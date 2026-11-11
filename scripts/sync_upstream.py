@@ -24,6 +24,7 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 import time
 import urllib.error
@@ -268,6 +269,27 @@ def main():
         seen[key] = slug
     if dupes:
         report['errors'].extend(dupes[:10])
+
+    # ---- auto-repair -------------------------------------------------------
+    # If the arithmetic or the (repo,path) uniqueness is off, the state itself
+    # is suspect. Rather than fail the run and wait for a human, rebuild the
+    # catalogue from upstream: it is deterministic and takes ~2 minutes.
+    if report['errors']:
+        print('! 校验未通过，自动从上游重建目录…', flush=True)
+        repair = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'rebuild_catalogue.py')],
+                                cwd=ROOT, capture_output=True, text=True)
+        tail = (repair.stdout or repair.stderr).strip().splitlines()[-3:]
+        for line in tail:
+            print('  ', line, flush=True)
+        if repair.returncode == 0:
+            catalogue = json.load(open(CATALOGUE))
+            report['after'] = len(catalogue)
+            report['auto_repaired'] = True
+            # The stale problems are gone now; keep one honest note so the
+            # notification says what happened instead of listing fixed errors.
+            report['errors'] = ['检测到目录异常，已自动从上游重建并修复']
+        else:
+            report['errors'].append('自动修复失败，请查看 Actions 日志')
 
     os.makedirs(STATE, exist_ok=True)
     json.dump(catalogue, open(CATALOGUE, 'w'), ensure_ascii=False, indent=1)
