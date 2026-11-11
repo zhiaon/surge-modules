@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Check, Download, FileCode2, Link2, Sparkles, Tag } from 'lucide-react';
 import { cn } from '@/lib/cn';
@@ -23,7 +23,7 @@ export interface ModuleCardProps {
 
 const CARD_BASE =
   'group relative flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-line bg-raised ' +
-  'card-hover card-spotlight';
+  'card-hover card-spotlight card-skip-paint';
 
 /**
  * The single card used everywhere a module is listed.
@@ -40,7 +40,7 @@ const CARD_BASE =
  * Hover: -2px lift + border warm + shadow, desktop only (see .card-hover). Touch
  * devices get a scale-down press instead, because hover never fires there.
  */
-export function ModuleCard({ module, variant = 'default', className, hideTags }: ModuleCardProps) {
+function ModuleCardImpl({ module, variant = 'default', className, hideTags }: ModuleCardProps) {
   const featured = variant === 'featured';
 
   /**
@@ -290,3 +290,17 @@ export function ModuleCard({ module, variant = 'default', className, hideTags }:
     </article>
   );
 }
+
+/**
+ * Memoised on the fields that actually affect the render. Filtering and paging
+ * rebuild the list array every keystroke, and without this every card re-runs
+ * its avatar/date/credential work on each pass.
+ */
+export const ModuleCard = memo(ModuleCardImpl, (a, b) =>
+  a.module.id === b.module.id &&
+  a.module.updatedAt === b.module.updatedAt &&
+  a.module.version === b.module.version &&
+  a.variant === b.variant &&
+  a.className === b.className &&
+  a.hideTags === b.hideTags,
+);

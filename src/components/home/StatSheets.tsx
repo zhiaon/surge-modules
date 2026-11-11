@@ -449,15 +449,48 @@ function UpdatesList({ modules }: { modules: ModuleWithMeta[] }) {
     () => [...modules].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)),
     [modules],
   );
+  // Rendering all 1200+ rows at once froze the sheet on open; page it like the
+  // catalogue list instead.
+  const PER = 30;
+  const [page, setPage] = useState(1);
+  const totalPages = Math.max(1, Math.ceil(sorted.length / PER));
+  const safePage = Math.min(page, totalPages);
+  const slice = sorted.slice((safePage - 1) * PER, safePage * PER);
 
   return (
     <div className="px-5 pb-6">
-      <p className="mb-3 text-[11px] text-faint">按更新时间倒序 · 共 {sorted.length} 个模块</p>
+      <p className="mb-3 text-[11px] text-faint">
+        按更新时间倒序 · 共 {sorted.length} 个模块 · 第 {safePage}/{totalPages} 页
+      </p>
       <ul className="space-y-1.5">
-        {sorted.map((m) => (
+        {slice.map((m) => (
           <ModuleRow key={m.id} module={m} showDate />
         ))}
       </ul>
+
+      {sorted.length > PER && (
+        <div className="mt-3 flex items-center justify-between gap-2">
+          <button
+            type="button"
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={safePage <= 1}
+            className="inline-flex h-8 items-center rounded-full border border-line px-3 text-[11.5px] text-muted transition-colors hover:text-fg disabled:opacity-40"
+          >
+            上一页
+          </button>
+          <span className="text-[11px] tabular-nums text-faint">
+            {safePage} / {totalPages}
+          </span>
+          <button
+            type="button"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={safePage >= totalPages}
+            className="inline-flex h-8 items-center rounded-full border border-line px-3 text-[11.5px] text-muted transition-colors hover:text-fg disabled:opacity-40"
+          >
+            下一页
+          </button>
+        </div>
+      )}
     </div>
   );
 }

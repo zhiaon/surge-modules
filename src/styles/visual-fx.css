@@ -18,30 +18,24 @@
 --------------------------------------------------------------------------- */
 .card-spotlight {
   position: relative;
-  isolation: isolate;
+  /* No `isolation: isolate` here: it forced a stacking context (and often a
+     compositor layer) per card, which is what made long lists feel janky.
+     The ::before/::after layers are painted behind the content by z-index. */
+  contain: layout paint style;
   /* per-card light colour; the nth-child rules below cycle through the three */
   --spot-color: #3b82f6;
   --spot-strength: 0.26;
   --spot-lift: 0.05;
+  /* One gradient instead of three stacked layers — same glow, a third of the
+     paint work on every card. */
   background-image:
     radial-gradient(
-      68% 52% at 50% -14%,
-      rgb(255 255 255 / calc(var(--spot-strength) * 0.34)),
-      transparent 62%
-    ),
-    radial-gradient(
-      118% 78% at 50% -22%,
+      92% 62% at 50% -12%,
       color-mix(in srgb, var(--spot-color) calc(var(--spot-strength) * 100%), transparent),
-      transparent 68%
-    ),
-    linear-gradient(
-      180deg,
-      rgb(255 255 255 / var(--spot-lift)),
-      transparent 42%
+      transparent 70%
     );
   background-repeat: no-repeat;
   transition:
-    background-image var(--dur-base) var(--ease-out-soft),
     border-color var(--dur-base) var(--ease-out-soft),
     box-shadow var(--dur-base) var(--ease-out-soft),
     transform var(--dur-base) var(--ease-out-soft);
@@ -405,4 +399,16 @@ html[data-motion='off'] .fx-hop {
     background: none;
     border-color: currentColor;
   }
+}
+
+
+/* ---------------------------------------------------------------------------
+   Off-screen skipping
+   A 24-card grid is fine, but the sheets render up to 50 rows at once; letting
+   the browser skip layout/paint for what is scrolled out of view is the single
+   biggest win on an older phone.
+--------------------------------------------------------------------------- */
+.card-skip-paint {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 240px;
 }

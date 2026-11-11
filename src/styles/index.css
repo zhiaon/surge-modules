@@ -178,6 +178,9 @@ html[data-theme='light'] {
 
   html {
     -webkit-text-size-adjust: 100%;
+    /* Let the compositor own the scroll and stop the rubber-band from
+       repainting the fixed tab bar on every frame. */
+    overscroll-behavior-y: none;
     text-size-adjust: 100%;
     /* `smooth` globally would also hijack programmatic scrollTo({behavior:'auto'})
        and the scroll restoration after navigation. Scoped to same-page anchors. */
