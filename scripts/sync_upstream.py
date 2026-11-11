@@ -48,6 +48,12 @@ SKIP_SLUGS = {
     'alibabagroup', 'cibn', 'flightradar24', 'hdo', 'hello', 'startup',
     'unicom-remove-ads', 'zhaoqianjinbao', 'wifiwannengyuechi',
 }
+# Modules authored by 可莉 (kel.ee / luestr / iKeLee) are excluded on request:
+# the site indexes other people's modules, not hers. Matching is on the *author
+# and title* only — many unrelated modules merely call her shared JS or credit
+# her in a comment, and those must stay.
+KELI_PATTERN = re.compile(r'可莉|kel[ie]|luestr|ikelee', re.I)
+
 # Files that are not Surge modules at all.
 SKIP_PATTERNS = re.compile(r'(^|/)(\.|README|LICENSE)', re.I)
 
@@ -181,6 +187,9 @@ def main():
             meta = parse_meta(text, fallback)
             if not meta:
                 continue  # body-less stub upstream
+
+            if KELI_PATTERN.search(f"{meta['author']} {meta['name']}"):
+                continue  # 可莉的模块，一律不导入
 
             slug = prev[0] if prev else slugify(fallback, path)
             # keep slugs unique across the whole catalogue

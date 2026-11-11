@@ -1351,19 +1351,6 @@
   "category": "adblock",
   "updatedAt": "2026-11-11T01:18:46Z"
  },
- "liantongmenhu": {
-  "slug": "liantongmenhu",
-  "repo": "fmz200/wool_scripts",
-  "branch": "main",
-  "path": "Surge/module/split/partL/LianTongMenHu.sgmodule",
-  "sha": "d9fcd6ffc3c10f3f28c29e34c83829fe075ae82c",
-  "name": "联掌门户去广告",
-  "description": "移除开屏广告、弹窗，以及首页、服务和发现页的无用内容",
-  "author": "可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T01:18:46Z"
- },
  "liangbulu": {
   "slug": "liangbulu",
   "repo": "fmz200/wool_scripts",
@@ -11530,19 +11517,6 @@
   "category": "adblock",
   "updatedAt": "2026-11-10T10:48:08Z"
  },
- "aiqicha": {
-  "slug": "aiqicha",
-  "repo": "BlackSpacee/Surge",
-  "branch": "main",
-  "path": "Module/UnlockVip/Aiqicha.sgmodule",
-  "sha": "10fc1e179cff16a91bcfd7660be0c5f5b576fbbd",
-  "name": "爱企查",
-  "description": "爱企查去广告及VIP",
-  "author": "@KELI@litieyin",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:13Z"
- },
  "gaoding": {
   "slug": "gaoding",
   "repo": "BlackSpacee/Surge",
@@ -16353,58 +16327,6 @@
   "category": "adblock",
   "updatedAt": "2026-11-11T13:58:26Z"
  },
- "blockad": {
-  "slug": "blockad",
-  "repo": "BlackSpacee/Surge",
-  "branch": "main",
-  "path": "Module/AdBlock/BlockAd.sgmodule",
-  "sha": "89d44f12caf982b70dc5b1ac10082f7383c65b96",
-  "name": "广告平台拦截器",
-  "description": "拦截腾讯、字节跳动、快手、百度、邑盟、倍孜、艾狄墨搏、袤博、极光、个推、友盟、阿里、优比客思、秒针、网易、美团、小米、京东、天目、讯飞、锐讯灵通等广告平台的广告请求，更适合iOS平台的应用。",
-  "author": "可莉🅥",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:27Z"
- },
- "mini-program-keli": {
-  "slug": "mini-program-keli",
-  "repo": "BlackSpacee/Surge",
-  "branch": "main",
-  "path": "Module/AdBlock/Mini_program_keli.sgmodule",
-  "sha": "44fdf53c9d278391cd0fdee537a5a9c4b7de5a54",
-  "name": "微信小程序去广告",
-  "description": "收录常用小程序的去广告，作者署名在插件内。",
-  "author": "可莉🅥",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:28Z"
- },
- "remove-ads-by-keli": {
-  "slug": "remove-ads-by-keli",
-  "repo": "BlackSpacee/Surge",
-  "branch": "main",
-  "path": "Module/AdBlock/Remove_ads_by_keli.sgmodule",
-  "sha": "3274fdad4070c921307cefcfb2f1e5237ce51d2d",
-  "name": "可莉广告过滤器",
-  "description": "可莉自用的广告过滤器",
-  "author": "可莉🅥",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:13Z"
- },
- "kelee-resource-preview": {
-  "slug": "kelee-resource-preview",
-  "repo": "BlackSpacee/Surge",
-  "branch": "main",
-  "path": "Module/Function/Kelee-resource-preview.sgmodule",
-  "sha": "1371b3e95025e9f90e472b0ece3ab32cd3d03147",
-  "name": "预览 kelee 资源",
-  "description": "预览 kelee.one 网站中的资源",
-  "author": "BlackSpacee",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:30Z"
- },
  "redirect": {
   "slug": "redirect",
   "repo": "BlackSpacee/Surge",
@@ -16417,19 +16339,6 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-11T13:58:30Z"
- },
- "pluginhub": {
-  "slug": "pluginhub",
-  "repo": "Yu9191/Rewrite",
-  "branch": "main",
-  "path": "pluginhub.sgmodule",
-  "sha": "61b46616deb070740119621bf34343012c025a46",
-  "name": "适配可莉插件中心",
-  "description": "支持可莉插件中心的插件给Surge使用; 非Loon用户切勿反馈插件任何问题，尊重原创; 使用前请先添加ScriptHub模块. 插件中心网址 https://pluginhub.kelee.one",
-  "author": "原作者@iKeLee",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:32Z"
  },
  "gamemode": {
   "slug": "gamemode",
@@ -16560,71 +16469,6 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-11T13:58:38Z"
- },
- "block-httpdns": {
-  "slug": "block-httpdns",
-  "repo": "gys619/surge-tools",
-  "branch": "main",
-  "path": "modules/Block_HTTPDNS.sgmodule",
-  "sha": "ca146030fd69a905118f15bc4dd5802d1ca2a5cc",
-  "name": "HTTPDNS拦截器",
-  "description": "🔗 [2026/7/16 12:46:02] 拦截常见的HTTPDNS服务，以确保这些请求都能够在Loon的DNS框架下工作。",
-  "author": "可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md], VirgilClyne[https://github.com/VirgilClyne]",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:39Z"
- },
- "block-httpdns-sgmodule": {
-  "slug": "block-httpdns-sgmodule",
-  "repo": "gys619/surge-tools",
-  "branch": "main",
-  "path": "modules/Block_HTTPDNS.sgmodule.sgmodule",
-  "sha": "3dae637b959caba5f5624a707f74816a85470fd1",
-  "name": "HTTPDNS拦截器",
-  "description": "🔗 [2026/1/30 16:31:00] 拦截常见的HTTPDNS服务，以确保这些请求都能够在Loon的DNS框架下工作。",
-  "author": "可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md], VirgilClyne[https://github.com/VirgilClyne]",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:39Z"
- },
- "remove-ads-by-keli-sgmodule": {
-  "slug": "remove-ads-by-keli-sgmodule",
-  "repo": "gys619/surge-tools",
-  "branch": "main",
-  "path": "modules/Remove_ads_by_keli.sgmodule.sgmodule",
-  "sha": "b0b174eabecf9a34431d0ed098adaf1d0127aaf9",
-  "name": "可莉广告过滤器",
-  "description": "🔗 [2026/1/30 16:31:11] 可莉自用的广告过滤器",
-  "author": "可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:39Z"
- },
- "xiaomispeaker-remove-ads": {
-  "slug": "xiaomispeaker-remove-ads",
-  "repo": "gys619/surge-tools",
-  "branch": "main",
-  "path": "modules/XiaomiSpeaker_remove_ads.sgmodule",
-  "sha": "afc5dc2d5435b1d2f82d01756f1cc0673d58fece",
-  "name": "小米音箱去广告",
-  "description": "🔗 [2026/8/12 14:59:52] 移除开屏广告、应用内横幅广告及弹窗广告。",
-  "author": "可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:40Z"
- },
- "xiaomispeaker-remove-ads-sgmodule": {
-  "slug": "xiaomispeaker-remove-ads-sgmodule",
-  "repo": "gys619/surge-tools",
-  "branch": "main",
-  "path": "modules/XiaomiSpeaker_remove_ads.sgmodule.sgmodule",
-  "sha": "464419695fea64724be7cd71bb7082533f0c996c",
-  "name": "小米音箱去广告",
-  "description": "🔗 [2026/1/30 16:31:14] 移除开屏广告、应用内横幅广告及弹窗广告。",
-  "author": "可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:40Z"
  },
  "weibo-self": {
   "slug": "weibo-self",
