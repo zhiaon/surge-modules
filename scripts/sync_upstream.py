@@ -191,17 +191,24 @@ def main():
             if KELI_PATTERN.search(f"{meta['author']} {meta['name']}"):
                 continue  # 可莉的模块，一律不导入
 
-            slug = prev[0] if prev else slugify(fallback, path)
-            # keep slugs unique across the whole catalogue
-            if slug not in catalogue:
+            if prev:
+                slug = prev[0]
+                is_new = False
+            else:
+                # New file: derive a slug, then de-duplicate against EVERY
+                # existing module. This used to be inverted (dedupe ran only
+                # when the slug was free), so a same-named module from another
+                # repo silently overwrote the existing entry — the catalogue
+                # count never moved and the run reported a phantom "new".
+                slug = slugify(fallback, path)
                 base, i = slug, 2
                 while slug in catalogue:
                     slug = f'{base}-{i}'
                     i += 1
+                is_new = True
+
             if slug in SKIP_SLUGS:
                 continue
-
-            is_new = prev is None
             record = {
                 'slug': slug,
                 'repo': f'{owner}/{repo}',
