@@ -1,0 +1,14 @@
+#!name=蜂巢每日签到
+#!desc=蜂巢每天09:14自动签到，附凭据采集、手动签到和只读状态查询，支持fengchao.chat。需Surge iOS 5.9+或Mac 5.5+。
+#!arguments=capture:蜂巢抓包
+#!arguments-desc=采集默认开启。在Surge开启时用Safari登录蜂巢，再打开https://fengchao.chat/api/auth/me；采集完成后将参数设为#可停用采集。
+#!category=自动任务
+
+[Script]
+{{{capture}}} = type=http-request, pattern=^https:\/\/(?:www\.)?(?:pting\.club|fengchao\.chat)\/api\/(?:auth\/me|check-in)(?:\?.*)?$, requires-body=false, timeout=10, script-path=https://raw.githubusercontent.com/Viceroy-Dennis/surge-modules/main/fengchao/fengchao_task.js, script-update-interval=0
+蜂巢自动签到 = type=cron, cronexp="14 9 * * *", timeout=45, script-path=https://raw.githubusercontent.com/Viceroy-Dennis/surge-modules/main/fengchao/fengchao_task.js, script-update-interval=0
+蜂巢手动签到 = type=generic, timeout=45, script-path=https://raw.githubusercontent.com/Viceroy-Dennis/surge-modules/main/fengchao/fengchao_task.js, script-update-interval=0
+蜂巢体检测试 = type=generic, argument=diagnose, timeout=45, script-path=https://raw.githubusercontent.com/Viceroy-Dennis/surge-modules/main/fengchao/fengchao_task.js, script-update-interval=0
+
+[MITM]
+hostname = %APPEND% pting.club, www.pting.club, fengchao.chat, www.fengchao.chat

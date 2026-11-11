@@ -1,0 +1,17 @@
+# Local secrets for `wrangler dev`. Copy to .dev.vars (git-ignored).
+# Values here are placeholders — never put a real token in a committed file.
+
+# --- main site worker (workers/site) ---
+# Salt for hashing the analytics rate-limit bucket key. Any long random string.
+RATE_LIMIT_SALT=dev-only-salt-change-me
+
+# --- module proxy worker (workers/module-proxy) ---
+# Fine-grained PAT or GitHub App token:
+#   Repository access : only your own repositories
+#   Permissions       : Contents — Read
+# Nothing else. The proxy only reads file contents.
+GITHUB_READ_TOKEN=ghp_replace_me
+
+# Base URL of the proxy, used to build public rawUrl values.
+# Local dev only — production sets this in wrangler.toml [env.production.vars].
+PUBLIC_BASE=http://localhost:8788

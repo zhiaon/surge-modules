@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5"
+    />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0B0D12" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Surge Modules" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="一个独立的 Surge 模块索引平台：浏览、搜索、收藏与分发模块，查看原始配置与版本记录。"
+    />
+    <title>Surge Modules</title>
+    <script>
+      // Apply the persisted theme before first paint (no dark flash on light users).
+      (function () {
+        try {
+          var stored = localStorage.getItem('surge-modules:theme:v1');
+          // Three modes. No stored choice => dark (product default); an explicit
+          // 'system' follows the OS. Must stay in sync with useTheme.ts.
+          var prefersDark =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolved =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : stored === 'system'
+                ? prefersDark
+                  ? 'dark'
+                  : 'light'
+                : 'dark';
+          document.documentElement.dataset.theme = resolved;
+          document.documentElement.style.colorScheme = resolved;
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.content = resolved === 'dark' ? '#0B0D12' : '#F6F7FA';
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

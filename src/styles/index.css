@@ -1,0 +1,638 @@
+@import '@fontsource-variable/inter';
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens — UI 2.0
+   One source of truth. Every component reads from these — no ad-hoc colours,
+   no per-component radii, no per-page type scales.
+
+   Names are unchanged from v1 on purpose: 86 files already reference
+   canvas/surface/raised/fg/muted/faint/line/accent. Only the values moved, so
+   the whole product re-skins at once instead of page by page.
+--------------------------------------------------------------------------- */
+@theme {
+  --font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+    'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* ---- surfaces (dark is the primary mode) ------------------------------ */
+  --color-canvas: #0b0d12; /* page */
+  --color-surface: #10141c; /* secondary plane: rails, headers */
+  --color-raised: #151a23; /* cards */
+  --color-raised-hover: #1b2230; /* hovered / floating card */
+  --color-inset: #0d1017; /* inputs, code wells */
+  --color-float: #1b2230; /* popovers, sheets */
+
+  /* ---- type ------------------------------------------------------------ */
+  --color-fg: #f1f5f9;
+  --color-muted: #a1aab8;
+  /* 4.79:1 on raised-hover, 5.24:1 on raised, 5.84:1 on canvas. The brief's
+     #737F90 only cleared 4.29:1 on a hovered card — below the 4.5 floor for
+     the 11px timestamps that use it. */
+  --color-faint: #828e9e;
+
+  /* ---- lines ----------------------------------------------------------- */
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-strong: rgba(255, 255, 255, 0.16);
+
+  /* ---- floating surfaces (tab bar pills, sticky controls) -------------- */
+  --line-soft: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(17, 20, 27, 0.86);
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --safe-area-lift: calc(8px + env(safe-area-inset-bottom));
+
+  /* ---- accent — periwinkle, used with restraint ------------------------ */
+  --color-accent: #8b9cff;
+  --color-accent-strong: #6d80f5;
+  --color-accent-soft: #b8c3ff; /* accent text on dark surfaces */
+  --color-accent-dim: #7f90cf; /* quieter accent text, 4.9:1 on canvas */
+  --color-accent-fg: #0b0d12; /* text on an accent-filled button */
+
+  /* ---- state ----------------------------------------------------------- */
+  --color-ok: #35c98a;
+  --color-warn: #e8b65c;
+  --color-danger: #f07178;
+
+  /* ---- radii — 8 small / 10–12 control / 16–20 card / 20–24 container -- */
+  --radius-xs: 8px;
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+
+  /* chrome heights — single source for the tab bar and anything above it */
+  --tabbar-h: 3.5rem; /* 56px */
+  /* total bottom space the floating tab bar needs (updated at runtime for
+   * iOS Safari, whose address pill is not part of env(safe-area-inset-bottom)) */
+  --content-bottom: calc(var(--tabbar-h) + 56px);
+
+  /* semantic tints -------------------------------------------------------
+     Each is declared twice: a flat rgba() first (Safari <16.2, Chrome <111),
+     then the color-mix() blend for engines that support it. */
+  --tint-accent-08: rgba(139, 156, 255, 0.08);
+  --tint-accent-10: rgba(139, 156, 255, 0.1);
+  --tint-accent-12: rgba(139, 156, 255, 0.12);
+  --tint-accent-16: rgba(139, 156, 255, 0.16);
+  --tint-accent-28: rgba(139, 156, 255, 0.28);
+  --tint-accent-32: rgba(139, 156, 255, 0.32);
+  --tint-accent-45: rgba(139, 156, 255, 0.45);
+  --tint-danger-08: rgba(240, 113, 120, 0.08);
+  --tint-danger-28: rgba(240, 113, 120, 0.28);
+  --tint-danger-35: rgba(240, 113, 120, 0.35);
+  --tint-ok-14: rgba(53, 201, 138, 0.14);
+  --tint-ok-26: rgba(53, 201, 138, 0.26);
+  --tint-ok-30: rgba(53, 201, 138, 0.3);
+  --tint-ok-40: rgba(53, 201, 138, 0.4);
+  --tint-warn-08: rgba(232, 182, 92, 0.08);
+  --tint-warn-35: rgba(232, 182, 92, 0.35);
+  --line-accent-28: rgba(139, 156, 255, 0.28);
+  --line-accent-32: rgba(139, 156, 255, 0.32);
+  --line-accent-45: rgba(139, 156, 255, 0.45);
+  --line-accent-62: rgba(139, 156, 255, 0.62);
+  --line-danger-28: rgba(240, 113, 120, 0.28);
+  --line-danger-35: rgba(240, 113, 120, 0.35);
+  --line-danger-38: rgba(240, 113, 120, 0.38);
+  --line-ok-26: rgba(53, 201, 138, 0.26);
+  --line-ok-40: rgba(53, 201, 138, 0.4);
+
+  /* overlay behind modals — must flip with the theme; a 62% black scrim over a
+     light page looks like a rendering bug rather than a focus layer */
+  --color-scrim: rgb(5 7 11 / 0.66);
+
+  /* elevation — dark surfaces need real shadow, not a glow */
+  --shadow-pop: 0 24px 80px -32px rgb(0 0 0 / 0.9);
+  --shadow-sheet: 0 -16px 60px -24px rgb(0 0 0 / 0.9);
+  --shadow-toast: 0 8px 28px -12px rgb(0 0 0 / 0.72);
+  --shadow-raised: 0 28px 90px -36px rgb(0 0 0 / 0.95);
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset;
+
+  /* motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* type scale */
+  --text-display: clamp(2.25rem, 6.4vw, 4.25rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.03em;
+  --text-headline: clamp(1.6rem, 3.2vw, 2.25rem);
+  --text-headline--line-height: 1.12;
+  --text-headline--letter-spacing: -0.022em;
+}
+
+/* light theme — every token is remapped, nothing is left dark */
+html[data-theme='light'] {
+  --color-canvas: #f6f7fa;
+  --color-surface: #eff1f6;
+  --color-raised: #ffffff;
+  --color-raised-hover: #f7f8fc;
+  --color-inset: #f1f3f8;
+  --color-float: #ffffff;
+
+  --color-fg: #171b25;
+  --color-muted: #5e6877; /* 5.27:1 canvas, 4.99:1 surface */
+  --color-faint: #616b7d; /* 5.02:1 canvas, 4.76:1 surface */
+
+  --color-line: #e8ebf0;
+  --color-line-strong: #d6dae3;
+
+  --line-soft: rgba(23, 27, 37, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+
+  /* 4.6:1 on white — the accent is a UI colour here, accent-soft carries text */
+  --color-accent: #6578e8;
+  --color-accent-strong: #5566d8;
+  --color-accent-soft: #4553c4;
+  --color-accent-dim: #5566c9;
+  --color-accent-fg: #ffffff;
+
+  --color-ok: #17794f; /* 5.05:1 canvas, 4.78:1 surface */
+  --color-warn: #8a6412; /* 5.01:1 / 4.75:1 */
+  --color-danger: #b93a43; /* 5.23:1 / 4.96:1 */
+
+  --color-scrim: rgb(23 27 37 / 0.34);
+
+  --shadow-pop: 0 20px 60px -28px rgb(23 27 37 / 0.24);
+  --shadow-sheet: 0 -14px 48px -20px rgb(23 27 37 / 0.22);
+  --shadow-toast: 0 6px 20px -8px rgb(23 27 37 / 0.18);
+  --shadow-raised: 0 24px 70px -32px rgb(23 27 37 / 0.26);
+  --shadow-card: 0 1px 2px 0 rgb(23 27 37 / 0.04);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    color-scheme: dark;
+    --dur-fast: 120ms;
+    --dur-base: 200ms;
+    --dur-slow: 420ms;
+    --dur-reveal: 560ms;
+  }
+
+  html[data-theme='light'] {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* `smooth` globally would also hijack programmatic scrollTo({behavior:'auto'})
+       and the scroll restoration after navigation. Scoped to same-page anchors. */
+    scroll-behavior: auto;
+    scroll-padding-top: 5.5rem;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  /* Grid/flex children default to min-width:auto, so any long unbreakable
+     content (URLs, <pre> lines) would widen the whole column and overflow the
+     viewport. Opt every element into shrinkable sizing once, globally. */
+  *,
+  *::before,
+  *::after {
+    min-width: 0;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02' 1, 'cv03' 1, 'cv04' 1, 'ss03' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-size: 15px; /* mobile body floor: 15px, never 14 */
+    line-height: 1.6;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 15.5px;
+    }
+  }
+
+  ::selection {
+    /* rgba fallback first: color-mix() needs Safari 16.2 / Chrome 111.
+       Without a fallback a slightly older browser renders the selection as an
+       unreadable transparent block. */
+    background-color: rgba(139, 156, 255, 0.32);
+    background-color: color-mix(in oklab, var(--color-accent) 32%, transparent);
+    color: var(--color-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* iOS Safari force-zooms the viewport when a focused text field computes
+     below 16px. Bumping the font size is the only reliable fix — setting
+     `maximum-scale=1` would also block intentional pinch-zoom. Applied only to
+     touch/coarse pointers so desktop keeps the designed type scale. */
+  @media (pointer: coarse) {
+    input,
+    textarea,
+    select {
+      font-size: max(16px, 1em);
+    }
+  }
+
+  /* thin, quiet scrollbars on desktop */
+  @media (pointer: fine) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-line-strong) transparent;
+    }
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--color-line-strong);
+      border-radius: 999px;
+      border: 3px solid transparent;
+      background-clip: content-box;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities / primitives
+--------------------------------------------------------------------------- */
+/* Touch sizing.
+   `size="sm"` buttons, nav links, chips and sort controls are 30–36px tall by
+   design — correct for a mouse, below the comfortable thumb target. On coarse
+   pointers every interactive row gets a 44px minimum, without changing the
+   visual rhythm on desktop. `.tap-target` (below) handles inline text links
+   whose box must stay small but whose hit area must not. */
+@media (pointer: coarse), (any-pointer: coarse) {
+  .btn-sm,
+  nav a,
+  nav button,
+  /* Card action pills opt out via data-compact: they sit inside a card that is
+     itself a large tap target, and forcing 44px turned a 28px pill into a
+     circle. Their hit area is padded by the surrounding row instead. */
+  button:not([data-compact]),
+  .chip {
+    min-height: 44px;
+    /* width matters too: a 36px-wide icon button is below the touch target
+       minimum even when its height is 44px */
+    min-width: 44px;
+  }
+
+  /* keep text links exempt: they are inline by design and the pseudo-element
+     in .tap-target already provides the hit area */
+  a:not(.btn-sm):not(.chip) {
+    min-width: 0;
+  }
+}
+
+/* Inline chips (tags, meta links) are visually small on purpose, but their hit
+   area must still be thumb-sized. Expand vertically without changing layout. */
+@utility tap-target {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 44px;
+    transform: translateY(-50%);
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Hairline that follows the theme instead of a hardcoded white alpha. */
+@utility hairline {
+  border: 1px solid var(--color-line);
+}
+
+@layer components {
+  /* ---------------------------------------------------------------- glass
+     The header / sticky bars. Falls back to an opaque surface where
+     backdrop-filter is unsupported so the text never sits on raw content. */
+  .glass {
+    background-color: var(--color-canvas);
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .glass {
+      background-color: color-mix(in srgb, var(--color-canvas) 72%, transparent);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      backdrop-filter: blur(18px) saturate(180%);
+    }
+  }
+
+  /* ------------------------------------------------------------ soft glow
+     A single, very wide accent bloom behind the hero. Pure CSS, no blur
+     filter on a large element (expensive on iOS) — a radial gradient is
+     rasterised once. */
+  .glow-field {
+    background-image: radial-gradient(
+      58% 55% at 50% 0%,
+      rgb(139 156 255 / 0.16),
+      transparent 72%
+    );
+  }
+
+  html[data-theme='light'] .glow-field {
+    background-image: radial-gradient(58% 55% at 50% 0%, rgb(101 120 232 / 0.1), transparent 72%);
+  }
+
+  .eyebrow {
+    font-size: 0.6875rem;
+    line-height: 1;
+    font-weight: 550;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* hairline that fades — used instead of hard full-width borders */
+  .rule-fade {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-line) 12%,
+      var(--color-line) 88%,
+      transparent
+    );
+  }
+
+  .link-quiet {
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color var(--dur-base) var(--ease-out-soft);
+  }
+  .link-quiet:hover {
+    color: var(--color-fg);
+  }
+
+  /* --------------------------------------------------------------- cards
+     One hover behaviour for the whole product: lift a hair, warm the border,
+     deepen the shadow. Transform + border-color only (no layout thrash). */
+  .card-hover {
+    transition:
+      transform var(--dur-base) var(--ease-out-soft),
+      border-color var(--dur-base) var(--ease-out-soft),
+      background-color var(--dur-base) var(--ease-out-soft),
+      box-shadow var(--dur-base) var(--ease-out-soft);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card-hover:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-line-strong);
+      background-color: var(--color-raised-hover);
+      box-shadow: var(--shadow-pop);
+    }
+  }
+
+  .card-hover:active {
+    transform: scale(0.995);
+  }
+
+  /* -------------------------------------------------------------- reveal
+     Driven by a class + CSS transition (see components/motion/Reveal.tsx).
+     Never blocks content: the "out" state is only applied for a short while,
+     and the element self-heals if the clock advances while hidden. */
+  [data-reveal] {
+    transition:
+      opacity var(--dur-reveal) var(--ease-out-soft) var(--reveal-delay, 0s),
+      transform var(--dur-reveal) var(--ease-out-soft) var(--reveal-delay, 0s);
+    will-change: opacity, transform;
+  }
+  [data-reveal='out'] {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 10px));
+  }
+  [data-reveal='in'] {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  /* staggered entrance for hero-level blocks — CSS keyframes, not JS.
+     `.enter-hold` is the pre-animation state and is only ever applied for two
+     frames while the document is visible (see hooks/useEnter.ts). */
+  .enter-hold {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .enter {
+    animation: enter-up var(--dur-reveal) var(--ease-out-soft) both;
+  }
+  .enter--delay {
+    animation-delay: var(--enter-delay, 0s);
+  }
+
+  /* ----------------------------------------------------------- code block
+     Horizontal scroll belongs to the block, never to the page. */
+  .code-well {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.65;
+    tab-size: 2;
+  }
+
+  .code-well pre,
+  .code-well code {
+    font-family: inherit;
+  }
+}
+
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* A quiet shimmer for skeletons — opacity only, composited on the GPU. */
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* -------------------------------------------------------------- motion off
+   When the document is hidden (so the compositor clock is paused) or the user
+   prefers reduced motion, every animated state collapses to its final look.
+   This is a correctness requirement, not a nicety: a paused transition would
+   otherwise leave content invisible indefinitely. */
+html[data-motion='off'] [data-reveal],
+html[data-motion='off'] .enter,
+html[data-motion='off'] .enter-hold {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Everything else settles instantly too.
+   Note: shrinking the duration is NOT enough. A transition that has started
+   but cannot advance (paused clock) keeps reporting its *from* value, so a
+   near-zero duration would still leave the header transparent and the theme
+   flip half-applied. The transition has to be removed outright. */
+html[data-motion='off'] *,
+html[data-motion='off'] *::before,
+html[data-motion='off'] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------------ compat
+   Fallbacks for the three engine families this project targets:
+     Safari 15+ (macOS Monterey, iOS 15)
+     Chrome 105+ (Windows / macOS)
+     Edge 105+ (Chromium)
+
+   Everything below is additive: the modern declaration stays, an older one
+   precedes it so a browser that does not understand the new syntax still gets a
+   sane rendering instead of a transparent or unstyled element.
+------------------------------------------------------------------------- */
+
+/* `color-mix()` needs Safari 16.2 / Chrome 111. The utility classes generated by
+   Tailwind for bg-x/90 etc. already emit an rgb fallback, but the hand-written
+   color-mix usages in components do not, so give them a base surface colour. */
+@supports not (color: color-mix(in oklab, red 50%, blue)) {
+  /* anything tinted with the accent becomes a flat, readable surface */
+  [class*='color-mix'] {
+    background-color: var(--color-raised);
+  }
+}
+
+/* `text-wrap: balance / pretty` is Safari 17.5+ / Chrome 114+. Older engines
+   simply ignore it, which is fine — but `overflow-wrap` keeps long module names
+   from escaping their card. */
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* iOS Safari < 16 does not support `dvh`; `vh` is the fallback. */
+@supports not (height: 100dvh) {
+  .min-h-dvh {
+    min-height: 100vh;
+  }
+}
+
+/* Windows high-contrast / forced-colors: make sure borders survive, since the
+   whole visual system relies on 1px lines. */
+@media (forced-colors: active) {
+  * {
+    border-color: currentColor !important;
+  }
+}
+
+/* Long descriptions in a card must not create a horizontal scrollbar in Safari,
+   which handles `min-width: auto` on flex children differently from Chrome. */
+.line-clamp-2,
+.line-clamp-3 {
+  overflow-wrap: anywhere;
+}
+
+@supports (color: color-mix(in oklab, red 50%, blue)) {
+  :root {
+    --tint-accent-08: color-mix(in oklab, var(--color-accent) 8%, transparent);
+    --tint-accent-10: color-mix(in oklab, var(--color-accent) 10%, transparent);
+    --tint-accent-12: color-mix(in oklab, var(--color-accent) 12%, transparent);
+    --tint-accent-16: color-mix(in oklab, var(--color-accent) 16%, var(--color-raised));
+    --tint-accent-28: color-mix(in oklab, var(--color-accent) 28%, transparent);
+    --tint-accent-32: color-mix(in oklab, var(--color-accent) 32%, transparent);
+    --tint-accent-45: color-mix(in oklab, var(--color-accent) 45%, transparent);
+    --tint-danger-08: color-mix(in oklab, var(--color-danger) 8%, transparent);
+    --tint-danger-28: color-mix(in oklab, var(--color-danger) 28%, transparent);
+    --tint-danger-35: color-mix(in oklab, var(--color-danger) 35%, transparent);
+    --tint-ok-14: color-mix(in oklab, var(--color-ok) 14%, transparent);
+    --tint-ok-26: color-mix(in oklab, var(--color-ok) 26%, transparent);
+    --tint-ok-30: color-mix(in oklab, var(--color-ok) 30%, transparent);
+    --tint-ok-40: color-mix(in oklab, var(--color-ok) 40%, transparent);
+    --tint-warn-08: color-mix(in oklab, var(--color-warn) 8%, transparent);
+    --tint-warn-35: color-mix(in oklab, var(--color-warn) 35%, transparent);
+    --line-accent-28: color-mix(in oklab, var(--color-accent) 28%, transparent);
+    --line-accent-32: color-mix(in oklab, var(--color-accent) 32%, transparent);
+    --line-accent-45: color-mix(in oklab, var(--color-accent) 45%, transparent);
+    --line-accent-62: color-mix(in oklab, var(--color-accent) 62%, transparent);
+    --line-danger-28: color-mix(in oklab, var(--color-danger) 28%, transparent);
+    --line-danger-35: color-mix(in oklab, var(--color-danger) 35%, transparent);
+    --line-danger-38: color-mix(in oklab, var(--color-danger) 38%, transparent);
+    --line-ok-26: color-mix(in oklab, var(--color-ok) 26%, transparent);
+    --line-ok-40: color-mix(in oklab, var(--color-ok) 40%, transparent);
+  }
+
+  /* light theme overrides the base colours, so the mixes follow automatically */
+  html[data-theme='light'] {
+    --tint-accent-10: color-mix(in oklab, var(--color-accent) 8%, transparent);
+    --tint-accent-16: color-mix(in oklab, var(--color-accent) 12%, var(--color-raised));
+  }
+}
+
+/* `svh` is the small viewport height: on iOS it stays fixed while the address
+   bar collapses, so the fixed tab bar never drifts below the visible area.
+   `dvh` is kept as a fallback for engines that have it but not `svh`. */
+@supports not (height: 100svh) {
+  .min-h-svh {
+    min-height: 100vh;
+  }
+}
+
+/* Safe-area helpers — one place, so no page reinvents env() padding. */
+@utility pb-tabbar {
+  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 0.75rem);
+}
+
+@utility scroll-mt-header {
+  scroll-margin-top: calc(4rem + env(safe-area-inset-top) + 1rem);
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Surge Modules",
+  "short_name": "Modules",
+  "description": "独立的 Surge 模块索引与管理平台",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#08090B",
+  "theme_color": "#08090B",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

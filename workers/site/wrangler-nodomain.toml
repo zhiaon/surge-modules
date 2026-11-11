@@ -1,0 +1,15 @@
+name = "surge-modules-site"
+main = "index.ts"
+compatibility_date = "2026-01-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+[assets]
+directory = "../../dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+[env.production]
+name = "surge-modules-site"
+workers_dev = false

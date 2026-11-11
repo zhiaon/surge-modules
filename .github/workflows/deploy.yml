@@ -1,0 +1,166 @@
+name: Deploy
+
+# 部署两个 Worker。手动触发，避免每次 push 都覆盖生产。
+#
+# 需要的仓库 Secrets（Settings → Secrets and variables → Actions）：
+#   CLOUDFLARE_API_TOKEN  Cloudflare API Token（Workers + D1 编辑权限）
+#   CLOUDFLARE_ACCOUNT_ID 账户 ID
+#
+# 注意：这里只放**部署**用的 Cloudflare Token。
+# GitHub 读取 Token（GITHUB_READ_TOKEN）不入 Actions，它通过
+# `wrangler secret put` 直接写进 Worker，且只给反代 Worker。
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: '部署目标'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - both
+          - site
+          - proxy
+      run_migrations:
+        description: '部署前执行 D1 远程迁移'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  # 同时只允许一个部署，避免两个 run 交叉写入
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: 类型检查与测试
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 类型检查
+        run: npm run typecheck
+
+      - name: 测试
+        run: npm test
+
+      - name: 构建
+        run: npm run build
+
+      - name: 确认构建产物不含密钥
+        run: |
+          set -e
+          # 任何 token 形状的字符串出现在 dist/ 里都是严重问题
+          if grep -rEq 'ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}' dist/ 2>/dev/null; then
+            echo "::error::构建产物中发现疑似 GitHub Token"
+            exit 1
+          fi
+          echo "构建产物检查通过"
+
+      - name: 保留构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 3
+
+  deploy-site:
+    name: 部署主站 Worker
+    needs: verify
+    if: inputs.target == 'both' || inputs.target == 'site'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: 取回构建产物
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: D1 远程迁移
+        if: inputs.run_migrations
+        run: npx wrangler d1 migrations apply surge-modules --remote --env production -c workers/site/wrangler.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: 部署
+        run: npx wrangler deploy -c workers/site/wrangler.toml --env production
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  deploy-proxy:
+    name: 部署反代 Worker
+    needs: verify
+    if: inputs.target == 'both' || inputs.target == 'proxy'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: 部署
+        run: npx wrangler deploy -c workers/module-proxy/wrangler.toml --env production
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  smoke:
+    name: 部署后验证
+    needs: [deploy-site, deploy-proxy]
+    if: always() && (needs.deploy-site.result == 'success' || needs.deploy-proxy.result == 'success')
+    runs-on: ubuntu-latest
+    steps:
+      - name: 主站健康检查
+        continue-on-error: true
+        run: |
+          for i in 1 2 3 4 5; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' https://son.zhiaon.top/api/v1/health || true)
+            echo "尝试 $i: $code"
+            [ "$code" = "200" ] && exit 0
+            sleep 10
+          done
+          echo "::warning::主站健康检查未通过（可能是首次部署的 DNS 传播）"
+
+      - name: 反代健康检查
+        continue-on-error: true
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' https://sgmd.zhiaon.top/health || true)
+          echo "sgmd.zhiaon.top/health → $code"
+          [ "$code" = "200" ] || echo "::warning::反代健康检查未通过"
+
+      - name: 确认 workers.dev 已关闭
+        continue-on-error: true
+        run: |
+          # 关闭后这些地址应返回 404/530 或无法解析
+          for host in "surge-modules-site.workers.dev" "surge-modules-proxy.workers.dev"; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://$host/" || echo fail)
+            echo "$host → $code"
+          done
+          echo "::notice::上面的地址若返回 200 说明 workers.dev 未关闭"

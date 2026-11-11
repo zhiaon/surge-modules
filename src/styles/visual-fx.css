@@ -1,0 +1,408 @@
+/* ===========================================================================
+   Visual layer: card spotlight + global click feedback
+   ---------------------------------------------------------------------------
+   Appended as a self-contained block so the existing token layer stays the
+   single source of truth for colour and spacing. Nothing here redefines a
+   token; everything reads from the ones already declared above.
+=========================================================================== */
+
+/* ---------------------------------------------------------------- spotlight
+   A soft top-centre light on every card.
+
+   Painting order matters more than the gradient itself: `isolation: isolate`
+   makes the card its own stacking context, which lets the ::before layer sit at
+   `z-index: -1` — above the card's own background, below every in-flow child.
+   That is what guarantees the light can never cover text, icons or buttons,
+   without adding a z-index to any child (which would break the stretched-link
+   pattern the module cards rely on).
+--------------------------------------------------------------------------- */
+.card-spotlight {
+  position: relative;
+  isolation: isolate;
+  /* per-card light colour; the nth-child rules below cycle through the three */
+  --spot-color: #3b82f6;
+  --spot-strength: 0.26;
+  --spot-lift: 0.05;
+  background-image:
+    radial-gradient(
+      68% 52% at 50% -14%,
+      rgb(255 255 255 / calc(var(--spot-strength) * 0.34)),
+      transparent 62%
+    ),
+    radial-gradient(
+      118% 78% at 50% -22%,
+      color-mix(in srgb, var(--spot-color) calc(var(--spot-strength) * 100%), transparent),
+      transparent 68%
+    ),
+    linear-gradient(
+      180deg,
+      rgb(255 255 255 / var(--spot-lift)),
+      transparent 42%
+    );
+  background-repeat: no-repeat;
+  transition:
+    background-image var(--dur-base) var(--ease-out-soft),
+    border-color var(--dur-base) var(--ease-out-soft),
+    box-shadow var(--dur-base) var(--ease-out-soft),
+    transform var(--dur-base) var(--ease-out-soft);
+}
+
+/* The three source colours, cycled deterministically so a grid reads as one
+   system rather than random confetti. */
+.card-spotlight:nth-child(3n + 1) {
+  --spot-color: #3b82f6;
+}
+.card-spotlight:nth-child(3n + 2) {
+  --spot-color: #8b5cf6;
+}
+.card-spotlight:nth-child(3n) {
+  --spot-color: #06b6d4;
+}
+
+/* A very quiet top-edge highlight — reads as a lit rim, not a neon outline. */
+.card-spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--spot-color) 22%, transparent),
+    transparent 34%
+  );
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out-soft);
+}
+
+.card-spotlight::after {
+  content: '';
+  position: absolute;
+  inset-inline: 12%;
+  top: -1px;
+  height: 1px;
+  z-index: -1;
+  border-radius: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--spot-color) 62%, transparent),
+    transparent
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out-soft);
+}
+
+/* Hover: the light widens and brightens, the card lifts a hair. Desktop only —
+   touch devices get the press feedback in the click-fx layer instead. */
+@media (hover: hover) and (pointer: fine) {
+  .card-spotlight:hover {
+    --spot-strength: 0.36;
+    --spot-lift: 0.07;
+    border-color: var(--color-line-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-pop);
+  }
+
+  .card-spotlight:hover::before {
+    opacity: 0.6;
+  }
+
+  .card-spotlight:hover::after {
+    opacity: 0.95;
+  }
+}
+
+/* Light theme: not a copy of the dark one. The glow is a low-opacity tint on a
+   near-white surface, the rim is subtle, and there is real drop shadow — on
+   white, a bright wash reads as a printing error rather than light. */
+html[data-theme='light'] .card-spotlight {
+  --spot-strength: 0.1;
+  --spot-lift: 0;
+  background-image:
+    radial-gradient(
+      78% 54% at 50% -16%,
+      color-mix(in srgb, var(--spot-color) 13%, transparent),
+      transparent 66%
+    ),
+    linear-gradient(180deg, rgb(255 255 255 / 0.5), transparent 40%);
+  box-shadow: var(--shadow-card);
+}
+
+html[data-theme='light'] .card-spotlight::before {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--spot-color) 10%, transparent),
+    transparent 30%
+  );
+}
+
+html[data-theme='light'] .card-spotlight::after {
+  opacity: 0.35;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--spot-color) 30%, transparent),
+    transparent
+  );
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html[data-theme='light'] .card-spotlight:hover {
+    --spot-strength: 0.16;
+    box-shadow: 0 14px 36px -22px rgb(23 27 37 / 0.26);
+  }
+}
+
+/* ===========================================================================
+   Click feedback
+   ---------------------------------------------------------------------------
+   The element itself is never modified. A fixed-position layer is created at
+   the element's bounding box, clipped to its radius, and the animation happens
+   inside that. Consequences:
+
+     * zero risk of layout shift or stacking-order damage
+     * the light physically cannot escape the card/button bounds
+     * nested interactive elements produce exactly one effect (the layer is
+       created once per click, for the closest interactive ancestor)
+
+   Everything animates opacity / transform / background-position only.
+--------------------------------------------------------------------------- */
+
+.fx-layer {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  overflow: hidden;
+  contain: layout paint;
+  will-change: opacity;
+}
+
+.fx-piece {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* 1 — ripple: a ring expanding from the exact click point. */
+@keyframes fx-ripple {
+  from {
+    transform: scale(0.15);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.fx-ripple {
+  width: var(--fx-size);
+  height: var(--fx-size);
+  margin-left: calc(var(--fx-size) / -2);
+  margin-top: calc(var(--fx-size) / -2);
+  border-radius: 999px;
+  border: 1.5px solid var(--fx-color);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--fx-color) 22%, transparent),
+    transparent 68%
+  );
+  animation: fx-ripple var(--fx-dur) var(--ease-out-soft) forwards;
+}
+
+/* 2 — glow pulse: a soft bloom that swells and fades in place. */
+@keyframes fx-glow {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+.fx-glow {
+  width: var(--fx-size);
+  height: var(--fx-size);
+  margin-left: calc(var(--fx-size) / -2);
+  margin-top: calc(var(--fx-size) / -2);
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--fx-color) 42%, transparent),
+    transparent 70%
+  );
+  filter: blur(1px);
+  animation: fx-glow var(--fx-dur) var(--ease-out-soft) forwards;
+}
+
+/* 4 — sheen: a highlight sweeps across, direction randomised. */
+@keyframes fx-sheen {
+  from {
+    transform: translateX(calc(var(--fx-dir) * -120%));
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(calc(var(--fx-dir) * 120%));
+    opacity: 0;
+  }
+}
+
+.fx-sheen {
+  /* a narrow diagonal band, not a full-size rectangle: on a square, unpadded
+     tab the old `inset: -20% 0` version painted a solid block that read as a
+     big blue rectangle flashing over the whole tab */
+  height: 140%;
+  width: 38%;
+  margin-left: -19%;
+  border-radius: 999px;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    color-mix(in srgb, var(--fx-color) 30%, transparent) 40%,
+    rgb(255 255 255 / 0.22),
+    transparent
+  );
+  animation: fx-sheen var(--fx-dur) var(--ease-out-soft) forwards;
+}
+
+/* 5 — bounce: the element itself presses and springs back. Transform only. */
+@keyframes fx-press {
+  0% {
+    transform: scale(1);
+  }
+  28% {
+    transform: scale(0.965);
+  }
+  62% {
+    transform: scale(1.012);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.fx-press {
+  animation: fx-press 320ms var(--ease-out-soft);
+}
+
+/* 6 — halo: a soft disc right under the finger/cursor. */
+@keyframes fx-halo {
+  0% {
+    transform: scale(0.35);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.fx-halo {
+  width: calc(var(--fx-size) * 0.9);
+  height: calc(var(--fx-size) * 0.9);
+  margin-left: calc(var(--fx-size) * -0.45);
+  margin-top: calc(var(--fx-size) * -0.45);
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgb(255 255 255 / 0.3),
+    color-mix(in srgb, var(--fx-color) 30%, transparent) 45%,
+    transparent 72%
+  );
+  animation: fx-halo var(--fx-dur) var(--ease-out-soft) forwards;
+}
+
+/* 7 — icon hop: the element's own icon bounces, the box never moves. */
+@keyframes fx-hop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  35% {
+    transform: translateY(-3px) scale(1.12);
+  }
+  62% {
+    transform: translateY(1px) scale(0.98);
+  }
+}
+
+.fx-hop {
+  animation: fx-hop 380ms var(--ease-out-soft);
+  transform-origin: center;
+}
+
+/* 8 — wave: a band of colour expands outward, rotated at random. */
+@keyframes fx-wave {
+  0% {
+    transform: rotate(var(--fx-angle)) scale(0.3);
+    opacity: 0.55;
+  }
+  100% {
+    transform: rotate(var(--fx-angle)) scale(2.2);
+    opacity: 0;
+  }
+}
+
+.fx-wave {
+  width: calc(var(--fx-size) * 1.5);
+  height: calc(var(--fx-size) * 0.5);
+  margin-left: calc(var(--fx-size) * -0.75);
+  margin-top: calc(var(--fx-size) * -0.25);
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--fx-color) 45%, transparent),
+    transparent
+  );
+  animation: fx-wave var(--fx-dur) var(--ease-out-soft) forwards;
+}
+
+/* Motion off: the entire feedback system is inert. Correctness, not taste —
+   a paused animation would leave the layer mid-flight forever. */
+html[data-motion='off'] .fx-layer,
+html[data-motion='off'] .fx-press,
+html[data-motion='off'] .fx-hop {
+  display: none !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-layer {
+    display: none !important;
+  }
+  .fx-press,
+  .fx-hop {
+    animation: none !important;
+  }
+  .card-spotlight {
+    transition: none;
+  }
+}
+
+/* Older engines without color-mix(): fall back to a flat, readable tint so the
+   card still reads as lit instead of losing its background entirely. */
+@supports not (color: color-mix(in srgb, red 50%, transparent)) {
+  .card-spotlight {
+    background-image: radial-gradient(
+      70% 46% at 50% -12%,
+      rgb(255 255 255 / 0.06),
+      transparent 62%
+    );
+  }
+  .fx-ripple {
+    background: none;
+    border-color: currentColor;
+  }
+}

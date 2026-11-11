@@ -1,0 +1,15 @@
+#!name=dlm
+#!desc=🔗 [2025/2/17 01:16:28] dlm
+
+[Script]
+达美乐披萨 = type=cron, cronexp="30 10 * * *", script-path=https://gist.githubusercontent.com/Sliverkiss/6b4da0d367d13790a9fd1d928c82bdf8/raw/dlm.js, timeout=300
+
+达美乐披萨获取token = type=http-request, pattern=^https:\/\/game\.dominos\.com\.cn\/.+\/game\/gameDone, script-path=https://gist.githubusercontent.com/Sliverkiss/6b4da0d367d13790a9fd1d928c82bdf8/raw/dlm.js, requires-body=true, timeout=10
+
+[MITM]
+hostname = %APPEND% game.dominos.com.cn
+
+
+
+# 🔗 模块链接
+#SUBSCRIBED http://script.hub/file/_start_/https://gist.githubusercontent.com/Sliverkiss/6b4da0d367d13790a9fd1d928c82bdf8/raw/dlm.js/_end_/dlm.sgmodule?type=qx-rewrite&target=surge-module&del=true

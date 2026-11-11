@@ -1,0 +1,13 @@
+#!name=蜗牛4K每日签到
+#!desc=根据QX签到脚本改写的Surge原生版。每天09:14（设备本地时区）多账号签到，附Cookie采集、手动签到和本地诊断。需Surge iOS 5.9+或Mac 5.5+。登录后打开会员中心或签到页面采集账号；QX及旧版Surge用户需重新采集。
+#!category=自动任务
+
+[Script]
+# 请求头采集：只保存登录凭据，不在页面请求中执行签到。
+蜗牛4K抓Cookie = type=http-request, pattern=^https:\/\/(?:www\.)?wn4k\.com(?::443)?\/(?:user\/(?:index|info|checkin)(?:\.html)?\/?(?:\?.*)?$|index\.php\/user\/(?:index|info|checkin)(?:\.html)?\/?(?:\?.*)?$|index\.php\?s=(?:/|%2[Ff])user(?:/|%2[Ff])(?:index|info|checkin)(?:\.html)?(?:/|%2[Ff])?(?:&.*)?$), requires-body=false, timeout=10, script-path=https://raw.githubusercontent.com/Viceroy-Dennis/surge-modules/main/wn4k/wn4k_checkin.js, script-update-interval=0
+蜗牛4K每日签到 = type=cron, cronexp="14 9 * * *", wake-system=true, timeout=120, script-path=https://raw.githubusercontent.com/Viceroy-Dennis/surge-modules/main/wn4k/wn4k_checkin.js, script-update-interval=0
+蜗牛4K手动签到 = type=generic, timeout=120, script-path=https://raw.githubusercontent.com/Viceroy-Dennis/surge-modules/main/wn4k/wn4k_checkin.js, script-update-interval=0
+蜗牛4K本地诊断 = type=generic, argument=diagnose, timeout=10, script-path=https://raw.githubusercontent.com/Viceroy-Dennis/surge-modules/main/wn4k/wn4k_checkin.js, script-update-interval=0
+
+[MITM]
+hostname = %APPEND% wn4k.com, www.wn4k.com

@@ -1,0 +1,14 @@
+#!name=Google Simplify URL
+#!desc=简化 Google 搜索结果链接，方便分享。
+#!category=Google
+
+[General]
+# https://manual.nssurge.com/others/host-list.html
+# https://manual.nssurge.com/others/misc-options.html#always-real-ip
+always-real-ip = %INSERT% -www.google.com
+
+[MITM]
+hostname = %INSERT% www.google.com
+
+[Script]
+google-simplify-url.js = debug=false,type=http-request,engine=webview,script-path=modules/google-simplify-url.js,pattern=^https://www.google.com/search\?

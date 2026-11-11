@@ -1,0 +1,91 @@
+name: Sync upstream & deploy
+
+# 每 2 小时扫描 24 个上游仓库，有新增/更新就重建并部署到 Cloudflare Pages。
+# 手动触发：Actions → Sync upstream & deploy → Run workflow
+on:
+  schedule:
+    - cron: '0 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      full_rebuild:
+        description: '忽略缓存，全量重建'
+        type: boolean
+        default: false
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync upstream repositories
+        id: sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
+        run: |
+          python3 scripts/sync_upstream.py
+          python3 - <<'EOF'
+          import json
+          r = json.load(open('/tmp/sync-report.json'))
+          changed = len(r['new']) + len(r['updated']) + len(r['removed'])
+          print(f"new={len(r['new'])} updated={len(r['updated'])} removed={len(r['removed'])} errors={len(r['errors'])}")
+          open('/tmp/changed.txt','w').write(str(changed))
+          import os
+          if os.environ.get('GITHUB_OUTPUT'):
+              with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+                  f.write(f"changed={changed}\n")
+                  f.write(f"new={len(r['new'])}\n")
+                  f.write(f"updated={len(r['updated'])}\n")
+                  f.write(f"removed={len(r['removed'])}\n")
+          EOF
+
+      - name: Build frontend
+        run: npm run build:static
+
+      - name: Deploy to Cloudflare Pages
+        if: steps.sync.outputs.changed != '0'
+        env:
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler pages deploy dist --project-name surge-modules --branch main
+
+      - name: Commit state
+        if: steps.sync.outputs.changed != '0'
+        run: |
+          git config user.name  'surge-modules-bot'
+          git config user.email 'bot@users.noreply.github.com'
+          git add state/ dist/m/ 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "sync: $(date -u +%Y-%m-%dT%H:%MZ) (+${{ steps.sync.outputs.new }} ~${{ steps.sync.outputs.updated }} -${{ steps.sync.outputs.removed }})"
+          git push
+
+      - name: Summary
+        run: |
+          echo "### 同步结果" >> $GITHUB_STEP_SUMMARY
+          echo "- 新增 **${{ steps.sync.outputs.new }}**" >> $GITHUB_STEP_SUMMARY
+          echo "- 更新 **${{ steps.sync.outputs.updated }}**" >> $GITHUB_STEP_SUMMARY
+          echo "- 移除 **${{ steps.sync.outputs.removed }}**" >> $GITHUB_STEP_SUMMARY
+          python3 - <<'EOF'
+          import json
+          r = json.load(open('/tmp/sync-report.json'))
+          for m in r['new'][:10]:
+              print(f"| 新增 | {m['name']} | {m['repo']} |")
+          for m in r['updated'][:10]:
+              print(f"| 更新 | {m['name']} | v{m['version']} |")
+          EOF

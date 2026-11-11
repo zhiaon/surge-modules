@@ -1,0 +1,8 @@
+#!name=麥當勞自動簽到
+#!desc=每天早上自動簽到 + 參加活動。 v20220722
+
+[Script]
+cron "13 0 * * *" script-path=https://kinta.ma/surge/scripts/mcdonalds_checkin.js, wake-system=1, timeout=5
+cron "14 0 * * *" script-path=https://kinta.ma/surge/scripts/mcdonalds_luckydraw.js, wake-system=1, timeout=10
+cron "14 0 * * 3,6" script-path=https://kinta.ma/surge/scripts/mcdonalds_question.js, wake-system=1, timeout=10
+cron "15 0 * * 3,6" script-path=https://kinta.ma/surge/scripts/mcdonalds_media_checkin.js, wake-system=1, timeout=30

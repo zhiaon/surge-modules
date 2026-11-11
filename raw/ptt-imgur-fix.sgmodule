@@ -1,0 +1,9 @@
+#!name=PTT Imgur 修正
+#!desc=修正 PTT 網頁版無法顯示 Imgur 圖片的問題 v20250324
+#!category=Tweaks
+
+[Script]
+ptt-imgur-fix.js = type=http-response,pattern=^https://www.ptt.cc/bbs/.*,requires-body=true,script-path=https://kinta.ma/surge/scripts/ptt_imgur_fix.js
+
+[MITM]
+hostname = %APPEND% ptt.cc, www.ptt.cc

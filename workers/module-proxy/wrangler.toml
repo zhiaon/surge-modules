@@ -1,0 +1,56 @@
+#:schema ../node_modules/wrangler/config-schema.json
+# 模块反代 Worker —— 独立部署、独立域名、独立 Secrets。
+#
+# 正式域名：https://sgmd.zhiaon.top
+# 本地：  npm run dev:proxy   (http://localhost:8788/<slug>)
+# 部署：  npm run deploy:proxy
+#
+# 与主站完全分离：不同的 Worker 名称、不同的 D1 凭据、不同的 Token。
+# 它只做一件事：按 slug 查已登记的映射，读取自有私有仓库的文件原文。
+
+name = "surge-modules-proxy"
+main = "index.ts"
+compatibility_date = "2026-01-01"
+
+# workers.dev 对反代同样关闭——对外只暴露 sgmd.zhiaon.top。
+workers_dev = false
+
+[observability]
+enabled = true
+
+[vars]
+ENVIRONMENT = "development"
+# 本地留空，缓存键回退到请求来源
+PUBLIC_BASE = ""
+CACHE_TTL_SECONDS = "300"
+MAX_MODULE_BYTES = "262144"
+UPSTREAM_TIMEOUT_MS = "8000"
+
+# --------------------------------------------------------------- 生产环境
+[env.production]
+name = "surge-modules-proxy"
+workers_dev = false
+routes = [
+  { pattern = "sgmd.zhiaon.top", custom_domain = true },
+]
+
+[env.production.vars]
+ENVIRONMENT = "production"
+PUBLIC_BASE = "https://sgmd.zhiaon.top"
+CACHE_TTL_SECONDS = "300"
+MAX_MODULE_BYTES = "262144"
+UPSTREAM_TIMEOUT_MS = "8000"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "surge-modules"
+database_id = "70355f3d-47ce-42c2-a56c-16e53cbf1b8a"
+# 反代只读，从不执行 migration
+
+# Secrets（永不写入本文件）：
+#   npx wrangler secret put GITHUB_READ_TOKEN -c workers/module-proxy/wrangler.toml --env production
+#
+# 该 Token 只需：
+#   Repository access : 仅你自己的仓库（Modules）
+#   Permissions       : Contents — Read-only
+# 其余权限全部 No access。

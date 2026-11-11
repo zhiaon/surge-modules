@@ -1,0 +1,46 @@
+#:schema node_modules/wrangler/config-schema.json
+# Cloudflare Workers + Static Assets.
+#
+# Phase 1 only needs the assets binding — the built SPA in ./dist.
+# D1 / KV / R2 bindings are declared but commented out until Phase 2 creates
+# the real resources, so `wrangler deploy` cannot fail on missing IDs.
+
+name = "surge-modules"
+compatibility_date = "2026-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Static site: served straight from the assets binding.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+[observability]
+enabled = true
+
+[vars]
+ENVIRONMENT = "production"
+
+# ---------------------------------------------------------------- Phase 2+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "surge-modules"
+# database_id = "<run `wrangler d1 create surge-modules`>"
+# migrations_dir = "database/migrations"
+#
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = "<run `wrangler kv namespace create CACHE`>"
+#
+# [[r2_buckets]]
+# binding = "BUCKET"
+# bucket_name = "surge-modules-assets"
+#
+# # Phase 3: periodic GitHub sync
+# [triggers]
+# crons = ["0 */6 * * *"]
+
+# Secrets are never written here:
+#   wrangler secret put GITHUB_TOKEN
+#   wrangler secret put WEBHOOK_SECRET

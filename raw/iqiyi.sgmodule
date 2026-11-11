@@ -1,0 +1,6 @@
+#!name= 爱奇艺签到
+#!desc= by nubida
+#!system=ios
+
+[Script]
+爱奇艺签到 = type=cron,cronexp=10 0 * * *,timeout=120,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js

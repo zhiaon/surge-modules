@@ -1,0 +1,11 @@
+#!name=Block Qinlin AD
+#!desc=Block Qinlin AD in miniApp and others
+#!system=ios
+
+[Rule]
+DOMAIN-SUFFIX,qadx.qinlinad.com,REJECT
+DOMAIN,mallapi.qinlinkeji.com,REJECT
+DOMAIN,mall-dsp.qinlinkeji.com,REJECT
+
+[MITM]
+hostname = %APPEND% mobileapi.qinlinkeji.com, qapp.qinlinkeji.com

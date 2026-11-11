@@ -1,0 +1,5 @@
+#!name=DOH
+#!desc=DOH设置
+
+[General]
+doh-server = https://ea-dns.rubyfish.cn/dns-query
