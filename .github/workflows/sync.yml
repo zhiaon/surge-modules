@@ -66,6 +66,13 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx wrangler pages deploy dist --project-name surge-modules --branch main
 
+      - name: Notify Telegram
+        if: steps.sync.outputs.changed != '0'
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: python3 scripts/notify_telegram.py
+
       - name: Commit state
         if: steps.sync.outputs.changed != '0'
         run: |
