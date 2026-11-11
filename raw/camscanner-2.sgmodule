@@ -1,12 +1,10 @@
-#!name = 扫描全能王
-#!desc = 扫描全能王解锁黄金会员
-#!homepage = https://github.com/chxm1023/Rewrite/tree/main
-#!author = chxm1023
-#!icon = https://raw.githubusercontent.com/BlackSpacee/icon/main/Apps/Saomiao.png
-#!date = [2023/8/19]
+#!name=扫描全能王
+#!desc=解锁扫描全能王
+#!author=NobyDa
+#!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/cs.png
+
+[Mitm]
+hostname =%APPEND% ap*.intsig.net
 
 [Script]
-扫描全能王 = type=http-response, pattern=^https:\/\/.*\.(intsig\.net|camscanner\.com), script-path=https://raw.githubusercontent.com/chxm1023/Rewrite/main/CamScanner.js, requires-body=true
-
-[MITM]
-hostname = %APPEND% *.camscanner.com, *.intsig.net
+扫描全能王=type=http-response,pattern=https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\?,requires-body=1, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/CamScanner.js

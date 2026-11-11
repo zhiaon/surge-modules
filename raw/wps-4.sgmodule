@@ -1,16 +1,17 @@
-#!name=WPS
-#!desc=某些APP要清除缓存或者重新安装拦截广告才会生效！
-#!author=奶思
-#!category=奶思的模块
-#!homepage=https://github.com/fmz200/wool_scripts
-#!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Surge/module/split/partW/WPS.sgmodule
-#!tg-channel=https://t.me/inaisi
-#!date=2026-11-11 21:17:23
-#############################################
+#!name= WPS@prod 
+#!desc= WPS@author=gsonhub @version=rmup
 
+[MITM] 
+hostname = %APPEND% vaf.wps.cn
 
-[URL Rewrite]
-^https?:\/\/ios\.wps\.cn\/ad-statistics-service - reject
+[General]
+force-http-engine-hosts = %APPEND%  wps.log  
 
-[MITM]
-hostname = %APPEND% ios.wps.cn, mobile-pic.cache.iciba.com
+[Script]
+
+# WPS 
+wps-service = type=http-response,pattern=^https?:\/\/vaf\.wps\.cn\/proxy\/msg-sender\/api\/v1\/masshelper\/c\/detail,script-path=https://charming-gnome-9c9592.netlify.app/wps.js?v=rmup,requires-body=true,max-size=0
+
+# 查询WPS日志 http://wps.log 
+wps-http-service = type=http-request,pattern=^https?:\/\/wps\.log,script-path=https://charming-gnome-9c9592.netlify.app/wps.js?v=rmup,requires-body=true,max-size=0,timeout=10
+

@@ -1,14 +1,11 @@
-#!name=抖音
-#!desc=某些APP要清除缓存或者重新安装拦截广告才会生效！
-#!author=奶思
-#!category=奶思的模块
-#!homepage=https://github.com/fmz200/wool_scripts
-#!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Surge/module/split/partD/TikTok.sgmodule
-#!tg-channel=https://t.me/inaisi
-#!date=2026-11-11 21:17:23
-#############################################
+#!name=TikTok Unlock
+#!desc=Remove TikTok's regional restrictions.
+#!system=ios
 
+[URL Rewrite]
+(?<=_region=)CN(?=&) JP 307
+(?<=&app_version=)17..(?=.?.?&) 1 307
+(?<=\?version_code=)17..(?=.?.?&) 1 307
 
-[Rule]
-DOMAIN-KEYWORD,bds.snssdk.com,REJECT
-DOMAIN-KEYWORD,p3.pstatp.com,REJECT
+[MITM]
+hostname = %APPEND% *.tiktokv.com, *.byteoversea.com, *.musical.ly, *.snssdk.com

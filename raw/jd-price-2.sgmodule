@@ -1,8 +1,10 @@
 #!name=京东比价
-#!desc=通知版：点击商品页面详情 看弹窗通知 
+#!desc=京东历史价格
+#!system=ios
 
 [Script]
-京东比价 = type=http-request, pattern=^https:\/\/in\.m\.jd\.com\/product\/graphext\/\d+\.html, script-path=https://raw.githubusercontent.com/mw418/Loon/main/script/jd_price.js, timeout=60
+# > 京东比价
+http-response ^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=(wareBusiness|serverConfig|basicConfig) requires-body=1,script-path= https://raw.githubusercontent.com/zwf234/rules/master/js/jd_price.js
 
 [MITM]
-hostname = %APPEND% in.m.jd.com
+hostname = %APPEND% api.m.jd.com

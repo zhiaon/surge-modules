@@ -157,7 +157,9 @@ def main():
         key = f"{rec['repo']}@{rec['branch']}"
         by_repo.setdefault(key, {})[rec['path']] = (slug, rec.get('sha', ''))
 
-    report = {'checked': 0, 'new': [], 'updated': [], 'removed': [], 'errors': []}
+    before_count = len(catalogue)
+    report = {'checked': 0, 'new': [], 'updated': [], 'removed': [], 'errors': [],
+              'before': before_count, 'after': 0}
 
     for key, repo_meta in sorted(sources.items()):
         owner, repo = repo_meta['owner'], repo_meta['repo']
@@ -243,6 +245,29 @@ def main():
         json.dump(report, open(REPORT, 'w'), ensure_ascii=False, indent=1)
         print(json.dumps({k: (len(v) if isinstance(v, list) else v) for k, v in report.items()}, ensure_ascii=False))
         return 0
+
+    # ---- consistency check -------------------------------------------------
+    # The catalogue is the platform's only source of truth, so a silent
+    # overwrite is worse than a failed run: verify the arithmetic before
+    # writing anything.
+    report['after'] = len(catalogue)
+    expected = before_count + len(report['new']) - len(report['removed'])
+    if report['after'] != expected:
+        report['errors'].append(
+            f'数量校验失败：{before_count} + {len(report["new"])} - '
+            f'{len(report["removed"])} 应为 {expected}，实际 {report["after"]}'
+        )
+
+    # Every upstream file must map to exactly one catalogue record.
+    seen = {}
+    dupes = []
+    for slug, rec in catalogue.items():
+        key = f"{rec['repo']}@{rec['branch']}:{rec['path']}"
+        if key in seen:
+            dupes.append(f'{seen[key]} 与 {slug} 指向同一文件 {key}')
+        seen[key] = slug
+    if dupes:
+        report['errors'].extend(dupes[:10])
 
     os.makedirs(STATE, exist_ok=True)
     json.dump(catalogue, open(CATALOGUE, 'w'), ensure_ascii=False, indent=1)

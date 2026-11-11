@@ -1,29 +1,33 @@
-#!name=Weibo
-#!desc=Weibo app removes ad.
+#!name= 微博净化
+#!desc=微博官方App净化
+#!system=ios
+
+[Map Local]
+# > 微博
+^https?:\/\/h5\.sinaimg\.cn\/upload\/.+\/fhy_dongtu\.gif$ data="https://hub.nan.ge/Mock/Weibo/hy_dongtu.gif"
+^https?:\/\/h5\.sinaimg\.cn\/upload\/.+\/bianjijiantou\.png$ data="https://hub.nan.ge/Mock/Weibo/jiantougaocheng.png"
+^https?:\/\/h5\.sinaimg\.cn\/upload\/.+\/Vip\.png$ data="https://hub.nan.ge/Mock/Weibo/avatar_vip_golden.png"
+^https?:\/\/h5\.sinaimg\.cn\/upload\/.+\/vip[0-9]_default\.png$ data="https://hub.nan.ge/Mock/Weibo/feed_icon_100vip_7_default.png"
 
 [Script]
-// 微博下面的评论
-http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/comments/build_comments\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_comment.js
+# > 微博个人信息
+主页 = type=http-response,pattern=^https?:\/\/api\.weibo\.cn\/2\/profile\?gsid=,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Spec/Weibo/Moore/Profile.js
 
-// 微博 推荐 热门/榜单/放映厅… https://api.weibo.cn/2/statuses/unread_hot_timeline?
-// 微博 最新微博 https://api.weibo.cn/2/statuses/friends/timeline?
-// 视频流（短视频上划，微博继续推荐新视频） https://api.weibo.cn/2/video/tiny_stream_video_list?
-// 微博 全部关注 https://api.weibo.cn/2/statuses/unread_friends_timeline?
-http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/(statuses/unread_hot_timeline|statuses/friends/timeline|video/tiny_stream_video_list|statuses/unread_friends_timeline)\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_statuses.js
+个人信息 = type=http-response,pattern=^https?:\/\/api\.weibo\.cn\/2\/users\/(show|relation),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Spec/Weibo/Moore/UserShow.js
 
-// 发现 搜索 https://api.weibo.cn/2/searchall?
-// 超话 帖子/精华/官方 https://api.weibo.cn/2/page?
-http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/(searchall|page)\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_cardlist.js
+消息列表 = type=http-response,pattern=^https?:\/\/api\.weibo\.cn\/2\/(direct_messages\/user_list|messageflow\/notice)\?gsid=,requires-body=1,max-size=0,script-path=https://hub.nan.ge/Script/Weibo/Message.js
 
-// 发现 热点（这货特殊，有卡片广告） https://api.weibo.cn/2/cardlist?
-http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/cardlist\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_cardlist_discover.js
+# > 微博去广告
+扩展 = type=http-response,pattern=^https?://m?api\.weibo\.c(n|om)/2/(profile/(me|statuses)|searchall|statuses/(unread_hot_timeline|extend|video_mixtimeline)|video/(community_tab|remind_info|tiny_stream_video_list)|checkin/show|container/get_item),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Spec/Weibo/Moore/Weibo.js
 
-// 每条微博下面 创作者广告共享计划
-http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/statuses/extend\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_statuses_extend.js
+开屏 = requires-body=1,script-path=https://hub.nan.ge/Script/Weibo/Launch.js,type=http-response,pattern=^https?://(sdk|wb)app\.uve\.weibo\.com(/interface/sdk/sdkad.php|/wbapplua/wbpullad.lua)
 
+微博 = type=http-response,requires-body=1,max-size=-1,pattern=^https?://m?api\.weibo\.c(n|om)/2/(statuses/(unread|extend|positives/get|(friends|video)(/|_)(mix)?timeline)|stories/(video_stream|home_list)|(groups|fangle)/timeline|profile/statuses|comments/build_comments|photo/recommend_list|service/picfeed|cardlist|page|!/(photos/pic_recommend_status|live/media_homelist|wbox\/.+\/createrIndex|st_videos\/tiny\/effect\/shoot_display_config)|video/tiny_stream_video_list|photo/info|remind/unread_count),script-path=https://hub.nan.ge/Script/Weibo/Timeline.js
 
-// 开屏广告
-http-response ^https://sdkapp\.uve\.weibo\.com/interface/sdk/sdkad\.php$ requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_sdkad.js
+微博钱包 = type=http-response,pattern=^https?:\/\/pay\.sc\.weibo\.com\/api\/client\/sdk\/app\/indexnew\/(index|person),requires-body=1,max-size=0,script-path=https://hub.nan.ge/Script/Weibo/Wallet.js
+
+# > 微博配置变量注入
+微博去广告配置 = type=cron,cronexp="0 0 1 1 * ? ",debug=1,script-path=https://hub.nan.ge/Script/Weibo/Config.js
 
 [MITM]
-hostname = %APPEND% api.weibo.cn, mapi.weibo.com, sdkapp.uve.weibo.com
+hostname = %APPEND% *.uve.weibo.com, api.weibo.cn, api.weibo.com, mapi.weibo.com, mapi.weibo.cn, h5.sinaimg.cn, pay.sc.weibo.com

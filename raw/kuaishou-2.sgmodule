@@ -1,34 +1,14 @@
-#!name=快手
-#!desc=某些APP要清除缓存或者重新安装拦截广告才会生效！
-#!author=奶思
-#!category=奶思的模块
-#!homepage=https://github.com/fmz200/wool_scripts
-#!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Surge/module/split/partK/Kuaishou.sgmodule
-#!tg-channel=https://t.me/inaisi
-#!date=2026-11-11 21:17:23
-#############################################
+#!name= kuaishou Rewrite
+#!desc= 快手重写配置
+#!system=ios
 
+[Script]
+cron "5 0 * * *" script-path=https://raw.githubusercontent.com/GoodHolidays/Scripts/master/Task/kuaishou.js
+cron "6 0 * * *" script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/box/switcher/box.switcher.js, tag=切换会话
+cron "7 0 * * *" script-path=https://raw.githubusercontent.com/GoodHolidays/Scripts/master/Task/kuaishou.js
 
-[Rule]
-# DOMAIN, js-ad.a.yximgs.com, REJECT
-DOMAIN-SUFFIX,e.kuaishou.com,REJECT
-DOMAIN-SUFFIX,cm.downloader.commercial.kuaishou.com,REJECT
-DOMAIN-SUFFIX,cm.ad.gifshow.com,REJECT
-DOMAIN-SUFFIX,cm.kwad.com,REJECT
-
-[Body Rewrite]
-http-response-jq ^https:\/\/(apissl|az2-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/system\/startup\? 'delpaths([["reskinConfig"]])'
-http-response-jq ^https:\/\/(apissl|az2-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/system\/startup\? 'delpaths([["sidebarExSquareStyle","moreList"]])'
-http-response-jq ^https:\/\/(apissl|az2-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/system\/startup\? 'delpaths([["sidebarExSquareStyle","topList"]])'
-http-response-jq ^https:\/\/(apissl|az2-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/system\/startup\? '.sidebarExSquareStyle.commonlyUsedList |= map(select(.title == "设置" or .title == "历史记录" or .title == "草稿箱" or .title == "我的钱包" or .title == "小程序" or .title == "未成年人模式" or .title == "官方客服" or .title == "内容偏好" or .title == "离线模式" or .title == "稍后再看" or .title == "举报中心" or .title == "挂件"))'
-http-response-jq ^https:\/\/az2-live\.ksapisrv\.com\/rest\/n\/live\/feed\/square\/refresh\? 'delpaths([["data","banners"]])'
-http-response-jq ^https:\/\/az4-api(-idc)?\.ksapisrv\.com\/rest\/n\/feed\/selectionFast\? 'if (.feeds | type) == "array" then .feeds |= map(select(.ad | not)) else . end'
-http-response-jq ^https:\/\/az2-api-js\.gifshow\.com\/rest\/n\/user\/profile\/v2\? 'delpaths([["postRecommends"]])'
-
-[Map Local]
-^https:\/\/az2-api\.ksapisrv\.com\/rest\/n\/taskCenter\/task\/report\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-
-^https:\/\/az2-api\.ksapisrv\.com\/rest\/n\/ad\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+#快手正式版 = type=http-request,pattern=https:\/\/activity\.m\.kuaishou\.com\/rest\/wd\/taskCenter\/\w+\/module\/list,script-path=https://raw.githubusercontent.com/GoodHolidays/Scripts/master/Task/kuaishou.js
+快手极速版 = type=http-request,pattern=https:\/\/nebula\.kuaishou\.com\/nebula\/task\/earning\?,script-path=https://raw.githubusercontent.com/GoodHolidays/Scripts/master/Task/kuaishou.js
 
 [MITM]
-hostname = %APPEND% az4-api.ksapisrv.com, az4-api-idc.ksapisrv.com, az2-api.ksapisrv.com, az2-api-idc.ksapisrv.com, apissl.gifshow.com, apissl.ksapisrv.com, az2-api-js.gifshow.com, az2-live.ksapisrv.com
+hostname = %APPEND% nebula.kuaishou.com, activity.m.kuaishou.com

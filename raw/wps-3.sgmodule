@@ -1,15 +1,16 @@
-#!name=WPS 每日签到
-#!desc=每天 10:00 自动运行 WPS 签到任务。开启模块后，打开 WPS App 的任务中心或福利中心活动页获取 Cookie。
-#!category=自动任务
+#!name=WPS
+#!desc=某些APP要清除缓存或者重新安装拦截广告才会生效！
+#!author=奶思
+#!category=奶思的模块
+#!homepage=https://github.com/fmz200/wool_scripts
+#!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Surge/module/split/partW/WPS.sgmodule
+#!tg-channel=https://t.me/inaisi
+#!date=2026-11-11 21:17:23
+#############################################
 
-# 脚本作者：MaYIHEI
-# 脚本来源：https://github.com/MaYIHEI/paperclip/tree/main/app/wps
-# 定时执行使用运行设备的本地时区。
-# 获取 Cookie 前，请开启 Surge MITM 并安装、信任其 CA 证书。
+
+[URL Rewrite]
+^https?:\/\/ios\.wps\.cn\/ad-statistics-service - reject
 
 [MITM]
-hostname = %APPEND% personal-act.wps.cn
-
-[Script]
-WPS Cookie = type=http-request, pattern=^https:\/\/personal-act\.wps\.cn\/activity-rubik\/activity\/page_info, requires-body=false, max-size=0, script-path=https://raw.githubusercontent.com/MaYIHEI/paperclip/refs/heads/main/app/wps/wps.cookie.js, img-url=https://raw.githubusercontent.com/MaYIHEI/pin/refs/heads/main/app/wps.png
-WPS签到 = type=cron, cronexp="0 10 * * *", timeout=120, script-path=https://raw.githubusercontent.com/MaYIHEI/paperclip/refs/heads/main/app/wps/wps.js, img-url=https://raw.githubusercontent.com/MaYIHEI/pin/refs/heads/main/app/wps.png
+hostname = %APPEND% ios.wps.cn, mobile-pic.cache.iciba.com

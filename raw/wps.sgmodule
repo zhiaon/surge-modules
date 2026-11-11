@@ -1,10 +1,15 @@
-#!name=WPS会员
-#!desc=WPS解锁本地会员
-#!icon= https://raw.githubusercontent.com/deezertidal/private/main/icons/wps.png
-#!author=I-am-R-E
+#!name=WPS 每日签到
+#!desc=每天 10:00 自动运行 WPS 签到任务。开启模块后，打开 WPS App 的任务中心或福利中心活动页获取 Cookie。
+#!category=自动任务
 
-[Script]
-WPS=type=http-response,pattern=^https?:\/\/.*?account\.wps\.(com|cn)(:\d+)?\/api\/users\/\w+\/overview$,script-path=https://raw.githubusercontent.com/I-am-R-E/Functional-Store-Hub/Master/WPSOffice/Script/WPS.js, requires-body=true, timeout=10
+# 脚本作者：MaYIHEI
+# 脚本来源：https://github.com/MaYIHEI/paperclip/tree/main/app/wps
+# 定时执行使用运行设备的本地时区。
+# 获取 Cookie 前，请开启 Surge MITM 并安装、信任其 CA 证书。
 
 [MITM]
-hostname = %APPEND% account.wps.cn,*account.wps.com
+hostname = %APPEND% personal-act.wps.cn
+
+[Script]
+WPS Cookie = type=http-request, pattern=^https:\/\/personal-act\.wps\.cn\/activity-rubik\/activity\/page_info, requires-body=false, max-size=0, script-path=https://raw.githubusercontent.com/MaYIHEI/paperclip/refs/heads/main/app/wps/wps.cookie.js, img-url=https://raw.githubusercontent.com/MaYIHEI/pin/refs/heads/main/app/wps.png
+WPS签到 = type=cron, cronexp="0 10 * * *", timeout=120, script-path=https://raw.githubusercontent.com/MaYIHEI/paperclip/refs/heads/main/app/wps/wps.js, img-url=https://raw.githubusercontent.com/MaYIHEI/pin/refs/heads/main/app/wps.png
