@@ -48,7 +48,7 @@ export function SiteFooter() {
     : '';
 
   return (
-    <footer className="mt-16 border-t border-line bg-surface/30 md:mt-20">
+    <footer className="mt-10 border-t border-line bg-surface/30 pb-[calc(var(--tabbar-h)+28px+env(safe-area-inset-bottom))] md:mt-20 md:pb-0">
       <Container size="wide" className="py-12 sm:py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] lg:gap-14">
           <div className="max-w-sm">

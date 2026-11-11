@@ -36,7 +36,7 @@ export function RootLayout() {
 
       <SiteHeader />
 
-      <main id="main" className="flex-1 pb-[var(--content-bottom)] md:pb-0">
+      <main id="main" className="flex-1">
         <Outlet />
       </main>
 
