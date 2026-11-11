@@ -48,7 +48,7 @@ TOOL_SLUGS = {'dns', 'dns-lite', 'ipinfo', 'jichang', 'streaming', 'netcheck',
               'cloudflare-speedtest', 'speedtest'}
 
 SETTINGS = {
-    'contactTelegram': '',
+    'contactTelegram': 'https://t.me/Xzhou_Xz',
     'siteName': 'Surge Modules',
     'tagline': '让 Surge 模块发现更简单',
     'description': '一个独立的 Surge 模块索引平台：浏览、搜索、收藏与分发模块，查看原始配置与版本记录。',

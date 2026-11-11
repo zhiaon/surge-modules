@@ -73,7 +73,9 @@ export const siteConfig: SiteConfig = {
   issuesUrl: '',
   contact: {
     email: '',
-    telegram: '',
+    // Fallback for the footer「联系作者」card when /data/settings.json is not
+    // available — the entry must never degrade into dead text.
+    telegram: 'https://t.me/Xzhou_Xz',
     twitter: '',
   },
   footer: {

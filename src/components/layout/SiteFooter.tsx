@@ -24,7 +24,7 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
   const links = siteConfig.nav.filter((n) => !n.to.includes('#'));
 
-  const [telegram, setTelegram] = useState('');
+  const [telegram, setTelegram] = useState(siteConfig.contact.telegram);
   useEffect(() => {
     let cancelled = false;
     api
