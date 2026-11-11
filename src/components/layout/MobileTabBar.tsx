@@ -42,13 +42,13 @@ export function MobileTabBar() {
       window.matchMedia('(display-mode: standalone)').matches;
     // Safari's floating address pill straddles the safe-area inset; ~46px clears
     // it. Other iOS browsers (Chrome/Firefox) use the same WebKit chrome.
-    const chromeLift = isIos && !standalone ? 46 : 0;
+    const chromeLift = isIos && !standalone ? 18 : 0;
     setBottom(`calc(8px + env(safe-area-inset-bottom) + ${chromeLift}px)`);
     // Keep the page's bottom padding in sync so the last card never hides
     // behind the pill (46px = Safari address pill, 8px = the bar's own gap).
     document.documentElement.style.setProperty(
       '--content-bottom',
-      `calc(var(--tabbar-h) + ${chromeLift + 56}px + env(safe-area-inset-bottom))`,
+      `calc(var(--tabbar-h) + ${chromeLift + 40}px + env(safe-area-inset-bottom))`,
     );
   }, []);
 
