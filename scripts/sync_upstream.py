@@ -53,7 +53,10 @@ SKIP_SLUGS = {
 # the site indexes other people's modules, not hers. Matching is on the *author
 # and title* only — many unrelated modules merely call her shared JS or credit
 # her in a comment, and those must stay.
-KELI_PATTERN = re.compile(r'可莉|kel[ie]|luestr|ikelee', re.I)
+# Only the Chinese name and the literal "kelee" are blocked. Anything else
+# (KELI, keli, luestr, iKeLee-style handles on unrelated work) is allowed —
+# the earlier broad pattern caught other people's modules by accident.
+KELI_PATTERN = re.compile(r'可莉|kelee', re.I)
 
 # Files that are not Surge modules at all.
 SKIP_PATTERNS = re.compile(r'(^|/)(\.|README|LICENSE)', re.I)

@@ -1104,6 +1104,19 @@
   "category": "adblock",
   "updatedAt": "2026-11-10T10:48:47Z"
  },
+ "aiqicha": {
+  "slug": "aiqicha",
+  "repo": "BlackSpacee/Surge",
+  "branch": "main",
+  "path": "Module/UnlockVip/Aiqicha.sgmodule",
+  "sha": "10fc1e179cff16a91bcfd7660be0c5f5b576fbbd",
+  "name": "爱企查",
+  "description": "爱企查去广告及VIP",
+  "author": "@KELI@litieyin",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-11T23:14:41Z"
+ },
  "apowersoft": {
   "slug": "apowersoft",
   "repo": "BlackSpacee/Surge",
@@ -5589,8 +5602,8 @@
   "category": "adblock",
   "updatedAt": "2026-11-11T01:15:22Z"
  },
- "aiqicha": {
-  "slug": "aiqicha",
+ "aiqicha-2": {
+  "slug": "aiqicha-2",
   "repo": "fmz200/wool_scripts",
   "branch": "main",
   "path": "Surge/module/split/partA/AiQiCha.sgmodule",
@@ -5600,7 +5613,7 @@
   "author": "奶思",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T23:14:41Z"
+  "updatedAt": "2026-11-11T23:54:12Z"
  },
  "aiqiangua": {
   "slug": "aiqiangua",
