@@ -1925,16 +1925,16 @@
  },
  "coolapk": {
   "slug": "coolapk",
-  "repo": "fmz200/wool_scripts",
+  "repo": "BlackSpacee/Surge",
   "branch": "main",
-  "path": "Surge/module/split/partK/Coolapk.sgmodule",
-  "sha": "2a102a4a554c9bee593c7c8857894f9ac561f629",
+  "path": "Module/AdBlock/Coolapk.sgmodule",
+  "sha": "9d1125b6da778bd0a83f19187f8ba538dc5139ed",
   "name": "酷安",
-  "description": "某些APP要清除缓存或者重新安装拦截广告才会生效！",
-  "author": "奶思",
+  "description": "酷安去广告&推广",
+  "author": "@RuCu6",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:24Z"
+  "updatedAt": "2026-11-11T21:04:22Z"
  },
  "kfc": {
   "slug": "kfc",
@@ -10505,16 +10505,16 @@
  },
  "netflix-rating": {
   "slug": "netflix-rating",
-  "repo": "deezertidal/shadowrocket-rules",
-  "branch": "main",
+  "repo": "Black-Magic-Lab/Surge",
+  "branch": "master",
   "path": "modules/netflix_rating.sgmodule",
-  "sha": "644942099a16e5fbbc683cf0c328298b6acdfc23",
-  "name": "Display Netflix Ratings",
-  "description": "奈菲迪士尼评分",
-  "author": "deezertidal",
+  "sha": "2214ecfebfee97232fa7f91b496f54d2870997d1",
+  "name": "Netflix IMDB 評分",
+  "description": "在 Netflix App 顯示評分。 v20200627",
+  "author": "Black-Magic-Lab",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:21Z"
+  "updatedAt": "2026-11-11T21:04:21Z"
  },
  "baiduwp-tpl": {
   "slug": "baiduwp-tpl",
@@ -10804,16 +10804,16 @@
  },
  "jd-price": {
   "slug": "jd-price",
-  "repo": "Rabbit-Spec/Surge",
-  "branch": "Master",
-  "path": "Module/Spec/JD_Price/Moore/JD_Price.sgmodule",
-  "sha": "b88ce5dfb9e63a55fd21a8b2269348f801fa96f1",
+  "repo": "BlackSpacee/Surge",
+  "branch": "main",
+  "path": "Module/Function/JD_price.sgmodule",
+  "sha": "62c27e30031f922a3b13d3da7e107efc69329b5c",
   "name": "京东比价",
-  "description": "京东历史价格",
-  "author": "Rabbit-Spec",
+  "description": "京东App历史价格（商品详情页面触发）表格",
+  "author": "BlackSpacee",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:16Z"
+  "updatedAt": "2026-11-11T21:04:25Z"
  },
  "ipv6": {
   "slug": "ipv6",
@@ -12715,16 +12715,16 @@
  },
  "mitm": {
   "slug": "mitm",
-  "repo": "elnfnoosm/iOS_network",
+  "repo": "Aoang/Surge",
   "branch": "main",
-  "path": "QuantumultX/Rewrite/allinone@eric0510/surge/Module/mitm.sgmodule",
-  "sha": "b4f31315e960ea32aabda111ab63a8ba5f67db62",
-  "name": "MITM",
-  "description": "此 Module 仅会解密这里指定的主机名（默认发往 433 端口上的请求执行 MitM）的请求，主要包含 URL Rewrite 请求部分，您任然需要配置 CA 证书并启用 Mitm 开关。",
-  "author": "elnfnoosm",
+  "path": "output/Modules/mitm.sgmodule",
+  "sha": "e4b4e32bd54e252379dbbc5c13734028c4f85101",
+  "name": "ASurge: MitM",
+  "description": "对所有域名进行 MitM，常见不可 MitM 除外",
+  "author": "Aoang",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:22Z"
+  "updatedAt": "2026-11-11T21:04:20Z"
  },
  "js": {
   "slug": "js",
@@ -13001,16 +13001,16 @@
  },
  "sub-info": {
   "slug": "sub-info",
-  "repo": "Rabbit-Spec/Surge",
-  "branch": "Master",
+  "repo": "cc63/Surge",
+  "branch": "main",
   "path": "Module/Panel/Sub-info/Moore/Sub-info.sgmodule",
-  "sha": "10ed519158cf91042401dc27690b76e43473d2c9",
-  "name": "机场流量信息",
-  "description": "显示机场剩余流量信息以及套餐到期日期",
-  "author": "Rabbit-Spec",
+  "sha": "62661544c339485576bf226b54ec3c9f0fe87b75",
+  "name": "面板-机场信息",
+  "description": "流量信息/智能提醒/到期日期",
+  "author": "cc63",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:15Z"
+  "updatedAt": "2026-11-11T21:04:30Z"
  },
  "icloud-contacts-drop-nx-domains": {
   "slug": "icloud-contacts-drop-nx-domains",
@@ -13521,16 +13521,16 @@
  },
  "tieba": {
   "slug": "tieba",
-  "repo": "Rabbit-Spec/Surge",
-  "branch": "Master",
-  "path": "Module/Spec/Tieba/Moore/Tieba.sgmodule",
-  "sha": "0afcc89e9fdd911072b084ade5699043a4b996ab",
-  "name": "贴吧净化",
-  "description": "贴吧官方App净化",
-  "author": "Rabbit-Spec",
+  "repo": "BlackSpacee/Surge",
+  "branch": "main",
+  "path": "Module/AdBlock/Tieba.sgmodule",
+  "sha": "36b2e6f759857eb507edea25b91067d03ffb2ab8",
+  "name": "贴吧去广告",
+  "description": "过滤贴吧广告，需注意此插件会导致新回复等通知功能不可用，需手动进入消息页点击查看。仅限iOS 15及以上版本系统使用。",
+  "author": "@app2smile",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:16Z"
+  "updatedAt": "2026-11-11T21:04:24Z"
  },
  "agc": {
   "slug": "agc",
@@ -13677,16 +13677,16 @@
  },
  "youtube": {
   "slug": "youtube",
-  "repo": "blankmagic/Surge",
+  "repo": "BlackSpacee/Surge",
   "branch": "main",
-  "path": "module/block/Youtube.sgmodule",
-  "sha": "7bde3b95044264d2d6ebbbc638ff5aafd81b6be0",
-  "name": "Block YouTube Advertising",
-  "description": "For video advertising only",
-  "author": "blankmagic",
+  "path": "Module/AdBlock/YouTube.sgmodule",
+  "sha": "91abdd89899745e2f716b1807b6c984067083ff6",
+  "name": "Youtube (Music) Enhance",
+  "description": "适用于 Youtube & Youtube Music",
+  "author": "BlackSpacee",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:20Z"
+  "updatedAt": "2026-11-11T21:04:24Z"
  },
  "baiducloudspped": {
   "slug": "baiducloudspped",
@@ -13885,16 +13885,16 @@
  },
  "weibo": {
   "slug": "weibo",
-  "repo": "Rabbit-Spec/Surge",
-  "branch": "Master",
-  "path": "Module/Spec/Weibo/Moore/Weibo.sgmodule",
-  "sha": "bd3f4696a317722283f9894f928ea2affd917cfa",
-  "name": "微博净化",
-  "description": "微博官方App净化",
-  "author": "Rabbit-Spec",
+  "repo": "BlackSpacee/Surge",
+  "branch": "main",
+  "path": "Module/AdBlock/Weibo.sgmodule",
+  "sha": "243a797c57da9b5f6916f09099bf771b8224806a",
+  "name": "微博轻享版去广告",
+  "description": "过滤轻享国际版广告及去除各部分推广模块",
+  "author": "@Keywos",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:16Z"
+  "updatedAt": "2026-11-11T21:04:24Z"
  },
  "mini-program-fmz200": {
   "slug": "mini-program-fmz200",
@@ -14990,16 +14990,16 @@
  },
  "jd": {
   "slug": "jd",
-  "repo": "Tartarus2014/Surge-Script",
-  "branch": "master",
-  "path": "JD.sgmodule",
-  "sha": "30ba7095128610c3bb8162365cf84c36ca6f3081",
-  "name": "JD iOS Tasks&Cookies Module",
-  "description": "iOS Tasks&Cookies 模块配置",
-  "author": "Tartarus2014",
+  "repo": "BlackSpacee/Surge",
+  "branch": "main",
+  "path": "Module/AdBlock/JD.sgmodule",
+  "sha": "e8ff05eff9b23e9b883ec731d5be6574321fcf30",
+  "name": "京东去广告",
+  "description": "移除京东开屏广告，精简我的页面产品推广。",
+  "author": "@RuCu6",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:17Z"
+  "updatedAt": "2026-11-11T21:04:22Z"
  },
  "jd-baitiao": {
   "slug": "jd-baitiao",
@@ -15354,16 +15354,16 @@
  },
  "hide-vpn-icon": {
   "slug": "hide-vpn-icon",
-  "repo": "Rabbit-Spec/Surge",
-  "branch": "Master",
-  "path": "Module/Spec/Hide-VPN-Icon/Moore/Hide-VPN-Icon.sgmodule",
-  "sha": "c50e58ea6d1ea003a1d4cabfe769b19b500fb703",
+  "repo": "blankmagic/Surge",
+  "branch": "main",
+  "path": "module/Hide-VPN-Icon.sgmodule",
+  "sha": "77d5fa394434831988728230f6af161e12c43023",
   "name": "Hide VPN Icon",
-  "description": "隐藏VPN图标",
-  "author": "Rabbit-Spec",
+  "description": "隐藏状态栏中的 VPN 图标",
+  "author": "blankmagic",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:15Z"
+  "updatedAt": "2026-11-11T21:04:29Z"
  },
  "tiktok": {
   "slug": "tiktok",
