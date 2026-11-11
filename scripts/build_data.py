@@ -16,7 +16,8 @@ import json
 import os
 import sys
 
-ROOT = '/var/minis/workspace/surge-modules'
+# Repo root: works both in the sandbox and on a GitHub runner.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = os.path.join(ROOT, 'state', 'catalogue.json')
 DIST = os.path.join(ROOT, 'dist')
 OUT = os.path.join(DIST, 'data')

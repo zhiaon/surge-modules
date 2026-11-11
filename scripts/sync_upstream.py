@@ -30,7 +30,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-ROOT = '/var/minis/workspace/surge-modules'
+# Repo root: works both in the sandbox and on a GitHub runner.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = os.path.join(ROOT, 'state')
 CATALOGUE = os.path.join(STATE, 'catalogue.json')
 SOURCES = os.path.join(STATE, 'sources.json')
