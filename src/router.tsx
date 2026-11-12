@@ -6,6 +6,7 @@ import { HomePage } from '@/pages/Home/HomePage';
 import { DiscoverPage } from '@/pages/Discover/DiscoverPage';
 import { FavoritesPage } from '@/pages/Favorites/FavoritesPage';
 import { UpdatesPage } from '@/pages/Updates/UpdatesPage';
+import { CollectionPage } from '@/pages/Collection/CollectionPage';
 import { NotFoundPage } from '@/pages/NotFound';
 
 /**
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
       { path: 'discover', element: <DiscoverPage /> },
       { path: 'favorites', element: <FavoritesPage /> },
       { path: 'updates', element: <UpdatesPage /> },
+      { path: 'collection', element: <CollectionPage /> },
       // The About page is gone; keep the URL working by sending people home.
       { path: 'about', element: <Navigate to="/" replace /> },
       // The full detail page is gone: modules open in the detail sheet. Old

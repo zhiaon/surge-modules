@@ -112,8 +112,17 @@ def main():
     cat_by_slug = {c['slug']: c for c in CATEGORIES}
     counts = {}
 
+    missing_raw = [rec['slug'] for rec in catalogue.values()
+                   if not os.path.exists(os.path.join(RAW_DIR, f"{rec['slug']}.sgmodule"))]
+    if missing_raw:
+        # A module without its file produces a 404 install link and (worse) an
+        # HTML fallback page — drop it from the catalogue feed instead.
+        print(f'! 缺少 raw 文件 {len(missing_raw)} 个，已跳过：{missing_raw[:5]}')
+
     modules = []
     for rec in catalogue.values():
+        if rec['slug'] in set(missing_raw):
+            continue
         cslug = category_for(rec, auto_cat)
         cat = cat_by_slug[cslug]
         counts[cslug] = counts.get(cslug, 0) + 1

@@ -136,6 +136,14 @@ export function DiscoverPage() {
             aria-label="筛选模块"
           />
           <div className="flex items-center gap-2">
+            <ButtonLink
+              to="/collection"
+              variant="secondary"
+              size="md"
+              className="shrink-0"
+            >
+              合集
+            </ButtonLink>
             <Button
               variant="secondary"
               size="md"

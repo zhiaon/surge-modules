@@ -78,7 +78,7 @@ jobs:
         run: |
           git config user.name  'surge-modules-bot'
           git config user.email 'bot@users.noreply.github.com'
-          git add state/ dist/m/ 2>/dev/null || true
+          git add state/ raw/ 2>/dev/null || true
           git diff --cached --quiet || git commit -m "sync: $(date -u +%Y-%m-%dT%H:%MZ) (+${{ steps.sync.outputs.new }} ~${{ steps.sync.outputs.updated }} -${{ steps.sync.outputs.removed }})"
           git push
 
