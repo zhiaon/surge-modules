@@ -36,6 +36,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = os.path.join(ROOT, 'state')
 CATALOGUE = os.path.join(STATE, 'catalogue.json')
 SOURCES = os.path.join(STATE, 'sources.json')
+HISTORY = os.path.join(STATE, 'history.json')
 DIST = os.path.join(ROOT, 'dist')
 RAW_DIR = os.path.join(ROOT, 'raw')
 DATA_DIR = os.path.join(DIST, 'data')
@@ -152,6 +153,14 @@ def main():
     args = ap.parse_args()
 
     catalogue = json.load(open(CATALOGUE)) if os.path.exists(CATALOGUE) else {}
+    history = json.load(open(HISTORY)) if os.path.exists(HISTORY) else {}
+
+    def note(slug, kind):
+        """Append one change event, keeping the last 20 per module."""
+        events = history.setdefault(slug, [])
+        events.append({'at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+                       'type': kind})
+        history[slug] = events[-20:]
     sources = json.load(open(SOURCES)) if os.path.exists(SOURCES) else {}
     # catalogue: slug -> module record (with repo/path/sha)
     # sources:   "owner/repo@branch" -> {branch, owner, repo}
@@ -229,6 +238,7 @@ def main():
                 'updatedAt': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
             }
             catalogue[slug] = record
+            note(slug, 'added' if is_new else 'content')
             (report['new'] if is_new else report['updated']).append(
                 {'slug': slug, 'name': record['name'], 'version': record['version'],
                  'repo': record['repo']}
@@ -243,6 +253,7 @@ def main():
             if path in seen_paths:
                 continue
             report['removed'].append({'slug': slug, 'name': catalogue.get(slug, {}).get('name', slug)})
+            note(slug, 'removed')
             catalogue.pop(slug, None)
 
     if args.dry_run:
@@ -296,6 +307,7 @@ def main():
 
     os.makedirs(STATE, exist_ok=True)
     json.dump(catalogue, open(CATALOGUE, 'w'), ensure_ascii=False, indent=1)
+    json.dump(history, open(HISTORY, 'w'), ensure_ascii=False, separators=(',', ':'))
     json.dump(report, open(REPORT, 'w'), ensure_ascii=False, indent=1)
 
     print(f"新增 {len(report['new'])} · 更新 {len(report['updated'])} · "

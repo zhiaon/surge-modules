@@ -85,6 +85,16 @@ def main():
     catalogue = json.load(open(STATE))
     # Auto-classification output (scripts/classify.py); falls back to the
     # stored category when a module has not been classified yet.
+    enrich = {}
+    enrich_path = os.path.join(os.path.dirname(STATE), 'enrich.json')
+    if os.path.exists(enrich_path):
+        enrich = json.load(open(enrich_path))
+
+    history = {}
+    history_path = os.path.join(os.path.dirname(STATE), 'history.json')
+    if os.path.exists(history_path):
+        history = json.load(open(history_path))
+
     health = {}
     health_path = os.path.join(os.path.dirname(STATE), 'health.json')
     if os.path.exists(health_path):
@@ -130,10 +140,14 @@ def main():
             'id': f"mod-{rec['slug']}",
             'slug': rec['slug'],
             'name': rec['name'],
-            'description': rec['description'],
+            # Upstream descriptions are one boilerplate sentence for ~1000
+            # modules; enrich.py writes a factual replacement for those.
+            'description': ((enrich.get(rec['slug']) or {}).get('summary')
+                            if (enrich.get(rec['slug']) or {}).get('generated')
+                            else rec['description']),
             'author': rec['author'],
             'category': {'id': cat['id'], 'name': cat['name'], 'slug': cat['slug']},
-            'tags': [],
+            'tags': (enrich.get(rec['slug']) or {}).get('tags', []),
             'version': rec['version'],
             'updatedAt': rec['updatedAt'],
             'rawUrl': f"{PROXY_BASE}/{rec['slug']}.sgmodule",
@@ -142,6 +156,8 @@ def main():
             # 'ok' | 'broken' | 'unknown' — 'broken' means at least one
             # script-path in the module no longer resolves.
             'health': (health.get(rec['slug']) or {}).get('status', 'unknown'),
+            # pinyin index for the search box (jingdong → 京东)
+            'py': (enrich.get(rec['slug']) or {}).get('pinyin') or None,
         })
 
     modules.sort(key=lambda m: m['updatedAt'], reverse=True)
@@ -176,6 +192,9 @@ def main():
             'commitUrl': None,
         }]
         detail['createdAt'] = rec['updatedAt']
+        info = enrich.get(mod['slug']) or {}
+        detail['tech'] = info.get('tech') or None
+        detail['history'] = (history.get(mod['slug']) or [])[-8:][::-1]
         json.dump(detail, open(f'{OUT}/details/{mod["slug"]}.json', 'w'),
                   ensure_ascii=False, separators=(',', ':'))
 

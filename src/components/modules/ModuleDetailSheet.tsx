@@ -43,6 +43,26 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
     () => (module ? moduleService.getVersions(module.slug) : Promise.resolve([])),
     [module?.slug],
   );
+  // tech / history only exist in the per-module detail file
+  const { data: detail } = useAsync(async () => {
+    if (!slug) return null;
+    try {
+      const res = await fetch(`/data/details/${encodeURIComponent(slug)}.json`);
+      if (!res.ok) return null;
+      return (await res.json()) as {
+        tech?: {
+          mitm: string[];
+          rewrites: number;
+          scripts: Array<{ name: string; url: string }>;
+          crons: string[];
+        } | null;
+        history?: Array<{ at: string; type: 'added' | 'content' | 'removed' }>;
+      };
+    } catch {
+      return null;
+    }
+  }, [slug]);
+
   const { data: rawConfig, status: configStatus } = useAsync(
     () => (module ? moduleService.getRawConfig(module.slug) : Promise.resolve('')),
     [module?.slug],
@@ -196,6 +216,71 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                     </li>
                   ))}
                 </ul>
+              )}
+
+              {/* What the module actually touches — parsed from its config. */}
+              {detail?.tech && (
+                <details className="group mt-3.5 rounded-[var(--radius-md)] border border-line bg-inset/60">
+                  <summary className="flex cursor-pointer list-none items-center justify-between px-3 py-2.5 text-[11.5px] text-muted">
+                    <span>技术清单</span>
+                    <span className="text-[10.5px] text-faint">
+                      {detail.tech.mitm.length} 域名 · {detail.tech.rewrites} 条规则 ·{' '}
+                      {detail.tech.scripts.length} 个脚本
+                    </span>
+                  </summary>
+                  <div className="space-y-2.5 border-t border-line px-3 py-2.5 text-[11px] leading-relaxed text-faint">
+                    {detail.tech.crons.length > 0 && (
+                      <p>
+                        <span className="text-muted">定时：</span>
+                        {detail.tech.crons.join(' / ')}
+                      </p>
+                    )}
+                    {detail.tech.mitm.length > 0 && (
+                      <p className="break-all">
+                        <span className="text-muted">MITM：</span>
+                        {detail.tech.mitm.slice(0, 12).join(', ')}
+                        {detail.tech.mitm.length > 12 && ` …等 ${detail.tech.mitm.length} 个`}
+                      </p>
+                    )}
+                    {detail.tech.scripts.length > 0 && (
+                      <ul className="space-y-1">
+                        <li className="text-muted">脚本：</li>
+                        {detail.tech.scripts.map((sc) => (
+                          <li key={sc.url} className="break-all">
+                            <a
+                              href={sc.url}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              className="underline-offset-2 hover:text-fg hover:underline"
+                            >
+                              {sc.name || sc.url.split('/').pop()}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {detail.tech.crons.length === 0 &&
+                      detail.tech.mitm.length === 0 &&
+                      detail.tech.scripts.length === 0 && <p>无脚本、无 MITM、无定时任务。</p>}
+                  </div>
+                </details>
+              )}
+
+              {/* Change events recorded by the sync job. */}
+              {detail?.history && detail.history.length > 0 && (
+                <div className="mt-3.5">
+                  <p className="mb-1.5 text-[11px] text-faint">变更记录</p>
+                  <ul className="space-y-1">
+                    {detail.history.slice(0, 4).map((h, i) => (
+                      <li key={`${h.at}-${i}`} className="flex items-center gap-2 text-[11px] text-faint">
+                        <span className="tabular-nums">{formatDate(h.at)}</span>
+                        <span className="text-muted">
+                          {h.type === 'added' ? '收录' : h.type === 'removed' ? '下架' : '内容变更'}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </div>
 

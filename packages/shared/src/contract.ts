@@ -69,10 +69,21 @@ export interface PublicModule {
   isFeatured: boolean;
   /** script health, resolved at build time */
   health?: 'ok' | 'broken' | 'unknown';
+  /** pinyin index for search (jingdong → 京东) */
+  py?: { full: string; initials: string } | null;
 }
 
 export interface PublicModuleDetail extends PublicModule {
   versions: PublicModuleVersion[];
+  /** what the module actually does, parsed from its config */
+  tech?: {
+    mitm: string[];
+    rewrites: number;
+    scripts: Array<{ name: string; url: string }>;
+    crons: string[];
+  } | null;
+  /** change events recorded by the sync job */
+  history?: Array<{ at: string; type: 'added' | 'content' | 'removed' }>;
   createdAt: string;
 }
 

@@ -50,6 +50,8 @@ export interface ModuleWithMeta extends Module {
    * script-path the module references no longer resolves upstream.
    */
   health?: 'ok' | 'broken' | 'unknown';
+  /** pinyin index for search */
+  py?: { full: string; initials: string } | null;
 }
 
 export interface ModuleStats {

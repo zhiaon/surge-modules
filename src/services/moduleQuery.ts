@@ -14,8 +14,15 @@ function score(module: ModuleWithMeta, tokens: string[]): number {
   const name = module.name.toLowerCase();
   const author = module.author.toLowerCase();
   const tags = module.tags.map((t) => t.toLowerCase());
+  // Pinyin index: 'jingdong' / 'jd' both reach 「京东去广告」.
+  const py = module.py;
+  const pyFull = (py?.full ?? '').replace(/\s+/g, '');
+  const pyInitials = (py?.initials ?? '').replace(/\s+/g, '');
+
   for (const token of tokens) {
     if (name.includes(token)) total += 6;
+    if (pyFull && pyFull.includes(token)) total += 5;
+    if (pyInitials && pyInitials.includes(token)) total += 3;
     if (tags.some((t) => t.includes(token))) total += 4;
     if (author.includes(token)) total += 3;
     if (module.category.name.toLowerCase().includes(token)) total += 2;
