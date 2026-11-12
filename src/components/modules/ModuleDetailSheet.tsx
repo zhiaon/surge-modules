@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  AlertTriangle,
   Calendar,
   Check,
   Copy,
@@ -169,6 +170,16 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                   </dd>
                 </div>
               </dl>
+
+              {module.health === 'broken' && (
+                <div className="mt-3.5 flex items-start gap-2 rounded-[var(--radius-md)] border border-[var(--line-danger-35)] bg-[var(--tint-danger-10)] px-3 py-2.5">
+                  <AlertTriangle className="mt-0.5 size-3.5 shrink-0 text-danger" strokeWidth={2} aria-hidden="true" />
+                  <p className="text-[11.5px] leading-relaxed text-danger/90">
+                    该模块引用的脚本已失效（上游文件已删除），安装后可能不生效。
+                    建议选择其他同类模块。
+                  </p>
+                </div>
+              )}
 
               <p className="mt-3.5 text-pretty text-[13px] leading-[1.7] text-muted">
                 {module.description}

@@ -67,6 +67,8 @@ export interface PublicModule {
   rawUrl: string;
   repositoryUrl: string | null;
   isFeatured: boolean;
+  /** script health, resolved at build time */
+  health?: 'ok' | 'broken' | 'unknown';
 }
 
 export interface PublicModuleDetail extends PublicModule {

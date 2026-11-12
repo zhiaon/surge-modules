@@ -85,6 +85,11 @@ def main():
     catalogue = json.load(open(STATE))
     # Auto-classification output (scripts/classify.py); falls back to the
     # stored category when a module has not been classified yet.
+    health = {}
+    health_path = os.path.join(os.path.dirname(STATE), 'health.json')
+    if os.path.exists(health_path):
+        health = json.load(open(health_path))
+
     auto_cat = {}
     auto_path = os.path.join(os.path.dirname(STATE), 'categories.json')
     if os.path.exists(auto_path):
@@ -125,6 +130,9 @@ def main():
             'rawUrl': f"{PROXY_BASE}/{rec['slug']}.sgmodule",
             'repositoryUrl': f"https://github.com/{rec['repo']}",
             'isFeatured': False,
+            # 'ok' | 'broken' | 'unknown' — 'broken' means at least one
+            # script-path in the module no longer resolves.
+            'health': (health.get(rec['slug']) or {}).get('status', 'unknown'),
         })
 
     modules.sort(key=lambda m: m['updatedAt'], reverse=True)

@@ -45,6 +45,11 @@ export interface ModuleWithMeta extends Module {
   latestVersion?: ModuleVersion;
   /** stable identity of where the record came from */
   source: 'api' | 'sample' | 'github';
+  /**
+   * Script health, checked at build time: 'broken' means at least one
+   * script-path the module references no longer resolves upstream.
+   */
+  health?: 'ok' | 'broken' | 'unknown';
 }
 
 export interface ModuleStats {

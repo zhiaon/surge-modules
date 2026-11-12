@@ -1,6 +1,6 @@
 import { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Check, Download, FileCode2, Link2, Sparkles, Tag } from 'lucide-react';
+import { AlertTriangle, Check, Download, FileCode2, Link2, Sparkles, Tag } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { copyText, formatDate, formatRelative, toIsoDate } from '@/lib/format';
 import type { ModuleWithMeta } from '@/types';
@@ -170,6 +170,15 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
                 /
               </span>
               <VersionBadge version={module.version} />
+              {module.health === 'broken' && (
+                <span
+                  className="inline-flex items-center gap-1 rounded-full border border-[var(--line-danger-35)] bg-[var(--tint-danger-10)] px-1.5 py-0.5 text-[9.5px] text-danger"
+                  title="模块引用的脚本已失效"
+                >
+                  <AlertTriangle className="size-2.5" strokeWidth={2.2} aria-hidden="true" />
+                  脚本失效
+                </span>
+              )}
             </div>
             <h3 className="text-[15px] font-medium leading-snug">{module.name}</h3>
           </div>

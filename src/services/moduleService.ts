@@ -90,6 +90,7 @@ function toModuleWithMeta(
     ...base,
     category,
     latestVersion: versions[0],
+    health: m.health,
     source: 'api',
   } as ModuleWithMeta;
 }
