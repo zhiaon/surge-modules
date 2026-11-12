@@ -30,16 +30,20 @@ PROXY_BASE = 'https://son.zhiaon.top/m'
 CATEGORIES = [
     {'id': 'cat-adblock', 'name': '广告拦截', 'slug': 'adblock',
      'description': '在请求层拦截网页与 App 内的广告、统计与追踪域名。', 'icon': 'shield', 'sortOrder': 1},
-    {'id': 'cat-rules', 'name': '规则与分流', 'slug': 'rules',
-     'description': '补充域名规则、策略组与更细粒度的分流判断。', 'icon': 'waypoints', 'sortOrder': 2},
-    {'id': 'cat-scripts', 'name': '脚本增强', 'slug': 'scripts',
-     'description': '定时任务、自动签到与基于 HTTP 的轻量自动化。', 'icon': 'terminal', 'sortOrder': 3},
     {'id': 'cat-clean', 'name': '应用净化', 'slug': 'clean',
-     'description': '移除开屏广告、信息流推荐与多余的运营弹窗。', 'icon': 'sparkles', 'sortOrder': 4},
+     'description': '移除开屏广告、信息流推荐与多余的运营弹窗。', 'icon': 'sparkles', 'sortOrder': 2},
+    {'id': 'cat-unlock', 'name': '应用解锁', 'slug': 'unlock',
+     'description': '解锁会员功能、去除功能限制。', 'icon': 'key', 'sortOrder': 3},
+    {'id': 'cat-media', 'name': '流媒体', 'slug': 'media',
+     'description': '流媒体平台的解锁、增强与广告清理。', 'icon': 'play', 'sortOrder': 4},
+    {'id': 'cat-scripts', 'name': '脚本增强', 'slug': 'scripts',
+     'description': '定时任务、自动签到与基于 HTTP 的轻量自动化。', 'icon': 'terminal', 'sortOrder': 5},
+    {'id': 'cat-rules', 'name': '规则分流', 'slug': 'rules',
+     'description': '补充域名规则、策略组与更细粒度的分流判断。', 'icon': 'waypoints', 'sortOrder': 6},
     {'id': 'cat-privacy', 'name': '隐私防护', 'slug': 'privacy',
-     'description': '阻断设备指纹、追踪像素与遥测上报。', 'icon': 'eyeoff', 'sortOrder': 5},
+     'description': '阻断设备指纹、追踪像素与遥测上报。', 'icon': 'eyeoff', 'sortOrder': 7},
     {'id': 'cat-tools', 'name': '网络工具', 'slug': 'tools',
-     'description': 'IP 信息、流媒体解锁与网络诊断类模块。', 'icon': 'globe', 'sortOrder': 6},
+     'description': 'IP 信息、流媒体解锁与网络诊断类模块。', 'icon': 'globe', 'sortOrder': 8},
 ]
 
 # Modules that are clearly more than ad blocking, keyed by slug. Kept small on
@@ -60,9 +64,11 @@ SETTINGS = {
 }
 
 
-def category_for(rec):
-    # The stored category wins — it came from the curated catalogue. The slug
-    # list is only a fallback for records that predate having one.
+def category_for(rec, auto=None):
+    # Auto-classification (content-derived) wins over the stored value, which
+    # was a single coarse bucket for almost everything.
+    if auto and rec['slug'] in auto:
+        return auto[rec['slug']]
     cat = (rec.get('category') or '').lower()
     if not cat and rec['slug'] in TOOL_SLUGS:
         return 'tools'
@@ -77,6 +83,12 @@ def main():
         print(f'! 缺少 {STATE}', file=sys.stderr)
         return 1
     catalogue = json.load(open(STATE))
+    # Auto-classification output (scripts/classify.py); falls back to the
+    # stored category when a module has not been classified yet.
+    auto_cat = {}
+    auto_path = os.path.join(os.path.dirname(STATE), 'categories.json')
+    if os.path.exists(auto_path):
+        auto_cat = json.load(open(auto_path))
 
     os.makedirs(OUT, exist_ok=True)
     os.makedirs(os.path.join(OUT, 'details'), exist_ok=True)
@@ -97,7 +109,7 @@ def main():
 
     modules = []
     for rec in catalogue.values():
-        cslug = category_for(rec)
+        cslug = category_for(rec, auto_cat)
         cat = cat_by_slug[cslug]
         counts[cslug] = counts.get(cslug, 0) + 1
         modules.append({
@@ -117,11 +129,12 @@ def main():
 
     modules.sort(key=lambda m: m['updatedAt'], reverse=True)
 
+    # Empty categories would render as dead chips — hide them.
     categories = [{
         'id': c['id'], 'name': c['name'], 'slug': c['slug'],
         'description': c['description'], 'icon': c['icon'],
         'sortOrder': c['sortOrder'], 'moduleCount': counts.get(c['slug'], 0),
-    } for c in CATEGORIES]
+    } for c in CATEGORIES if counts.get(c['slug'], 0) > 0]
 
     settings = dict(SETTINGS)
     settings['totalVersions'] = len(modules)

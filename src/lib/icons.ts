@@ -6,8 +6,10 @@ import {
   EyeOff,
   Filter,
   Globe2,
+  KeyRound,
   Layers,
   MonitorSmartphone,
+  PlayCircle,
   ShieldCheck,
   Sparkles,
   Terminal,
@@ -21,6 +23,8 @@ import {
  */
 export const categoryIcons: Record<string, LucideIcon> = {
   shield: ShieldCheck,
+  key: KeyRound,
+  play: PlayCircle,
   filter: Filter,
   waypoints: Waypoints,
   code: Code2,
