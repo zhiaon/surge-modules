@@ -96,7 +96,14 @@ def parse(text):
                 rewrites += 1
     rejects = len(re.findall(r'=\s*reject', text, re.I))
 
+    rules = 0
+    m_rule = re.search(r'^\[Rule\]([\s\S]*?)(?=^\[|\Z)', text, re.M | re.I)
+    if m_rule:
+        those = [l.strip() for l in m_rule.group(1).splitlines()]
+        rules = len([l for l in those if l and not l.startswith('#')])
+
     return {
+        'rules': rules,
         'mitm': mitm,
         'sections': sections,
         'scripts': [{'name': s[0].split('=')[0].strip(), 'url': s[1]} for s in scripts],
@@ -184,6 +191,7 @@ def main():
             'summary': (lambda r: (r[0], r[1]))(make_summary(rec, facts))[0],
             'generated': make_summary(rec, facts)[1],
             'tech': {
+                'rules': facts['rules'],
                 'mitm': facts['mitm'][:40],
                 'rewrites': facts['rewrites'],
                 'scripts': facts['scripts'][:10],

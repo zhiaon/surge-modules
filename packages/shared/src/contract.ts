@@ -77,6 +77,7 @@ export interface PublicModuleDetail extends PublicModule {
   versions: PublicModuleVersion[];
   /** what the module actually does, parsed from its config */
   tech?: {
+    rules?: number;
     mitm: string[];
     rewrites: number;
     scripts: Array<{ name: string; url: string }>;

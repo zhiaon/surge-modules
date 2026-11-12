@@ -51,6 +51,7 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
       if (!res.ok) return null;
       return (await res.json()) as {
         tech?: {
+          rules?: number;
           mitm: string[];
           rewrites: number;
           scripts: Array<{ name: string; url: string }>;
@@ -224,7 +225,8 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                   <summary className="flex cursor-pointer list-none items-center justify-between px-3 py-2.5 text-[11.5px] text-muted">
                     <span>技术清单</span>
                     <span className="text-[10.5px] text-faint">
-                      {detail.tech.mitm.length} 域名 · {detail.tech.rewrites} 条规则 ·{' '}
+                      {detail.tech.rules ? `${detail.tech.rules} 条规则 · ` : ''}
+                      {detail.tech.mitm.length} 域名 · {detail.tech.rewrites} 条重写 ·{' '}
                       {detail.tech.scripts.length} 个脚本
                     </span>
                   </summary>
