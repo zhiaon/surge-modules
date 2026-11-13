@@ -42,7 +42,9 @@ def build_message(report, total_modules=None):
     if new:
         lines.append(f'🆕 <b>新增模块 {len(new)} 个</b>')
         for m in new[:MAX_LINES]:
-            lines.append(f'· <b>{esc(m["name"])}</b>\n  <code>{esc(m["repo"])}</code>')
+            ver = str(m.get('version') or '').lstrip('vV')
+            tail = f' · v{esc(ver)}' if ver else ''
+            lines.append(f'· <b>{esc(m["name"])}</b>{tail}\n  <code>{esc(m["repo"])}</code>')
         if len(new) > MAX_LINES:
             lines.append(f'  …另有 {len(new) - MAX_LINES} 个')
         lines.append('')
@@ -50,8 +52,18 @@ def build_message(report, total_modules=None):
     if updated:
         lines.append(f'🔄 <b>模块更新 {len(updated)} 个</b>')
         for m in updated[:MAX_LINES]:
+            # 版本号只有部分上游会维护；不变时说明是内容变更，比谎报一个
+            # 假的版本跃迁诚实，也不至于让人以为没更新。
+            frm = str(m.get('from_version') or '').lstrip('vV')
+            to = str(m.get('version') or '').lstrip('vV')
+            if frm and to and frm != to:
+                change = f'v{esc(frm)} → v{esc(to)}'
+            elif to:
+                change = f'v{esc(to)} · 内容变更'
+            else:
+                change = '内容变更'
             lines.append(
-                f'· <b>{esc(m["name"])}</b> → v{esc(str(m["version"]))}\n'
+                f'· <b>{esc(m["name"])}</b> {change}\n'
                 f'  <code>{esc(m["repo"])}</code>'
             )
         if len(updated) > MAX_LINES:

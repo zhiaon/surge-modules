@@ -237,11 +237,12 @@ def main():
                 'category': (catalogue.get(slug, {}).get('category') or 'adblock'),
                 'updatedAt': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
             }
+            prev_version = (catalogue.get(slug) or {}).get('version', '')
             catalogue[slug] = record
             note(slug, 'added' if is_new else 'content')
             (report['new'] if is_new else report['updated']).append(
                 {'slug': slug, 'name': record['name'], 'version': record['version'],
-                 'repo': record['repo']}
+                 'from_version': prev_version, 'repo': record['repo']}
             )
             if not args.dry_run:
                 os.makedirs(RAW_DIR, exist_ok=True)
