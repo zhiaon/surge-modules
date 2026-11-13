@@ -139,6 +139,41 @@ def parse_meta(text, fallback_name):
     }
 
 
+def diff_sections(old_text, new_text):
+    """Per-section line diff for the change report.
+
+    Counting added/removed lines per section is what a user actually wants to
+    see ("+3 scripts, -1 rule"), and it costs nothing because the previous
+    file is still on disk when we overwrite it.
+    """
+    def split(text):
+        out, cur = {}, None
+        for raw in text.replace('\r\n', '\n').split('\n'):
+            line = raw.strip()
+            m = re.match(r'^\[([^\]]+)\]$', line)
+            if m:
+                cur = m.group(1).strip()
+                out.setdefault(cur, set())
+                continue
+            if not line or line.startswith('#') or line.startswith(';'):
+                continue
+            if cur is not None:
+                out[cur].add(line)
+        return out
+
+    a, b = split(old_text), split(new_text)
+    added = removed = 0
+    by_section = {}
+    for section in set(a) | set(b):
+        plus = len(b.get(section, set()) - a.get(section, set()))
+        minus = len(a.get(section, set()) - b.get(section, set()))
+        if plus or minus:
+            by_section[section] = {'added': plus, 'removed': minus}
+            added += plus
+            removed += minus
+    return {'added': added, 'removed': removed, 'sections': by_section}
+
+
 def slugify(name, path):
     s = re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
     if not s:
@@ -238,11 +273,21 @@ def main():
                 'updatedAt': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
             }
             prev_version = (catalogue.get(slug) or {}).get('version', '')
+            change = None
+            if not is_new:
+                old_path = os.path.join(RAW_DIR, f'{slug}.sgmodule')
+                if os.path.exists(old_path):
+                    try:
+                        old_text = open(old_path, encoding='utf-8', errors='replace').read()
+                        change = diff_sections(old_text, text)
+                    except Exception:
+                        change = None
             catalogue[slug] = record
             note(slug, 'added' if is_new else 'content')
             (report['new'] if is_new else report['updated']).append(
                 {'slug': slug, 'name': record['name'], 'version': record['version'],
-                 'from_version': prev_version, 'repo': record['repo']}
+                 'from_version': prev_version, 'repo': record['repo'],
+                 'diff': change}
             )
             if not args.dry_run:
                 os.makedirs(RAW_DIR, exist_ok=True)

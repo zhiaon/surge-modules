@@ -62,9 +62,11 @@ def build_message(report, total_modules=None):
                 change = f'v{esc(to)} · 内容变更'
             else:
                 change = '内容变更'
+            detail = format_diff(m.get('diff'))
             lines.append(
                 f'· <b>{esc(m["name"])}</b> {change}\n'
                 f'  <code>{esc(m["repo"])}</code>'
+                + (f'\n  {detail}' if detail else '')
             )
         if len(updated) > MAX_LINES:
             lines.append(f'  …另有 {len(updated) - MAX_LINES} 个')
@@ -86,6 +88,26 @@ def build_message(report, total_modules=None):
         lines.append(f'⚠️ 同步异常 {len(errors)} 处（详见 Actions 日志）')
 
     return '\n'.join(lines).strip()
+
+
+def format_diff(diff):
+    """'+3 [Script], -1 [Rule]' — compact, only the sections that moved."""
+    if not diff:
+        return ''
+    parts = []
+    sections = diff.get('sections') or {}
+    for name, d in sorted(sections.items(), key=lambda kv: -(kv[1]['added'] + kv[1]['removed']))[:3]:
+        bits = []
+        if d.get('added'):
+            bits.append(f'+{d["added"]}')
+        if d.get('removed'):
+            bits.append(f'−{d["removed"]}')
+        parts.append(f'{" ".join(bits)} [{name}]')
+    if not parts:
+        return ''
+    changed = (diff.get('added') or 0) + (diff.get('removed') or 0)
+    total = f'共 {changed} 行' if changed >= 3 else ''
+    return ' · '.join(parts) + (f'（{total}）' if total else '')
 
 
 def esc(s):
