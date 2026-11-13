@@ -15006,13 +15006,13 @@
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/amap-self.sgmodule",
-  "sha": "01b73ef8f494b0953764a90cf5b7344427cd80cf",
+  "sha": "2d381a70f166e2ef9edf77b07580b73889451d87",
   "name": "高德地图",
   "description": "固定云端订阅，自有可审计高德地图去广告模块：清理开屏、消息盒子、首页推荐、搜索热词和部分广告接口，覆盖真机验证的 m5、m5-zb 与 m5-x API 主机。不含第三方脚本。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-10T12:10:33Z"
+  "updatedAt": "2026-11-13T05:30:38Z"
  },
  "basic-adblock": {
   "slug": "basic-adblock",
@@ -15032,91 +15032,91 @@
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/camscanner-self.sgmodule",
-  "sha": "58652e29acb3ebdfa45c82537936f157460481ad",
+  "sha": "55342062d700ab5e3f7bc1f324033c6224b16f46",
   "name": "扫描全能王",
   "description": "固定云端订阅，自有可审计扫描全能王专用模块：只处理第一方广告、活动弹窗、运营位和采集接口。通用广告网络由基础去广告模块负责。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-10T12:10:36Z"
+  "updatedAt": "2026-11-13T05:30:40Z"
  },
  "instagram-self": {
   "slug": "instagram-self",
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/instagram-self.sgmodule",
-  "sha": "e9aa0b092453efe0eeaccf7262073b6703605ac2",
+  "sha": "3ff25262d24d07522a924e907b6edf47b585fd5b",
   "name": "Instagram",
   "description": "固定云端订阅，自有可审计 Instagram 增强版：清理 Web Feed、探索页和 Reels 中的明确广告对象，并拦截真机验证的 netseer 网络关联辅助探测。原生 iOS App 主链路因证书钉扎无法解密，不强行 MITM。不含第三方脚本。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-10T12:10:35Z"
+  "updatedAt": "2026-11-13T05:30:40Z"
  },
  "jd-self": {
   "slug": "jd-self",
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/jd-self.sgmodule",
-  "sha": "cfd9bc644c51347daa7c0d5e3a77603993923d3d",
+  "sha": "f2e6cf6983e842244e1b78010ada6ae5640ff725",
   "name": "京东",
   "description": "固定云端订阅，自有可审计京东去广告模块：清理开屏、首页/我的页营销卡、弹层和搜索推荐，并可关闭京东诊断上报。不含第三方脚本，不修改账号、订单、支付或会员状态。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T00:05:23Z"
+  "updatedAt": "2026-11-13T05:30:41Z"
  },
  "wechat-self": {
   "slug": "wechat-self",
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/wechat-self.sgmodule",
-  "sha": "603c77c4c5ad987ab145673a5933f61e44164e23",
+  "sha": "3ca879d925f1f0f6cecbe8c99687390ae6b82a94",
   "name": "微信",
   "description": "固定云端订阅，自有可审计微信去广告模块：清理公众号文章广告与商品推广接口，并拒绝部分明确的小程序广告素材主机。不含第三方脚本；不承诺清除朋友圈或视频号原生广告。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-10T12:10:27Z"
+  "updatedAt": "2026-11-13T05:30:42Z"
  },
  "weibo-self": {
   "slug": "weibo-self",
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/weibo-self.sgmodule",
-  "sha": "083605a7ad2acfd7a81c2b9644222324fb40fdb8",
+  "sha": "150ea48ec20977289ead0a3148f168600879ce0b",
   "name": "微博",
   "description": "固定云端订阅，自有可审计微博去广告模块：仅清理白名单信息流、搜索、详情、评论容器中具有明确结构标志的广告，并精确空响应开屏广告接口。不处理账号、会员、私信或钱包接口。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:41Z"
+  "updatedAt": "2026-11-13T05:30:42Z"
  },
  "xiaohongshu-self": {
   "slug": "xiaohongshu-self",
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/xiaohongshu-self.sgmodule",
-  "sha": "8e1892e2c091595a23a069f9442ef7bb1386e2d0",
+  "sha": "d15a5d1976a7050602ea34786d8047eb2fe668d4",
   "name": "小红书",
   "description": "固定云端订阅，自有可审计小红书去广告模块：仅清理白名单 Feed、搜索结果、笔记和开屏响应中具有明确结构标志的广告。不含第三方脚本。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:41Z"
+  "updatedAt": "2026-11-13T05:30:43Z"
  },
  "youtube-self": {
   "slug": "youtube-self",
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/youtube-self.sgmodule",
-  "sha": "8bcf52f2e85a446ea899aaecd415b457ccc26728",
+  "sha": "1f7f1cd175597e348a4cee973034a11499ff5824",
   "name": "YouTube",
   "description": "固定云端订阅，自有可审计 YouTube 去广告与后台播放唯一入口：处理播放广告，按完整信息流条目清理首页、搜索及视频详情页赞助卡，并支持网页端翻译字幕轨。不含第三方代码。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-10T12:10:23Z"
+  "updatedAt": "2026-11-13T05:30:44Z"
  },
  "302": {
   "slug": "302",
@@ -16456,5 +16456,18 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-12T12:09:14Z"
+ },
+ "bilibili-self": {
+  "slug": "bilibili-self",
+  "repo": "mulanshan/surge",
+  "branch": "main",
+  "path": "rewrite/Surge/bilibili-self.sgmodule",
+  "sha": "70a3d5bada857e2e85cf14234f3107248fcc6a07",
+  "name": "哔哩哔哩",
+  "description": "固定云端订阅，自有可审计哔哩哔哩去广告模块：覆盖开屏、首页与竖屏推荐流、视频详情与相关推荐(gRPC)、评论区商业推广、动态流广告与搜索推广，并提供可选底栏精简与 PCDN 策略开关。不含第三方脚本，不修改登录、大会员或支付状态。",
+  "author": "mulanshan",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-13T05:30:39Z"
  }
 }

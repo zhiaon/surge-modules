@@ -249,9 +249,21 @@ def main():
                     f.write(raw)
 
         # files gone from upstream → drop them
-        for path, (slug, _sha) in existing.items():
-            if path in seen_paths:
-                continue
+        # Safety valve: a repo that suddenly reports no files is far more likely
+        # to be an upstream hiccup (renamed default branch, partial API answer)
+        # than a real mass deletion. Never wipe a whole repo's modules on a
+        # single suspicious response.
+        vanished = [p for p in existing if p not in seen_paths]
+        if existing and not tree:
+            report['errors'].append(f'{key}: 上游返回空文件列表，跳过下架')
+            continue
+        if existing and len(vanished) > max(20, len(existing) * 0.4):
+            report['errors'].append(
+                f'{key}: {len(vanished)}/{len(existing)} 个文件消失，疑似上游异常，跳过下架')
+            continue
+
+        for path in vanished:
+            slug, _sha = existing[path]
             report['removed'].append({'slug': slug, 'name': catalogue.get(slug, {}).get('name', slug)})
             note(slug, 'removed')
             catalogue.pop(slug, None)
