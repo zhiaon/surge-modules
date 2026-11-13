@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   AlertTriangle,
+  Share2,
   Calendar,
   Check,
   Copy,
@@ -267,6 +268,21 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                   </div>
                 </details>
               )}
+
+              {/* Share link points at the generated preview page, which carries
+                  per-module OG meta so messengers render a real card. */}
+              <button
+                type="button"
+                onClick={async () => {
+                  const url = `${location.origin}/p/${module.slug}`;
+                  const ok = await copyText(url);
+                  toast.show(ok ? '分享链接已复制' : '复制失败', ok ? '对方会看到模块预览卡片' : undefined, ok ? 'success' : 'default');
+                }}
+                className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-line bg-inset px-3 py-1.5 text-[11.5px] text-muted transition-colors hover:border-line-strong hover:text-fg"
+              >
+                <Share2 className="size-3" strokeWidth={2} aria-hidden="true" />
+                分享链接
+              </button>
 
               {/* Change events recorded by the sync job. */}
               {detail?.history && detail.history.length > 0 && (

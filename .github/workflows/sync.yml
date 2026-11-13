@@ -35,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Python deps
-        run: pip install --quiet pypinyin
+        run: pip install --quiet pypinyin pillow
 
       - name: Sync upstream repositories
         id: sync
