@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   AlertTriangle,
+  Layers3,
   Share2,
   Calendar,
   Check,
@@ -19,6 +20,7 @@ import { cn } from '@/lib/cn';
 import { toast } from '@/components/feedback/Toast';
 import { useAsync } from '@/hooks/useAsync';
 import { moduleService } from '@/services/moduleService';
+import { rankGroup, type CompareTech } from '@/lib/sameName';
 import { analyticsService } from '@/services/analyticsService';
 import { copyText, formatDate, formatRelative, toIsoDate } from '@/lib/format';
 import { resolveCategoryIcon } from '@/lib/icons';
@@ -58,6 +60,7 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
           scripts: Array<{ name: string; url: string }>;
           crons: string[];
         } | null;
+        sameAs?: string[];
         history?: Array<{ at: string; type: 'added' | 'content' | 'removed' }>;
       };
     } catch {
@@ -69,6 +72,56 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
     () => (module ? moduleService.getRawConfig(module.slug) : Promise.resolve('')),
     [module?.slug],
   );
+
+  // Same-title modules from other repos: the catalogue carries up to four
+  // 「京东去广告」 and by default the user cannot tell them apart.
+  const { data: allModules } = useAsync(() => moduleService.getModules({ perPage: 9999 }), []);
+  const [siblingTech, setSiblingTech] = useState<Record<string, CompareTech | null>>({});
+
+  const siblings = useMemo(() => {
+    if (!module || !allModules) return [];
+    const want = new Set(detail?.sameAs ?? []);
+    if (!want.size) return [];
+    return allModules.items.filter((m) => want.has(m.slug));
+  }, [module, allModules, detail]);
+
+  useEffect(() => {
+    if (!siblings.length) return;
+    let cancelled = false;
+    (async () => {
+      const entries: Array<[string, CompareTech | null]> = [];
+      for (const m of [module!, ...siblings].slice(0, 5)) {
+        try {
+          const res = await fetch(`/data/details/${encodeURIComponent(m.slug)}.json`);
+          const d = await res.json();
+          const t = d.tech;
+          entries.push([
+            m.slug,
+            t
+              ? {
+                  rules: t.rules ?? 0,
+                  rewrites: t.rewrites ?? 0,
+                  mitm: (t.mitm ?? []).length,
+                  scripts: (t.scripts ?? []).length,
+                  crons: (t.crons ?? []).length,
+                }
+              : null,
+          ]);
+        } catch {
+          entries.push([m.slug, null]);
+        }
+      }
+      if (!cancelled) setSiblingTech(Object.fromEntries(entries));
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [module, siblings]);
+
+  const comparison = useMemo(() => {
+    if (!module || !siblings.length) return [];
+    return rankGroup([module, ...siblings], siblingTech);
+  }, [module, siblings, siblingTech]);
 
   const [copied, setCopied] = useState<'config' | null>(null);
   const [showConfig, setShowConfig] = useState(false);
@@ -267,6 +320,75 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                       detail.tech.scripts.length === 0 && <p>无脚本、无 MITM、无定时任务。</p>}
                   </div>
                 </details>
+              )}
+
+              {/* 同名模块对比 */}
+              {comparison.length > 1 && (
+                <div className="mt-3.5 rounded-[var(--radius-md)] border border-line bg-inset/60 p-3">
+                  <p className="mb-2 flex items-center gap-1.5 text-[11.5px] text-muted">
+                    <Layers3 className="size-3" strokeWidth={2} aria-hidden="true" />
+                    同名模块 {comparison.length} 个，选哪个？
+                  </p>
+                  <div className="-mx-1 overflow-x-auto">
+                    <table className="w-full min-w-[420px] border-collapse text-[11px]">
+                      <thead>
+                        <tr className="text-faint">
+                          <th className="p-1 text-left font-normal">来源</th>
+                          <th className="p-1 text-right font-normal">规则</th>
+                          <th className="p-1 text-right font-normal">重写</th>
+                          <th className="p-1 text-right font-normal">域名</th>
+                          <th className="p-1 text-right font-normal">脚本</th>
+                          <th className="p-1 text-right font-normal">状态</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {comparison.map((row) => (
+                          <tr
+                            key={row.module.slug}
+                            className={cn(
+                              'border-t border-line/60',
+                              row.module.slug === module.slug && 'bg-[var(--tint-accent-10)]',
+                            )}
+                          >
+                            <td className="max-w-[132px] truncate p-1 text-muted">
+                              {row.recommended && (
+                                <span className="mr-1 rounded bg-[var(--tint-accent-16)] px-1 py-0.5 text-[9px] text-accent-soft">
+                                  推荐
+                                </span>
+                              )}
+                              {row.module.repositoryUrl?.replace('https://github.com/', '') ??
+                                row.module.author}
+                            </td>
+                            <td className="p-1 text-right tabular-nums text-faint">
+                              {row.tech ? row.tech.rules : '—'}
+                            </td>
+                            <td className="p-1 text-right tabular-nums text-faint">
+                              {row.tech ? row.tech.rewrites : '—'}
+                            </td>
+                            <td className="p-1 text-right tabular-nums text-faint">
+                              {row.tech ? row.tech.mitm : '—'}
+                            </td>
+                            <td className="p-1 text-right tabular-nums text-faint">
+                              {row.tech ? row.tech.scripts : '—'}
+                            </td>
+                            <td className="p-1 text-right">
+                              {row.module.health === 'broken' ? (
+                                <span className="text-danger">失效</span>
+                              ) : row.module.health === 'ok' ? (
+                                <span className="text-ok">正常</span>
+                              ) : (
+                                <span className="text-faint">—</span>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-2 text-[10.5px] leading-relaxed text-faint">
+                    按「脚本是否可用 → 拦截面大小 → 更新时间」排序，推荐项可直接安装。
+                  </p>
+                </div>
               )}
 
               {/* Share link points at the generated preview page, which carries

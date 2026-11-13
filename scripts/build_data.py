@@ -64,6 +64,15 @@ SETTINGS = {
 }
 
 
+def name_key(name):
+    """Same normalisation as src/lib/sameName.ts — keep the two in sync."""
+    import re as _re
+    n = (name or '').lower()
+    n = _re.sub(r'[（(][^）)]*[）)]', '', n)
+    n = _re.sub(r'[\s·・,，.。:：\-—_/\\|]+', '', n)
+    return n.strip()
+
+
 def category_for(rec, auto=None):
     # Auto-classification (content-derived) wins over the stored value, which
     # was a single coarse bucket for almost everything.
@@ -162,6 +171,15 @@ def main():
 
     modules.sort(key=lambda m: m['updatedAt'], reverse=True)
 
+    # Same-title modules across repos (jd / jd-2 / jd-3 …). Computed here so the
+    # client never has to group 1200 records on every render.
+    groups = {}
+    for mod in modules:
+        groups.setdefault(name_key(mod['name']), []).append(mod['slug'])
+    for mod in modules:
+        siblings = groups.get(name_key(mod['name']), [])
+        mod['dupe'] = max(0, len(siblings) - 1)
+
     # Empty categories would render as dead chips — hide them.
     categories = [{
         'id': c['id'], 'name': c['name'], 'slug': c['slug'],
@@ -194,6 +212,7 @@ def main():
         detail['createdAt'] = rec['updatedAt']
         info = enrich.get(mod['slug']) or {}
         detail['tech'] = info.get('tech') or None
+        detail['sameAs'] = [x for x in groups.get(name_key(mod['name']), []) if x != mod['slug']]
         detail['history'] = (history.get(mod['slug']) or [])[-8:][::-1]
         json.dump(detail, open(f'{OUT}/details/{mod["slug"]}.json', 'w'),
                   ensure_ascii=False, separators=(',', ':'))

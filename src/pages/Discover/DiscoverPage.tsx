@@ -76,6 +76,7 @@ export function DiscoverPage() {
   };
 
   const owner = params.get('owner') ?? '';
+
   const sources = useMemo(() => {
     const map = new Map<string, { owner: string; repo: string; count: number }>();
     for (const m of all.data?.items ?? []) {

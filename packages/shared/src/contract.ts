@@ -71,6 +71,8 @@ export interface PublicModule {
   health?: 'ok' | 'broken' | 'unknown';
   /** pinyin index for search (jingdong → 京东) */
   py?: { full: string; initials: string } | null;
+  /** how many other modules share this title (precomputed at build time) */
+  dupe?: number;
 }
 
 export interface PublicModuleDetail extends PublicModule {
@@ -83,6 +85,8 @@ export interface PublicModuleDetail extends PublicModule {
     scripts: Array<{ name: string; url: string }>;
     crons: string[];
   } | null;
+  /** slugs of modules with the same title */
+  sameAs?: string[];
   /** change events recorded by the sync job */
   history?: Array<{ at: string; type: 'added' | 'content' | 'removed' }>;
   createdAt: string;

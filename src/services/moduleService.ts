@@ -91,6 +91,8 @@ function toModuleWithMeta(
     category,
     latestVersion: versions[0],
     health: m.health,
+    dupe: m.dupe,
+    py: m.py,
     source: 'api',
   } as ModuleWithMeta;
 }

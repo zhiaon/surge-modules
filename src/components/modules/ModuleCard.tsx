@@ -170,6 +170,14 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
                 /
               </span>
               <VersionBadge version={module.version} />
+              {(module.dupe ?? 0) > 0 && (
+                <span
+                  className="inline-flex items-center rounded-full border border-line bg-inset px-1.5 py-0.5 text-[9.5px] text-faint"
+                  title={`另有 ${module.dupe} 个同名模块，可在详情里对比`}
+                >
+                  同名 {(module.dupe ?? 0) + 1}
+                </span>
+              )}
               {module.health === 'broken' && (
                 <span
                   className="inline-flex items-center gap-1 rounded-full border border-[var(--line-danger-35)] bg-[var(--tint-danger-10)] px-1.5 py-0.5 text-[9.5px] text-danger"
@@ -239,6 +247,14 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
           <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
             <span className="eyebrow">{module.category.name}</span>
             <VersionBadge version={module.version} />
+            {(module.dupe ?? 0) > 0 && (
+              <span
+                className="inline-flex items-center rounded-full border border-line bg-inset px-1.5 py-0.5 text-[9.5px] text-faint"
+                title={`另有 ${module.dupe} 个同名模块，可在详情里对比`}
+              >
+                同名 {(module.dupe ?? 0) + 1}
+              </span>
+            )}
             {featured && (
               <span className="inline-flex items-center gap-1 rounded-[var(--radius-xs)] border border-[var(--line-accent-28)] bg-[var(--tint-accent-12)] px-1.5 py-[3px] text-[10.5px] leading-none text-accent-soft">
                 <Sparkles className="size-2.5" strokeWidth={2} aria-hidden="true" />

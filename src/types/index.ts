@@ -52,6 +52,8 @@ export interface ModuleWithMeta extends Module {
   health?: 'ok' | 'broken' | 'unknown';
   /** pinyin index for search */
   py?: { full: string; initials: string } | null;
+  /** how many other modules share this title */
+  dupe?: number;
 }
 
 export interface ModuleStats {
