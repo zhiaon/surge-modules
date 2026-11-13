@@ -118,9 +118,13 @@ def main():
     os.makedirs(os.path.join(OUT, 'details'), exist_ok=True)
     os.makedirs(DIST_RAW, exist_ok=True)
 
-    # Copy the committed raw modules into the bundle (vite build wipes dist/).
+    # Copy only modules that are still in the catalogue: an upstream removal
+    # must actually disappear from the site, not linger as an orphan file.
+    keep_slugs = set(catalogue.keys())
     for f in os.listdir(RAW_DIR):
         if not f.endswith('.sgmodule'):
+            continue
+        if f[:-9] not in keep_slugs:
             continue
         src = os.path.join(RAW_DIR, f)
         dst = os.path.join(DIST_RAW, f)
@@ -137,6 +141,11 @@ def main():
         # A module without its file produces a 404 install link and (worse) an
         # HTML fallback page — drop it from the catalogue feed instead.
         print(f'! 缺少 raw 文件 {len(missing_raw)} 个，已跳过：{missing_raw[:5]}')
+
+    # Prune raw files whose module is gone (they would never be served).
+    for f in os.listdir(RAW_DIR):
+        if f.endswith('.sgmodule') and f[:-9] not in set(catalogue.keys()):
+            os.remove(os.path.join(RAW_DIR, f))
 
     modules = []
     for rec in catalogue.values():
@@ -222,17 +231,6 @@ def main():
     for f in os.listdir(os.path.join(OUT, 'details')):
         if f.endswith('.json') and f[:-5] not in keep:
             os.remove(os.path.join(OUT, 'details', f))
-
-    # placeholder modules for upstream stubs whose body was removed
-    for slug in ('alibabagroup', 'cibn', 'flightradar24', 'hdo', 'hello',
-                 'startup', 'unicom-remove-ads', 'zhaoqianjinbao', 'wifiwannengyuechi'):
-        fp = os.path.join(RAW_DIR, f'{slug}.sgmodule')
-        if not os.path.exists(fp):
-            os.makedirs(RAW_DIR, exist_ok=True)
-            with open(fp, 'w', encoding='utf-8') as f:
-                f.write('#!name=模块已下架\n'
-                        '#!desc=该模块的上游文件已被作者删除，请前往 son.zhiaon.top 选择其他模块\n'
-                        '#!author=Surge Modules\n\n[General]\n')
 
     print(f'模块 {len(modules)} · 分类 {len(categories)} · 来源 {settings["sourceCount"]}')
     return 0

@@ -108,22 +108,6 @@ def main():
         if i % 100 == 0:
             print(f'  {i}/{len(rows)} … ok={ok} fail={failed}', flush=True)
 
-    # The 8 upstream-broken stubs: ship a valid, self-describing placeholder so
-    # an old install link fails cleanly instead of receiving index.html (which
-    # Surge reports as "not a valid Surge config").
-    for slug in SKIP:
-        target = os.path.join(OUT, f'{slug}.sgmodule')
-        if os.path.exists(target):
-            continue
-        with open(target, 'w', encoding='utf-8') as f:
-            f.write(
-                '#!name=模块已下架\n'
-                '#!desc=该模块的上游文件已被作者删除，请前往 son.zhiaon.top 选择其他模块\n'
-                '#!author=Surge Modules\n'
-                '\n'
-                '[General]\n'
-            )
-
     # The proxy needs to know which slugs exist; a manifest beats a 404 probe.
     json.dump(sorted(k for k in index.keys() if k not in SKIP),
               open(os.path.join(DIST, 'm-index.json'), 'w'))

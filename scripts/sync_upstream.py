@@ -255,6 +255,11 @@ def main():
             report['removed'].append({'slug': slug, 'name': catalogue.get(slug, {}).get('name', slug)})
             note(slug, 'removed')
             catalogue.pop(slug, None)
+            # Upstream deleted it, so we stop serving it too — no orphan files
+            # in the repo and no half-working links on the site.
+            fp = os.path.join(RAW_DIR, f'{slug}.sgmodule')
+            if os.path.exists(fp):
+                os.remove(fp)
 
     if args.dry_run:
         json.dump(report, open(REPORT, 'w'), ensure_ascii=False, indent=1)
