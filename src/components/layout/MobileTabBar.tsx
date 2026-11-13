@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Compass, Bookmark, History } from 'lucide-react';
+import { Home, Compass, Bookmark, Layers } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { useFavorites } from '@/stores/favorites';
 
@@ -8,7 +8,7 @@ const TABS = [
   { to: '/', label: '首页', icon: Home, end: true },
   { to: '/discover', label: '发现', icon: Compass, end: false },
   { to: '/favorites', label: '收藏', icon: Bookmark, end: false },
-  { to: '/updates', label: '更新', icon: History, end: false },
+  { to: '/collection', label: '合集', icon: Layers, end: false },
 ] as const;
 
 /**

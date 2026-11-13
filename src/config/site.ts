@@ -97,6 +97,7 @@ export const siteConfig: SiteConfig = {
     { label: '首页', to: '/', primary: true },
     { label: '发现模块', to: '/discover', primary: true },
     { label: '分类', to: '/discover#categories', inMenu: false },
+    { label: '合集', to: '/collection', primary: true },
     { label: '收藏', to: '/favorites', primary: true },
     { label: '更新日志', to: '/updates', primary: true },
   ],
