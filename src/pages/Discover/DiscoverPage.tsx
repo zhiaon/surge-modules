@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SearchX, SlidersHorizontal, Users, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Container } from '@/components/common/Container';
@@ -51,7 +51,16 @@ export function DiscoverPage() {
   const [search, setSearch] = useState(q);
   const debounced = useDebouncedValue(search, 160);
   const [filterSheetOpen, setFilterSheetOpen] = useState(false);
-  const [page, setPage] = useState(1);
+  // Page lives in the URL, not component state: opening a module sheet and
+  // coming back (or any remount) must not throw the reader back to page 1.
+  const page = Math.max(1, Number(params.get('page') ?? '1') || 1);
+  const setPage = (next: number | ((p: number) => number)) => {
+    const value = typeof next === 'function' ? next(page) : next;
+    const np = new URLSearchParams(params);
+    if (value <= 1) np.delete('page');
+    else np.set('page', String(value));
+    setParams(np, { replace: true });
+  };
 
   useEffect(() => setSearch(q), [q]);
 
@@ -72,6 +81,7 @@ export function DiscoverPage() {
     const next = new URLSearchParams(params);
     if (value) next.set(key, value);
     else next.delete(key);
+    next.delete('page'); // a new filter always starts at page 1
     setParams(next, { replace: true });
   };
 
@@ -108,7 +118,18 @@ export function DiscoverPage() {
     });
   }, [all.data, debounced, categorySlug, tag, sort, owner]);
 
-  useEffect(() => setPage(1), [debounced, categorySlug, tag, sort, owner]);
+  const filterSig = `${debounced}|${categorySlug}|${tag}|${sort}|${owner}`;
+  const prevSig = useRef(filterSig);
+  useEffect(() => {
+    if (prevSig.current === filterSig) return; // first paint / unrelated render
+    prevSig.current = filterSig;
+    if (params.get('page')) {
+      const np = new URLSearchParams(params);
+      np.delete('page');
+      setParams(np, { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterSig]);
 
   const activeCategory = categories.data?.find((c) => c.slug === categorySlug);
   const hasFilters = Boolean(categorySlug || tag || sort !== 'recommended' || debounced || owner);

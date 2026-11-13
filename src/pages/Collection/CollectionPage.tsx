@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Check, Copy, Download, Link2, Plus, Search, Trash2, X } from 'lucide-react';
 import { Container } from '@/components/common/Container';
 import { useAsync } from '@/hooks/useAsync';
@@ -25,6 +25,7 @@ export function CollectionPage() {
     path: '/collection',
   });
 
+  const navigate = useNavigate();
   const catalogue = useAsync(() => moduleService.getModules({ perPage: 9999 }), []);
   const [selected, setSelected] = useState<string[]>(() => readHash());
   const [q, setQ] = useState('');
@@ -117,6 +118,15 @@ export function CollectionPage() {
 
   return (
     <Container size="wide" className="pt-8 sm:pt-12">
+      <button
+        type="button"
+        onClick={() => (history.length > 1 ? history.back() : navigate('/discover'))}
+        className="mb-4 inline-flex items-center gap-1.5 text-[12px] text-muted transition-colors hover:text-fg"
+      >
+        <ArrowLeft className="size-3.5" strokeWidth={2} aria-hidden="true" />
+        返回
+      </button>
+
       <header className="max-w-2xl">
         <span className="eyebrow">合集</span>
         <h1 className="mt-2.5 text-[1.9rem] font-semibold leading-[1.08] tracking-[-0.028em] sm:text-[2.4rem]">
