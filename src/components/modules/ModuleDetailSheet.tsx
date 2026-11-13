@@ -124,7 +124,14 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
   }, [module, siblings, siblingTech]);
 
   const [copied, setCopied] = useState<'config' | null>(null);
-  const [showConfig, setShowConfig] = useState(false);
+  // The raw config is why most people open this sheet — start expanded so it
+  // is one less tap. Collapsed again only if the user chooses to (the effect
+  // below re-expands when a different module is opened).
+  const [showConfig, setShowConfig] = useState(true);
+
+  useEffect(() => {
+    setShowConfig(true);
+  }, [module?.slug]);
 
   useEffect(() => {
     if (module) analyticsService.trackModuleView(module.slug);
