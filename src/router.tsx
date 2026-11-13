@@ -8,6 +8,7 @@ import { FavoritesPage } from '@/pages/Favorites/FavoritesPage';
 import { UpdatesPage } from '@/pages/Updates/UpdatesPage';
 import { CollectionPage } from '@/pages/Collection/CollectionPage';
 import { NotFoundPage } from '@/pages/NotFound';
+import { ErrorPage } from '@/pages/ErrorPage';
 
 /**
  * Legacy /modules/:slug links open the detail sheet over the module list.
@@ -25,6 +26,9 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    // Any render error inside a page lands here instead of React Router's
+    // developer error screen.
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
       { path: 'discover', element: <DiscoverPage /> },

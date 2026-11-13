@@ -160,9 +160,9 @@ export function UpdatesPage() {
                             {formatRelative(v.releasedAt)}
                           </time>
                         </div>
-                        {(v.changelog || m.description) && (
+                        {(v.changelog || v.module.description) && (
                           <p className="mt-2 text-[12.5px] leading-relaxed text-muted">
-                            {v.changelog || m.description}
+                            {v.changelog || v.module.description}
                           </p>
                         )}
                       </li>
