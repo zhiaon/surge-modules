@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, Copy, Download, Plus, Search, Trash2, X } from 'lucide-react';
+import { ArrowLeft, Check, Copy, Download, Link2, Plus, Search, Trash2, X } from 'lucide-react';
 import { Container } from '@/components/common/Container';
 import { useAsync } from '@/hooks/useAsync';
 import { moduleService } from '@/services/moduleService';
@@ -100,6 +100,16 @@ export function CollectionPage() {
     URL.revokeObjectURL(url);
   };
 
+  /** Installable URL: the proxy worker merges server-side, so Surge can fetch
+      it directly instead of downloading a file first. */
+  const mergeUrl = () => `https://sgmd.zhiaon.top/merge?m=${selected.join(',')}`;
+
+  const copyInstall = async () => {
+    const ok = await copyText(mergeUrl());
+    toast.show(ok ? '安装链接已复制' : '复制失败',
+      ok ? '在 Surge 里粘贴这个链接即可安装' : undefined, ok ? 'success' : 'default');
+  };
+
   const share = async () => {
     const ok = await copyText(`${location.origin}/collection#${selected.join(',')}`);
     toast.show(ok ? '链接已复制' : '复制失败', ok ? '分享后对方打开就能看到同样选择' : undefined, ok ? 'success' : 'default');
@@ -182,15 +192,30 @@ export function CollectionPage() {
               </button>
               <button
                 type="button"
+                onClick={() => void copyInstall()}
+                className="inline-flex h-9 items-center gap-1.5 rounded-full border border-line px-4 text-[12.5px] text-muted hover:text-fg"
+              >
+                <Link2 className="size-3.5" strokeWidth={2} aria-hidden="true" />
+                复制安装链接
+              </button>
+              <button
+                type="button"
                 onClick={() => void share()}
                 className="inline-flex h-9 items-center gap-1.5 rounded-full border border-line px-4 text-[12.5px] text-muted hover:text-fg"
               >
                 <Copy className="size-3.5" strokeWidth={2} aria-hidden="true" />
-                复制分享链接
+                分享此页
               </button>
             </>
           )}
         </div>
+
+        {result && (
+          <p className="mt-2 text-[11px] leading-relaxed text-faint">
+            「安装链接」是真正的模块地址，可直接粘进 Surge；「分享此页」是网页，
+            对方打开后能自己查看并下载，不能直接导入。
+          </p>
+        )}
 
         {result && (
           <pre className="mt-3 max-h-72 overflow-auto rounded-[var(--radius-md)] border border-line bg-inset p-3 text-[11px] leading-relaxed text-muted">
