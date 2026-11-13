@@ -213,7 +213,7 @@ def main():
         detail = dict(mod)
         detail['versions'] = [{
             'version': rec['version'],
-            'changelog': '同步自上游仓库',
+            'changelog': '',
             'releasedAt': rec['updatedAt'],
             'commitSha': None,
             'commitUrl': None,
