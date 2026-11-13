@@ -29,6 +29,8 @@ export function CollectionPage() {
   const [selected, setSelected] = useState<string[]>(() => readHash());
   const [q, setQ] = useState('');
   const [busy, setBusy] = useState(false);
+  // 'single' = 每个模块一条（Surge 里分开显示）；'merged' = 合成一条
+  const [mode, setMode] = useState<'single' | 'merged'>('single');
   const [result, setResult] = useState<string | null>(null);
 
   // keep the hash in sync so the link is always shareable
@@ -67,6 +69,16 @@ export function CollectionPage() {
     setSelected((prev) =>
       prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug],
     );
+  };
+
+  const installUrl = (m: ModuleWithMeta) =>
+    `surge:///install-module?url=${encodeURIComponent(m.rawUrl)}`;
+
+  const copyAll = async () => {
+    const text = chosen.map((m) => `${m.name}\n${m.rawUrl}`).join('\n\n');
+    const ok = await copyText(text);
+    toast.show(ok ? '已复制全部链接' : '复制失败', ok ? `${chosen.length} 个模块` : undefined,
+      ok ? 'success' : 'default');
   };
 
   const build = async () => {
@@ -157,20 +169,50 @@ export function CollectionPage() {
           </ul>
         )}
 
+        {/* 两种安装方式：逐个装（Surge 里分开显示）/ 合成一条 */}
+        <div className="mt-4 inline-flex rounded-[var(--radius-md)] border border-line bg-raised p-0.5">
+          {([
+            ['single', '逐个安装'],
+            ['merged', '合并成一个'],
+          ] as const).map(([value, label]) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() => setMode(value)}
+              aria-pressed={mode === value}
+              className={cn(
+                'rounded-[var(--radius-xs)] px-3 py-1.5 text-[11.5px] transition-colors',
+                mode === value ? 'bg-raised-hover text-fg shadow-[var(--shadow-card)]' : 'text-faint hover:text-muted',
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        <p className="mt-2 text-[11px] leading-relaxed text-faint">
+          {mode === 'single'
+            ? '每个模块单独安装，Surge 的模块列表里会分开显示、可以单独开关。'
+            : '合成一条模块，Surge 里只显示一条；规则全部生效但无法单独开关。'}
+        </p>
+
         <div className="mt-3 flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={build}
+            onClick={mode === 'merged' ? build : copyAll}
             disabled={!chosen.length || busy}
             className={cn(
               'inline-flex h-9 items-center gap-1.5 rounded-full px-4 text-[12.5px] font-semibold',
               'bg-white text-[#0b0d12] transition-opacity hover:bg-white/90 disabled:opacity-40',
             )}
           >
-            <Download className="size-3.5" strokeWidth={2.4} aria-hidden="true" />
-            {busy ? '生成中…' : '生成合集'}
+            {mode === 'merged' ? (
+              <Download className="size-3.5" strokeWidth={2.4} aria-hidden="true" />
+            ) : (
+              <Copy className="size-3.5" strokeWidth={2.4} aria-hidden="true" />
+            )}
+            {mode === 'merged' ? (busy ? '生成中…' : '生成合集') : '复制全部链接'}
           </button>
-          {result && (
+          {mode === 'merged' && result && (
             <>
               <button
                 type="button"
@@ -192,12 +234,50 @@ export function CollectionPage() {
           )}
         </div>
 
-        {result && (
+        {mode === 'merged' && result && (
           <pre className="mt-3 max-h-72 overflow-auto rounded-[var(--radius-md)] border border-line bg-inset p-3 text-[11px] leading-relaxed text-muted">
             {result.slice(0, 4000)}
           </pre>
         )}
       </section>
+
+      {/* 逐个安装清单 */}
+      {mode === 'single' && chosen.length > 0 && (
+        <section className="mt-6">
+          <h2 className="text-[13px] font-medium text-muted">逐个安装</h2>
+          <p className="mt-1 text-[11px] text-faint">点条目右侧按钮即可在 Surge 中安装，装完是独立的一条模块。</p>
+          <ul className="mt-3 divide-y divide-line overflow-hidden rounded-[var(--radius-md)] border border-line">
+            {chosen.map((m) => (
+              <li key={m.rawUrl} className="flex items-center gap-3 px-3 py-2.5">
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-[12.5px] text-fg">{m.name}</span>
+                  <span className="block truncate text-[10.5px] text-faint">
+                    {m.category?.name} · @{m.author}
+                  </span>
+                </span>
+                <a
+                  href={installUrl(m)}
+                  className="inline-flex h-8 shrink-0 items-center gap-1 rounded-full bg-white px-3 text-[11.5px] font-semibold text-[#0b0d12]"
+                >
+                  <Download className="size-3" strokeWidth={2.4} aria-hidden="true" />
+                  导入
+                </a>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    const ok = await copyText(m.rawUrl);
+                    toast.show(ok ? '已复制链接' : '复制失败', m.name, ok ? 'success' : 'default');
+                  }}
+                  className="inline-flex h-8 shrink-0 items-center rounded-full border border-line px-2.5 text-[11px] text-muted hover:text-fg"
+                  aria-label={`复制 ${m.name} 的安装链接`}
+                >
+                  链接
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* picker */}
       <section className="mt-8">
