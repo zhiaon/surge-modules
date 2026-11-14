@@ -1,10 +1,13 @@
-#!name=Reddit
-#!desc=过滤推广关 NSFW 提示
-#!category=能蟹仔
-[Script]
-Reddit = type=http-response,pattern=^https?:\/\/gql\.reddit\.com,requires-body=1,max-size=0,timeout=30,script-path=https://github.com/androidcn/userscripts/raw/main/reddit.js
+#!name=All about Reddit
+#!desc=Reddit Related Domain Routing Rules
 
-[MITM]
-hostname = %APPEND% gql.reddit.com
-
-
+[Rule]
+##Reddit
+DOMAIN-SUFFIX,redd.it,Tmp
+DOMAIN-SUFFIX,reddit.com,Tmp
+DOMAIN-SUFFIX,redditmail.com,Tmp
+DOMAIN-SUFFIX,redditmedia.com,Tmp
+DOMAIN-SUFFIX,redditstatic.com,Tmp
+DOMAIN-SUFFIX,reddituploads.com,Tmp
+DOMAIN-SUFFIX,reddituploads.com.cdn-cf.behance.net,Tmp
+DOMAIN-SUFFIX,reddituploads.com.cdn-cf.dropbox.com,Tmp
