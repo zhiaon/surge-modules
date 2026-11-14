@@ -1,6 +1,6 @@
 name: Sync upstream & deploy
 
-# 每 2 小时扫描 24 个上游仓库，有新增/更新就重建并部署到 Cloudflare Pages。
+# 每 2 小时扫描 41 个上游仓库 + 12 条 Releases 直链，有新增/更新就重建并部署到 Cloudflare Pages。
 # 手动触发：Actions → Sync upstream & deploy → Run workflow
 on:
   schedule:
