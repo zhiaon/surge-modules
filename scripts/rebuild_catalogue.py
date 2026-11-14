@@ -14,7 +14,9 @@ Repairing them by hand is guesswork, so this does a clean sweep:
 
 Usage: python3 scripts/rebuild_catalogue.py
 """
+import hashlib
 import json
+import urllib.request
 import os
 import re
 import sys
@@ -53,7 +55,41 @@ def main():
             files.append((meta['owner'], meta['repo'], meta['branch'], node['path'], node['sha']))
     print(f'上游文件 {len(files)} 个', flush=True)
 
-    # 2) fetch + parse (network bound; 8 workers)
+    # 2) release assets are not in any repo tree — re-add them from state/releases.json
+    try:
+        rel_doc = json.load(open(os.path.join(STATE, 'releases.json')))
+    except Exception:
+        rel_doc = {'items': []}
+    for item in rel_doc.get('items') or []:
+        home, url = item['home'], item['url']
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'surge-modules-sync'})
+            with urllib.request.urlopen(req, timeout=40) as r:
+                raw = r.read()
+        except Exception as e:
+            print(f'! release {url.rsplit("/", 1)[-1]}: {str(e)[:50]}')
+            errors += 1
+            continue
+        text = raw.decode('utf-8', 'replace').lstrip('\ufeff')
+        meta = su.parse_meta(text, url.rsplit('/', 1)[-1].rsplit('.', 1)[0])
+        if not meta:
+            continue
+        slug = su.slugify(url.rsplit('/', 1)[-1].rsplit('.', 1)[0], url)
+        base, i = slug, 2
+        while slug in catalogue:
+            slug = f'{base}-{i}'
+            i += 1
+        catalogue[slug] = {
+            'slug': slug, 'repo': home, 'branch': 'release', 'path': url,
+            'sha': hashlib.sha256(raw).hexdigest(), 'name': meta['name'],
+            'description': meta['description'], 'author': meta['author'] or home.split('/')[0],
+            'version': meta['version'], 'category': 'adblock',
+            'updatedAt': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+        }
+        os.makedirs(RAW_DIR, exist_ok=True)
+        open(os.path.join(RAW_DIR, f'{slug}.sgmodule'), 'wb').write(raw)
+
+    # 3) fetch + parse (network bound; 8 workers)
     def one(item):
         owner, repo, branch, path, sha = item
         try:
@@ -85,6 +121,9 @@ def main():
             skipped += 1
             continue
         if su.KELI_PATTERN.search(f"{meta['author']} {meta['name']}"):
+            skipped += 1
+            continue
+        if su.denied(f'{owner}/{repo}@{branch}:{path}', meta['author'], meta['name'], is_new=True):
             skipped += 1
             continue
 

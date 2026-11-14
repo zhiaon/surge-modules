@@ -369,7 +369,7 @@ def main():
         for item in rel:
             rel_by_home.setdefault(item['home'], []).append(item['url'])
         for home, urls in rel_by_home.items():
-            key = f'{home}#release'
+            key = f'{home}@release'
             existing = by_repo.get(key, {})
             seen = set()
             for url in urls:
@@ -442,7 +442,9 @@ def main():
     # writing anything.
     report['after'] = len(catalogue)
     expected = before_count + len(report['new']) - len(report['removed'])
+    fatal = False
     if report['after'] != expected:
+        fatal = True
         report['errors'].append(
             f'数量校验失败：{before_count} + {len(report["new"])} - '
             f'{len(report["removed"])} 应为 {expected}，实际 {report["after"]}'
@@ -457,13 +459,14 @@ def main():
             dupes.append(f'{seen[key]} 与 {slug} 指向同一文件 {key}')
         seen[key] = slug
     if dupes:
+        fatal = True
         report['errors'].extend(dupes[:10])
 
     # ---- auto-repair -------------------------------------------------------
     # If the arithmetic or the (repo,path) uniqueness is off, the state itself
     # is suspect. Rather than fail the run and wait for a human, rebuild the
     # catalogue from upstream: it is deterministic and takes ~2 minutes.
-    if report['errors']:
+    if fatal:
         print('! 校验未通过，自动从上游重建目录…', flush=True)
         repair = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'rebuild_catalogue.py')],
                                 cwd=ROOT, capture_output=True, text=True)
