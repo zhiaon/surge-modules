@@ -5,5 +5,5 @@
 WeChat = type=http-request, pattern=^https://mp\.weixin\.qq\.com/mp/getappmsgad, script-path=https://raw.githubusercontent.com/scomper/Surge/master/Scripts/WeChat.js
 
 [MITM]
-hostname = %INSERT% mp.weixin.qq.com
+hostname = %APPEND% %INSERT% mp.weixin.qq.com
 
