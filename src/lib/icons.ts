@@ -1,4 +1,6 @@
 import {
+  Apple,
+  Subtitles,
   Blocks,
   Brush,
   Code2,
@@ -36,6 +38,8 @@ export const categoryIcons: Record<string, LucideIcon> = {
   blocks: Blocks,
   brush: Brush,
   monitor: MonitorSmartphone,
+  apple: Apple,
+  subtitles: Subtitles,
 };
 
 export const fallbackCategoryIcon = Compass;
