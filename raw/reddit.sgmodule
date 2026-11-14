@@ -1,10 +1,20 @@
 #!name=Reddit
-#!desc=过滤推广关 NSFW 提示
-#!category=能蟹仔
+#!desc=某些APP要清除缓存或者重新安装拦截广告才会生效！
+#!author=奶思
+#!category=奶思的模块
+#!homepage=https://github.com/fmz200/wool_scripts
+#!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Surge/module/split/partR/Reddit.sgmodule
+#!tg-channel=https://t.me/inaisi
+#!date=2026-11-11 21:17:23
+#############################################
+
+
+#!arguments=reddit_enable:true
+
 [Script]
-Reddit = type=http-response,pattern=^https?:\/\/gql\.reddit\.com,requires-body=1,max-size=0,timeout=30,script-path=https://github.com/androidcn/userscripts/raw/main/reddit.js
+# 过滤推广 关NSFW提示 感谢【xream】分享
+reddit = type=http-response, pattern=^https?:\/\/gql(-fed)?\.reddit\.com, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/reddit.js, requires-body=true, timeout=60
+
 
 [MITM]
-hostname = %APPEND% gql.reddit.com
-
-
+hostname = %APPEND% gql.reddit.com, gql-fed.reddit.com

@@ -1,23 +1,26 @@
-#!name=YouTube
-#!desc=某些APP要清除缓存或者重新安装拦截广告才会生效！
-#!author=奶思
-#!category=奶思的模块
-#!homepage=https://github.com/fmz200/wool_scripts
-#!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Surge/module/split/partY/YouTube.sgmodule
-#!tg-channel=https://t.me/inaisi
-#!date=2026-11-11 21:17:23
-#############################################
+#!name=YouTube RmAd
+#!desc=https://github.com/lhie1/Rules/blob/master/Surge/Surge%203/Module/YouTube.sgmodule
 
+[Rule]
+URL-REGEX,https?:\/\/.+.googlevideo.com\/ptracking\?pltype=adhost,REJECT
+URL-REGEX,https?:\/\/.+.youtube.com\/api\/stats\/ads,REJECT
+URL-REGEX,https?:\/\/.+.youtube.com\/get_midroll_,REJECT
+URL-REGEX,https?:\/\/.+.youtube.com\/pagead\/,REJECT
+URL-REGEX,https?:\/\/.+.youtube.com\/ptracking\?,REJECT
+URL-REGEX,https?:\/\/.+.youtube.com\/_get_ads,REJECT
+URL-REGEX,https?:\/\/premiumyva.appspot.com\/vmclickstoadvertisersite,REJECT
+URL-REGEX,https?:\/\/s0.2mdn.net\/ads\/,REJECT
+URL-REGEX,https?:\/\/stats.tubemogul.com\/stats\/,REJECT
+URL-REGEX,https?:\/\/youtubei.googleapis.com\/.+ad_break,REJECT
+URL-REGEX,https?:\/\/youtubei.googleapis.com\/youtubei\/.+(ad|log),REJECT
+URL-REGEX,https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adformat,REJECT
+URL-REGEX,https?:\/\/[\w-]+\.googlevideo\.com\/.+&oad,REJECT-TINYGIF
 
-#!arguments=youtube_enable:true
-
-[Map Local]
-# 播放页广告
-^https:\/\/rr[\w-]+\.googlevideo\.com\/initplayback\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+[URL Rewrite]
+ctier=[A-Z] citer=A 302
 
 [Script]
-# 响应体
-YouTube响应体 = type=http-response, pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch), script-path=https://raw.githubusercontent.com/Maasea/sgmodule/refs/heads/master/Script/Youtube/youtube.response.js, requires-body=true, binary-body-mode=true, timeout=60
+http-request https?:\/\/.+?\.googlevideo\.com\/.+&(oad|ctier)=(?!A),script-path=https://choler.github.io/Surge/Script/YouTube.js
 
 [MITM]
-hostname = %APPEND% rr*.googlevideo.com, youtubei.googleapis.com
+hostname = %APPEND% *.googlevideo.com, *.youtube.com, youtubei.googleapis.com
