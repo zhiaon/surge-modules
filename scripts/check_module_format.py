@@ -32,9 +32,16 @@ SECTION = re.compile(r'^\[([^\]]+)\]$')
 def main():
     warn_only = '--warn' in sys.argv
     problems = []
+    # Explicit paths let CI check only what this run touched.
+    explicit = [a for a in sys.argv[1:] if not a.startswith('--')]
+    if explicit:
+        targets = [a for a in explicit if os.path.isfile(a)]
+    else:
+        targets = [os.path.join(RAW, x) for x in sorted(os.listdir(RAW))
+                   if x.endswith('.sgmodule')]
 
-    for name in sorted(f for f in os.listdir(RAW) if f.endswith('.sgmodule')):
-        path = os.path.join(RAW, name)
+    for path in targets:
+        name = os.path.basename(path)
         text = open(path, encoding='utf-8', errors='replace').read()
         lines = text.split('\n')
 
@@ -64,7 +71,7 @@ def main():
                         problems.append(f'{name}: [MITM] hostname 缺少 %APPEND%')
 
     if not problems:
-        print(f'格式检查通过（{len(os.listdir(RAW))} 个文件）')
+        print(f'格式检查通过（{len(targets)} 个文件）')
         return 0
 
     print(f'发现 {len(problems)} 处格式问题：')

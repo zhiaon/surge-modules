@@ -143,15 +143,23 @@ def main():
     ap.add_argument('--apply', action='store_true')
     ap.add_argument('--only', default='')
     ap.add_argument('--report', default='')
+    ap.add_argument('paths', nargs='*',
+                    help='只处理这些文件；省略则扫描整个 raw/')
     args = ap.parse_args()
     stages = [args.only] if args.only else ['append', 'case', 'body']
 
     stats = {s: 0 for s in stages}
     rows = []
-    files = sorted(f for f in os.listdir(RAW) if f.endswith('.sgmodule'))
+    if args.paths:
+        # Only the files the sync run actually touched — an untouched module is
+        # never rewritten, so a working one can never be broken by a repair.
+        paths = [p for p in args.paths if os.path.isfile(p)]
+    else:
+        paths = [os.path.join(RAW, x) for x in sorted(os.listdir(RAW))
+                 if x.endswith('.sgmodule')]
 
-    for f in files:
-        path = os.path.join(RAW, f)
+    for path in paths:
+        f = os.path.basename(path)
         text = open(path, encoding='utf-8', errors='replace').read()
         orig = text
         touched = []

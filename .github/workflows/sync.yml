@@ -63,11 +63,7 @@ jobs:
       # a bad push never reaches the CDN. Runs after sync (raw/ is fresh) and
       # before the build (dist/m is generated from raw/).
       - name: Repair module format
-        run: |
-          python3 scripts/fix_module_format.py --apply
-          python3 scripts/fix_shadowrocket_scripts.py --apply raw
-          echo "--- 格式验收 ---"
-          python3 scripts/check_module_format.py
+        run: sh scripts/repair_touched.sh
 
       - name: Build frontend
         run: npm run build:static

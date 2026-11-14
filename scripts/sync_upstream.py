@@ -486,6 +486,10 @@ def main():
     os.makedirs(STATE, exist_ok=True)
     json.dump(catalogue, open(CATALOGUE, 'w'), ensure_ascii=False, indent=1)
     json.dump(history, open(HISTORY, 'w'), ensure_ascii=False, separators=(',', ':'))
+    # Repair runs only over these files downstream; touching an untouched
+    # module would be pointless churn and a chance to break something.
+    report['touched'] = sorted({m['slug'] for m in report['new']} |
+                               {m['slug'] for m in report['updated']})
     json.dump(report, open(REPORT, 'w'), ensure_ascii=False, indent=1)
 
     print(f"新增 {len(report['new'])} · 更新 {len(report['updated'])} · "
