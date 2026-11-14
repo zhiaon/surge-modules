@@ -83,6 +83,10 @@ jobs:
           git config user.email 'bot@users.noreply.github.com'
           git add state/ raw/ 2>/dev/null || true
           git diff --cached --quiet || git commit -m "sync: $(date -u +%Y-%m-%dT%H:%MZ) (+${{ steps.sync.outputs.new }} ~${{ steps.sync.outputs.updated }} -${{ steps.sync.outputs.removed }})"
+          # The job may have been queued before commits landed on main. Without
+          # this pull the stale worktree is pushed over newer state and silently
+          # drops modules that were added in the meantime.
+          git pull --rebase --autostash origin main
           git push
 
       - name: Summary
