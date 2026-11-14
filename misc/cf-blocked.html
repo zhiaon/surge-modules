@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>暂时无法访问</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: #0b0d12;
+    color: #e6e9ef;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC", "PingFang SC",
+                 "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .card { max-width: 380px; width: 100%; }
+  .mark {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center;
+    background: rgba(59,130,246,.12);
+    border: 1px solid rgba(59,130,246,.28);
+    margin-bottom: 22px;
+  }
+  .mark svg { width: 21px; height: 21px; stroke: #6b9cff; }
+  h1 {
+    font-size: 20px; font-weight: 600; letter-spacing: -.01em;
+    margin: 0 0 10px;
+  }
+  p {
+    font-size: 14px; line-height: 1.68; color: #8b93a3;
+    margin: 0 0 12px;
+  }
+  .hint {
+    margin-top: 24px; padding: 13px 15px;
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 12px; background: #141821;
+    font-size: 12.5px; line-height: 1.65; color: #8b93a3;
+  }
+  .hint b { color: #c9cfdb; font-weight: 500; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11.5px; color: #9aa4b8;
+    background: rgba(255,255,255,.05);
+    padding: 1px 5px; border-radius: 4px;
+  }
+  .foot {
+    margin-top: 26px; font-size: 11px; color: #4b5363;
+    font-family: ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: light) {
+    body { background: #f6f7fa; color: #14181f; }
+    .mark { background: rgba(59,130,246,.1); border-color: rgba(59,130,246,.25); }
+    .mark svg { stroke: #2563eb; }
+    p, .hint { color: #5b6472; }
+    .hint { background: #fff; border-color: #e3e7ee; }
+    .hint b { color: #14181f; }
+    code { background: #eef1f6; color: #47505f; }
+    .foot { color: #9aa3b2; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"></path>
+      </svg>
+    </div>
+
+    <h1>该站点在当前网络不可用</h1>
+    <p>本站的页面不向此地区开放访问。这是站点所有者的设置，与你的账号或设备无关。</p>
+
+    <div class="hint">
+      <b>只想安装模块？</b><br>
+      模块安装链接不受影响，在 Surge 里直接粘贴 <code>.sgmodule</code> 地址即可安装。
+    </div>
+
+    <div class="foot">son.zhiaon.top</div>
+  </div>
+</body>
+</html>
