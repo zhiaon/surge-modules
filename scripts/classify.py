@@ -79,7 +79,8 @@ PANEL_WORDS = re.compile(
     r'dns|倒数日|黄历|油价|天气|加密货币|机场信息|代理信息|节点信息',
     re.I,
 )
-SCRIPT_WORDS = re.compile(r'签到|签退|signin|checkin|cookie|自动任务|定时|每日|领取|抽奖', re.I)
+SCRIPT_WORDS = re.compile(r'签到|签退|signin|checkin|cookie|ws ?key|token|凭证|密钥|自动任务|定时|每日|领取|抽奖', re.I)
+ADBLOCK_WORDS = re.compile(r'adblock|ad ?block|去广告|广告拦截|广告屏蔽|拦截广告|adguard', re.I)
 UNLOCK_WORDS = re.compile(r'解锁|会员|vip|pro 版|高级版|去限制|premium|破解', re.I)
 MEDIA_WORDS = re.compile(
     r'netflix|youtube|disney|spotify|bilibili|b站|爱奇艺|腾讯视频|优酷|芒果|'
@@ -144,6 +145,8 @@ def classify(name, desc, facts):
         return 'scripts'
     if CLEAN_WORDS.search(name_l):
         return 'clean'
+    if ADBLOCK_WORDS.search(name_l):
+        return 'adblock'
     if UNLOCK_WORDS.search(text):
         return 'unlock'
     if MEDIA_WORDS.search(name_l):
