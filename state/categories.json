@@ -1400,5 +1400,17 @@
 "haijiao": "unlock",
 "porntube": "unlock",
 "porntube-shadowrocket": "unlock",
-"tlsm": "unlock"
+"tlsm": "unlock",
+"iringo-weatherkit": "unlock",
+"iringo-siri": "adblock",
+"iringo-maps": "adblock",
+"iringo-tv": "adblock",
+"iringo-news": "unlock",
+"iringo-testflight": "adblock",
+"dualsubs-youtube": "media",
+"dualsubs-universal": "media",
+"dualsubs-spotify": "media",
+"dualsubs-netflix": "media",
+"bilibili-adblock-2": "media",
+"bilibili-global": "media"
 }

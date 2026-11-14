@@ -21,6 +21,7 @@ Usage:
   python3 scripts/sync_upstream.py --dry-run  # report only, touch nothing
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -37,6 +38,7 @@ STATE = os.path.join(ROOT, 'state')
 CATALOGUE = os.path.join(STATE, 'catalogue.json')
 SOURCES = os.path.join(STATE, 'sources.json')
 DENYLIST = os.path.join(STATE, 'denylist.json')
+RELEASES = os.path.join(STATE, 'releases.json')
 
 # Things that must never reach the site: grey-market streaming/short-drama VIP
 # unlocks and adult material. Keyed both by exact repo path (stable) and by
@@ -354,6 +356,80 @@ def main():
             fp = os.path.join(RAW_DIR, f'{slug}.sgmodule')
             if os.path.exists(fp):
                 os.remove(fp)
+
+
+    # ---- release sources -------------------------------------------------
+    # Some projects only ship one finished module as a GitHub Release asset;
+    # the repo itself holds per-region or β fragments. Those are fetched here
+    # by direct URL, keyed as "<home>#release" so the repo scanner never
+    # touches (or deletes) them.
+    if os.path.exists(RELEASES):
+        rel = json.load(open(RELEASES)).get('items') or []
+        rel_by_home = {}
+        for item in rel:
+            rel_by_home.setdefault(item['home'], []).append(item['url'])
+        for home, urls in rel_by_home.items():
+            key = f'{home}#release'
+            existing = by_repo.get(key, {})
+            seen = set()
+            for url in urls:
+                seen.add(url)
+                try:
+                    req = urllib.request.Request(url, headers={'User-Agent': 'surge-modules-sync'})
+                    with urllib.request.urlopen(req, timeout=40) as r:
+                        raw = r.read()
+                except Exception as e:
+                    report['errors'].append(f'{key}:{url.rsplit("/", 1)[-1]}: {str(e)[:50]}')
+                    continue
+                sha = hashlib.sha256(raw).hexdigest()
+                prev = existing.get(url)
+                if prev and prev[1] == sha:
+                    continue
+                report['checked'] += 1
+                text = raw.decode('utf-8', 'replace').lstrip('\ufeff')
+                fallback = url.rsplit('/', 1)[-1].rsplit('.', 1)[0]
+                meta = parse_meta(text, fallback)
+                if not meta:
+                    continue
+                if KELI_PATTERN.search(f"{meta['author']} {meta['name']}"):
+                    continue
+                if denied(f'{key}:{url}', meta['author'], meta['name'], is_new=prev is None):
+                    continue
+                if prev:
+                    slug, is_new = prev[0], False
+                else:
+                    slug = slugify(fallback, url)
+                    base, i = slug, 2
+                    while slug in catalogue:
+                        slug = f'{base}-{i}'
+                        i += 1
+                    is_new = True
+                record = {
+                    'slug': slug, 'repo': home, 'branch': 'release', 'path': url, 'sha': sha,
+                    'name': meta['name'], 'description': meta['description'],
+                    'author': meta['author'] or home.split('/')[0],
+                    'version': meta['version'],
+                    'category': (catalogue.get(slug, {}).get('category') or 'adblock'),
+                    'updatedAt': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+                }
+                prev_version = (catalogue.get(slug) or {}).get('version', '')
+                catalogue[slug] = record
+                note(slug, 'added' if is_new else 'content')
+                (report['new'] if is_new else report['updated']).append(
+                    {'slug': slug, 'name': record['name'], 'version': record['version'],
+                     'from_version': prev_version, 'repo': record['repo'], 'diff': None})
+                if not args.dry_run:
+                    os.makedirs(RAW_DIR, exist_ok=True)
+                    with open(os.path.join(RAW_DIR, f'{slug}.sgmodule'), 'wb') as f:
+                        f.write(raw)
+            # a 404 release (asset renamed / deleted) drops the module
+            for path in [p for p in existing if p not in seen]:
+                slug, _sha = existing[path]
+                report['removed'].append({'slug': slug, 'name': catalogue.get(slug, {}).get('name', slug)})
+                catalogue.pop(slug, None)
+                fp = os.path.join(RAW_DIR, f'{slug}.sgmodule')
+                if os.path.exists(fp):
+                    os.remove(fp)
 
     if args.dry_run:
         json.dump(report, open(REPORT, 'w'), ensure_ascii=False, indent=1)

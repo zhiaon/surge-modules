@@ -1,0 +1,53 @@
+{
+  "comment": "正式版直链源：仓库里的分文件是变体（β / 地区拆包），正式发布版只在 Releases 里发一个 .sgmodule。只收这类单文件，不扫仓库。",
+  "items": [
+    {
+      "url": "https://github.com/NSRingo/WeatherKit/releases/latest/download/iRingo.WeatherKit.sgmodule",
+      "home": "NSRingo/WeatherKit"
+    },
+    {
+      "url": "https://github.com/NSRingo/Siri/releases/latest/download/iRingo.Siri.sgmodule",
+      "home": "NSRingo/Siri"
+    },
+    {
+      "url": "https://github.com/NSRingo/GeoServices/releases/latest/download/iRingo.Maps.sgmodule",
+      "home": "NSRingo/GeoServices"
+    },
+    {
+      "url": "https://github.com/NSRingo/TV/releases/latest/download/iRingo.TV.sgmodule",
+      "home": "NSRingo/TV"
+    },
+    {
+      "url": "https://github.com/NSRingo/News/releases/latest/download/iRingo.News.sgmodule",
+      "home": "NSRingo/News"
+    },
+    {
+      "url": "https://github.com/NSRingo/TestFlight/releases/latest/download/iRingo.TestFlight.sgmodule",
+      "home": "NSRingo/TestFlight"
+    },
+    {
+      "url": "https://github.com/DualSubs/YouTube/releases/latest/download/DualSubs.YouTube.sgmodule",
+      "home": "DualSubs/YouTube"
+    },
+    {
+      "url": "https://github.com/DualSubs/Universal/releases/latest/download/DualSubs.Universal.sgmodule",
+      "home": "DualSubs/Universal"
+    },
+    {
+      "url": "https://github.com/DualSubs/Spotify/releases/latest/download/DualSubs.Spotify.sgmodule",
+      "home": "DualSubs/Spotify"
+    },
+    {
+      "url": "https://github.com/DualSubs/Netflix/releases/latest/download/DualSubs.Netflix.sgmodule",
+      "home": "DualSubs/Netflix"
+    },
+    {
+      "url": "https://github.com/BiliUniverse/ADBlock/releases/latest/download/BiliBili.ADBlock.sgmodule",
+      "home": "BiliUniverse/ADBlock"
+    },
+    {
+      "url": "https://github.com/BiliUniverse/Global/releases/latest/download/BiliBili.Global.sgmodule",
+      "home": "BiliUniverse/Global"
+    }
+  ]
+}
