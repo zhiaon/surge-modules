@@ -36,6 +36,30 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = os.path.join(ROOT, 'state')
 CATALOGUE = os.path.join(STATE, 'catalogue.json')
 SOURCES = os.path.join(STATE, 'sources.json')
+DENYLIST = os.path.join(STATE, 'denylist.json')
+
+# Things that must never reach the site: grey-market streaming/short-drama VIP
+# unlocks and adult material. Keyed both by exact repo path (stable) and by
+# name pattern (catches the same content arriving from a new repo).
+def load_denylist():
+    if not os.path.exists(DENYLIST):
+        return set(), None
+    d = json.load(open(DENYLIST))
+    pats = d.get('name_patterns') or []
+    rx = re.compile('|'.join(re.escape(x) for x in pats), re.I) if pats else None
+    return set(d.get('keys') or []), rx
+
+
+DENY_KEYS, DENY_RX = load_denylist()
+
+
+def denied(key, author, name, is_new=False):
+    """Keyed entries always lose. Name patterns only gate NEW files, so an
+    existing module is never dropped because its title happens to contain a
+    flagged word (红果短剧去广告 and friends stay)."""
+    if key in DENY_KEYS:
+        return True
+    return bool(is_new and DENY_RX and DENY_RX.search(f'{author} {name}'))
 HISTORY = os.path.join(STATE, 'history.json')
 DIST = os.path.join(ROOT, 'dist')
 RAW_DIR = os.path.join(ROOT, 'raw')
@@ -197,6 +221,15 @@ def main():
                        'type': kind})
         history[slug] = events[-20:]
     sources = json.load(open(SOURCES)) if os.path.exists(SOURCES) else {}
+
+    # Denylisted modules that slipped in before the rule existed are dropped
+    # here, so the next build never ships them and they cannot come back.
+    for slug in [k for k, v in catalogue.items()
+                 if f"{v['repo']}@{v['branch']}:{v['path']}" in DENY_KEYS]:
+        del catalogue[slug]
+        raw_p = os.path.join(RAW_DIR, f'{slug}.sgmodule')
+        if os.path.exists(raw_p):
+            os.remove(raw_p)
     # catalogue: slug -> module record (with repo/path/sha)
     # sources:   "owner/repo@branch" -> {branch, owner, repo}
 
@@ -240,6 +273,9 @@ def main():
 
             if KELI_PATTERN.search(f"{meta['author']} {meta['name']}"):
                 continue  # 可莉的模块，一律不导入
+
+            if denied(f'{key}:{path}', meta['author'], meta['name'], is_new=prev is None):
+                continue  # 黑名单：灰产解锁 / 上游测试残留
 
             if prev:
                 slug = prev[0]
