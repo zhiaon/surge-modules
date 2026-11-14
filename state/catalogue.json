@@ -18191,26 +18191,26 @@
   "repo": "Yu9191/Rewrite",
   "branch": "main",
   "path": "porntube/modules/porntube.sgmodule",
-  "sha": "f5f1f51ca3d068f035662523d7e3260300cf420e",
+  "sha": "9a026d500e57d36e3032a2f2b0d5d87b3b1ca973",
   "name": "porntube VIP 解锁",
   "description": "VIP 解锁 + 去广告 (porntube.cool / 91porn family)",
   "author": "Yu9191 Rewrite",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-14T01:58:31Z"
+  "updatedAt": "2026-11-14T08:33:14Z"
  },
  "porntube-shadowrocket": {
   "slug": "porntube-shadowrocket",
   "repo": "Yu9191/Rewrite",
   "branch": "main",
   "path": "porntube/modules/porntube.shadowrocket.sgmodule",
-  "sha": "b0dd824a1408f4faee3a56e300f8cf8aa24b2f11",
+  "sha": "19b9ec856a661f51c0f22299b89d6d033b78b101",
   "name": "porntube VIP 解锁",
   "description": "API 解密改写 + 前端伪登录 + 去广告 (porntube.cool / 91porn family)",
   "author": "Yu9191 Rewrite",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-14T01:58:32Z"
+  "updatedAt": "2026-11-14T08:33:15Z"
  },
  "tlsm": {
   "slug": "tlsm",
