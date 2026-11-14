@@ -55,8 +55,8 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
         'group relative flex items-center border border-line',
         'transition-colors duration-200 hover:border-line-strong focus-within:border-[var(--color-accent)]',
         size === 'lg'
-          ? // 大号：接近搜索框的观感 —— 圆角更大、底色比页面抬一层、ICON 更醒目
-            'h-[3.25rem] rounded-[16px] bg-[var(--color-raised)] sm:h-14'
+          ? // 大号：明显的胶囊搜索框 —— 更高、圆角更大、浮起来一层
+            'h-[3.5rem] rounded-[18px] bg-[var(--color-raised)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]'
           : 'h-11 rounded-[var(--radius-md)] bg-inset',
         className,
       )}
