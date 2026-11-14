@@ -42,8 +42,9 @@ def split_kv(rest):
 
 
 def norm_value(key, value):
+    """Surge wants true/false; Shadowrocket writes 1/0."""
     if key == 'requires-body':
-        return 'should' if value in ('1', 'true', 'yes') else value
+        return 'true' if value in ('1', 'true', 'yes') else 'false'
     return value
 
 
@@ -111,11 +112,17 @@ def convert_line(line, used_names, counter):
                     f'script-path={sp_url}')
     elif kind in ('http-request', 'http-response'):
         sp = rest.find('script-path=')
-        head = rest[:sp] if sp >= 0 else rest
-        head = head.strip().rstrip(',')
-        if head:
-            pattern = head
-        rest = rest[sp:] if sp >= 0 else ''
+        head = (rest[:sp] if sp >= 0 else rest).strip().rstrip(',')
+        # Shadowrocket writes `^regex requires-body=1,script-path=...` — the
+        # flags after the regex are space separated, so split on the first
+        # `key=` token rather than taking the whole head as the pattern.
+        flag = re.search(r'\s+([A-Za-z-]+=)', head)
+        if flag:
+            pattern = head[:flag.start()].strip()
+            rest = head[flag.start():].strip() + (',' + rest[sp:] if sp >= 0 else '')
+        else:
+            pattern = head or None
+            rest = rest[sp:] if sp >= 0 else ''
     elif kind == 'generic':
         sp = rest.find('script-path=')
         if sp >= 0:
@@ -197,6 +204,16 @@ def convert_module(text):
 def main():
     apply = '--apply' in sys.argv
     files = [a for a in sys.argv[1:] if not a.startswith('--')]
+    # Allow `fix_shadowrocket_scripts.py --apply raw` so CI does not have to
+    # expand 1400 paths on the command line.
+    expanded = []
+    for f in files:
+        if os.path.isdir(f):
+            expanded += [os.path.join(f, x) for x in sorted(os.listdir(f))
+                         if x.endswith('.sgmodule')]
+        else:
+            expanded.append(f)
+    files = expanded
     total = 0
     for path in files:
         text = open(path, encoding='utf-8', errors='replace').read()

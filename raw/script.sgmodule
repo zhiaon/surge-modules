@@ -50,7 +50,7 @@ Keep = type=http-response, pattern=^https:\/\/api\.gotokeep\.com\/* requires-bod
 联通轮播去广告 = type=http-response, pattern=^https?://m.client.10010.com/uniAdmsInterface/getHomePageAd, script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/china_unicom.js
 
 # Alex0510
-noto笔记 = type=http-response, pattern=https://api.revenuecat.com/v1/receipts, requires-body=should, script-path=https://raw.githubusercontent.com/Alex0510/Eric/master/surge/Script/noto.js
+noto笔记 = type=http-response, pattern=https://api.revenuecat.com/v1/receipts, requires-body=true, script-path=https://raw.githubusercontent.com/Alex0510/Eric/master/surge/Script/noto.js
 
 # Liquor030
 皮皮虾去水印广告 = type=http-response, pattern=^https?://.*\.snssdk\.com/bds/(feed/stream|comment/cell_reply|cell/cell_comment|cell/detail|ward/list|user/favorite|user/cell_coment|user/cell_userfeed|user/publish_list) requires-body=1,max-size=-1, script-path=https://raw.githubusercontent.com/Liquor030/Sub_Ruleset/master/Script/Super.js

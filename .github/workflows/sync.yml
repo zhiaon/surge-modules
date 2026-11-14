@@ -58,6 +58,17 @@ jobs:
                   f.write(f"removed={len(r['removed'])}\n")
           EOF
 
+      # Upstream keeps shipping modules that break on load or, worse, quietly
+      # replace the user's own MITM hostname list. Repair them on the way in so
+      # a bad push never reaches the CDN. Runs after sync (raw/ is fresh) and
+      # before the build (dist/m is generated from raw/).
+      - name: Repair module format
+        run: |
+          python3 scripts/fix_module_format.py --apply
+          python3 scripts/fix_shadowrocket_scripts.py --apply raw
+          echo "--- 格式验收 ---"
+          python3 scripts/check_module_format.py
+
       - name: Build frontend
         run: npm run build:static
 
