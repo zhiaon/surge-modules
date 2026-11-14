@@ -52,16 +52,19 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
   return (
     <div
       className={cn(
-        'group relative flex items-center rounded-[var(--radius-md)] border border-line bg-inset',
+        'group relative flex items-center border border-line',
         'transition-colors duration-200 hover:border-line-strong focus-within:border-[var(--color-accent)]',
-        size === 'lg' ? 'h-13 sm:h-14' : 'h-11',
+        size === 'lg'
+          ? // 大号：接近搜索框的观感 —— 圆角更大、底色比页面抬一层、ICON 更醒目
+            'h-[3.25rem] rounded-[16px] bg-[var(--color-raised)] sm:h-14'
+          : 'h-11 rounded-[var(--radius-md)] bg-inset',
         className,
       )}
     >
       <Search
         className={cn(
-          'pointer-events-none ml-3.5 shrink-0 text-faint transition-colors group-focus-within:text-muted',
-          size === 'lg' ? 'size-4.5' : 'size-4',
+          'pointer-events-none shrink-0 text-faint transition-colors group-focus-within:text-muted',
+          size === 'lg' ? 'ml-4 size-[1.15rem]' : 'ml-3.5 size-4',
         )}
         strokeWidth={1.75}
         aria-hidden="true"
