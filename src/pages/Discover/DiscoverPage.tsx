@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SearchX, SlidersHorizontal, Users, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Container } from '@/components/common/Container';
-import { SearchInput } from '@/components/common/SearchInput';
+import { DebouncedSearchInput } from '@/components/common/DebouncedSearchInput';
 import { ModuleCard } from '@/components/modules/ModuleCard';
 import { ModuleCardSkeleton } from '@/components/common/Skeleton';
 import { EmptyState } from '@/components/common/EmptyState';
@@ -10,7 +10,6 @@ import { ErrorState } from '@/components/feedback/ErrorState';
 import { Button, ButtonLink } from '@/components/common/Button';
 import { CategoryCard } from '@/components/modules/CategoryCard';
 import { useAsync } from '@/hooks/useAsync';
-import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 import { moduleService } from '@/services/moduleService';
 import { categoryService } from '@/services/categoryService';
 import { moduleQuery } from '@/services/moduleQuery';
@@ -48,8 +47,14 @@ export function DiscoverPage() {
   const tag = params.get('tag') ?? '';
   const sort = (params.get('sort') as ModuleSort | null) ?? 'recommended';
 
+  // 输入框自己维护文本缓冲，只在停顿后把 q 交上来；父组件持有的就是
+  // 已提交的查询，避免每敲一个字母都重算 1400 条。
   const [search, setSearch] = useState(q);
-  const debounced = useDebouncedValue(search, 160);
+  // 我们写进地址栏的最后一个值。用来区分「URL 变化是用户输入的回声」和
+  // 「URL 变化是外部导航」。之前无条件 setSearch(q)，debounce 一写回 URL 就
+  // 把用户正在输入的内容覆盖成旧值 —— 表现就是打字卡顿、字母丢失，中文输入
+  // 法组字更是直接被切断。
+  const pushedQ = useRef(q);
   const [filterSheetOpen, setFilterSheetOpen] = useState(false);
   // Page lives in the URL, not component state: opening a module sheet and
   // coming back (or any remount) must not throw the reader back to page 1.
@@ -62,20 +67,26 @@ export function DiscoverPage() {
     setParams(np, { replace: true });
   };
 
-  useEffect(() => setSearch(q), [q]);
+  useEffect(() => {
+    // 只接受外部导航带来的 q（前进后退、分享链接）。自己写入地址栏的回声
+    // 必须忽略：之前无条件 setSearch(q)，debounce 一写回 URL 就把正在输入的
+    // 内容覆盖成较旧的值 —— 表现就是打字卡顿、丢字母，中文候选更是被切断。
+    if (q === pushedQ.current) return;
+    pushedQ.current = q;
+    setSearch(q);
+  }, [q]);
 
   const all = useAsync(() => moduleService.getModules({ perPage: 9999 }), []);
   const categories = useAsync(() => categoryService.getCategories(), []);
 
-  useEffect(() => {
+  const commitSearch = (value: string) => {
+    setSearch(value);
     const next = new URLSearchParams(params);
-    if (debounced) next.set('q', debounced);
+    if (value) next.set('q', value);
     else next.delete('q');
-    if (next.toString() !== params.toString()) {
-      setParams(next, { replace: true });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debounced]);
+    pushedQ.current = value;
+    setParams(next, { replace: true });
+  };
 
   const setParam = (key: string, value: string | null) => {
     const next = new URLSearchParams(params);
@@ -111,14 +122,14 @@ export function DiscoverPage() {
         )
       : all.data.items;
     return moduleQuery.apply(base, {
-      search: debounced,
+      search,
       categorySlug: categorySlug || undefined,
       tag: tag || undefined,
       sort,
     });
-  }, [all.data, debounced, categorySlug, tag, sort, owner]);
+  }, [all.data, search, categorySlug, tag, sort, owner]);
 
-  const filterSig = `${debounced}|${categorySlug}|${tag}|${sort}|${owner}`;
+  const filterSig = `${search}|${categorySlug}|${tag}|${sort}|${owner}`;
   const prevSig = useRef(filterSig);
   useEffect(() => {
     if (prevSig.current === filterSig) return; // first paint / unrelated render
@@ -132,7 +143,7 @@ export function DiscoverPage() {
   }, [filterSig]);
 
   const activeCategory = categories.data?.find((c) => c.slug === categorySlug);
-  const hasFilters = Boolean(categorySlug || tag || sort !== 'recommended' || debounced || owner);
+  const hasFilters = Boolean(categorySlug || tag || sort !== 'recommended' || search || owner);
 
   return (
     <>
@@ -149,9 +160,9 @@ export function DiscoverPage() {
 
         {/* search + sort */}
         <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:items-center">
-          <SearchInput
+          <DebouncedSearchInput
             value={search}
-            onChange={setSearch}
+            onChange={commitSearch}
             placeholder="搜索模块、描述、作者或标签"
             size="lg"
             className="flex-1"
@@ -308,9 +319,9 @@ export function DiscoverPage() {
                 排序：{SORTS.find((s) => s.value === sort)?.label ?? sort}
               </ActiveChip>
             )}
-            {debounced && (
+            {search && (
               <ActiveChip onRemove={() => { setSearch(''); setParam('q', null); }}>
-                “{debounced}”
+                “{search}”
               </ActiveChip>
             )}
             <button

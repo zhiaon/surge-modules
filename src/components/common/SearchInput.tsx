@@ -19,6 +19,9 @@ export interface SearchInputProps {
   'aria-expanded'?: boolean;
   'aria-activedescendant'?: string;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  /** IME composition hooks — parents need these to avoid submitting mid-word */
+  onCompositionStart?: () => void;
+  onCompositionEnd?: () => void;
   /** keyboard hint on desktop */
   shortcut?: string;
 }
@@ -36,6 +39,8 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
     autoFocus,
     id,
     onKeyDown,
+    onCompositionStart,
+    onCompositionEnd,
     shortcut,
     ...aria
   },
@@ -87,6 +92,8 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
         enterKeyHint="search"
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
+        onCompositionStart={onCompositionStart}
+        onCompositionEnd={onCompositionEnd}
         onKeyDown={(e) => {
           if (e.key === 'Enter') onSubmit?.(value);
           else if (e.key === 'Escape' && value) {
