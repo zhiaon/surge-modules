@@ -17,16 +17,16 @@ DOMAIN-KEYWORD,iyes.youku.com,REJECT
 # 消息页感兴趣推荐
 ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.playboy\.recommend\/1\.0 - reject
 
-[Body Rewrite]
-http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\.shade\/ 'del(.data)'
-http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.user\.strategy\.list\/ 'del(.data)'
-http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.group\.myself\.banner\/ '.data.bannerList = []'
-http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.playboy\.recommend\/2\.0 '.data.recommends = [] | .data.items = [] | .data.next = false'
-http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.item\.recommend\.list\/ '.data.cardList = []'
-http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.fun\.follow\.often\.visit '.data.sections = []'
-http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.circle\.myself\.banner\/1\.0 '.data.bannerList = []'
-http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.circle\.visited\/1\.0 '.data.visitedCircleList = []'
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\.shade\/ 'del(.data)'
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.user\.strategy\.list\/ 'del(.data)'
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.group\.myself\.banner\/ '.data.bannerList = []'
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.playboy\.recommend\/2\.0 '.data.recommends = [] | .data.items = [] | .data.next = false'
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.item\.recommend\.list\/ '.data.cardList = []'
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.fun\.follow\.often\.visit '.data.sections = []'
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.circle\.myself\.banner\/1\.0 '.data.bannerList = []'
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.circle\.visited\/1\.0 '.data.visitedCircleList = []'
 [Map Local]
 # 搜索页多余推荐列表
 ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.item\.search\.activate\/2\.0 data-type=text data="{}" status-code=200 header="Content-Type:application/json"

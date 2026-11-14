@@ -4,7 +4,7 @@
 #!category=能蟹仔
 
 [MITM]
-hostname = api.tuhu.cn
+hostname = %APPEND% api.tuhu.cn
 
 [Script]
 途虎养车# = type=http-request,pattern=https:\/\/api\.tuhu\.cn\/User\/GetInternalCenterInfo,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/FoKit/Scripts/main/scripts/tuhu.js

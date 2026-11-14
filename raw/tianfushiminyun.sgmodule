@@ -9,9 +9,9 @@
 #############################################
 
 
-[Body Rewrite]
-http-response ^https?:\/\/tft-app\.cdtft\.cn\/gateway-customer\/tftapp\/tft-ams\/api\/appAd officialAdvertResultVo fmz200
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/tft-app\.cdtft\.cn\/gateway-customer\/tftapp\/tft-ams\/api\/appAd officialAdvertResultVo fmz200
 [Map Local]
 # 注意：生活圈,社区打不开 需要的自己添加主机名
 ^https?:\/\/tfsmy\.chengdu\.gov\.cn\/api\/v5\/core\/version data-type=text data=" " status-code=200

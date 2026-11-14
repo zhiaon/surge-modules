@@ -8,7 +8,7 @@
 always-real-ip = %INSERT% -item.taobao.com, -detail.tmall.com
 
 [MITM]
-hostname = %INSERT% item.taobao.com, detail.tmall.com
+hostname = %APPEND% %INSERT% item.taobao.com, detail.tmall.com
 
 [URL Rewrite]
 ^https://item\.taobao\.com/item\.htm\?.*&id=([^&]+).*?&skuId=([^&]+).* https://item.taobao.com/item.htm?id=$1&skuId=$2 302

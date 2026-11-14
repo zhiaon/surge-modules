@@ -19,10 +19,10 @@ DOMAIN,o2o-ad-log-gateway.alibaba.com,REJECT
 ^https?:\/\/waimai-guide\.ele\.me\/\w+\/mtop\.alsc\.wamai\.store\.detail\.miniapp\.popup - reject
 ^https?:\/\/waimai-guide\.ele\.me\/\w+\/mtop\.venus\.shopcouponpopupservice\.getshopcouponspopup - reject
 
-[Body Rewrite]
-http-response ^https?:\/\/yunbusiness\.ccb\.com\/basic_service\/txCtrl\? "TAG_AD_INFO" "fmz200"
-http-response ^https?:\/\/waimai-guide\.ele\.me\/\w+\/mtop\.venus\.shopresourceservice\.getshopresource posterList fmz200
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/yunbusiness\.ccb\.com\/basic_service\/txCtrl\? "TAG_AD_INFO" "fmz200"
+# [Body Rewrite 原样保留] http-response ^https?:\/\/waimai-guide\.ele\.me\/\w+\/mtop\.venus\.shopresourceservice\.getshopresource posterList fmz200
 [Map Local]
 # 首页横幅广告
 ^https?:\/\/yunbusiness\.ccb\.com\/clp_service\/txCtrl\?txcode=A3341A(002|006|009|119|120) data-type=text data=" " status-code=200

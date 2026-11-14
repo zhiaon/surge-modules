@@ -14,9 +14,9 @@
 [URL Rewrite]
 ^https?:\/\/47\.100\.65\.202\/source\/plugin\/mobile\/mobile\.php\?module=advis - reject
 
-[Body Rewrite]
-http-response ^https?:\/\/47\.100\.65\.202\/api\/mobile\/index\.php\?version=\d&mobile=yes&module=basicdata&type=forumlist adv fmz200
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/47\.100\.65\.202\/api\/mobile\/index\.php\?version=\d&mobile=yes&module=basicdata&type=forumlist adv fmz200
 [Map Local]
 ^https?:\/\/ptf\.flyertrip\.com\/common\/cf\/.*.jpg data-type=text data=" " status-code=200
 

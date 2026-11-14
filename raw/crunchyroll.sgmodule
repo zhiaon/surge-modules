@@ -9,8 +9,8 @@
 #############################################
 
 
-[Body Rewrite]
-http-response ^https?:\/\/beta-api\.crunchyroll\.com\/cms offset_ms":\d+ offset_ms":99999999999999
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/beta-api\.crunchyroll\.com\/cms offset_ms":\d+ offset_ms":99999999999999
 [MITM]
 hostname = %APPEND% beta-api.crunchyroll.com

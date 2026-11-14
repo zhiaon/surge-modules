@@ -3,7 +3,7 @@
 #!category=Bing
 
 [MITM]
-hostname = %INSERT% cn.bing.com
+hostname = %APPEND% %INSERT% cn.bing.com
 
 [URL Rewrite]
 ^https?://cn\.bing\.com/search\? https://www.google.com/search? 302

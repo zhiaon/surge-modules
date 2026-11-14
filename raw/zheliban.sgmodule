@@ -9,8 +9,8 @@
 #############################################
 
 
-[Body Rewrite]
-http-response-jq ^https?:\/\/portal\.zjzwfw\.gov\.cn\/app_api\/appHome\/selectStartPic 'if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end'
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/portal\.zjzwfw\.gov\.cn\/app_api\/appHome\/selectStartPic 'if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end'
 [MITM]
 hostname = %APPEND% portal.zjzwfw.gov.cn

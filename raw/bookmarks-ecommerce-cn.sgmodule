@@ -6,7 +6,7 @@
 always-real-ip = %INSERT% -as, -asc, -aso, -ikea, -ikeac, -ikeao, -jd, -jdc, -jdo, -tb, -tbc, -tbo, -yp, -ypc, -ypo
 
 [MITM]
-hostname = %INSERT% as, asc, aso, ikea, ikeac, ikeao, jd, jdc, jdo, tb, tbc, tbo, yp, ypc, ypo
+hostname = %APPEND% %INSERT% as, asc, aso, ikea, ikeac, ikeao, jd, jdc, jdo, tb, tbc, tbo, yp, ypc, ypo
 
 [URL Rewrite]
 # Apple Store

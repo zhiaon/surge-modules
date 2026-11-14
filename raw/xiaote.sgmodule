@@ -9,8 +9,8 @@
 #############################################
 
 
-[Body Rewrite]
-http-response ^https?:\/\/lcen\.xiaote\.net\/api\/graphql screenSplashAd fmz200
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/lcen\.xiaote\.net\/api\/graphql screenSplashAd fmz200
 [MITM]
 hostname = %APPEND% lcen.xiaote.net

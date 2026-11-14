@@ -3,7 +3,7 @@
 #!category=Google
 
 [MITM]
-hostname = %INSERT% www.google.cn
+hostname = %APPEND% %INSERT% www.google.cn
 
 [URL Rewrite]
 ^https?://www\.google\.cn/search\? https://www.google.com/search? 302

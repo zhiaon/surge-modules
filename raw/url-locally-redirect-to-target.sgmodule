@@ -3,7 +3,7 @@
 #!category=URL
 
 [MITM]
-hostname = %INSERT% nam.safelink.emails.azure.net, developers.weixin.qq.com, mp.weixin.qq.com, www.youtube.com, duckduckgo.com, go.hoteldig.com, www.google.com, www.google.com.hk, statics.teams.cdn.office.net, teams.public.onecdn.static.microsoft, *.safelinks.protection.outlook.com, t.me, triplink.trip.com, *.mjt.lu, link.csdn.net, link.zhihu.com, i.gkd.li, www.linkedin.com, *.awstrack.me
+hostname = %APPEND% %INSERT% nam.safelink.emails.azure.net, developers.weixin.qq.com, mp.weixin.qq.com, www.youtube.com, duckduckgo.com, go.hoteldig.com, www.google.com, www.google.com.hk, statics.teams.cdn.office.net, teams.public.onecdn.static.microsoft, *.safelinks.protection.outlook.com, t.me, triplink.trip.com, *.mjt.lu, link.csdn.net, link.zhihu.com, i.gkd.li, www.linkedin.com, *.awstrack.me
 
 [Script]
 # search param: destination

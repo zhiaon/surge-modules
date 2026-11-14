@@ -8,4 +8,4 @@
 
 
 [MITM]
-hostname =game.dominos.com.cn
+hostname =%APPEND% game.dominos.com.cn

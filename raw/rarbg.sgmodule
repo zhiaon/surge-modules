@@ -9,9 +9,9 @@
 #############################################
 
 
-[Body Rewrite]
-http-response ^https?:\/\/dyncdn\.me\/static\/\d{0,2}\/js\/showads\.js$ true false
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/dyncdn\.me\/static\/\d{0,2}\/js\/showads\.js$ true false
 [Map Local]
 # https://rarbgmirror.org/torrents.php
 ^https?:\/\/dyncdn\.me\/static\/\d{0,2}\/js\/expla\d{0,4}\.js$ data-type=text data=" " status-code=200

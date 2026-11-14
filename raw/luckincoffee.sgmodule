@@ -9,11 +9,11 @@
 #############################################
 
 
-[Body Rewrite]
-http-response ^https?:\/\/capi\.lkcoffee\.com\/resource\/m\/sys\/app\/adposNew \{.+\} {"status":"SUCCESS"}
-http-response ^https?:\/\/m\.lkcoffee\.com\/ecapi\/resource\/m\/member\/exchange\/page \{.+\} {"status":"SUCCESS"}
-http-response ^https?:\/\/m\.lkcoffee\.com\/capi\/resource\/m\/growUp\/main "popTitle":".+?" "popTitle":""
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/capi\.lkcoffee\.com\/resource\/m\/sys\/app\/adposNew \{.+\} {"status":"SUCCESS"}
+# [Body Rewrite 原样保留] http-response ^https?:\/\/m\.lkcoffee\.com\/ecapi\/resource\/m\/member\/exchange\/page \{.+\} {"status":"SUCCESS"}
+# [Body Rewrite 原样保留] http-response ^https?:\/\/m\.lkcoffee\.com\/capi\/resource\/m\/growUp\/main "popTitle":".+?" "popTitle":""
 [Map Local]
 ^https?:\/\/img0[1-9]{1}\.luckincoffeecdn\.com\/group\d/M00/[A-Z0-9]{2}/[A-Z0-9]{2}/[a-zA-Z0-9]{29}\.(jpg|jpeg)_\.webp data-type=text data=" " status-code=200
 

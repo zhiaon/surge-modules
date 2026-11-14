@@ -20,9 +20,9 @@
 # 主页实惠卡横幅
 ^https:\/\/j1\.pupuapi\.com\/client\/member_card\/index\/my - reject
 
-[Body Rewrite]
-http-response-jq ^https:\/\/j1\.pupuapi\.com\/client\/notification\/message_center\/unread_number '.data = []'
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/j1\.pupuapi\.com\/client\/notification\/message_center\/unread_number '.data = []'
 [Map Local]
 # 搜索框页面热榜
 ^https:\/\/j1\.pupuapi\.com\/client\/marketing\/advertisement\/search_input_ranking data-type=text data="{}" status-code=200 header="Content-Type:application/json"

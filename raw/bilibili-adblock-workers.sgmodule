@@ -20,10 +20,10 @@
 # 番剧页可能弹出的HTML广告
 ^https:\/\/api\.bilibili\.com\/pgc\/activity\/deliver\/material\/receive\? header="content-type: application/json" data-type=text data="{\"code\":0,\"data\":{\"closeType\":\"close_win\",\"container\":[],\"showTime\":\"\"},\"message\":\"success\"}"
 
-[Body Rewrite]
-# iPad端番剧推荐列表上方广告
-http-response-jq ^https:\/\/api\.bilibili\.com\/pgc\/view\/v2\/app\/season\? 'del(.data.payment)'
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# # iPad端番剧推荐列表上方广告
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/api\.bilibili\.com\/pgc\/view\/v2\/app\/season\? 'del(.data.payment)'
 [URL Rewrite]
 # 去除搜索中的默认关键词
 ^https?:\/\/(grpc|app)\.bili(bili\.com|api\.net)\/bilibili\.app\.interface\.v1\.Search\/DefaultWords$ - reject

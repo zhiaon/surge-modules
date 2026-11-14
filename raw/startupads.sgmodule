@@ -43,10 +43,10 @@ https://b.appsimg.com/upload/momin/ - reject
 # > zhangshangkaoyan
 ^https?:\/\/misc\.eol\.cn\/js\/target\/move\/zskyApp\/Appqdkp\/.*json - reject
 
-[Body Rewrite]
-http-response-jq ^https?:\/\/api\.qeeniao\.com\/nap\/ad '.data={}'
-http-response-jq ^https?:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alibaba.*mytab '.data.model.children |= map(select(.name | contains("营销") | not))'
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/api\.qeeniao\.com\/nap\/ad '.data={}'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alibaba.*mytab '.data.model.children |= map(select(.name | contains("营销") | not))'
 [Map Local]
 # > Version
 ^https?:\/\/2026.06.29/c415/v2.0.647 data-type=text data=" " status-code=200

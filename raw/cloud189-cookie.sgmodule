@@ -1,11 +1,12 @@
 #!name=cloud.189.cn Cookie 提取器
 #!desc=仅在访问 https://h5.cloud.189.cn/main.html#/my 时提取 Cookie，确保登录状态
 #!author=androidcn
-#!homepage=https://cloud.189.cn/
 #!icon=https://cloud.189.cn/favicon.ico
+#!homepage=https://cloud.189.cn/
 
 [Script]
-http-request ^https:\/\/api\.cloud\.189\.cn\/open\/user\/getUserInfo\.action script-path=https://github.com/androidcn/userscripts/raw/refs/heads/main/cloud189_cookie.js, tag=提取 cloud.189.cn Cookie, requires-body=false
+提取 cloud.189.cn Cookie = type=http-request, pattern=^https:\/\/api\.cloud\.189\.cn\/open\/user\/getUserInfo\.action, script-path=https://github.com/androidcn/userscripts/raw/refs/heads/main/cloud189_cookie.js
 
 [MITM]
-hostname = h5.cloud.189.cn
+hostname = %APPEND% h5.cloud.189.cn
+

@@ -148,23 +148,23 @@ DOMAIN-SUFFIX,lnk0.com,REJECT
 ^https:\/\/images\.pinduoduo\.com\/mrk\/ - reject
 ^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
 
-[Body Rewrite]
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adsplash"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adIsConsumable"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adProductId"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["nologin_tips"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["index_banner"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["me_banner"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["index_banner_shadow"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adshongbao"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adsapp_homepage_ticket_pop"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adsoptimizationsend"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adsapp_activity_ad_array"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adbanner"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adposition"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adShowAgainTime"]])'
-http-response-jq ^https?:\/\/p\.kuaidi100\.com\/apicenter\/xcx\.dox 'delpaths([["data","secondMenuList"]])'
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adsplash"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adIsConsumable"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adProductId"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["nologin_tips"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["index_banner"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["me_banner"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["index_banner_shadow"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adshongbao"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adsapp_homepage_ticket_pop"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adsoptimizationsend"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adsapp_activity_ad_array"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adbanner"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adposition"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do$ 'delpaths([["adShowAgainTime"]])'
+# [Body Rewrite 原样保留] http-response-jq ^https?:\/\/p\.kuaidi100\.com\/apicenter\/xcx\.dox 'delpaths([["data","secondMenuList"]])'
 [Map Local]
 ^https?:\/\/cdn\.kuaidi100\.com\/images\/open\/appads data-type=tiny-gif status-code=200
 

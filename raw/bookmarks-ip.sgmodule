@@ -6,7 +6,7 @@
 always-real-ip = %INSERT% -ipinfo
 
 [MITM]
-hostname = %INSERT% ipinfo
+hostname = %APPEND% %INSERT% ipinfo
 
 [URL Rewrite]
 # IPinfo

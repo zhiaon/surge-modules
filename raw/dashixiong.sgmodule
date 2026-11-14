@@ -9,9 +9,9 @@
 #############################################
 
 
-[Body Rewrite]
-http-response ^https?:\/\/adservice\.sigmob\.cn\/extconfig false true
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/adservice\.sigmob\.cn\/extconfig false true
 [Map Local]
 ^https?:\/\/sdk\.alibaba\.com\.ailbaba\.me\/xgapp\.php\/v\d\/version data-type=text data=" " status-code=200
 

@@ -13,9 +13,9 @@
 DOMAIN-SUFFIX,ja.gamersky.com,REJECT
 DOMAIN-SUFFIX,ja1.gamersky.com,REJECT
 
-[Body Rewrite]
-http-response-jq http:\/\/.+\.gamersky.com/.+/lists/getListElements '.listElements |= map(select(has("adCategory") | not))'
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response-jq http:\/\/.+\.gamersky.com/.+/lists/getListElements '.listElements |= map(select(has("adCategory") | not))'
 [Map Local]
 # 移除开屏广告、列表广告
 ^http:\/\/.+\.gamersky\.com\/.+\/adSystem\/ad\/.+ data-type=text data="{}" status-code=200 header="Content-Type:application/json"

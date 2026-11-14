@@ -5,4 +5,4 @@
 #!homepage = https://github.com/Aoang/Surge
 
 [MITM]
-hostname = -*.apple.com, -*.icloud.com, -*.mzstatic.com, -*.crashlytics.com, -*.tailscale.com, -derp*.*.*, *
+hostname = %APPEND% -*.apple.com, -*.icloud.com, -*.mzstatic.com, -*.crashlytics.com, -*.tailscale.com, -derp*.*.*, *

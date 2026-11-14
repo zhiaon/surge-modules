@@ -10,7 +10,7 @@
 always-real-ip = %INSERT% app.harness.io, -*.harness.io, -proxy-free.ff.harness.io
 
 [MITM]
-hostname = %INSERT% *.harness.io, proxy-free.ff.harness.io
+hostname = %APPEND% %INSERT% *.harness.io, proxy-free.ff.harness.io
 
 [Header Rewrite]
 http-response ^https://.+.harness.io/auth/assets/ header-del Cache-Control

@@ -9,10 +9,10 @@
 #############################################
 
 
-[Body Rewrite]
-http-response-jq ^https:\/\/bp-api\.bestv\.cn\/cms\/api\/free\/open\/advertisingV2 '.dt = []'
-http-response-jq ^https:\/\/bp-api\.bestv\.cn\/cms\/api\/c\/search\/hot\/v(2|4) '.dt.hot = [] | .dt.recommand = [] | .dt.bannerList = []'
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/bp-api\.bestv\.cn\/cms\/api\/free\/open\/advertisingV2 '.dt = []'
+# [Body Rewrite 原样保留] http-response-jq ^https:\/\/bp-api\.bestv\.cn\/cms\/api\/c\/search\/hot\/v(2|4) '.dt.hot = [] | .dt.recommand = [] | .dt.bannerList = []'
 [Map Local]
 # 开屏广告 感谢【树先生】分享
 ^https:\/\/bp-api\.bestv\.com\.cn\/cms\/api\/free\/open\/advertisingV2 data-type=text data="{}" status-code=200 header="Content-Type:application/json"

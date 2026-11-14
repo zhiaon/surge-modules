@@ -1,11 +1,11 @@
 #!name=七猫小说去广告
-#!version=1.1.5
 #!desc=v1.1.5：补 hc-ssp.sm.cn、ai.advertisement.alibabacorp.sm.cn、reachmax.cn
 #!author=许舟
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/SevenCat.png
 #!category=去广告
+#!version=1.1.5
 #!openUrl=https://apps.apple.com/app/id1387717110
-#!tag=去广告
+#!category=去广告
 #!homepage=https://github.com/zhiaon/qimao-novel-adblock
 #!date=2026-10-28
 
@@ -34,6 +34,7 @@ DOMAIN,a-qmad.qimao.com,REJECT,extended-matching,pre-matching
 DOMAIN,t-qmad.qimao.com,REJECT,extended-matching,pre-matching
 DOMAIN,a-remad.qm989.com,REJECT,extended-matching,pre-matching
 # 峰控云设备风控域名，默认不拦截（可能影响 App 登录/风控校验），需要时取消下一行注释
+#DOMAIN,fp-it.fengkongcloud.com,REJECT,extended-matching,pre-matching
 #DOMAIN,fp-it.fengkongcloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adxvip.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.xelements.cn,REJECT,extended-matching,pre-matching
@@ -78,7 +79,6 @@ DOMAIN,u.uc123.com,REJECT,extended-matching,pre-matching
 DOMAIN,hc-ssp.sm.cn,REJECT,extended-matching,pre-matching
 DOMAIN,ai.advertisement.alibabacorp.sm.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,reachmax.cn,REJECT,extended-matching,pre-matching
-# UBiX 天璇广告（七猫阅读页插页角标 UBIX）：域名取自官方 UBiXAdSDK 二进制硬编码
 # adx-cfg-u1.ubixioe.com（配置）、adx-data-u1.ubixioe.com（数据）、entry-su1.ubixioe.com（入口）
 DOMAIN-SUFFIX,ubixioe.com,REJECT,extended-matching,pre-matching
 # 快手广告
@@ -107,18 +107,26 @@ DOMAIN,dsp-x.jd.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
 # 返回空 JSON，保持 App 正常逻辑而非崩溃
-^https?:\/\/api-cfg\.wtzw\.com\/v\d\/operation\/index\?ad_personal_switch data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https?:\/\/api-cfg\.wtzw\.com\/v\d\/operation\/index\?(?:[^#?&]+&)*ad_personal_switch data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
 ^https?:\/\/api-bc\.wtzw\.com\/api\/v4\/search\/dispose data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
 ^https?:\/\/api-bc\.wtzw\.com\/api\/v\d\/book-store\/config data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
 ^https?:\/\/api-bc\.wtzw\.com\/api\/v\d\/book-store\/push-book data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
 ^https?:\/\/api-bc\.wtzw\.com\/api\/v\d\/operation data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
 ^https?:\/\/api-gw\.wtzw\.com\/welf\/app\/v\d\/task\/red-packet data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
 ^https?:\/\/cdn\.wtzw\.com\/bookimg\/free\/api\/v\d\/reader\/reader-copy-paragraph-all\.json data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
 ^https?:\/\/xiaoshuo\.wtzw\.com\/api\/v\d\/withdraw\/init data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [Script]
 # 移除「我的」页面个人中心功能区中的广告位（等价于 luestr 的 jq delpaths func_area[1,2]）
-http-response ^https?:\/\/xiaoshuo\.wtzw\.com\/api\/v\d\/user\/my-center\? script-path=https://raw.githubusercontent.com/zhiaon/Modules/main/surge_scripts/qimao.js, requires-body=true, tag=qimao-mycenter
+qimao-mycenter = type=http-response, pattern=^https?:\/\/xiaoshuo\.wtzw\.com\/api\/v\d\/user\/my-center\?, script-path=https://raw.githubusercontent.com/zhiaon/Modules/main/surge_scripts/qimao.js, requires-body=true
 
 [MITM]
 hostname = %APPEND% api-cfg.wtzw.com, api-bc.wtzw.com, api-gw.wtzw.com, cdn.wtzw.com, xiaoshuo.wtzw.com, sf3-fe-tos.pglstatp-toutiao.com, api-access.pangolin-sdk-toutiao-b.com, api-access.pangolin-sdk-toutiao.com, api-access.pangolin-sdk-toutiao1.com, open.e.kuaishou.cn, p1-lm.adukwai.com, lf-cdn-tos.bytescm.com, dsp-x.jd.com
+

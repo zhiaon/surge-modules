@@ -3,7 +3,7 @@
 #!category=Google
 
 [MITM]
-hostname = %INSERT% www.google.com
+hostname = %APPEND% %INSERT% www.google.com
 
 [URL Rewrite]
 # ddg -> www.duckduckgo.com

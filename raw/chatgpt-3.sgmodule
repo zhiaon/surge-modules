@@ -3,6 +3,7 @@
 #!author=@Androidcn
 #!category=能蟹仔
 [MITM]
-hostname = ab.chatgpt.com
-[Body Rewrite]
-http-response ^https://ab\.chatgpt\.com/v1/ '"gateValue":"false"' '"gateValue":"true"' '"value":false' '"value":true'
+hostname = %APPEND% ab.chatgpt.com
+
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 无法转换，原样保留] http-response ^https://ab\.chatgpt\.com/v1/ '"gateValue":"false"' '"gateValue":"true"' '"value":false' '"value":true'

@@ -1,6 +1,7 @@
-node_modules/
-dist/
-.wrangler/
 *.log
 .DS_Store
+.backup-fmt-*/
+.wrangler/
 /tmp/
+dist/
+node_modules/

@@ -11,10 +11,10 @@
 
 #!arguments=vrvr_enable:true
 
-[Body Rewrite]
-http-response ^https?:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getfeedflowinfo\? userRed fmz200
-http-response ^https?:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getchoicegoodsinfos infoData fmz200
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getfeedflowinfo\? userRed fmz200
+# [Body Rewrite 原样保留] http-response ^https?:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getchoicegoodsinfos infoData fmz200
 [Map Local]
 ^https?:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getConfigInfo data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 

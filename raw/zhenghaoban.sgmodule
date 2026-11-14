@@ -9,8 +9,8 @@
 #############################################
 
 
-[Body Rewrite]
-http-response ^https?:\/\/app-izz\.zhengzhou\.gov\.cn:10019\/bizgw\/gateway\.do "imgUrl19_5x9":".+?" "imgUrl19_5x9":""
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/app-izz\.zhengzhou\.gov\.cn:10019\/bizgw\/gateway\.do "imgUrl19_5x9":".+?" "imgUrl19_5x9":""
 [MITM]
 hostname = %APPEND% app-izz.zhengzhou.gov.cn

@@ -9,8 +9,8 @@
 #############################################
 
 
-[Body Rewrite]
-http-response ^https?:\/\/www\.i3zh\.com cm-pop-up-banners fmz200
 
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-response ^https?:\/\/www\.i3zh\.com cm-pop-up-banners fmz200
 [MITM]
 hostname = %APPEND% www.i3zh.com
