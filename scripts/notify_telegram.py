@@ -80,6 +80,13 @@ def build_message(report, total_modules=None):
             lines.append(f'  …另有 {len(removed) - 6} 个')
         lines.append('')
 
+    fixed = report.get('fixed') or {}
+    if fixed:
+        label = {'append': '%APPEND%', 'case': '[MITM] 大小写',
+                 'body': '[Body Rewrite]', 'script': '脚本语法'}
+        parts = [f'{label.get(k, k)} {v}' for k, v in sorted(fixed.items(), key=lambda kv: -kv[1])]
+        lines.append(f'🔧 格式修复 {len(parts)} 类：{" · ".join(parts)}')
+
     if total_modules:
         lines.append(f'📦 平台现有 <b>{total_modules}</b> 个模块')
     lines.append(f'🔗 <a href="{SITE}/discover">查看站点</a>')

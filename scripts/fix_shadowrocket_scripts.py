@@ -203,7 +203,22 @@ def convert_module(text):
 
 def main():
     apply = '--apply' in sys.argv
-    files = [a for a in sys.argv[1:] if not a.startswith('--')]
+    report = None
+    for i, a in enumerate(sys.argv):
+        if a == '--report' and i + 1 < len(sys.argv):
+            report = sys.argv[i + 1]
+    touched = []
+    files = []
+    skip = False
+    for a in sys.argv[1:]:
+        if skip:
+            skip = False
+            continue
+        if a == '--report':
+            skip = True
+            continue
+        if not a.startswith('--'):
+            files.append(a)
     # Allow `fix_shadowrocket_scripts.py --apply raw` so CI does not have to
     # expand 1400 paths on the command line.
     expanded = []
@@ -220,10 +235,14 @@ def main():
         new, changed = convert_module(text)
         if changed:
             total += 1
+            touched.append(os.path.basename(path))
             if apply:
                 open(path, 'w', encoding='utf-8').write(new)
             else:
                 print('would convert:', os.path.basename(path))
+    if report:
+        open(report, 'w', encoding='utf-8').write(
+            '\n'.join(f'{f}: script' for f in touched))
     print(f'{"已转换" if apply else "将转换"} {total} 个')
 
 
