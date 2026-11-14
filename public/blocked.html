@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>暂时无法访问</title>
+<title>暂不向该地区开放</title>
 <style>
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
@@ -16,72 +16,53 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 28px;
+    padding: 30px 26px;
     -webkit-font-smoothing: antialiased;
   }
-  .card { max-width: 380px; width: 100%; }
-  .mark {
-    width: 44px; height: 44px; border-radius: 12px;
-    display: grid; place-items: center;
-    background: rgba(59,130,246,.12);
-    border: 1px solid rgba(59,130,246,.28);
-    margin-bottom: 22px;
-  }
-  .mark svg { width: 21px; height: 21px; stroke: #6b9cff; }
+  .wrap { max-width: 400px; width: 100%; }
   h1 {
-    font-size: 20px; font-weight: 600; letter-spacing: -.01em;
-    margin: 0 0 10px;
+    font-size: 21px; font-weight: 600; letter-spacing: -.012em;
+    line-height: 1.32; margin: 0 0 18px;
   }
   p {
-    font-size: 14px; line-height: 1.68; color: #8b93a3;
-    margin: 0 0 12px;
+    font-size: 14px; line-height: 1.78; color: #8d95a5;
+    margin: 0 0 14px;
   }
-  .hint {
-    margin-top: 24px; padding: 13px 15px;
-    border: 1px solid rgba(255,255,255,.07);
-    border-radius: 12px; background: #141821;
-    font-size: 12.5px; line-height: 1.65; color: #8b93a3;
+  hr {
+    border: 0; height: 1px; background: rgba(255,255,255,.07);
+    margin: 24px 0;
   }
-  .hint b { color: #c9cfdb; font-weight: 500; }
+  .label {
+    font-size: 14px; font-weight: 500; color: #c3cad7;
+    margin: 0 0 8px;
+  }
   code {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 11.5px; color: #9aa4b8;
-    background: rgba(255,255,255,.05);
-    padding: 1px 5px; border-radius: 4px;
+    font-size: 12.5px; color: #a8b2c4;
+    background: rgba(255,255,255,.055);
+    padding: 2px 6px; border-radius: 5px;
+    white-space: nowrap;
   }
   .foot {
-    margin-top: 26px; font-size: 11px; color: #4b5363;
-    font-family: ui-monospace, monospace;
-  }
-  @media (prefers-color-scheme: light) {
-    body { background: #f6f7fa; color: #14181f; }
-    .mark { background: rgba(59,130,246,.1); border-color: rgba(59,130,246,.25); }
-    .mark svg { stroke: #2563eb; }
-    p, .hint { color: #5b6472; }
-    .hint { background: #fff; border-color: #e3e7ee; }
-    .hint b { color: #14181f; }
-    code { background: #eef1f6; color: #47505f; }
-    .foot { color: #9aa3b2; }
+    margin-top: 30px; font-size: 11.5px; color: #4a515f;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .01em;
   }
 </style>
 </head>
 <body>
-  <div class="card">
-    <div class="mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"
-           stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="9"></circle>
-        <path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"></path>
-      </svg>
-    </div>
+  <div class="wrap">
+    <h1>该站点暂不向中国大陆地区开放</h1>
 
-    <h1>该站点在当前网络不可用</h1>
-    <p>本站的页面不向此地区开放访问。这是站点所有者的设置，与你的账号或设备无关。</p>
+    <p>本站目前仅面向中国大陆以外地区提供访问服务。由于站点访问策略限制，中国大陆地区的网络暂时无法访问本站。</p>
+    <p>此限制由站点所有者设置，与您的账号或设备无关。</p>
 
-    <div class="hint">
-      <b>只想安装模块？</b><br>
-      模块安装链接不受影响，在 Surge 里直接粘贴 <code>.sgmodule</code> 地址即可安装。
-    </div>
+    <hr>
+
+    <p class="label">只想安装模块？</p>
+    <p>模块安装链接不受此限制。在 Surge 中直接粘贴 <code>.sgmodule</code> 地址，即可正常安装模块。</p>
+
+    <hr>
 
     <div class="foot">son.zhiaon.top · 1020</div>
   </div>
