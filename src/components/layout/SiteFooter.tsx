@@ -174,7 +174,16 @@ export function SiteFooter() {
         <Divider className="mt-10" />
 
         <div className="mt-6 flex flex-col gap-3 text-[11px] leading-relaxed text-faint sm:flex-row sm:items-start sm:justify-between sm:gap-8">
-          <p className="max-w-xl text-pretty">{siteConfig.footer.disclaimer}</p>
+          <div className="max-w-xl">
+            <p className="text-pretty">{siteConfig.footer.disclaimer}</p>
+            <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span>{siteConfig.footer.license}</span>
+              <span className="text-line-strong" aria-hidden="true">
+                ·
+              </span>
+              <span>站点代码 {siteConfig.footer.rights}</span>
+            </p>
+          </div>
           <p className="shrink-0 tabular-nums sm:text-right">
             © {year} {siteConfig.name}
             <span className="mx-2 text-line-strong" aria-hidden="true">

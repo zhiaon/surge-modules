@@ -43,6 +43,8 @@ export interface SiteConfig {
   footer: {
     tagline: string;
     disclaimer: string;
+    license: string;
+    rights: string;
   };
   seo: {
     titleTemplate: string;
@@ -81,7 +83,9 @@ export const siteConfig: SiteConfig = {
   footer: {
     tagline: '独立维护的 Surge 模块索引。非 Surge 官方产品。',
     disclaimer:
-      '本平台与 Surge 官方无隶属关系。所有模块由其作者独立提供与维护，使用前请自行确认模块内容与来源。',
+      '本平台与 Surge 官方无隶属关系。所有模块由其作者独立提供与维护，著作权归原作者所有；本站仅做索引与格式规范化，不对模块内容主张权利。使用前请自行确认模块内容与来源。',
+    license: '站内内容版权归原作者所有',
+    rights: '保留所有权利',
   },
   seo: {
     titleTemplate: '%s · Surge Modules',

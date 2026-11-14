@@ -507,6 +507,12 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                 安装链接需要 Surge 已安装并登录；未登录时链接不含访问凭证。
                 模块最后更新 {formatRelative(module.updatedAt)}。
               </p>
+
+              {/* Attribution: the module is the author's work, not ours. */}
+              <p className="mt-2 border-t border-line pt-2.5 text-[10.5px] leading-relaxed text-faint">
+                模块著作权归原作者 {module.author || '所有作者'} 所有，本站仅做索引与格式规范化，
+                不对模块内容主张任何权利。如有异议可联系下架。
+              </p>
             </div>
           </>
         )}
