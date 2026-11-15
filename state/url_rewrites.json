@@ -14,6 +14,83 @@
       "note": "同上，响应脚本迁到 Script/Youtube/youtube.response.js",
       "verified": "2026-11-15",
       "verified_by": "HTTP 200 / 132973 bytes，同仓库 Script/Youtube/youtube.response.js"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/bilibili/bilibili_plus.js",
+      "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/bilibili/bilibili_plus.js",
+      "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 23747 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/zimuzu/zimuzu.cookie.js",
+      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/zimuzu/zimuzu.cookie.js",
+      "note": "chavyleung/scripts 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 2376 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/rrtv/rrtv.cookie.js",
+      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/rrtv/rrtv.cookie.js",
+      "note": "chavyleung/scripts 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 1528 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/10086/10086.cookie.js",
+      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/10086/10086.cookie.js",
+      "note": "chavyleung/scripts 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 2279 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/dingdong/dingdong_checkin.js",
+      "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/dingdong/dingdong_checkin.js",
+      "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 30996 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/js/archive/v0.7/DualSubs.HLS.Main.m3u8.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.HLS.Main.m3u8.js",
+      "note": "DualSubs/DualSubs 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 33194 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/js/archive/v0.7/DualSubs.HLS.WebVTT.m3u8.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.HLS.WebVTT.m3u8.js",
+      "note": "DualSubs/DualSubs 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 26463 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/js/archive/v0.7/DualSubs.SUB.WebVTT.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.SUB.WebVTT.js",
+      "note": "DualSubs/DualSubs 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 46298 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/eleme/eleme_daily.js",
+      "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/eleme/eleme_daily.js",
+      "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 43769 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/smartmimi/conf/master/surge/covid19.js",
+      "to": "https://raw.githubusercontent.com/smartmimi/conf/master/surge/archives/covid19.js",
+      "note": "smartmimi/conf 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 2707 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_remove_ads.js",
+      "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/smzdm/smzdm_remove_ads.js",
+      "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 20338 bytes"
     }
   ]
 }
