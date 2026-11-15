@@ -73,13 +73,13 @@ CSDN = type=http-request, pattern=^https:\/\/gw.csdn.net\/mini-app\/v2\/lucky_dr
 
 时光相册 = type=http-request, pattern=^https:\/\/api.everphoto.cn\/users\/self\/checkin\/v2, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/everphoto/everphoto.cookie.js
 
-百词斩 = type=http-request, pattern=^https://group\.baicizhan\.com/group/rewards?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bcz/bcz.cookie.js
+百词斩 = type=http-request, pattern=^https://group\.baicizhan\.com/group/rewards?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/bcz/bcz.cookie.js
 
 叮咚买菜 = type=http-request, pattern=^https:\/\/maicai.api.ddxq.mobi\/point\/home, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/mcdd/mcdd.cookie.js
 
-分期乐 = type=http-request, pattern=^https://pm\.m\.fenqile\.com/route0014/star/sign/sign.json, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/fenqile/fenqile.cookie.js, requires-body=true
+分期乐 = type=http-request, pattern=^https://pm\.m\.fenqile\.com/route0014/star/sign/sign.json, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/fenqile/fenqile.cookie.js, requires-body=true
 
-分期乐 = type=http-request, pattern=^https:\/\/pm\.m\.fenqile\.com/route0014\/app\/tab\/privilege\/convertTaskReward.json, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/fenqile/fenqile.cookie.js, requires-body=true
+分期乐 = type=http-request, pattern=^https:\/\/pm\.m\.fenqile\.com/route0014\/app\/tab\/privilege\/convertTaskReward.json, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/fenqile/fenqile.cookie.js, requires-body=true
 
 樊登读书 = type=http-request, pattern=^https://api\.dushu\.io/CheckIn, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/fandeng/fandeng.cookie.js, requires-body=true
 
@@ -107,9 +107,9 @@ WPS = type=http-request, pattern=^https:\/\/zt.wps.cn\/2018\/docer_check_in\/api
 
 Zaker = type=http-request, pattern=^https:\/\/iphone\.myzaker\.com\/zaker\/sign_in\/\/api\/sign_in\.php, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zaker/zaker.js
 
-不背单词 = type=http-request, pattern=^https:\/\/sapi\.beingfine\.cn\/v3\/bb\/reward\/by-sign-in, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bubei/bubei.js
+不背单词 = type=http-request, pattern=^https:\/\/sapi\.beingfine\.cn\/v3\/bb\/reward\/by-sign-in, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/bubei/bubei.js
 
-豆瓣时间 = type=http-request, pattern=^https:\/\/frodo\.douban\.com\/api\/v2\/niffler\/check_in\/status, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/dbsj/dbsj.cookie.js
+豆瓣时间 = type=http-request, pattern=^https:\/\/frodo\.douban\.com\/api\/v2\/niffler\/check_in\/status, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/dbsj/dbsj.cookie.js
 
 哈啰出行 = type=http-request, pattern=^https:\/\/gameapi\.hellobike\.com\/api, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/hellobike/hellobike.js, requires-body=true
 

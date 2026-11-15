@@ -83,7 +83,7 @@ WPS = type=cron, cronexp="30 7 8 * * *", wake-system=1, script-path=https://raw.
 智行火车 = type=cron, cronexp="50 7 8 * * *", wake-system=1, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zxhc/zxhc.js
 苏宁易购 = type=cron, cronexp="0 8 8 * * *", wake-system=1, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/suning/suning.js
 Zaker = type=cron, cronexp="10 8 8 * * *", wake-system=1, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zaker/zaker.js
-不背单词 = type=cron, cronexp="20 8 8 * * *", wake-system=1, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bubei/bubei.js
+不背单词 = type=cron, cronexp="20 8 8 * * *", wake-system=1, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/bubei/bubei.js
 豆瓣时间 = type=cron, cronexp="30 8 8 * * *", wake-system=1, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/dbsj/dbsj.js
 哈啰出行 = type=cron, cronexp="40 8 8 * * *", wake-system=1, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/hellobike/hellobike.js
 掌上飞车 = type=cron, cronexp="50 8 8 * * *", wake-system=1, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zsfc/zsfc.js
