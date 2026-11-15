@@ -7,6 +7,7 @@
     "app2smile/rules@master:module/mitm.sgmodule",
     "app2smile/rules@master:module/tieba-test.sgmodule",
     "zhiaon/Modules@main:surge-memory.sgmodule",
-    "zhiaon/Modules@main:surge-uptime.sgmodule"
+    "zhiaon/Modules@main:surge-uptime.sgmodule",
+    "zhiaon/Modules@main:workbuddy.sgmodule"
   ]
 }
