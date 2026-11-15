@@ -224,11 +224,17 @@ def main():
         history[slug] = events[-20:]
     sources = json.load(open(SOURCES)) if os.path.exists(SOURCES) else {}
 
+    # Measured before the denylist drop below, so the arithmetic check at the
+    # end still balances when entries are removed by rule rather than upstream.
+    before_count = len(catalogue)
+
     # Denylisted modules that slipped in before the rule existed are dropped
     # here, so the next build never ships them and they cannot come back.
+    denied_drops = []
     for slug in [k for k, v in catalogue.items()
                  if f"{v['repo']}@{v['branch']}:{v['path']}" in DENY_KEYS]:
-        del catalogue[slug]
+        rec = catalogue.pop(slug)
+        denied_drops.append({'slug': slug, 'name': rec.get('name', slug)})
         raw_p = os.path.join(RAW_DIR, f'{slug}.sgmodule')
         if os.path.exists(raw_p):
             os.remove(raw_p)
@@ -240,9 +246,16 @@ def main():
         key = f"{rec['repo']}@{rec['branch']}"
         by_repo.setdefault(key, {})[rec['path']] = (slug, rec.get('sha', ''))
 
-    before_count = len(catalogue)
     report = {'checked': 0, 'new': [], 'updated': [], 'removed': [], 'errors': [],
               'before': before_count, 'after': 0}
+
+    # A denylisted module leaving the catalogue is a real catalogue change:
+    # count it, otherwise the run reports "nothing changed" and the workflow
+    # skips the build, the deploy and the commit — the module would keep being
+    # served from the old deploy and the removal would never stick.
+    for drop in denied_drops:
+        report['removed'].append(drop)
+        note(drop['slug'], 'removed')
 
     for key, repo_meta in sorted(sources.items()):
         owner, repo = repo_meta['owner'], repo_meta['repo']
