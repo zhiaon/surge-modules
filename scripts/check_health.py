@@ -61,6 +61,32 @@ def probe(url, timeout=12):
     return False
 
 
+def classify(url, repo_cache):
+    """Why a script is gone: tells the site whether to say "upstream deleted the
+    file" or "the whole repo is gone" — they mean very different things to a
+    reader deciding whether to wait for a fix."""
+    if url.startswith('(relative)'):
+        return 'relative-path'
+    parts = url.split('/')
+    if 'raw.githubusercontent.com' not in url:
+        return 'external-host'
+    if len(parts) < 5:
+        return 'file-removed'
+    owner, repo = parts[3], parts[4]
+    key = f'{owner}/{repo}'
+    if key not in repo_cache:
+        req = urllib.request.Request(f'https://api.github.com/repos/{key}',
+                                     headers={'User-Agent': UA})
+        try:
+            with urllib.request.urlopen(req, timeout=12) as r:
+                repo_cache[key] = 200 <= r.status < 400
+        except urllib.error.HTTPError as e:
+            repo_cache[key] = e.code != 404
+        except Exception:
+            repo_cache[key] = True   # unknown: do not claim the repo is gone
+    return 'file-removed' if repo_cache[key] else 'repo-removed'
+
+
 def scripts_of(text):
     urls = []
     for m in SCRIPT_RE.finditer(text):
@@ -118,12 +144,17 @@ def main():
     now = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     out = {}
     broken_count = 0
+    repo_cache = {}
     for slug, urls in jobs:
         bad = [u for u in urls if u.startswith('(relative)') or not verdict.get(u, True)]
         status = 'broken' if bad else 'ok'
+        reason = None
         if bad:
             broken_count += 1
-        out[slug] = {'status': status, 'broken': bad[:5], 'checked': now}
+            reasons = {classify(u, repo_cache) for u in bad}
+            reason = reasons.pop() if len(reasons) == 1 else 'mixed'
+        out[slug] = {'status': status, 'broken': bad[:5], 'checked': now,
+                     'reason': reason}
 
     # keep previous verdicts for modules we did not scan this round
     for slug, rec in previous.items():
