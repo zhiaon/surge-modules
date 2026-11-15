@@ -69,6 +69,8 @@ export interface PublicModule {
   isFeatured: boolean;
   /** script health, resolved at build time */
   health?: 'ok' | 'broken' | 'unknown';
+  /** for broken modules: why the script is unreachable */
+  healthReason?: 'file-removed' | 'repo-removed' | 'external-host' | 'relative-path' | 'mixed' | null;
   /** pinyin index for search (jingdong → 京东) */
   py?: { full: string; initials: string } | null;
   /** how many other modules share this title (precomputed at build time) */
