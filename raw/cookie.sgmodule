@@ -19,13 +19,13 @@ V2ex = type=http-request, pattern=^https:\/\/www\.v2ex\.com\/mission\/daily, scr
 
 AcFun = type=http-request, pattern=^https:\/\/api\-new\.app\.acfun\.cn\/rest\/app\/user\/personalInfo, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/acfun/acfun.cookie.js
 
-字幕组 = type=http-request, pattern=^https?:\/\/(www\.)?rrys2020\.com\/?.?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zimuzu/zimuzu.cookie.js
+字幕组 = type=http-request, pattern=^https?:\/\/(www\.)?rrys2020\.com\/?.?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/zimuzu/zimuzu.cookie.js
 
-字幕组 = type=http-request, pattern=^http:\/\/ios.zmzapi.com\/index.php.*a=(mobile_)?login, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zimuzu/zimuzu.cookie.js
+字幕组 = type=http-request, pattern=^http:\/\/ios.zmzapi.com\/index.php.*a=(mobile_)?login, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/zimuzu/zimuzu.cookie.js
 
 喜马拉雅 = type=http-request, pattern=^https?:\/\/.*\/mobile\-user\/homePage\/.*, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/ximalaya/ximalaya.cookie.js
 
-人人视频 = type=http-request, pattern=^https:\/\/api\.rr\.tv\/user\/profile, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/rrtv/rrtv.cookie.js
+人人视频 = type=http-request, pattern=^https:\/\/api\.rr\.tv\/user\/profile, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/rrtv/rrtv.cookie.js
 
 飞客茶馆 = type=http-request, pattern=^https:\/\/www\.flyertea\.com\/source\/plugin\/mobile\/mobile\.php\?(?:[^#?&]+&)*module=getdata&.*, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/flyertea/flyertea.cookie.js
 
@@ -53,9 +53,9 @@ CSDN = type=http-request, pattern=^https:\/\/gw.csdn.net\/mini-app\/v2\/lucky_dr
 
 猫咪音乐 = type=http-request, pattern=https:\/\/www.maomicd.com\/plugin.php\?(?:[^#?&]+&)*id=k_misign:sign&operation=qiandao, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/maomicd/maomicd.cookie.js
 
-10086 = type=http-request, pattern=^http:\/\/wx.10086.cn\/website\/taskCenter\/index\?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10086/10086.cookie.js, requires-body=true
+10086 = type=http-request, pattern=^http:\/\/wx.10086.cn\/website\/taskCenter\/index\?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/10086/10086.cookie.js, requires-body=true
 
-10086 = type=http-request, pattern=^http:\/\/wx.10086.cn\/website\/taskCenter\/sign\?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10086/10086.cookie.js, requires-body=true
+10086 = type=http-request, pattern=^http:\/\/wx.10086.cn\/website\/taskCenter\/sign\?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/achived/10086/10086.cookie.js, requires-body=true
 
 中国联通 = type=http-request, pattern=^https?:\/\/act.10010.com\/SigninApp\/signin\/querySigninActivity.htm, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js
 

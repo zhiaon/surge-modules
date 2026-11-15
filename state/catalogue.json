@@ -18432,5 +18432,18 @@
   "version": "1.1.0",
   "category": "adblock",
   "updatedAt": "2026-11-15T10:00:52Z"
+ },
+ "workbuddy": {
+  "slug": "workbuddy",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "workbuddy.sgmodule",
+  "sha": "e16d0453dcd04efb4d5a6a6f1da023ae89fc7d4c",
+  "name": "WorkBuddy签到与积分",
+  "description": "V1.3 多手机号积分面板与每日签到。依赖自建 WorkBuddy 反代受限接口；手机号用逗号分隔，逐号显示余额。无网页登录与 MITM。",
+  "author": "许舟",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-15T11:58:34Z"
  }
 }
