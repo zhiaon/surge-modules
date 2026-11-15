@@ -43,7 +43,7 @@ const SORTERS: Record<ModuleSort, (a: ModuleWithMeta, b: ModuleWithMeta) => numb
 export const moduleQuery = {
   apply(
     modules: ModuleWithMeta[],
-    { search = '', categorySlug, tag, featuredOnly, sort = 'recommended', limit }: ModuleQuery,
+    { search = '', categorySlug, tag, panelOnly, featuredOnly, sort = 'recommended', limit }: ModuleQuery,
   ): ListResult<ModuleWithMeta> {
     const tokens = tokenize(search);
     let items = modules.filter((m) => {
@@ -51,6 +51,9 @@ export const moduleQuery = {
       if (featuredOnly && !m.isFeatured) return false;
       if (categorySlug && m.category.slug !== categorySlug) return false;
       if (tag && !m.tags.some((t) => t.toLowerCase() === tag.toLowerCase())) return false;
+      // Structural, not a tag: only modules whose file really has a [Panel]
+      // section render a dashboard card in Surge.
+      if (panelOnly && !m.hasPanel) return false;
       if (tokens.length > 0 && score(m, tokens) === 0) return false;
       return true;
     });
