@@ -91,6 +91,7 @@ function toModuleWithMeta(
     category,
     latestVersion: versions[0],
     health: m.health,
+    healthReason: m.healthReason,
     dupe: m.dupe,
     py: m.py,
     hasPanel: m.hasPanel,
