@@ -45,6 +45,9 @@ export function DiscoverPage() {
   const q = params.get('q') ?? '';
   const categorySlug = params.get('category') ?? '';
   const tag = params.get('tag') ?? '';
+  // Structural filter, not a tag: ?panel=1 keeps only modules whose file has a
+  // [Panel] section (the ones Surge renders as a dashboard card).
+  const panelOnly = params.get('panel') === '1';
   const sort = (params.get('sort') as ModuleSort | null) ?? 'recommended';
 
   // 输入框自己维护文本缓冲，只在停顿后把 q 交上来；父组件持有的就是
@@ -125,11 +128,17 @@ export function DiscoverPage() {
       search,
       categorySlug: categorySlug || undefined,
       tag: tag || undefined,
+      panelOnly,
       sort,
     });
-  }, [all.data, search, categorySlug, tag, sort, owner]);
+  }, [all.data, search, categorySlug, tag, panelOnly, sort, owner]);
 
-  const filterSig = `${search}|${categorySlug}|${tag}|${sort}|${owner}`;
+  const panelCount = useMemo(
+    () => (all.data?.items ?? []).filter((m) => m.hasPanel).length,
+    [all.data],
+  );
+
+  const filterSig = `${search}|${categorySlug}|${tag}|${panelOnly}|${sort}|${owner}`;
   const prevSig = useRef(filterSig);
   useEffect(() => {
     if (prevSig.current === filterSig) return; // first paint / unrelated render
@@ -143,7 +152,9 @@ export function DiscoverPage() {
   }, [filterSig]);
 
   const activeCategory = categories.data?.find((c) => c.slug === categorySlug);
-  const hasFilters = Boolean(categorySlug || tag || sort !== 'recommended' || search || owner);
+  const hasFilters = Boolean(
+    categorySlug || tag || panelOnly || sort !== 'recommended' || search || owner,
+  );
 
   return (
     <>
@@ -280,13 +291,29 @@ export function DiscoverPage() {
               </div>
             </div>
 
-            {(owner || categorySlug || tag) && (
+            {/* features — currently only [Panel]; parsed from the module body */}
+            <div>
+              <p className="mb-2 text-[11.5px] text-faint">功能</p>
+              <div className="flex flex-wrap gap-1">
+                <Chip active={!panelOnly} onClick={() => setParam('panel', null)}>全部</Chip>
+                <Chip
+                  active={panelOnly}
+                  onClick={() => setParam('panel', panelOnly ? null : '1')}
+                >
+                  含面板
+                  <span className="font-mono text-[9.5px] tabular-nums opacity-60">{panelCount}</span>
+                </Chip>
+              </div>
+            </div>
+
+            {(owner || categorySlug || tag || panelOnly) && (
               <button
                 type="button"
                 onClick={() => {
                   setParam('owner', null);
                   setParam('category', null);
                   setParam('tag', null);
+                  setParam('panel', null);
                 }}
                 className="inline-flex items-center gap-1.5 text-[11.5px] text-muted underline-offset-4 hover:text-fg hover:underline"
               >
@@ -314,6 +341,9 @@ export function DiscoverPage() {
               </ActiveChip>
             )}
             {tag && <ActiveChip onRemove={() => setParam('tag', null)}>#{tag}</ActiveChip>}
+            {panelOnly && (
+              <ActiveChip onRemove={() => setParam('panel', null)}>含面板 [Panel]</ActiveChip>
+            )}
             {sort !== 'recommended' && (
               <ActiveChip onRemove={() => setParam('sort', null)}>
                 排序：{SORTS.find((s) => s.value === sort)?.label ?? sort}
