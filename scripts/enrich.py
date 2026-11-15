@@ -81,6 +81,11 @@ def parse(text):
                 mitm += [h.strip() for h in value.split(',') if h.strip()]
 
     sections = [s.strip() for s in re.findall(r'^\[([^\]]+)\]', text, re.M)]
+    # A `[Panel]` section is a structural fact — Surge renders it as a dashboard
+    # card. Kept separate from the loose 面板 tag, which also fires on any script
+    # whose file name happens to contain "panel".
+    panels = len([s for s in sections if s.strip().lower() == 'panel'])
+
     scripts = re.findall(r'((?:[A-Za-z0-9_\-]+)\s*=\s*[^\n]*?script-path\s*=\s*([^,\s]+))', text, re.I)
     crons = re.findall(r'cronexp\s*=\s*"([^"]+)"', text)
     # Count real rules inside the rewrite sections. URL Rewrite lines have no
@@ -106,6 +111,7 @@ def parse(text):
         'rules': rules,
         'mitm': mitm,
         'sections': sections,
+        'panels': panels,
         'scripts': [{'name': s[0].split('=')[0].strip(), 'url': s[1]} for s in scripts],
         'crons': crons,
         'rewrites': rewrites,
@@ -196,13 +202,16 @@ def main():
                 'rewrites': facts['rewrites'],
                 'scripts': facts['scripts'][:10],
                 'crons': facts['crons'][:5],
+                'panels': facts['panels'],
             },
             'pinyin': make_pinyin(rec['name']),
+            'panel': bool(facts['panels']),
         }
 
+    panel_count = sum(1 for v in out.values() if v.get('panel'))
     json.dump(out, open(OUT, 'w'), ensure_ascii=False, separators=(',', ':'))
     print(f'增强完成：{len(out)} 个（缺文件 {missing}）· 有标签 {tag_count} · '
-          f'拼音 {"开" if HAS_PINYIN else "关"}')
+          f'含面板 {panel_count} · 拼音 {"开" if HAS_PINYIN else "关"}')
     return 0
 
 
