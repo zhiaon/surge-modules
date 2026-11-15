@@ -234,7 +234,8 @@ def main():
     for slug in [k for k, v in catalogue.items()
                  if f"{v['repo']}@{v['branch']}:{v['path']}" in DENY_KEYS]:
         rec = catalogue.pop(slug)
-        denied_drops.append({'slug': slug, 'name': rec.get('name', slug)})
+        denied_drops.append({'slug': slug, 'name': rec.get('name', slug),
+                             'reason': 'denylisted', 'repo': rec.get('repo')})
         raw_p = os.path.join(RAW_DIR, f'{slug}.sgmodule')
         if os.path.exists(raw_p):
             os.remove(raw_p)
@@ -361,7 +362,9 @@ def main():
 
         for path in vanished:
             slug, _sha = existing[path]
-            report['removed'].append({'slug': slug, 'name': catalogue.get(slug, {}).get('name', slug)})
+            report['removed'].append({
+                'slug': slug, 'name': catalogue.get(slug, {}).get('name', slug),
+                'reason': 'upstream-removed', 'repo': key.split('@')[0]})
             note(slug, 'removed')
             catalogue.pop(slug, None)
             # Upstream deleted it, so we stop serving it too — no orphan files
@@ -438,7 +441,9 @@ def main():
             # a 404 release (asset renamed / deleted) drops the module
             for path in [p for p in existing if p not in seen]:
                 slug, _sha = existing[path]
-                report['removed'].append({'slug': slug, 'name': catalogue.get(slug, {}).get('name', slug)})
+                report['removed'].append({
+                'slug': slug, 'name': catalogue.get(slug, {}).get('name', slug),
+                'reason': 'upstream-removed'})
                 catalogue.pop(slug, None)
                 fp = os.path.join(RAW_DIR, f'{slug}.sgmodule')
                 if os.path.exists(fp):
