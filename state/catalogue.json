@@ -16215,13 +16215,13 @@
   "repo": "elnfnoosm/iOS_network",
   "branch": "main",
   "path": "Surge/Module/Adblock4limbo.sgmodule",
-  "sha": "df3ef8e78327ea81130ba11f2ff69abe9ac280bc",
-  "name": "毒奶特供(2026年11月13日更新)",
+  "sha": "a185aa2458082ce377885003a94751746266933a",
+  "name": "毒奶特供(2026年11月14日更新)",
   "description": "毒奶去网页广告计划用户脚本 For Quantumult X & Surge & Shadowrocket & Loon & Stash & 油猴 ；1.新增页面右下角导航；2.通过 JavaScript 移除特定网站网页广告 —— 搜索引擎（Bing/Google）广告及内容农场结果清除/低端影视/欧乐影院/iyf爱壹帆/哔滴影视/Pornhub/Javbus/Supjav/Jable(支持抓取M3U8链接)/MissAv/91porn(支持视频下载)/hitomi/紳士漫畫/禁漫天堂/等视频&ACG&小说&漫画网站上的弹窗广告&视频广告&Gif图片广告等，保持网页清爽干净无打扰！ P.S. 欢迎提交issue",
   "author": "elnfnoosm",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-14T01:48:34Z"
+  "updatedAt": "2026-11-15T01:32:22Z"
  },
  "google-2": {
   "slug": "google-2",
@@ -18393,5 +18393,44 @@
   "version": "1.0",
   "category": "adblock",
   "updatedAt": "2026-11-14T21:57:06Z"
+ },
+ "ippurity": {
+  "slug": "ippurity",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "ippurity.sgmodule",
+  "sha": "aaf9cb09cca16ceb15d7ea391f26b2150751cd60",
+  "name": "IP纯净度",
+  "description": "V1.1 IPQuery 免 Key 出口风险面板：显示 IP、位置、ASN、风险分与 VPN/代理/Tor/机房标签。点击刷新，自动刷新 30 分钟。未匹配≠安全，风险分不是纯净度百分比。",
+  "author": "许舟",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-15T01:32:27Z"
+ },
+ "surge-memory": {
+  "slug": "surge-memory",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "surge-memory.sgmodule",
+  "sha": "0ebab11cb3f7622430cf80dddc81be8d5da79974",
+  "name": "Surge 内存监控",
+  "description": "V1.0 显示引擎真实物理内存、采样峰值/最低值、变化与活动连接数。自动刷新仅监控；20 秒内连续点两次刷新才重启引擎。重启会断开全部连接，清空缓存及临时规则。需 Surge iOS 6+ 且 http-api-mcp=true；无需控制密码或 MitM。",
+  "author": "许舟",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-15T01:32:27Z"
+ },
+ "surge-uptime": {
+  "slug": "surge-uptime",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "surge-uptime.sgmodule",
+  "sha": "177d390eb2955e46ee79e2bd6eb1446244c70aeb",
+  "name": "Surge 运行时长",
+  "description": "V1.0 面板显示 Surge 引擎本次已运行多久、启动于何时、配置重载过几次。靠 engine-started / profile-reloaded 事件记录时间戳，数值与 Surge 实际运行时长一致；每分钟自动刷新，不需要控制密码与 MitM。需 Surge iOS 5.22 及以上。",
+  "author": "许舟",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-15T01:32:27Z"
  }
 }
