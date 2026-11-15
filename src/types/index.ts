@@ -50,6 +50,8 @@ export interface ModuleWithMeta extends Module {
    * script-path the module references no longer resolves upstream.
    */
   health?: 'ok' | 'broken' | 'unknown';
+  /** for broken modules: why the referenced script cannot be loaded */
+  healthReason?: 'file-removed' | 'repo-removed' | 'external-host' | 'relative-path' | 'mixed' | null;
   /** pinyin index for search */
   py?: { full: string; initials: string } | null;
   /** how many other modules share this title */
