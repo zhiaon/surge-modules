@@ -180,6 +180,9 @@ def main():
             'health': (health.get(rec['slug']) or {}).get('status', 'unknown'),
             # pinyin index for the search box (jingdong → 京东)
             'py': (enrich.get(rec['slug']) or {}).get('pinyin') or None,
+            # true when the module declares a [Panel] section (Surge renders it
+            # as a dashboard card). Parsed from the file, not from the name.
+            'hasPanel': bool((enrich.get(rec['slug']) or {}).get('panel')),
         })
 
     modules.sort(key=lambda m: m['updatedAt'], reverse=True)
