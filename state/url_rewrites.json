@@ -91,6 +91,97 @@
       "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
       "verified": "2026-11-15",
       "verified_by": "HTTP 200 / 20338 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/bcz/bcz.cookie.js",
+      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/bcz/bcz.cookie.js",
+      "note": "chavyleung/scripts@master 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 1796 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/fenqile/fenqile.cookie.js",
+      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/fenqile/fenqile.cookie.js",
+      "note": "chavyleung/scripts@master 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 2232 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/bubei/bubei.js",
+      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/bubei/bubei.js",
+      "note": "chavyleung/scripts@master 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 4115 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/dbsj/dbsj.cookie.js",
+      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/dbsj/dbsj.cookie.js",
+      "note": "chavyleung/scripts@master 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 1694 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.SUB.WebVTT.beta.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.WebVTT.beta.js",
+      "note": "DualSubs/Universal@main 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 45689 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.HLS.Main.m3u8.beta.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.HLS.Main.m3u8.beta.js",
+      "note": "DualSubs/Universal@main 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 33801 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.HLS.WebVTT.m3u8.beta.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.HLS.WebVTT.m3u8.beta.js",
+      "note": "DualSubs/Universal@main 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 26095 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/Universal/beta/js/Translate.response.beta.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v1.4/Translate.response.beta.js",
+      "note": "DualSubs/Universal@main 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 904679 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs-Netflix/beta/js/DualSubs.Netflix.Manifest.beta.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/Netflix/main/archive/js/v0.1/DualSubs.Netflix.Manifest.beta.js",
+      "note": "DualSubs/Netflix@main 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 36314 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/DualSubs.SUB.WebVTT.beta.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.WebVTT.beta.js",
+      "note": "DualSubs/Universal@main 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 45689 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/DualSubs.SUB.TTML.beta.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.TTML.beta.js",
+      "note": "DualSubs/Universal@main 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 45483 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/VirgilClyne/Cloudflare/beta/js/Cloudflare.1.1.1.1.panel.beta.js",
+      "to": "https://raw.githubusercontent.com/Auraflare/1.1.1.1/main/js/archive/Cloudflare.1.1.1.1.panel.beta.js",
+      "note": "Auraflare/1.1.1.1@main 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 27710 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/function/URI/URIs.embedded.test.js",
+      "to": "https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/function/URI/URIs.embedded.test.js",
+      "note": "VirgilClyne/GetSomeFries@main 归档同名脚本",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 10445 bytes"
     }
   ]
 }
