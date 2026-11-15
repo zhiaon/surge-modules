@@ -18406,5 +18406,18 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-15T01:32:27Z"
+ },
+ "surge-runtime": {
+  "slug": "surge-runtime",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "surge-runtime.sgmodule",
+  "sha": "b4aa497901c518ca6f8fffb62c72c0504f17344b",
+  "name": "Surge 运行监控",
+  "description": "V1.2 单张卡片显示 Surge 运行时长、启动时间、配置重载、真实物理内存、采样峰值/最低值和活动连接。自动刷新只监控，20 秒内连续点两次右上角刷新才重启引擎；重启会断开连接并清空缓存和临时规则。需 Surge iOS 6+ 且 http-api-mcp=true。",
+  "author": "许舟",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-15T02:13:26Z"
  }
 }
