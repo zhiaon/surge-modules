@@ -18406,31 +18406,5 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-15T01:32:27Z"
- },
- "surge-memory": {
-  "slug": "surge-memory",
-  "repo": "zhiaon/Modules",
-  "branch": "main",
-  "path": "surge-memory.sgmodule",
-  "sha": "0ebab11cb3f7622430cf80dddc81be8d5da79974",
-  "name": "Surge 内存监控",
-  "description": "V1.0 显示引擎真实物理内存、采样峰值/最低值、变化与活动连接数。自动刷新仅监控；20 秒内连续点两次刷新才重启引擎。重启会断开全部连接，清空缓存及临时规则。需 Surge iOS 6+ 且 http-api-mcp=true；无需控制密码或 MitM。",
-  "author": "许舟",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-15T01:32:27Z"
- },
- "surge-uptime": {
-  "slug": "surge-uptime",
-  "repo": "zhiaon/Modules",
-  "branch": "main",
-  "path": "surge-uptime.sgmodule",
-  "sha": "177d390eb2955e46ee79e2bd6eb1446244c70aeb",
-  "name": "Surge 运行时长",
-  "description": "V1.0 面板显示 Surge 引擎本次已运行多久、启动于何时、配置重载过几次。靠 engine-started / profile-reloaded 事件记录时间戳，数值与 Surge 实际运行时长一致；每分钟自动刷新，不需要控制密码与 MitM。需 Surge iOS 5.22 及以上。",
-  "author": "许舟",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-15T01:32:27Z"
  }
 }
