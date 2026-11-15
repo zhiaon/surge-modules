@@ -73,6 +73,8 @@ export interface PublicModule {
   py?: { full: string; initials: string } | null;
   /** how many other modules share this title (precomputed at build time) */
   dupe?: number;
+  /** true when the module file declares a [Panel] section */
+  hasPanel?: boolean;
 }
 
 export interface PublicModuleDetail extends PublicModule {
@@ -84,6 +86,8 @@ export interface PublicModuleDetail extends PublicModule {
     rewrites: number;
     scripts: Array<{ name: string; url: string }>;
     crons: string[];
+    /** how many [Panel] sections the file declares */
+    panels?: number;
   } | null;
   /** slugs of modules with the same title */
   sameAs?: string[];
