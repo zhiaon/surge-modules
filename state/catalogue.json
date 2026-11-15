@@ -15565,13 +15565,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "ikuuu.sgmodule",
-  "sha": "66df60fcc2643c18417181e596e67cc4bffa9849",
+  "sha": "8b7a5f301e4fcce264bc4bd4c754fee179221029",
   "name": "iKuuu 每日签到",
-  "description": "V1.1 自动签到 ikuuu.org / ikuuu.pw / ikuuu.me：可开关的 Cookie 自动抓取、每日定时签到 + 面板刷新按钮手动签到，通知里只报服务器原文与剩余流量。移植自 Yjwj205/loon-modules 的 Loon 插件。",
+  "description": "V1.2 仅保留自动签到（无面板）：Cookie 自动抓取 + 每日定时签到，已移除面板与手动签到脚本。通知里只报服务器原文与剩余流量。",
   "author": "Yjwj205 / 许舟（Surge 移植）",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T13:58:41Z"
+  "updatedAt": "2026-11-15T15:00:58Z"
  },
  "ipinfo": {
   "slug": "ipinfo",
