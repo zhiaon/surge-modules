@@ -292,6 +292,12 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                     </span>
                   </summary>
                   <div className="space-y-2.5 border-t border-line px-3 py-2.5 text-[11px] leading-relaxed text-faint">
+                    {(detail.tech.panels ?? 0) > 0 && (
+                      <p>
+                        <span className="text-muted">面板：</span>
+                        {detail.tech.panels} 个 [Panel] 卡片
+                      </p>
+                    )}
                     {detail.tech.crons.length > 0 && (
                       <p>
                         <span className="text-muted">定时：</span>
