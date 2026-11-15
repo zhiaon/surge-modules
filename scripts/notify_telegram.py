@@ -74,8 +74,14 @@ def build_message(report, total_modules=None):
 
     if removed:
         lines.append(f'🗑 <b>已下架 {len(removed)} 个</b>')
+        # 下架要能看出是「上游删了」还是「我们主动拉黑」：前者用户该去找替代，
+        # 后者是我们自己的运营决定，混在一起会让人以为上游出了问题。
+        REASON = {'upstream-removed': '上游已删除', 'denylisted': '站点黑名单'}
         for m in removed[:6]:
-            lines.append(f'· {esc(m.get("name") or m["slug"])}')
+            why = REASON.get(m.get('reason'))
+            repo = f' · <code>{esc(m["repo"])}</code>' if m.get('repo') else ''
+            suffix = f' · {why}' if why else ''
+            lines.append(f'· {esc(m.get("name") or m["slug"])}{suffix}{repo}')
         if len(removed) > 6:
             lines.append(f'  …另有 {len(removed) - 6} 个')
         lines.append('')
