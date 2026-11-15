@@ -1,0 +1,19 @@
+{
+  "comment": "上游把脚本文件挪了位置、但模块原作者还没跟改时，在这里登记已人工核实的目标地址。只允许逐条精确匹配整条 URL，禁止正则通配——猜错的代价是模块装上能跑但行为不对，比 404 更难发现。每条必须写明核实时间。",
+  "rules": [
+    {
+      "from": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/dist/youtube.request.preview.js",
+      "to": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.request.js",
+      "note": "Maasea/sgmodule 删除 Script/Youtube/dist/ 预编译目录，请求脚本迁到 Script/Youtube/youtube.request.js；原模块仍可运行，仅路径失效",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 44024 bytes，同仓库 Script/Youtube/youtube.request.js"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/dist/youtube.response.preview.js",
+      "to": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js",
+      "note": "同上，响应脚本迁到 Script/Youtube/youtube.response.js",
+      "verified": "2026-11-15",
+      "verified_by": "HTTP 200 / 132973 bytes，同仓库 Script/Youtube/youtube.response.js"
+    }
+  ]
+}
