@@ -54,6 +54,8 @@ export interface ModuleWithMeta extends Module {
   py?: { full: string; initials: string } | null;
   /** how many other modules share this title */
   dupe?: number;
+  /** true when the module file declares a [Panel] section */
+  hasPanel?: boolean;
 }
 
 export interface ModuleStats {
@@ -78,6 +80,8 @@ export interface ModuleQuery {
   search?: string;
   categorySlug?: string;
   tag?: string;
+  /** only modules that declare a [Panel] section */
+  panelOnly?: boolean;
   featuredOnly?: boolean;
   sort?: ModuleSort;
   limit?: number;
