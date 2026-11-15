@@ -11,6 +11,10 @@ on:
         description: '忽略缓存，全量重建'
         type: boolean
         default: false
+      force_deploy:
+        description: '没有上游变化也强制构建并部署（改前端/脚本时用）'
+        type: boolean
+        default: false
 
 concurrency:
   group: sync
@@ -69,7 +73,7 @@ jobs:
         run: npm run build:static
 
       - name: Deploy to Cloudflare Pages
-        if: steps.sync.outputs.changed != '0'
+        if: steps.sync.outputs.changed != '0' || inputs.force_deploy
         env:
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
