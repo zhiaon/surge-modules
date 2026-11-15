@@ -93,6 +93,7 @@ function toModuleWithMeta(
     health: m.health,
     dupe: m.dupe,
     py: m.py,
+    hasPanel: m.hasPanel,
     source: 'api',
   } as ModuleWithMeta;
 }
