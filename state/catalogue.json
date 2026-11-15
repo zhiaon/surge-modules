@@ -18419,5 +18419,18 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-15T02:13:26Z"
+ },
+ "dual-ip": {
+  "slug": "dual-ip",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "dual-ip.sgmodule",
+  "sha": "20527aa1844f5781378886dff26ed73053375293",
+  "name": "双出口 IP 面板",
+  "description": "V1.1 详细双出口面板：IP、IPv4/IPv6、国家/省市、运营商/组织、ASN、时区、查询来源、每路耗时与更新时间；点右上角刷新立即查询。",
+  "author": "许舟",
+  "version": "1.1.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-15T10:00:52Z"
  }
 }
