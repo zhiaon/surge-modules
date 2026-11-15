@@ -178,6 +178,9 @@ def main():
             # 'ok' | 'broken' | 'unknown' — 'broken' means at least one
             # script-path in the module no longer resolves.
             'health': (health.get(rec['slug']) or {}).get('status', 'unknown'),
+            # why a broken script is gone: upstream deleted the file, the whole
+            # repo disappeared, or it is hosted outside GitHub.
+            'healthReason': (health.get(rec['slug']) or {}).get('reason'),
             # pinyin index for the search box (jingdong → 京东)
             'py': (enrich.get(rec['slug']) or {}).get('pinyin') or None,
             # true when the module declares a [Panel] section (Surge renders it
