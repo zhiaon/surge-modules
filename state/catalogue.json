@@ -2664,19 +2664,6 @@
   "category": "adblock",
   "updatedAt": "2026-11-10T10:43:48Z"
  },
- "bilibili-3": {
-  "slug": "bilibili-3",
-  "repo": "Viceroy-Dennis/surge-modules",
-  "branch": "main",
-  "path": "bilibili.sgmodule",
-  "sha": "a18527d5c6a561ba82ca57b4fc9f81f0d70d3fbc",
-  "name": "哔哩哔哩每日任务",
-  "description": "主站每日任务(观看/分享/投币/大会员签到) + 直播签到/粉丝牌 + 银瓜子换硬币 + 漫画签到。主站任务无需 WBI 签名(实测存活)，不含 App 任务中心 UI 奖励领取。",
-  "author": "Viceroy-Dennis",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-10T10:47:02Z"
- },
  "fengchao": {
   "slug": "fengchao",
   "repo": "Viceroy-Dennis/surge-modules",
