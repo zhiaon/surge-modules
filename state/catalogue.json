@@ -18419,5 +18419,18 @@
   "version": "1.1.0",
   "category": "adblock",
   "updatedAt": "2026-11-15T10:00:52Z"
+ },
+ "salary-widget": {
+  "slug": "salary-widget",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "salary-widget.sgmodule",
+  "sha": "83f0cef22197859224fc21cd8ffc64956f8707e5",
+  "name": "今日入账",
+  "description": "V1.3：采用分组留白排版；详细显示今日收入、预计总额、计薪工时、工作进度、两段用餐休息与下班倒计时，以及本月累计与含本班合计。纯本地计算，每60秒刷新。",
+  "author": "许舟",
+  "version": "1.3",
+  "category": "adblock",
+  "updatedAt": "2026-11-16T04:00:50Z"
  }
 }
