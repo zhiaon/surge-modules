@@ -11,7 +11,7 @@
 
 
 # ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
-# [Body Rewrite 原样保留] http-response ^https?:\/\/chl\.tf\.cn\/channelmg\/sys\/socso\/order\/queryOrderInfo "imgUrl" response-body
+# [Body Rewrite 原样保留] http-response ^https?:\/\/chl\.tf\.cn\/channelmg\/sys\/socso\/order\/queryOrderInfo "imgUrl" "fmz200"
 [Map Local]
 ^https?:\/\/chl\.tf\.cn\/channelmg\/sys\/socso\/socsonew\/queryIsRealNameAdertInfo data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 

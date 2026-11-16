@@ -9754,13 +9754,13 @@
   "repo": "fmz200/wool_scripts",
   "branch": "main",
   "path": "Surge/module/split/partP/PuPuSupermarket.sgmodule",
-  "sha": "44ace25aa1227cb6e97f748cb46123923c602734",
+  "sha": "a8855f9fd831b630786d6a811a5d0b5c085487e0",
   "name": "朴朴超市",
   "description": "某些APP要清除缓存或者重新安装拦截广告才会生效！",
   "author": "奶思",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T01:19:22Z"
+  "updatedAt": "2026-11-16T15:00:56Z"
  },
  "pushpluswechatpushad": {
   "slug": "pushpluswechatpushad",
@@ -11002,13 +11002,13 @@
   "repo": "fmz200/wool_scripts",
   "branch": "main",
   "path": "Surge/module/split/partT/TianFuBankMiniProgram.sgmodule",
-  "sha": "6a271140f81f09d2da2153dee485983b0c4916f7",
+  "sha": "34a24169af94a1fbd0da9725e31ed85e514472e4",
   "name": "天府银行小程序",
   "description": "某些APP要清除缓存或者重新安装拦截广告才会生效！",
   "author": "奶思",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T01:16:42Z"
+  "updatedAt": "2026-11-16T15:00:56Z"
  },
  "tianfumobilebank": {
   "slug": "tianfumobilebank",
