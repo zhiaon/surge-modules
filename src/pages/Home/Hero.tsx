@@ -166,7 +166,7 @@ export function Hero({ stats, topCategory }: HeroProps) {
 
         <p className="pb-8 text-center text-[10.5px] text-faint">
           模块数据构建时生成，
-          共 1270 个模块
+          共 {stats?.modules ?? '—'} 个模块
         </p>
       </Container>
     </section>
