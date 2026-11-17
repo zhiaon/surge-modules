@@ -182,6 +182,20 @@
       "note": "VirgilClyne/GetSomeFries@main 归档同名脚本",
       "verified": "2026-11-15",
       "verified_by": "HTTP 200 / 10445 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/10086/10086.fee.cookie.js",
+      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/10086/10086.fee.cookie.js",
+      "note": "chavyleung/scripts 目录重组，同名脚本迁入 achived/",
+      "verified": "2026-11-17",
+      "verified_by": "HTTP 200 / 10133 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.SUB.TTML.beta.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.TTML.beta.js",
+      "note": "beta 分支已删，同名 beta 归档件在 Universal 仓库",
+      "verified": "2026-11-17",
+      "verified_by": "HTTP 200 / 46223 bytes"
     }
   ]
 }
