@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Heart } from 'lucide-react';
 import { BottomSheet } from '@/components/common/BottomSheet';
 import { useDonateSheet, closeDonateSheet } from '@/stores/donateSheet';
@@ -9,8 +10,32 @@ import { useDonateSheet, closeDonateSheet } from '@/stores/donateSheet';
  * that the WeChat in-app scanner and long-press recognition both work
  * comfortably; long-press-to-save also works since it is a plain <img>.
  */
+interface DonationSummary {
+  total: number;
+  count: number;
+  updated: string | null;
+}
+
 export function DonateSheet() {
   const open = useDonateSheet();
+  // Summary only: amounts and head count. Fetched once, and rendered only when
+  // there is something to show — a lonely "¥0.00" reads worse than nothing.
+  const [summary, setSummary] = useState<DonationSummary | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('/data/donations.json', { headers: { accept: 'application/json' } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: DonationSummary | null) => {
+        if (alive && d && Number.isFinite(d.total) && d.total > 0) setSummary(d);
+      })
+      .catch(() => {
+        /* the QR still works without the figure */
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   return (
     <BottomSheet
@@ -57,6 +82,13 @@ export function DonateSheet() {
           <Heart className="size-3 text-danger/60" strokeWidth={2} aria-hidden="true" />
           微信「扫一扫」识别，或长按保存
         </p>
+
+        {summary && (
+          <p className="mt-3 text-[11.5px] tabular-nums text-faint">
+            累计 <span className="text-muted">¥{summary.total.toFixed(2)}</span> ·{' '}
+            {summary.count} 位朋友支持
+          </p>
+        )}
       </div>
     </BottomSheet>
   );
