@@ -231,6 +231,9 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
           aria-label="捐赠作者"
           title="捐赠作者"
           className="absolute right-3.5 top-3.5 z-20 inline-flex min-h-0 items-center gap-1 rounded-full border border-line bg-raised/80 px-2 py-[5px] text-[10px] leading-none text-muted shadow-[var(--shadow-card)] transition-colors hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]"
+          // The global 44px tap-target rule outranks the utility class; pin the
+          // visual box here so the pill stays a small corner badge.
+          style={{ minHeight: 22, height: 22 }}
         >
           <span aria-hidden="true">💌</span>
           捐赠作者
