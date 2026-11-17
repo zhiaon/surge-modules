@@ -5,7 +5,6 @@ import { formatDate } from '@/lib/format';
 import { useEnter } from '@/hooks/useEnter';
 import { cn } from '@/lib/cn';
 import { openStatSheet, type StatSheetKind } from '@/stores/statSheet';
-import { openDonateSheet } from '@/stores/donateSheet';
 import type { ModuleStats } from '@/types';
 
 export interface HeroProps {
@@ -163,17 +162,6 @@ export function Hero({ stats, topCategory }: HeroProps) {
               </button>
             );
           })}
-        </div>
-
-        <div className="pb-3 text-center">
-          <button
-            type="button"
-            onClick={openDonateSheet}
-            className="inline-flex items-center gap-1.5 rounded-full border border-line bg-raised/70 px-3.5 py-1.5 text-[11.5px] text-muted transition-colors hover:border-line-strong hover:text-fg active:scale-[0.985]"
-          >
-            <span aria-hidden="true">❤️</span>
-            这些模块帮到你了吗？请作者喝杯咖啡
-          </button>
         </div>
 
         <p className="pb-8 text-center text-[10.5px] text-faint">
