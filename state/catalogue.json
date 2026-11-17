@@ -20746,5 +20746,18 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-17T14:29:33Z"
+ },
+ "rednote-clean3": {
+  "slug": "rednote-clean3",
+  "repo": "xchun5678/surge",
+  "branch": "main",
+  "path": "RedNote-Clean3.sgmodule",
+  "sha": "7c36f69e0a08f4c787fdb52b0eea2b4d1c555dd7",
+  "name": "小红书/RedNote 去水印去广告（自制版）",
+  "description": "模块v3（脚本v5：red_id 改名只限评论列表，修笔记图片保存失败）：xchun5678 自制：Map Local 拦截水印配置接口（客户端拿不到水印配置）+ 自研脚本 rednote-clean5.js 处理响应体（关水印开关、去信息流/搜索/开屏广告、视频与实况照片保存换原画地址、评论区媒体解锁）。适配海外版 RedNote（rnote.com），不依赖任何第三方脚本。",
+  "author": "xchun5678",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-17T14:38:46Z"
  }
 }
