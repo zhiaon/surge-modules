@@ -1,243 +1,313 @@
 {
-  "comment": "上游把脚本文件挪了位置、但模块原作者还没跟改时，在这里登记已人工核实的目标地址。只允许逐条精确匹配整条 URL，禁止正则通配——猜错的代价是模块装上能跑但行为不对，比 404 更难发现。每条必须写明核实时间。",
-  "rules": [
-    {
-      "from": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/dist/youtube.request.preview.js",
-      "to": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.request.js",
-      "note": "Maasea/sgmodule 删除 Script/Youtube/dist/ 预编译目录，请求脚本迁到 Script/Youtube/youtube.request.js；原模块仍可运行，仅路径失效",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 44024 bytes，同仓库 Script/Youtube/youtube.request.js"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/dist/youtube.response.preview.js",
-      "to": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js",
-      "note": "同上，响应脚本迁到 Script/Youtube/youtube.response.js",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 132973 bytes，同仓库 Script/Youtube/youtube.response.js"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/bilibili/bilibili_plus.js",
-      "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/bilibili/bilibili_plus.js",
-      "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 23747 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/zimuzu/zimuzu.cookie.js",
-      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/zimuzu/zimuzu.cookie.js",
-      "note": "chavyleung/scripts 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 2376 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/rrtv/rrtv.cookie.js",
-      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/rrtv/rrtv.cookie.js",
-      "note": "chavyleung/scripts 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 1528 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/10086/10086.cookie.js",
-      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/10086/10086.cookie.js",
-      "note": "chavyleung/scripts 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 2279 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/dingdong/dingdong_checkin.js",
-      "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/dingdong/dingdong_checkin.js",
-      "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 30996 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/js/archive/v0.7/DualSubs.HLS.Main.m3u8.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.HLS.Main.m3u8.js",
-      "note": "DualSubs/DualSubs 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 33194 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/js/archive/v0.7/DualSubs.HLS.WebVTT.m3u8.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.HLS.WebVTT.m3u8.js",
-      "note": "DualSubs/DualSubs 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 26463 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/js/archive/v0.7/DualSubs.SUB.WebVTT.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.SUB.WebVTT.js",
-      "note": "DualSubs/DualSubs 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 46298 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/eleme/eleme_daily.js",
-      "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/eleme/eleme_daily.js",
-      "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 43769 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/smartmimi/conf/master/surge/covid19.js",
-      "to": "https://raw.githubusercontent.com/smartmimi/conf/master/surge/archives/covid19.js",
-      "note": "smartmimi/conf 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 2707 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_remove_ads.js",
-      "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/smzdm/smzdm_remove_ads.js",
-      "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 20338 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/bcz/bcz.cookie.js",
-      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/bcz/bcz.cookie.js",
-      "note": "chavyleung/scripts@master 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 1796 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/fenqile/fenqile.cookie.js",
-      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/fenqile/fenqile.cookie.js",
-      "note": "chavyleung/scripts@master 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 2232 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/bubei/bubei.js",
-      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/bubei/bubei.js",
-      "note": "chavyleung/scripts@master 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 4115 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/dbsj/dbsj.cookie.js",
-      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/dbsj/dbsj.cookie.js",
-      "note": "chavyleung/scripts@master 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 1694 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.SUB.WebVTT.beta.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.WebVTT.beta.js",
-      "note": "DualSubs/Universal@main 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 45689 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.HLS.Main.m3u8.beta.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.HLS.Main.m3u8.beta.js",
-      "note": "DualSubs/Universal@main 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 33801 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.HLS.WebVTT.m3u8.beta.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.HLS.WebVTT.m3u8.beta.js",
-      "note": "DualSubs/Universal@main 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 26095 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/Universal/beta/js/Translate.response.beta.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v1.4/Translate.response.beta.js",
-      "note": "DualSubs/Universal@main 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 904679 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs-Netflix/beta/js/DualSubs.Netflix.Manifest.beta.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/Netflix/main/archive/js/v0.1/DualSubs.Netflix.Manifest.beta.js",
-      "note": "DualSubs/Netflix@main 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 36314 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/DualSubs.SUB.WebVTT.beta.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.WebVTT.beta.js",
-      "note": "DualSubs/Universal@main 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 45689 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/DualSubs.SUB.TTML.beta.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.TTML.beta.js",
-      "note": "DualSubs/Universal@main 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 45483 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/VirgilClyne/Cloudflare/beta/js/Cloudflare.1.1.1.1.panel.beta.js",
-      "to": "https://raw.githubusercontent.com/Auraflare/1.1.1.1/main/js/archive/Cloudflare.1.1.1.1.panel.beta.js",
-      "note": "Auraflare/1.1.1.1@main 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 27710 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/function/URI/URIs.embedded.test.js",
-      "to": "https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/function/URI/URIs.embedded.test.js",
-      "note": "VirgilClyne/GetSomeFries@main 归档同名脚本",
-      "verified": "2026-11-15",
-      "verified_by": "HTTP 200 / 10445 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/10086/10086.fee.cookie.js",
-      "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/10086/10086.fee.cookie.js",
-      "note": "chavyleung/scripts 目录重组，同名脚本迁入 achived/",
-      "verified": "2026-11-17",
-      "verified_by": "HTTP 200 / 10133 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.SUB.TTML.beta.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.TTML.beta.js",
-      "note": "beta 分支已删，同名 beta 归档件在 Universal 仓库",
-      "verified": "2026-11-17",
-      "verified_by": "HTTP 200 / 46223 bytes"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/NSRingo/TV/beta/archive/js/Apple_TV.beta.js",
-      "to": "https://raw.githubusercontent.com/NSRingo/TV/main/archive/js/Apple_TV.beta.js",
-      "note": "NSRingo/TV 默认分支由 beta 改为 main，archive/js/ 目录随之迁移；脚本内容未变（25664B，含 $request/$response）",
-      "verified": "2026-11-17",
-      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.SUB.SSA.beta.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.SUB.SSA.beta.js",
-      "note": "blackmatrix7/ios_rule_script 把 smzdm 脚本移入 script/archive/smzdm/，仅注释里写「Web端签到，已失效」，App 端签到逻辑仍完整（62588B）",
-      "verified": "2026-11-17",
-      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/DualSubs/Spotify/beta/js/DualSubs.Transcripts.Translate.response.beta.js",
-      "to": "https://raw.githubusercontent.com/DualSubs/Spotify/main/js/DualSubs.Transcripts.Translate.response.beta.js",
-      "note": "DualSubs/Spotify 默认分支由 beta 改为 main，js/ 目录随之迁移；129457B 与旧 beta 版同结构",
-      "verified": "2026-11-17",
-      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/NSRingo/Siri/dev/debug/request.bundle.js",
-      "to": "https://raw.githubusercontent.com/NSRingo/Siri/main/debug/request.bundle.js",
-      "note": "NSRingo/Siri 默认分支由 dev 改为 main，debug/ 预编译目录随之迁移；bundle 为 webpack 产物（561316B/288133B），非 ESM 源码",
-      "verified": "2026-11-17",
-      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/NSRingo/Siri/dev/debug/response.bundle.js",
-      "to": "https://raw.githubusercontent.com/NSRingo/Siri/main/debug/response.bundle.js",
-      "note": "NSRingo/Siri 默认分支由 dev 改为 main，debug/ 预编译目录随之迁移；bundle 为 webpack 产物（561316B/288133B），非 ESM 源码",
-      "verified": "2026-11-17",
-      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
-    },
-    {
-      "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_daily.js",
-      "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/smzdm/smzdm_daily.js",
-      "note": "blackmatrix7/ios_rule_script 把 smzdm 脚本移入 script/archive/smzdm/，仅注释里写「Web端签到，已失效」，App 端签到逻辑仍完整（62588B）",
-      "verified": "2026-11-17",
-      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
-    }
-  ]
+ "comment": "上游把脚本文件挪了位置、但模块原作者还没跟改时，在这里登记已人工核实的目标地址。只允许逐条精确匹配整条 URL，禁止正则通配——猜错的代价是模块装上能跑但行为不对，比 404 更难发现。每条必须写明核实时间。",
+ "rules": [
+  {
+   "from": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/dist/youtube.request.preview.js",
+   "to": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.request.js",
+   "note": "Maasea/sgmodule 删除 Script/Youtube/dist/ 预编译目录，请求脚本迁到 Script/Youtube/youtube.request.js；原模块仍可运行，仅路径失效",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 44024 bytes，同仓库 Script/Youtube/youtube.request.js"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/dist/youtube.response.preview.js",
+   "to": "https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js",
+   "note": "同上，响应脚本迁到 Script/Youtube/youtube.response.js",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 132973 bytes，同仓库 Script/Youtube/youtube.response.js"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/bilibili/bilibili_plus.js",
+   "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/bilibili/bilibili_plus.js",
+   "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 23747 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/zimuzu/zimuzu.cookie.js",
+   "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/zimuzu/zimuzu.cookie.js",
+   "note": "chavyleung/scripts 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 2376 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/rrtv/rrtv.cookie.js",
+   "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/rrtv/rrtv.cookie.js",
+   "note": "chavyleung/scripts 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 1528 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/10086/10086.cookie.js",
+   "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/10086/10086.cookie.js",
+   "note": "chavyleung/scripts 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 2279 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/dingdong/dingdong_checkin.js",
+   "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/dingdong/dingdong_checkin.js",
+   "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 30996 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/js/archive/v0.7/DualSubs.HLS.Main.m3u8.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.HLS.Main.m3u8.js",
+   "note": "DualSubs/DualSubs 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 33194 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/js/archive/v0.7/DualSubs.HLS.WebVTT.m3u8.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.HLS.WebVTT.m3u8.js",
+   "note": "DualSubs/DualSubs 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 26463 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/js/archive/v0.7/DualSubs.SUB.WebVTT.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.SUB.WebVTT.js",
+   "note": "DualSubs/DualSubs 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 46298 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/eleme/eleme_daily.js",
+   "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/eleme/eleme_daily.js",
+   "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 43769 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/smartmimi/conf/master/surge/covid19.js",
+   "to": "https://raw.githubusercontent.com/smartmimi/conf/master/surge/archives/covid19.js",
+   "note": "smartmimi/conf 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 2707 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_remove_ads.js",
+   "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/smzdm/smzdm_remove_ads.js",
+   "note": "blackmatrix7/ios_rule_script 目录重组，同名脚本迁入归档目录",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 20338 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/bcz/bcz.cookie.js",
+   "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/bcz/bcz.cookie.js",
+   "note": "chavyleung/scripts@master 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 1796 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/fenqile/fenqile.cookie.js",
+   "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/fenqile/fenqile.cookie.js",
+   "note": "chavyleung/scripts@master 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 2232 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/bubei/bubei.js",
+   "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/bubei/bubei.js",
+   "note": "chavyleung/scripts@master 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 4115 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/dbsj/dbsj.cookie.js",
+   "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/dbsj/dbsj.cookie.js",
+   "note": "chavyleung/scripts@master 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 1694 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.SUB.WebVTT.beta.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.WebVTT.beta.js",
+   "note": "DualSubs/Universal@main 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 45689 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.HLS.Main.m3u8.beta.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.HLS.Main.m3u8.beta.js",
+   "note": "DualSubs/Universal@main 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 33801 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.HLS.WebVTT.m3u8.beta.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.HLS.WebVTT.m3u8.beta.js",
+   "note": "DualSubs/Universal@main 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 26095 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/Universal/beta/js/Translate.response.beta.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v1.4/Translate.response.beta.js",
+   "note": "DualSubs/Universal@main 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 904679 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs-Netflix/beta/js/DualSubs.Netflix.Manifest.beta.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/Netflix/main/archive/js/v0.1/DualSubs.Netflix.Manifest.beta.js",
+   "note": "DualSubs/Netflix@main 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 36314 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/DualSubs.SUB.WebVTT.beta.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.WebVTT.beta.js",
+   "note": "DualSubs/Universal@main 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 45689 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/DualSubs.SUB.TTML.beta.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.TTML.beta.js",
+   "note": "DualSubs/Universal@main 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 45483 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/Cloudflare/beta/js/Cloudflare.1.1.1.1.panel.beta.js",
+   "to": "https://raw.githubusercontent.com/Auraflare/1.1.1.1/main/js/archive/Cloudflare.1.1.1.1.panel.beta.js",
+   "note": "Auraflare/1.1.1.1@main 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 27710 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/function/URI/URIs.embedded.test.js",
+   "to": "https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/function/URI/URIs.embedded.test.js",
+   "note": "VirgilClyne/GetSomeFries@main 归档同名脚本",
+   "verified": "2026-11-15",
+   "verified_by": "HTTP 200 / 10445 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/chavyleung/scripts/master/10086/10086.fee.cookie.js",
+   "to": "https://raw.githubusercontent.com/chavyleung/scripts/master/achived/10086/10086.fee.cookie.js",
+   "note": "chavyleung/scripts 目录重组，同名脚本迁入 achived/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 10133 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.SUB.TTML.beta.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/Universal/main/archive/js/v0.7/DualSubs.SUB.TTML.beta.js",
+   "note": "beta 分支已删，同名 beta 归档件在 Universal 仓库",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 46223 bytes"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/NSRingo/TV/beta/archive/js/Apple_TV.beta.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/TV/main/archive/js/Apple_TV.beta.js",
+   "note": "NSRingo/TV 默认分支由 beta 改为 main，archive/js/ 目录随之迁移；脚本内容未变（25664B，含 $request/$response）",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.SUB.SSA.beta.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.SUB.SSA.beta.js",
+   "note": "blackmatrix7/ios_rule_script 把 smzdm 脚本移入 script/archive/smzdm/，仅注释里写「Web端签到，已失效」，App 端签到逻辑仍完整（62588B）",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/DualSubs/Spotify/beta/js/DualSubs.Transcripts.Translate.response.beta.js",
+   "to": "https://raw.githubusercontent.com/DualSubs/Spotify/main/js/DualSubs.Transcripts.Translate.response.beta.js",
+   "note": "DualSubs/Spotify 默认分支由 beta 改为 main，js/ 目录随之迁移；129457B 与旧 beta 版同结构",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/NSRingo/Siri/dev/debug/request.bundle.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/Siri/main/debug/request.bundle.js",
+   "note": "NSRingo/Siri 默认分支由 dev 改为 main，debug/ 预编译目录随之迁移；bundle 为 webpack 产物（561316B/288133B），非 ESM 源码",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/NSRingo/Siri/dev/debug/response.bundle.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/Siri/main/debug/response.bundle.js",
+   "note": "NSRingo/Siri 默认分支由 dev 改为 main，debug/ 预编译目录随之迁移；bundle 为 webpack 产物（561316B/288133B），非 ESM 源码",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_daily.js",
+   "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/smzdm/smzdm_daily.js",
+   "note": "blackmatrix7/ios_rule_script 把 smzdm 脚本移入 script/archive/smzdm/，仅注释里写「Web端签到，已失效」，App 端签到逻辑仍完整（62588B）",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/iRingo/main/archive/js/Geo_Services.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/MapKit/main/archive/js/Geo_Services.js",
+   "note": "VirgilClyne/iRingo 已迁至 NSRingo 组织，GeoServices 归档进 NSRingo/MapKit，脚本移入 archive/js/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 1442 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/iRingo/beta/archive/js/Geo_Services.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/MapKit/main/archive/js/Geo_Services.js",
+   "note": "VirgilClyne/iRingo 已迁至 NSRingo 组织，GeoServices 归档进 NSRingo/MapKit，脚本移入 archive/js/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 1442 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/iRingo/main/archive/js/Geo_Services_US.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/MapKit/main/archive/js/Geo_Services_US.js",
+   "note": "同上，美国版脚本迁到 NSRingo/MapKit archive/js/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 438 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/iRingo/beta/archive/js/Geo_Services_US.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/MapKit/main/archive/js/Geo_Services_US.js",
+   "note": "同上，美国版脚本迁到 NSRingo/MapKit archive/js/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 438 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/iRingo/main/archive/js/Location_Services.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/MapKit/main/archive/js/Location_Services.js",
+   "note": "同上，定位服务脚本迁到 NSRingo/MapKit archive/js/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 4587 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/iRingo/beta/archive/js/Location_Services.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/MapKit/main/archive/js/Location_Services.js",
+   "note": "同上，定位服务脚本迁到 NSRingo/MapKit archive/js/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 4587 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/iRingo/main/archive/js/Location_Services.beta.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/MapKit/main/archive/js/Location_Services.beta.js",
+   "note": "同上，beta 版定位脚本迁到 NSRingo/MapKit archive/js/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 33432 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/iRingo/beta/archive/js/Location_Services.beta.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/MapKit/main/archive/js/Location_Services.beta.js",
+   "note": "同上，beta 版定位脚本迁到 NSRingo/MapKit archive/js/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 33432 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/iRingo/main/archive/js/Siri_Suggestions.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/Siri/main/archive/js/Siri_Suggestions.js",
+   "note": "同上，Siri 建议脚本迁到 NSRingo/Siri archive/js/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 5696 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/VirgilClyne/iRingo/beta/archive/js/Siri_Suggestions.js",
+   "to": "https://raw.githubusercontent.com/NSRingo/Siri/main/archive/js/Siri_Suggestions.js",
+   "note": "同上，Siri 建议脚本迁到 NSRingo/Siri archive/js/",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 5696 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  }
+ ]
 }
