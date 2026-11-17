@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AlertTriangle, Check, Download, FileCode2, Link2, Sparkles, Tag } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { healthBadge, healthHint } from '@/lib/health';
+import { openDonateSheet } from '@/stores/donateSheet';
 import { copyText, formatDate, formatRelative, toIsoDate } from '@/lib/format';
 import type { ModuleWithMeta } from '@/types';
 import { VersionBadge } from '../common/Badge';
@@ -43,6 +44,10 @@ const CARD_BASE =
  */
 function ModuleCardImpl({ module, variant = 'default', className, hideTags }: ModuleCardProps) {
   const featured = variant === 'featured';
+  // Only our own upstream gets a donation entry: the QR belongs to the site
+  // maintainer, so putting it on someone else's module would misattribute
+  // their work.
+  const isOwn = (module.repositoryUrl ?? '').includes('github.com/zhiaon/');
 
   /**
    * A card tap opens the detail sheet — the full detail page no longer exists
@@ -243,6 +248,19 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
           )}
 
         </span>
+
+        {isOwn && (
+          <button
+            type="button"
+            onClick={openDonateSheet}
+            aria-label="捐赠作者"
+            title="捐赠作者"
+            className="relative z-10 -mr-1 -mt-1 inline-flex shrink-0 items-center gap-1 rounded-full border border-line bg-raised/70 px-2 py-1 text-[10px] leading-none text-muted transition-colors hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]"
+          >
+            <span aria-hidden="true">💌</span>
+            捐赠作者
+          </button>
+        )}
 
         <div className="min-w-0 flex-1">
           <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
