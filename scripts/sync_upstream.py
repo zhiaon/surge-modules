@@ -250,6 +250,7 @@ def main():
 
     report = {'checked': 0, 'new': [], 'updated': [], 'removed': [], 'errors': [],
               'before': before_count, 'after': 0}
+    gone_sources = set()   # repos proven deleted, pruned from sources at the end
 
     # A denylisted module leaving the catalogue is a real catalogue change:
     # count it, otherwise the run reports "nothing changed" and the workflow
@@ -271,6 +272,7 @@ def main():
             # an empty upstream tree. Keep the source so it can recover later.
             if (isinstance(e, urllib.error.HTTPError) and e.code == 404
                     and confirmed_missing_repo(owner, repo, gh)):
+                gone_sources.add(key)
                 for path, (slug, _sha) in by_repo.get(key, {}).items():
                     if not missing_public_module(owner, repo, branch, path):
                         report['errors'].append(f'{key}:{path}: 仓库失联但原文件未确认404，保留')
@@ -469,6 +471,18 @@ def main():
                 fp = os.path.join(RAW_DIR, f'{slug}.sgmodule')
                 if os.path.exists(fp):
                     os.remove(fp)
+
+    # A source whose repo is gone and that no longer contributes a single
+    # module is dead weight: it would make one wasted API call every hour
+    # forever. Drop it once nothing is left to serve.
+    for key in sorted(gone_sources):
+        owner_repo = key.split('@')[0]
+        if any(rec.get('repo') == owner_repo for rec in catalogue.values()):
+            continue
+        sources.pop(key, None)
+        report.setdefault('sources_removed', []).append(key)
+    if report.get('sources_removed') and not args.dry_run:
+        json.dump(sources, open(SOURCES, 'w'), ensure_ascii=False, indent=1)
 
     if args.dry_run:
         json.dump(report, open(REPORT, 'w'), ensure_ascii=False, indent=1)
