@@ -196,6 +196,48 @@
       "note": "beta 分支已删，同名 beta 归档件在 Universal 仓库",
       "verified": "2026-11-17",
       "verified_by": "HTTP 200 / 46223 bytes"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/NSRingo/TV/beta/archive/js/Apple_TV.beta.js",
+      "to": "https://raw.githubusercontent.com/NSRingo/TV/main/archive/js/Apple_TV.beta.js",
+      "note": "NSRingo/TV 默认分支由 beta 改为 main，archive/js/ 目录随之迁移；脚本内容未变（25664B，含 $request/$response）",
+      "verified": "2026-11-17",
+      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/DualSubs/beta/js/archive/v0.7/DualSubs.SUB.SSA.beta.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/DualSubs/main/archive/js/v0.7/DualSubs.SUB.SSA.beta.js",
+      "note": "blackmatrix7/ios_rule_script 把 smzdm 脚本移入 script/archive/smzdm/，仅注释里写「Web端签到，已失效」，App 端签到逻辑仍完整（62588B）",
+      "verified": "2026-11-17",
+      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/DualSubs/Spotify/beta/js/DualSubs.Transcripts.Translate.response.beta.js",
+      "to": "https://raw.githubusercontent.com/DualSubs/Spotify/main/js/DualSubs.Transcripts.Translate.response.beta.js",
+      "note": "DualSubs/Spotify 默认分支由 beta 改为 main，js/ 目录随之迁移；129457B 与旧 beta 版同结构",
+      "verified": "2026-11-17",
+      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/NSRingo/Siri/dev/debug/request.bundle.js",
+      "to": "https://raw.githubusercontent.com/NSRingo/Siri/main/debug/request.bundle.js",
+      "note": "NSRingo/Siri 默认分支由 dev 改为 main，debug/ 预编译目录随之迁移；bundle 为 webpack 产物（561316B/288133B），非 ESM 源码",
+      "verified": "2026-11-17",
+      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/NSRingo/Siri/dev/debug/response.bundle.js",
+      "to": "https://raw.githubusercontent.com/NSRingo/Siri/main/debug/response.bundle.js",
+      "note": "NSRingo/Siri 默认分支由 dev 改为 main，debug/ 预编译目录随之迁移；bundle 为 webpack 产物（561316B/288133B），非 ESM 源码",
+      "verified": "2026-11-17",
+      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
+    },
+    {
+      "from": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_daily.js",
+      "to": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/archive/smzdm/smzdm_daily.js",
+      "note": "blackmatrix7/ios_rule_script 把 smzdm 脚本移入 script/archive/smzdm/，仅注释里写「Web端签到，已失效」，App 端签到逻辑仍完整（62588B）",
+      "verified": "2026-11-17",
+      "verified_by": "HTTP 200，内容含 $done/$request/$response，非 ESM"
     }
   ]
 }
