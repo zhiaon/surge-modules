@@ -128,6 +128,11 @@ def main():
     # bookmark would still install a module that silently does nothing.
     keep_slugs = set(catalogue.keys()) - {
         slug for slug, rec in health.items() if rec.get('status') == 'broken'}
+    # Stale copies from earlier builds have to go too, otherwise a hidden
+    # module keeps answering 200 on /m/<slug>.sgmodule forever.
+    for f in os.listdir(DIST_RAW):
+        if f.endswith('.sgmodule') and f[:-9] not in keep_slugs:
+            os.remove(os.path.join(DIST_RAW, f))
     for f in os.listdir(RAW_DIR):
         if not f.endswith('.sgmodule'):
             continue
