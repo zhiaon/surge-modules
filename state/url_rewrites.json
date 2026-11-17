@@ -308,6 +308,13 @@
    "note": "同上，Siri 建议脚本迁到 NSRingo/Siri archive/js/",
    "verified": "2026-11-17",
    "verified_by": "HTTP 200 / 5696 bytes，内容含 $done/$request/$response 之一，非 ESM"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/didi/didi.js",
+   "to": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/didi/didiAds.js",
+   "note": "fmz200 把 didi.js 升级为 didiAds.js（同目录），仍是滴滴广告处理脚本",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 2745 bytes，同仓库同语义新文件名"
   }
  ]
 }
