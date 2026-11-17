@@ -315,6 +315,13 @@
    "note": "fmz200 把 didi.js 升级为 didiAds.js（同目录），仍是滴滴广告处理脚本",
    "verified": "2026-11-17",
    "verified_by": "HTTP 200 / 2745 bytes，同仓库同语义新文件名"
+  },
+  {
+   "from": "https://raw.githubusercontent.com/zqzess/rule_for_quantumultX/master/js/Mine/firewall/WiFi防火墙.js",
+   "to": "https://raw.githubusercontent.com/zqzess/rule_for_quantumultX/master/js/Mine/firewall/WIFI防火墙.js",
+   "note": "模块写 WiFi（小写 fi），仓库实际文件名 WIFI（全大写），大小写不一致导致 404；同一份脚本内容",
+   "verified": "2026-11-17",
+   "verified_by": "HTTP 200 / 402 bytes，$persistentStore.read(\"WiFi_Timer\") 逻辑一致"
   }
  ]
 }
