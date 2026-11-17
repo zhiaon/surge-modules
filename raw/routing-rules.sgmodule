@@ -1,0 +1,41 @@
+#!name=Traffic Routing Rules
+#!desc=Personal routing rules
+#!category=Enhancement
+
+[Rule]
+# 美团
+DOMAIN-SUFFIX,dreport.meituan.net,REJECT,pre-matching,extended-matching
+DOMAIN-SUFFIX,d.meituan.net,REJECT,pre-matching,extended-matching
+IP-CIDR,202.90.110.46/32,REJECT,pre-matching,no-resolve
+IP-CIDR,202.90.108.13/32,REJECT,pre-matching,no-resolve
+IP-CIDR,202.90.110.46/32,REJECT,pre-matching,no-resolve
+IP-CIDR,202.90.108.13/32,REJECT,pre-matching,no-resolve
+
+# Disney Ad
+DOMAIN-SUFFIX,disneyadvertising.com,REJECT,pre-matching,extended-matching
+
+# 终点站emby
+DOMAIN-SUFFIX,emby.wtf,Stream,extended-matching
+
+# QQ
+DOMAIN,wspeed.qq.com,REJECT,pre-matching,extended-matching
+IP-CIDR6,2409:8c1e:8f60::/48,DIRECT,no-resolve
+IP-CIDR6,2409:8c54:871::/48,DIRECT,no-resolve
+
+# Domain of IP info in Surge panel
+DOMAIN,api.my-ip.io,DIRECT,extended-matching
+
+# Golang (单独设置 避免匹配到 Google)
+DOMAIN-SUFFIX,golang.com,Proxy,extended-matching
+DOMAIN-SUFFIX,golang.net,Proxy,extended-matching
+DOMAIN-SUFFIX,golang.org,Proxy,extended-matching
+
+# UHD
+DOMAIN-SUFFIX,uhdnow.com,Stream,extended-matching
+
+# Doom
+DOMAIN-SUFFIX,domob.org,DIRECT,extended-matching
+
+# Mine
+DOMAIN-SUFFIX,yuhangrao.com,DIRECT,extended-matching
+DOMAIN,cpa.siriusrry.com,"Auto - Athens",extended-matching

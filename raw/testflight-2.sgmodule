@@ -1,0 +1,13 @@
+#!name=TestFlight 解锁
+#!desc=解除 TestFlight 区域限制
+#!category=Basic
+#!tag=Basic
+
+[General]
+skip-proxy = %APPEND% iosapps.itunes.apple.com
+
+
+# ---- 以下来自 [Body Rewrite]，Surge 无等价语法 ----
+# [Body Rewrite 原样保留] http-request-jq ^https?://testflight\.apple\.com/v\d/accounts/.+?/install$ '.storefrontId = "143441-19,29"'
+[MITM]
+hostname = %APPEND% testflight.apple.com

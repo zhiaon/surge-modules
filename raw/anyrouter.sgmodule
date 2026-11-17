@@ -1,0 +1,10 @@
+#!name=AnyRouter
+#!desc=Proxy rules for AnyRouter API
+#!category=Utilities
+
+[Rule]
+# > US
+DOMAIN-SUFFIX,anyrouter.top,AnyRouter,extended-matching
+
+# > Shanghai
+DOMAIN-SUFFIX,a-ocnfniawgw.cn-shanghai.fcapp.run,DIRECT,extended-matching

@@ -1,0 +1,46 @@
+#!name=广告过滤整理
+#!desc=Fork on Kelee。打断常用 APP 的广告
+
+[Rule]
+# 虎牙直播开屏广告
+DOMAIN,business.msstatic.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,v1d.szbdyd.com,REJECT,extended-matching,pre-matching
+URL-REGEX,"^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns$",REJECT,extended-matching
+
+# 米家
+DOMAIN,sdkconfig.ad.xiaomi.com,REJECT,extended-matching,pre-matching
+
+# 中国电信
+DOMAIN,ad.21cn.com,REJECT,extended-matching,pre-matching
+DOMAIN,ad.k.21cn.com,REJECT,extended-matching,pre-matching
+DOMAIN,admarket.21cn.com,REJECT,extended-matching,pre-matching
+DOMAIN,adshows.21cn.com,REJECT,extended-matching,pre-matching
+IP-CIDR,122.229.8.47/32,REJECT,no-resolve,pre-matching
+IP-CIDR,122.229.29.89/32,REJECT,no-resolve,pre-matching
+
+[URL Rewrite]
+# 车来了 - 为您推荐
+^https:\/\/cdn\.web\.chelaile\.net\.cn\/info-flow\/index\.html - reject
+
+[Map Local]
+# 米家
+^https:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) data-type=text data="{}" status-code=200
+
+# 掌上英雄联盟
+^https?:\/\/us\.l\.qq\.com\/exapp data-type=text data=" " status-code=200
+
+# 深圳通
+^https?:\/\/ecard\.shenzhentong\.com\/wxweb\/bwxppub2\/QryAdvertList\.do data-type=text data=" " status-code=200
+
+# 猫眼 - 移除开屏广告、红包悬浮
+^https:\/\/p0\.pipi\.cn\/(adAdmin|mediaplus\/maoyantong_ads_fe)\/\w+\.jpg\?imageMogr2\/quality\/ data-type=text data="{}" status-code=200
+
+# 淘票票 - 开屏广告
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.mtopadvertiseapi\.queryloadingbanner\/ data-type=text data="{}" status-code=200
+
+# 淘票票 - 弹窗
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.life\.popup\.get\/ data-type=text data="{}" status-code=200
+
+[MITM]
+hostname = %APPEND% usiness.msstatic.com, sdkconfig.ad.xiaomi.com, cdn.web.chelaile.net.cn, home.mi.com, us.l.qq.com, ecard.shenzhentong.com, p0.pipi.cn, acs.m.taobao.com, ad.21cn.com, ad.k.21cn.com, admarket.21cn.com, adshows.21cn.com
+

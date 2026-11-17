@@ -1,0 +1,11 @@
+#!name=Google重定向
+#!desc=将google.cn/google.com.hk重定向回google.com
+#!category=Basic
+# 注：需关闭当前Google网页并重启浏览器。
+
+[URL Rewrite]
+^https?:\/\/www\.g(oogle)?\.cn https://www.google.com 307
+^https?:\/\/www\.g(oogle)?\.com.hk https://www.google.com 307
+
+[MITM]
+hostname = %APPEND% www.g.cn, www.google.cn, www.google.com.hk

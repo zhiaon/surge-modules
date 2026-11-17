@@ -1,0 +1,30 @@
+#!name=AV去广告
+#!desc=missav,jable 网页净化
+#!category=Adblock
+
+[URL Rewrite]
+# missav 播放页弹窗
+https?:\/\/[0-9a-zA-Z]{10,16}\.cloudfront\.net\/\?[a-z]{3,7}=\d{4,8} - reject
+# missav 直播跳出广告
+https://creative.live.missav\.(com|ai|ws)/widgets/Spot/lib.js - reject
+
+# Jable 网页跳转
+# (https:\/\/\w{2,3}\.)(jable\.tv.*) https://$2 307
+https://imasdk.googleapis.com/js/sdkloader/ima3.js - reject
+HereByAD - reject
+herebyad - reject
+ad-provider.js - reject
+ad.*\.js - reject
+
+# Netflav 播放页弹窗广告
+filemoon\.sx.*/js/baf.js - reject
+^https:\/\/mmfl02\.com\/assets\/jquery\/p2adult\.js.* - reject
+^https:\/\/mmfl02\.com\/.*?\&ads - reject
+
+[Script]
+Missav(missav.com) = type=http-response , pattern="^https?:\/\/missav\.(ws|live|com|ai)\/(?!(.*(api|login|cdn-cgi|verify|auth|captch|(\.(js|css|jpg|jpeg|png|webp|gif|zip|woff|woff2|m3u8|mp4|mov|m4v|avi|mkv|flv|rmvb|wmv|rm|asf|asx|mp3|json|ico|otf|ttf))))).*" , requires-body=1 , max-size=0 , script-path=https://limbopro.com/Adguard/Adblock4limbo.js , script-update-interval=0
+Jable_MultiDomain = type=http-response , pattern="^https?:\/\/(?:[a-zA-Z0-9-]+\.)*(?:91jable\.(?:top|sbs)|jable\.(?:cfd|tv)|jable1\.(?:com|net|art|nl)|jable888\.(?:com|net))\/(?!(?:.*\?(?:mode|login|cdn-cgi|verify|auth|captch)|.*\.(?:js|css|jpg|jpeg|png|webp|gif|zip|woff|woff2|m3u8|mp4|mov|m4v|avi|mkv|flv|rmvb|wmv|rm|asf|asx|mp3|json|ico|otf|ttf)$)).*" , requires-body=1 , max-size=0 , script-path=https://limbopro.com/Adguard/Adblock4limbo.js , script-update-interval=0
+Netflav(netflav|netflav5|.com) = type=http-response , pattern="^https?:\/\/(netflav|netflav5)\.com\/(?!(.*(cdn-cgi|verify|auth|captch|(\.(js|css|jpg|jpeg|png|webp|gif|zip|woff|woff2|m3u8|mp4|mov|m4v|avi|mkv|flv|rmvb|wmv|rm|asf|asx|mp3|json|ico|otf|ttf))))).*" , requires-body=1 , max-size=0 , script-path=https://limbopro.com/Adguard/Adblock4limbo.js , script-update-interval=0
+
+[MITM]
+hostname = %APPEND% missav.live, missav.ws, missav.ai, missav.com, netflav.com, jable.tv

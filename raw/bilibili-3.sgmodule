@@ -1,0 +1,16 @@
+#!name=Bilibili 我的页面去广告
+#!desc=对我的页面进行处理
+#!category=APP Adblock
+#!tag=APP Adblock
+
+[Rule]
+#去除 b 站云视听图标
+URL-REGEX,^https?:\/\/i\d+\.hdslb\.com\/bfs\/activity-plat\/static\/.*660w_160h.*\.png$,REJECT-TINYGIF
+
+[Script]
+# 精简我的页面
+精简我的页面 = type=http-response, pattern=^https:\/\/app\.bilibili\.com\/x\/v2\/account\/(?:mine|myinfo), requires-body=true, max-size=3145728, script-path=https://raw.githubusercontent.com/MeChenCC/Surge-sgmodule/refs/heads/main/JS/Bilibill_remove_ads.js
+
+[MITM]
+hostname = %APPEND% app.bilibili.com
+

@@ -1,0 +1,17 @@
+#!name=肯德基去广告
+#!desc=肯德基去开屏推荐广告和首页弹窗
+#!category=APP Adblock
+#!tag=APP Adblock
+
+[URL Rewrite]
+# 屏蔽广告请求
+^https?:\/\/res\.kfc\.com\.cn\/advertisement\/ - reject
+# 阻止动态弹窗广告
+^https?:\/\/dynamicad\.kfc\.com\.cn\/api\/app5\/homepage\/ai\/popup - reject
+
+[Map Local]
+# 去除开屏广告
+^https?://res.kfc.com.cn/CRM/kfcad/apphome6/\w+.json\? data-type=text data="{}" status-code=200
+
+[MITM]
+hostname = %APPEND% res.kfc.com.cn, dynamicad.kfc.com.cn
