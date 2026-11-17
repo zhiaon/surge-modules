@@ -35,11 +35,24 @@ URL_OK = re.compile(r'^https?://', re.I)
 UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Surge/5.0'
 
 import urllib.error
+import urllib.parse
 import urllib.request
+
+
+def encode_url(url):
+    """Percent-encode non-ASCII while keeping an already-encoded URL intact.
+
+    urllib raises UnicodeEncodeError on a raw CJK path (several upstream modules
+    point at 防火墙.js and friends), which used to mark a perfectly healthy
+    script as broken. `%` is left alone so double-encoding cannot happen."""
+    if url.isascii():
+        return url
+    return urllib.parse.quote(url, safe="/:?&=#%+,;@!$'()*[]~")
 
 
 def probe(url, timeout=12):
     """True when the URL resolves and answers with something usable."""
+    url = encode_url(url)
     for method in ('HEAD', 'GET'):
         req = urllib.request.Request(url, method=method, headers={'User-Agent': UA})
         if method == 'GET':
