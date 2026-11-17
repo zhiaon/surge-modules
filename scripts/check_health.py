@@ -88,8 +88,12 @@ def classify(url, repo_cache):
     owner, repo = parts[3], parts[4]
     key = f'{owner}/{repo}'
     if key not in repo_cache:
+        token = os.environ.get('GITHUB_TOKEN', '').strip()
+        headers = {'User-Agent': UA}
+        if token:
+            headers['Authorization'] = f'Bearer {token}'
         req = urllib.request.Request(f'https://api.github.com/repos/{key}',
-                                     headers={'User-Agent': UA})
+                                     headers=headers)
         try:
             with urllib.request.urlopen(req, timeout=12) as r:
                 repo_cache[key] = 200 <= r.status < 400
