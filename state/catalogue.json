@@ -20733,5 +20733,18 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-17T12:36:25Z"
+ },
+ "rednote-clean2": {
+  "slug": "rednote-clean2",
+  "repo": "xchun5678/surge",
+  "branch": "main",
+  "path": "RedNote-Clean2.sgmodule",
+  "sha": "26c294bf8411821e79eb7f02ab9f067de447a399",
+  "name": "小红书/RedNote 去水印去广告（自制版）",
+  "description": "模块v2：去掉水印配置接口拦截（排查开模块后图片下载失败）；xchun5678 自制：自研脚本 rednote-clean4.js 处理响应体（关水印开关、去信息流/搜索/开屏广告、视频与实况照片保存换原画地址、评论区媒体解锁）。适配海外版 RedNote（rnote.com），不依赖任何第三方脚本。",
+  "author": "xchun5678",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-17T14:29:33Z"
  }
 }
