@@ -31,6 +31,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from repo_removal import confirmed_missing_repo, missing_public_module
 
 # Repo root: works both in the sandbox and on a GitHub runner.
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -264,7 +265,27 @@ def main():
         try:
             tree = tree_of(owner, repo, branch)
         except Exception as e:
-            report['errors'].append(f'{key}: {str(e)[:80]}')
+            # A failed tree may mean a missing branch or a temporary API error.
+            # Only a separate repository 404 AND each original module's public
+            # URL returning 404 permits pruning; do not interpret all errors as
+            # an empty upstream tree. Keep the source so it can recover later.
+            if (isinstance(e, urllib.error.HTTPError) and e.code == 404
+                    and confirmed_missing_repo(owner, repo, gh)):
+                for path, (slug, _sha) in by_repo.get(key, {}).items():
+                    if not missing_public_module(owner, repo, branch, path):
+                        report['errors'].append(f'{key}:{path}: 仓库失联但原文件未确认404，保留')
+                        continue
+                    rec = catalogue.pop(slug)
+                    report['removed'].append({
+                        'slug': slug, 'name': rec.get('name', slug),
+                        'reason': 'upstream-removed', 'repo': rec['repo'],
+                        'evidence': 'repository-and-module-404'})
+                    note(slug, 'removed')
+                    fp = os.path.join(RAW_DIR, f'{slug}.sgmodule')
+                    if not args.dry_run and os.path.exists(fp):
+                        os.remove(fp)
+            else:
+                report['errors'].append(f'{key}: {str(e)[:80]}')
             continue
         existing = by_repo.get(key, {})
         seen_paths = set()
