@@ -224,6 +224,19 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
         />
       )}
 
+      {isOwn && (
+        <button
+          type="button"
+          onClick={openDonateSheet}
+          aria-label="捐赠作者"
+          title="捐赠作者"
+          className="absolute right-3.5 top-3.5 z-20 inline-flex items-center gap-1 rounded-full border border-line bg-raised/80 px-2 py-1 text-[10px] leading-none text-muted shadow-[var(--shadow-card)] transition-colors hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]"
+        >
+          <span aria-hidden="true">💌</span>
+          捐赠作者
+        </button>
+      )}
+
       <header className="flex items-start gap-3">
         {/* Author avatar as the card's lead image; the category icon rides on
             it as a small badge so users still see what the module does. Falls
@@ -250,7 +263,7 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
         </span>
 
         <div className="min-w-0 flex-1">
-          <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
+          <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 pr-16">
             <span className="eyebrow">{module.category.name}</span>
             <VersionBadge version={module.version} />
             {(module.dupe ?? 0) > 0 && (
@@ -275,18 +288,6 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
                 <Sparkles className="size-2.5" strokeWidth={2} aria-hidden="true" />
                 精选
               </span>
-            )}
-            {isOwn && (
-              <button
-                type="button"
-                onClick={openDonateSheet}
-                aria-label="捐赠作者"
-                title="捐赠作者"
-                className="relative z-10 ml-auto inline-flex shrink-0 items-center gap-1 rounded-full border border-line bg-raised/70 px-2 py-0.5 text-[10px] leading-none text-muted transition-colors hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]"
-              >
-                <span aria-hidden="true">💌</span>
-                捐赠作者
-              </button>
             )}
           </div>
           <h3
