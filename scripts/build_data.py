@@ -152,8 +152,13 @@ def main():
             os.remove(os.path.join(RAW_DIR, f))
 
     modules = []
+    # Broken modules stay in the catalogue (so the daily probe keeps watching
+    # them) but are not published: a module that installs and silently does
+    # nothing is worse than one that is simply absent. When upstream fixes the
+    # script, the next health run flips it back to ok and it reappears.
+    hidden = {slug for slug, rec in health.items() if rec.get('status') == 'broken'}
     for rec in catalogue.values():
-        if rec['slug'] in set(missing_raw):
+        if rec['slug'] in set(missing_raw) or rec['slug'] in hidden:
             continue
         cslug = category_for(rec, auto_cat)
         cat = cat_by_slug[cslug]
