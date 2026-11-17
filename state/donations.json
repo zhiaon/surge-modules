@@ -1,6 +1,6 @@
 {
   "comment": "只存汇总，不存任何个人信息。total=累计金额（元），count=支持人数，updated=最后更新日期。改完提交，下一次同步会带进站点。",
-  "total": 0,
-  "count": 0,
-  "updated": null
+  "total": 5,
+  "count": 1,
+  "updated": "2026-11-17"
 }
