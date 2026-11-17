@@ -24,6 +24,8 @@ jobs:
         run: python3 scripts/apply_url_rewrites.py
 
       - name: Probe module scripts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 scripts/check_health.py
       - name: Rebuild data & deploy
         env:
