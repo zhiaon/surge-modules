@@ -249,19 +249,6 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
 
         </span>
 
-        {isOwn && (
-          <button
-            type="button"
-            onClick={openDonateSheet}
-            aria-label="捐赠作者"
-            title="捐赠作者"
-            className="relative z-10 -mr-1 -mt-1 inline-flex shrink-0 items-center gap-1 rounded-full border border-line bg-raised/70 px-2 py-1 text-[10px] leading-none text-muted transition-colors hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]"
-          >
-            <span aria-hidden="true">💌</span>
-            捐赠作者
-          </button>
-        )}
-
         <div className="min-w-0 flex-1">
           <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
             <span className="eyebrow">{module.category.name}</span>
@@ -288,6 +275,18 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
                 <Sparkles className="size-2.5" strokeWidth={2} aria-hidden="true" />
                 精选
               </span>
+            )}
+            {isOwn && (
+              <button
+                type="button"
+                onClick={openDonateSheet}
+                aria-label="捐赠作者"
+                title="捐赠作者"
+                className="relative z-10 ml-auto inline-flex shrink-0 items-center gap-1 rounded-full border border-line bg-raised/70 px-2 py-0.5 text-[10px] leading-none text-muted transition-colors hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]"
+              >
+                <span aria-hidden="true">💌</span>
+                捐赠作者
+              </button>
             )}
           </div>
           <h3
