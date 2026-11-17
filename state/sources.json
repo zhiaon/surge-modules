@@ -1,207 +1,202 @@
 {
-  "fmz200/wool_scripts@main": {
-    "owner": "fmz200",
-    "repo": "wool_scripts",
-    "branch": "main"
-  },
-  "mulanshan/surge@main": {
-    "owner": "mulanshan",
-    "repo": "surge",
-    "branch": "main"
-  },
-  "Aoang/Surge@main": {
-    "owner": "Aoang",
-    "repo": "Surge",
-    "branch": "main"
-  },
-  "Viceroy-Dennis/surge-modules@main": {
-    "owner": "Viceroy-Dennis",
-    "repo": "surge-modules",
-    "branch": "main"
-  },
-  "cc63/Surge@main": {
-    "owner": "cc63",
-    "repo": "Surge",
-    "branch": "main"
-  },
-  "Yu9191/Rewrite@main": {
-    "owner": "Yu9191",
-    "repo": "Rewrite",
-    "branch": "main"
-  },
-  "bit-kitchen/sgmodule@main": {
-    "owner": "bit-kitchen",
-    "repo": "sgmodule",
-    "branch": "main"
-  },
-  "zqzess/rule_for_quantumultX@master": {
-    "owner": "zqzess",
-    "repo": "rule_for_quantumultX",
-    "branch": "master"
-  },
-  "gsons/boxjs@main": {
-    "owner": "gsons",
-    "repo": "boxjs",
-    "branch": "main"
-  },
-  "Black-Magic-Lab/Surge@master": {
-    "owner": "Black-Magic-Lab",
-    "repo": "Surge",
-    "branch": "master"
-  },
-  "yxjxx/Maintaining-Scripts@master": {
-    "owner": "yxjxx",
-    "repo": "Maintaining-Scripts",
-    "branch": "master"
-  },
-  "deezertidal/shadowrocket-rules@main": {
-    "owner": "deezertidal",
-    "repo": "shadowrocket-rules",
-    "branch": "main"
-  },
-  "BlackSpacee/Surge@main": {
-    "owner": "BlackSpacee",
-    "repo": "Surge",
-    "branch": "main"
-  },
-  "Rabbit-Spec/Surge@Master": {
-    "owner": "Rabbit-Spec",
-    "repo": "Surge",
-    "branch": "Master"
-  },
-  "elnfnoosm/iOS_network@main": {
-    "owner": "elnfnoosm",
-    "repo": "iOS_network",
-    "branch": "main"
-  },
-  "ppproxy/4surge@main": {
-    "owner": "ppproxy",
-    "repo": "4surge",
-    "branch": "main"
-  },
-  "NobyDa/Script@master": {
-    "owner": "NobyDa",
-    "repo": "Script",
-    "branch": "master"
-  },
-  "gys619/surge-tools@main": {
-    "owner": "gys619",
-    "repo": "surge-tools",
-    "branch": "main"
-  },
-  "blankmagic/Surge@main": {
-    "owner": "blankmagic",
-    "repo": "Surge",
-    "branch": "main"
-  },
-  "funnyzak/network-rules@main": {
-    "owner": "funnyzak",
-    "repo": "network-rules",
-    "branch": "main"
-  },
-  "anyehttp/quantumult-x@main": {
-    "owner": "anyehttp",
-    "repo": "quantumult-x",
-    "branch": "main"
-  },
-  "Tartarus2014/Surge-Script@master": {
-    "owner": "Tartarus2014",
-    "repo": "Surge-Script",
-    "branch": "master"
-  },
-  "zhiaon/Modules@main": {
-    "owner": "zhiaon",
-    "repo": "Modules",
-    "branch": "main"
-  },
-  "Maasea/sgmodule@master": {
-    "owner": "Maasea",
-    "repo": "sgmodule",
-    "branch": "master"
-  },
-  "app2smile/rules@master": {
-    "owner": "app2smile",
-    "repo": "rules",
-    "branch": "master"
-  },
-  "DualSubs/YouTube@main": {
-    "owner": "DualSubs",
-    "repo": "YouTube",
-    "branch": "main"
-  },
-  "DualSubs/Universal@main": {
-    "owner": "DualSubs",
-    "repo": "Universal",
-    "branch": "main"
-  },
-  "DualSubs/Spotify@main": {
-    "owner": "DualSubs",
-    "repo": "Spotify",
-    "branch": "main"
-  },
-  "BiliUniverse/ADBlock@main": {
-    "owner": "BiliUniverse",
-    "repo": "ADBlock",
-    "branch": "main"
-  },
-  "BiliUniverse/Global@main": {
-    "owner": "BiliUniverse",
-    "repo": "Global",
-    "branch": "main"
-  },
-  "NSRingo/WeatherKit@main": {
-    "owner": "NSRingo",
-    "repo": "WeatherKit",
-    "branch": "main"
-  },
-  "NSRingo/Siri@main": {
-    "owner": "NSRingo",
-    "repo": "Siri",
-    "branch": "main"
-  },
-  "NSRingo/GeoServices@main": {
-    "owner": "NSRingo",
-    "repo": "GeoServices",
-    "branch": "main"
-  },
-  "NSRingo/TV@main": {
-    "owner": "NSRingo",
-    "repo": "TV",
-    "branch": "main"
-  },
-  "NSRingo/News@main": {
-    "owner": "NSRingo",
-    "repo": "News",
-    "branch": "main"
-  },
-  "VirgilClyne/GetSomeFries@main": {
-    "owner": "VirgilClyne",
-    "repo": "GetSomeFries",
-    "branch": "main"
-  },
-  "FoKit/Scripts@main": {
-    "owner": "FoKit",
-    "repo": "Scripts",
-    "branch": "main"
-  },
-  "IBL3ND/module@main": {
-    "owner": "IBL3ND",
-    "repo": "module",
-    "branch": "main"
-  },
-  "androidcn/userscripts@main": {
-    "owner": "androidcn",
-    "repo": "userscripts",
-    "branch": "main"
-  },
-  "vfelix7/rule_module_script@master": {
-    "owner": "vfelix7",
-    "repo": "rule_module_script",
-    "branch": "master"
-  },
-  "DualSubs/Netflix@main": {
-    "owner": "DualSubs",
-    "repo": "Netflix",
-    "branch": "main"
-  }
+ "fmz200/wool_scripts@main": {
+  "owner": "fmz200",
+  "repo": "wool_scripts",
+  "branch": "main"
+ },
+ "mulanshan/surge@main": {
+  "owner": "mulanshan",
+  "repo": "surge",
+  "branch": "main"
+ },
+ "Aoang/Surge@main": {
+  "owner": "Aoang",
+  "repo": "Surge",
+  "branch": "main"
+ },
+ "cc63/Surge@main": {
+  "owner": "cc63",
+  "repo": "Surge",
+  "branch": "main"
+ },
+ "Yu9191/Rewrite@main": {
+  "owner": "Yu9191",
+  "repo": "Rewrite",
+  "branch": "main"
+ },
+ "bit-kitchen/sgmodule@main": {
+  "owner": "bit-kitchen",
+  "repo": "sgmodule",
+  "branch": "main"
+ },
+ "zqzess/rule_for_quantumultX@master": {
+  "owner": "zqzess",
+  "repo": "rule_for_quantumultX",
+  "branch": "master"
+ },
+ "gsons/boxjs@main": {
+  "owner": "gsons",
+  "repo": "boxjs",
+  "branch": "main"
+ },
+ "Black-Magic-Lab/Surge@master": {
+  "owner": "Black-Magic-Lab",
+  "repo": "Surge",
+  "branch": "master"
+ },
+ "yxjxx/Maintaining-Scripts@master": {
+  "owner": "yxjxx",
+  "repo": "Maintaining-Scripts",
+  "branch": "master"
+ },
+ "deezertidal/shadowrocket-rules@main": {
+  "owner": "deezertidal",
+  "repo": "shadowrocket-rules",
+  "branch": "main"
+ },
+ "BlackSpacee/Surge@main": {
+  "owner": "BlackSpacee",
+  "repo": "Surge",
+  "branch": "main"
+ },
+ "Rabbit-Spec/Surge@Master": {
+  "owner": "Rabbit-Spec",
+  "repo": "Surge",
+  "branch": "Master"
+ },
+ "elnfnoosm/iOS_network@main": {
+  "owner": "elnfnoosm",
+  "repo": "iOS_network",
+  "branch": "main"
+ },
+ "ppproxy/4surge@main": {
+  "owner": "ppproxy",
+  "repo": "4surge",
+  "branch": "main"
+ },
+ "NobyDa/Script@master": {
+  "owner": "NobyDa",
+  "repo": "Script",
+  "branch": "master"
+ },
+ "gys619/surge-tools@main": {
+  "owner": "gys619",
+  "repo": "surge-tools",
+  "branch": "main"
+ },
+ "blankmagic/Surge@main": {
+  "owner": "blankmagic",
+  "repo": "Surge",
+  "branch": "main"
+ },
+ "funnyzak/network-rules@main": {
+  "owner": "funnyzak",
+  "repo": "network-rules",
+  "branch": "main"
+ },
+ "anyehttp/quantumult-x@main": {
+  "owner": "anyehttp",
+  "repo": "quantumult-x",
+  "branch": "main"
+ },
+ "Tartarus2014/Surge-Script@master": {
+  "owner": "Tartarus2014",
+  "repo": "Surge-Script",
+  "branch": "master"
+ },
+ "zhiaon/Modules@main": {
+  "owner": "zhiaon",
+  "repo": "Modules",
+  "branch": "main"
+ },
+ "Maasea/sgmodule@master": {
+  "owner": "Maasea",
+  "repo": "sgmodule",
+  "branch": "master"
+ },
+ "app2smile/rules@master": {
+  "owner": "app2smile",
+  "repo": "rules",
+  "branch": "master"
+ },
+ "DualSubs/YouTube@main": {
+  "owner": "DualSubs",
+  "repo": "YouTube",
+  "branch": "main"
+ },
+ "DualSubs/Universal@main": {
+  "owner": "DualSubs",
+  "repo": "Universal",
+  "branch": "main"
+ },
+ "DualSubs/Spotify@main": {
+  "owner": "DualSubs",
+  "repo": "Spotify",
+  "branch": "main"
+ },
+ "BiliUniverse/ADBlock@main": {
+  "owner": "BiliUniverse",
+  "repo": "ADBlock",
+  "branch": "main"
+ },
+ "BiliUniverse/Global@main": {
+  "owner": "BiliUniverse",
+  "repo": "Global",
+  "branch": "main"
+ },
+ "NSRingo/WeatherKit@main": {
+  "owner": "NSRingo",
+  "repo": "WeatherKit",
+  "branch": "main"
+ },
+ "NSRingo/Siri@main": {
+  "owner": "NSRingo",
+  "repo": "Siri",
+  "branch": "main"
+ },
+ "NSRingo/GeoServices@main": {
+  "owner": "NSRingo",
+  "repo": "GeoServices",
+  "branch": "main"
+ },
+ "NSRingo/TV@main": {
+  "owner": "NSRingo",
+  "repo": "TV",
+  "branch": "main"
+ },
+ "NSRingo/News@main": {
+  "owner": "NSRingo",
+  "repo": "News",
+  "branch": "main"
+ },
+ "VirgilClyne/GetSomeFries@main": {
+  "owner": "VirgilClyne",
+  "repo": "GetSomeFries",
+  "branch": "main"
+ },
+ "FoKit/Scripts@main": {
+  "owner": "FoKit",
+  "repo": "Scripts",
+  "branch": "main"
+ },
+ "IBL3ND/module@main": {
+  "owner": "IBL3ND",
+  "repo": "module",
+  "branch": "main"
+ },
+ "androidcn/userscripts@main": {
+  "owner": "androidcn",
+  "repo": "userscripts",
+  "branch": "main"
+ },
+ "vfelix7/rule_module_script@master": {
+  "owner": "vfelix7",
+  "repo": "rule_module_script",
+  "branch": "master"
+ },
+ "DualSubs/Netflix@main": {
+  "owner": "DualSubs",
+  "repo": "Netflix",
+  "branch": "main"
+ }
 }
