@@ -124,7 +124,10 @@ def main():
 
     # Copy only modules that are still in the catalogue: an upstream removal
     # must actually disappear from the site, not linger as an orphan file.
-    keep_slugs = set(catalogue.keys())
+    # Hidden (broken) modules must not keep a working /m/ URL either: an old
+    # bookmark would still install a module that silently does nothing.
+    keep_slugs = set(catalogue.keys()) - {
+        slug for slug, rec in health.items() if rec.get('status') == 'broken'}
     for f in os.listdir(RAW_DIR):
         if not f.endswith('.sgmodule'):
             continue
