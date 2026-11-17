@@ -156,9 +156,10 @@ def main():
         out[slug] = {'status': status, 'broken': bad[:5], 'checked': now,
                      'reason': reason}
 
-    # keep previous verdicts for modules we did not scan this round
+    # keep previous verdicts for modules we did not scan this round — but only
+    # for modules that still exist: a pruned slug must not linger forever.
     for slug, rec in previous.items():
-        if slug not in out and slug not in no_scripts:
+        if slug not in out and slug not in no_scripts and slug in catalogue:
             out[slug] = rec
     for slug in no_scripts:
         out[slug] = {'status': 'unknown', 'broken': [], 'checked': now}
