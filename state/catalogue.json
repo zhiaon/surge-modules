@@ -20772,5 +20772,18 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-17T14:42:56Z"
+ },
+ "rednote-allinone": {
+  "slug": "rednote-allinone",
+  "repo": "xchun5678/surge",
+  "branch": "main",
+  "path": "RedNote-AllInOne.sgmodule",
+  "sha": "1836983009f2c3bd0ce9a2a5f8dd557d65af0eed",
+  "name": "小红书/RedNote 去水印去广告（合并版）",
+  "description": "合并版：原版（QingRex 水印配置拦截 + RedPaper 脚本）与评论实况补丁（rednote-comment-fix.js：评论列表登记 _16 原流、下载时换掉 _7 水印流）合为一个模块。适配海外版 RedNote(rnote.com)。",
+  "author": "xchun5678",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-17T15:01:09Z"
  }
 }
