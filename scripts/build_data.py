@@ -215,6 +215,20 @@ def main():
     json.dump(settings, open(f'{OUT}/settings.json', 'w'), ensure_ascii=False, separators=(',', ':'))
     json.dump([], open(f'{OUT}/announcements.json', 'w'))
 
+    # Donation summary only — amounts and head count, never names. Kept in
+    # state/ so the number is edited in review-able text, not a database row.
+    donations_path = os.path.join(os.path.dirname(STATE), 'donations.json')
+    donations = {'total': 0, 'count': 0, 'updated': None}
+    if os.path.exists(donations_path):
+        raw = json.load(open(donations_path))
+        donations = {
+            'total': round(float(raw.get('total') or 0), 2),
+            'count': int(raw.get('count') or 0),
+            'updated': raw.get('updated'),
+        }
+    json.dump(donations, open(f'{OUT}/donations.json', 'w'),
+              ensure_ascii=False, separators=(',', ':'))
+
     # detail files: one per module, versions come from the state if present
     for rec, mod in zip(catalogue.values(), [m for m in modules]):
         pass
