@@ -1,0 +1,277 @@
+#!name=全局速度优化Pro v6
+#!desc=全面优化网络速度v6：20大模块终极版
+#!arguments=基础优化:true,DNS优化:true,Telegram优化:true,Twitter优化:true,YouTube优化:true,Netflix优化:true,TikTok优化:true,游戏优化:true,谷歌优化:true,微软优化:true,B站优化:true,动漫优化:true,Emby优化:true,Discord优化:true,Spotify优化:true,GitHub优化:true,苹果优化:true,RealIP优化:true,通用优化:true,CDN优化:true
+#!arguments-desc=基础优化：DNS/QUIC/TCP/GeoIP/测试超时；DNS优化：DNS解析加速；Telegram优化：电报播放浏览加速；Twitter优化：推特播放浏览加速；YouTube优化：油管视频加速；Netflix优化：奈飞播放加速；TikTok优化：短视频加速；游戏优化：游戏加速；谷歌优化：谷歌服务加速；微软优化：微软服务加速；B站优化：哔哩哔哩加速；动漫优化：动漫漫画加速；Emby优化：Emby影院加速；Discord优化：Discord加速；Spotify优化：Spotify音乐加速；GitHub优化：GitHub加速；苹果优化：苹果服务加速；RealIP优化：RealIP补充优化；通用优化：通用速度优化；CDN优化：CDN域名优化
+
+[General]
+{{#基础优化}}
+# ===== 基础速度优化 =====
+test-timeout = 3
+disable-geoip-db-auto-update = false
+block-quic = true
+tcp-fast-open = true
+predict-alternative-dns-answering = true
+udp-policy-not-supported-behaviour = reject
+{{/基础优化}}
+
+{{#RealIP优化}}
+# ===== RealIP补充优化 =====
+always-real-ip = *.lan, *.direct, cable.auth.com, *.msftconnecttest.com, *.msftncsi.com, network-test.debian.org, detectportal.firefox.com, resolver1.opendns.com, *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, stun.*, global.turn.twilio.com, global.stun.twilio.com, app.yinxiang.com, injections.adguard.org, local.adguard.org, localhost.*.qq.com, localhost.*.weixin.qq.com, *.logon.battlenet.com.cn, *.logon.battle.net, *.blzstatic.cn, music.163.com, *.music.163.com, *.126.net, musicapi.taihe.com, music.taihe.com, songsearch.kugou.com, trackercdn.kugou.com, *.kuwo.cn, api-jooxtt.sanook.com, api.joox.com, joox.com, y.qq.com, *.y.qq.com, streamoc.music.tc.qq.com, mobileoc.music.tc.qq.com, isure.stream.qqmusic.qq.com, dl.stream.qqmusic.qq.com, aqqmusic.tc.qq.com, amobile.music.tc.qq.com, *.xiami.com, *.music.migu.cn, music.migu.cn, proxy.golang.org, *.mcdn.bilivideo.cn, *.cmpassport.com, id6.me, open.e.189.cn, opencloud.wostore.cn, id.mail.wo.cn, mdn.open.wo.cn, hmrz.wo.cn, nishub1.10010.com, enrichgw.10010.com, *.wosms.cn, *.jegotrip.com.cn, *.icitymobile.mobi, *.pingan.com.cn, *.cmbchina.com, *.10099.com.cn, *.microdone.cn, pool.ntp.org, *.pool.ntp.org, ntp.*.com, time.*.com, ntp?.*.com, time?.*.com, time.*.gov, time.*.edu.cn, *.ntp.org.cn, PDC._msDCS.*.*, DC._msDCS.*.*, GC._msDCS.*.*, *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, *.battlenet.com.cn, *.battlenet.com, *.blzstatic.cn, *.battle.net, *.turn.twilio.com, *.stun.twilio.com, stun.syncthing.net, stun.*, easy-login.10099.com.cn, *-update.xoyocdn.com, id6.me, open.e.189.cn
+{{/RealIP优化}}
+
+{{#通用优化}}
+# ===== 通用速度优化 =====
+exclude-simple-hostnames = true
+use-local-host-item-for-proxy = true
+read-etc-hosts = true
+{{/通用优化}}
+
+[Host]
+{{#DNS优化}}
+# ===== DNS解析优化 =====
+# 国内域名用国内DNS
+*.taobao.com = server:223.5.5.5
+*.tmall.com = server:223.5.5.5
+*.alicdn.com = server:223.5.5.5
+*.aliyun.com = server:223.5.5.5
+*.qq.com = server:119.29.29.29
+*.tencent.com = server:119.29.29.29
+*.weixin.com = server:119.29.29.29
+*.jd.com = server:119.29.29.29
+*.bilibili.com = server:119.29.29.29
+hdslb.com = server:119.29.29.29
+*.mi.com = server:223.5.5.5
+*.xiaomi.com = server:223.5.5.5
+
+# 国外域名用加密DNS
+google.com = server:https://doh.pub/dns-query
+youtube.com = server:https://doh.pub/dns-query
+twitter.com = server:https://doh.pub/dns-query
+telegram.org = server:https://doh.pub/dns-query
+{{/DNS优化}}
+
+[Rule]
+{{#Telegram优化}}
+# ===== Telegram 播放浏览加速 =====
+# Telegram DC IP段优化（确保所有连接走代理）
+IP-CIDR,91.108.0.0/16,电报信息,no-resolve
+IP-CIDR,149.154.160.0/20,电报信息,no-resolve
+IP-CIDR,5.28.192.0/18,电报信息,no-resolve
+IP-CIDR,109.239.140.0/24,电报信息,no-resolve
+IP-ASN,44907,电报信息,no-resolve
+IP-ASN,211157,电报信息,no-resolve
+
+# Telegram CDN域名优化（图片视频加载更快）
+DOMAIN-SUFFIX,cdn-telegram.org,电报信息
+DOMAIN-SUFFIX,telegram-cdn.org,电报信息
+DOMAIN-SUFFIX,telegramdownload.com,电报信息
+DOMAIN-SUFFIX,usercontent.dev,电报信息
+DOMAIN-SUFFIX,telesco.pe,电报信息
+DOMAIN-SUFFIX,comments.app,电报信息
+DOMAIN-SUFFIX,graph.org,电报信息
+
+# 屏蔽Telegram QUIC，强制TCP
+AND,((DOMAIN-SUFFIX,telegram.org), (PROTOCOL,UDP)),REJECT-NO-DROP
+AND,((DOMAIN-SUFFIX,t.me), (PROTOCOL,UDP)),REJECT-NO-DROP
+AND,((DOMAIN-SUFFIX,telegram-cdn.org), (PROTOCOL,UDP)),REJECT-NO-DROP
+AND,((IP-CIDR,91.108.0.0/16), (PROTOCOL,UDP)),REJECT-NO-DROP
+AND,((IP-CIDR,149.154.160.0/20), (PROTOCOL,UDP)),REJECT-NO-DROP
+{{/Telegram优化}}
+
+{{#Twitter优化}}
+# ===== Twitter/X 播放浏览加速 =====
+# Twitter CDN域名优化（图片视频加载更快）
+DOMAIN-SUFFIX,twimg.com,推特X
+DOMAIN-SUFFIX,twitter.com,推特X
+DOMAIN-SUFFIX,x.com,推特X
+
+# Twitter图片CDN精确匹配（确保走代理）
+DOMAIN,pbs.twimg.com,推特X
+DOMAIN,abs.twimg.com,推特X
+DOMAIN,ton.twimg.com,推特X
+DOMAIN,video.twimg.com,推特X
+DOMAIN,pbs-1.twimg.com,推特X
+DOMAIN,cdn.syndication.twimg.com,推特X
+
+# Twitter IP段优化
+IP-CIDR,104.244.42.0/24,推特X,no-resolve
+IP-CIDR,104.244.43.0/24,推特X,no-resolve
+IP-CIDR,199.16.156.0/22,推特X,no-resolve
+IP-CIDR,199.59.148.0/22,推特X,no-resolve
+{{/Twitter优化}}
+
+{{#YouTube优化}}
+# ===== YouTube 播放加速 =====
+# YouTube CDN域名优化（视频加载更快）
+DOMAIN-SUFFIX,youtube.com,油管视频
+DOMAIN-SUFFIX,youtu.be,油管视频
+DOMAIN-SUFFIX,googlevideo.com,油管视频
+DOMAIN-SUFFIX,youtube-nocookie.com,油管视频
+
+# YouTube视频CDN精确匹配
+DOMAIN,manifest.googlevideo.com,油管视频
+DOMAIN,redirector.googlevideo.com,油管视频
+
+# YouTube IP段优化
+IP-CIDR,173.194.0.0/16,油管视频,no-resolve
+IP-CIDR,203.208.0.0/16,油管视频,no-resolve
+IP-CIDR,216.58.192.0/19,油管视频,no-resolve
+{{/YouTube优化}}
+
+{{#Netflix优化}}
+# ===== Netflix 播放加速 =====
+# Netflix CDN域名优化
+DOMAIN-SUFFIX,netflix.com,奈飞视频
+DOMAIN-SUFFIX,netflix.net,奈飞视频
+DOMAIN-SUFFIX,nflxvideo.net,奈飞视频
+DOMAIN-SUFFIX,nflximg.net,奈飞视频
+DOMAIN-SUFFIX,nflximg.com,奈飞视频
+DOMAIN-SUFFIX,nflxext.com,奈飞视频
+DOMAIN-SUFFIX,nflxso.net,奈飞视频
+
+# Netflix IP段优化
+IP-CIDR,3.12.0.0/14,奈飞视频,no-resolve
+IP-CIDR,18.184.0.0/15,奈飞视频,no-resolve
+IP-CIDR,52.200.0.0/14,奈飞视频,no-resolve
+{{/Netflix优化}}
+
+{{#TikTok优化}}
+# ===== TikTok 短视频加速 =====
+# TikTok CDN域名优化
+DOMAIN-SUFFIX,tiktok.com,TikTok短视频
+DOMAIN-SUFFIX,byteoversea.com,TikTok短视频
+DOMAIN-SUFFIX,tiktokcdn.com,TikTok短视频
+DOMAIN-SUFFIX,tiktokd.org,TikTok短视频
+DOMAIN-SUFFIX,musical.ly,TikTok短视频
+
+# TikTok视频CDN精确匹配
+DOMAIN,api16-normal-c-useast1a.tiktokv.com,TikTok短视频
+DOMAIN,api16-normal-useast1a.tiktokv.com,TikTok短视频
+{{/TikTok优化}}
+
+{{#游戏优化}}
+# ===== 游戏加速优化 =====
+# Steam
+DOMAIN-SUFFIX,steampowered.com,游戏服务
+DOMAIN-SUFFIX,steamcommunity.com,游戏服务
+DOMAIN-SUFFIX,steamstatic.com,游戏服务
+
+# Epic
+DOMAIN-SUFFIX,epicgames.com,游戏服务
+DOMAIN-SUFFIX,unrealengine.com,游戏服务
+
+# PlayStation
+DOMAIN-SUFFIX,playstation.net,游戏服务
+DOMAIN-SUFFIX,playstation.com,游戏服务
+
+# Xbox
+DOMAIN-SUFFIX,xboxlive.com,游戏服务
+DOMAIN-SUFFIX,xbox.com,游戏服务
+{{/游戏优化}}
+
+{{#谷歌优化}}
+# ===== 谷歌服务加速 =====
+DOMAIN-SUFFIX,google.com,谷歌服务
+DOMAIN-SUFFIX,google.com.hk,谷歌服务
+DOMAIN-SUFFIX,gstatic.com,谷歌服务
+DOMAIN-SUFFIX,googleapis.com,谷歌服务
+DOMAIN-SUFFIX,googleusercontent.com,谷歌服务
+DOMAIN-SUFFIX,gmail.com,谷歌服务
+DOMAIN-SUFFIX,googlemail.com,谷歌服务
+{{/谷歌优化}}
+
+{{#微软优化}}
+# ===== 微软服务加速 =====
+DOMAIN-SUFFIX,microsoft.com,微软服务
+DOMAIN-SUFFIX,windows.com,微软服务
+DOMAIN-SUFFIX,office.com,微软服务
+DOMAIN-SUFFIX,office365.com,微软服务
+DOMAIN-SUFFIX,live.com,微软服务
+DOMAIN-SUFFIX,outlook.com,微软服务
+DOMAIN-SUFFIX,skype.com,微软服务
+{{/微软优化}}
+
+{{#B站优化}}
+# ===== 哔哩哔哩加速 =====
+DOMAIN-SUFFIX,bilibili.com,哔哩哔哩
+DOMAIN-SUFFIX,hdslb.com,哔哩哔哩
+DOMAIN-SUFFIX,biliapi.net,哔哩哔哩
+DOMAIN-SUFFIX,biliapi.com,哔哩哔哩
+DOMAIN-SUFFIX,bilivideo.com,哔哩哔哩
+DOMAIN-SUFFIX,bilivideo.cn,哔哩哔哩
+DOMAIN-SUFFIX,acgvideo.com,哔哩哔哩
+{{/B站优化}}
+
+{{#动漫优化}}
+# ===== 动漫漫画加速 =====
+DOMAIN-SUFFIX,ani.gamer.com.tw,动漫漫画
+DOMAIN-SUFFIX,bahamut.com.tw,动漫漫画
+DOMAIN-SUFFIX,crunchyroll.com,动漫漫画
+DOMAIN-SUFFIX,iqiyi.com,动漫漫画
+DOMAIN-SUFFIX,mgtv.com,动漫漫画
+DOMAIN-SUFFIX,tencentvideo.com,动漫漫画
+{{/动漫优化}}
+
+{{#Emby优化}}
+# ===== Emby影院加速 =====
+DOMAIN-SUFFIX,emby.media,Emby影院
+DOMAIN-SUFFIX,emby.theater,Emby影院
+DOMAIN-SUFFIX,mb3.dev,Emby影院
+DOMAIN-SUFFIX,jellyfin.media,Emby影院
+DOMAIN-SUFFIX,jellyfin.org,Emby影院
+{{/Emby优化}}
+
+{{#Discord优化}}
+# ===== Discord加速 =====
+DOMAIN-SUFFIX,discord.com,游戏服务
+DOMAIN-SUFFIX,discordapp.com,游戏服务
+DOMAIN-SUFFIX,discord.gg,游戏服务
+DOMAIN-SUFFIX,discordapp.net,游戏服务
+DOMAIN-SUFFIX,discordapp.io,游戏服务
+{{/Discord优化}}
+
+{{#Spotify优化}}
+# ===== Spotify音乐加速 =====
+DOMAIN-SUFFIX,spotify.com,全球媒体
+DOMAIN-SUFFIX,spotifycdn.com,全球媒体
+DOMAIN-SUFFIX,scdn.co,全球媒体
+DOMAIN-SUFFIX,spotify.design,全球媒体
+DOMAIN-SUFFIX,spotify.pw,全球媒体
+{{/Spotify优化}}
+
+{{#GitHub优化}}
+# ===== GitHub加速 =====
+DOMAIN-SUFFIX,github.com,GitHub
+DOMAIN-SUFFIX,githubusercontent.com,GitHub
+DOMAIN-SUFFIX,githubassets.com,GitHub
+DOMAIN-SUFFIX,github.io,GitHub
+DOMAIN-SUFFIX,github.dev,GitHub
+DOMAIN-SUFFIX,githubapp.com,GitHub
+DOMAIN-SUFFIX,githubcopilot.com,GitHub
+{{/GitHub优化}}
+
+{{#苹果优化}}
+# ===== 苹果服务加速 =====
+DOMAIN-SUFFIX,apple.com,苹果服务
+DOMAIN-SUFFIX,icloud.com,苹果服务
+DOMAIN-SUFFIX,icloud-content.com,苹果服务
+DOMAIN-SUFFIX,mzstatic.com,苹果服务
+DOMAIN-SUFFIX,itunes.com,苹果服务
+DOMAIN-SUFFIX,appstore.com,苹果服务
+DOMAIN-SUFFIX,cdn-apple.com,苹果服务
+{{/苹果优化}}
+
+{{#CDN优化}}
+# ===== CDN域名优化 =====
+# Cloudflare
+DOMAIN-SUFFIX,cloudflare.com,主节点
+DOMAIN-SUFFIX,cloudflare.net,主节点
+
+# Akamai
+DOMAIN-SUFFIX,akamai.net,主节点
+DOMAIN-SUFFIX,akamaiedge.net,主节点
+
+# Fastly
+DOMAIN-SUFFIX,fastly.net,主节点
+DOMAIN-SUFFIX,fastlylb.net,主节点
+{{/CDN优化}}
