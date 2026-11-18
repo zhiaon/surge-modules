@@ -240,18 +240,6 @@ html[data-theme='light'] {
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* iOS Safari force-zooms the viewport when a focused text field computes
-     below 16px. Bumping the font size is the only reliable fix — setting
-     `maximum-scale=1` would also block intentional pinch-zoom. Applied only to
-     touch/coarse pointers so desktop keeps the designed type scale. */
-  @media (pointer: coarse) {
-    input,
-    textarea,
-    select {
-      font-size: max(16px, 1em);
-    }
-  }
-
   /* thin, quiet scrollbars on desktop */
   @media (pointer: fine) {
     * {
@@ -639,3 +627,35 @@ h3 {
 @utility scroll-mt-header {
   scroll-margin-top: calc(4rem + env(safe-area-inset-top) + 1rem);
 }
+
+/* --------------------------------------------------------------- iOS zoom
+   iOS Safari zooms the whole page when a focused text field computes below
+   16px, and the zoom level then sticks across reloads until the user pinches
+   back out. `maximum-scale=1` would also kill intentional pinch-zoom, so the
+   font size has to be raised instead.
+
+   This used to live in `@layer base`, where it silently lost to every
+   `text-[13px]` utility on the same element — utilities outrank base. It has
+   to sit OUTSIDE the layers (unlayered rules beat layered ones) and stay late
+   in the file so nothing layered can override it again. Scoped to coarse
+   pointers so desktop keeps the designed type scale. */
+@media (pointer: coarse) {
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1em);
+  }
+
+  /* iOS also zooms on a <select> rendered inside a transformed/absolute
+     container; keeping the same floor on these two is enough. */
+  input[type='search'],
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='url'],
+  input[type='number'],
+  input[type='password'] {
+    font-size: max(16px, 1em);
+  }
+}
+
