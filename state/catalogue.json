@@ -15409,78 +15409,78 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "dnslite.sgmodule",
-  "sha": "ea5687cb2baca71ad80c6caf09785611b50fc2fa",
+  "sha": "d35c7e359d552e3572eaec046643efabb33c5e45",
   "name": "DNS Lite",
   "description": "V1.0 国内/国外双 DNS 智能分流 + 广告与追踪域名拦截。国内域名走国内 DNS，其余走国外加密 DNS。",
   "author": "许舟",
-  "version": "1.0.0",
+  "version": "1.0",
   "category": "rules",
-  "updatedAt": "2026-11-11T23:14:42Z"
+  "updatedAt": "2026-11-18T06:01:05Z"
  },
  "dnsrefresh": {
   "slug": "dnsrefresh",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "dnsrefresh.sgmodule",
-  "sha": "9ee87cf4a86250318af78de2478573ddc9f40953",
+  "sha": "aeb9953bebdf186cd2c5cd2e30e0c14d889363a3",
   "name": "DNS 清理缓存",
   "description": "V1.0 一键刷新 Surge DNS 缓存。卡片显示缓存条目数与上次刷新时间，点刷新按钮才执行 POST /v1/dns/flush，随后回读缓存条数核对，成功/未生效/失败都如实显示，不伪造状态。",
   "author": "许舟",
-  "version": "1.0.0",
+  "version": "1.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T14:11:29Z"
+  "updatedAt": "2026-11-18T06:01:05Z"
  },
  "fanqie": {
   "slug": "fanqie",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "fanqie.sgmodule",
-  "sha": "70dbac178b2c9464d8d44a73e2b885d372ec0332",
+  "sha": "ea9a385478331580676eb15e66e3ea2751d219e6",
   "name": "番茄小说去广告",
   "description": "V1.25：移除 p3/p11-webcast-sign.douyinpic.com 拦截，避免误伤抖音评论头像；V1.24 基础：新增 lf-fe*.fqnovelstatic.com 拦截 —— 实测「番茄送你惊喜电商券」运营弹窗弹出瞬间拉 1.1 MB 活动页前端包；V1.23 基础：摘除失效的 [Script] 段（番茄证书固定，fanqie_clean.js 永远跑不起来，纯占位误导）；V1.22 基础：撤回 pddpic 拦截（会误伤拼多多App图片），活动卡改靠接口断供，仅做 SNI/域名层拦截",
   "author": "许舟",
-  "version": "1.0.0",
+  "version": "1.25",
   "category": "adblock",
-  "updatedAt": "2026-11-15T06:00:53Z"
+  "updatedAt": "2026-11-18T06:01:05Z"
  },
  "ikuuu": {
   "slug": "ikuuu",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "ikuuu.sgmodule",
-  "sha": "8b7a5f301e4fcce264bc4bd4c754fee179221029",
+  "sha": "3efbf877f78715e62f202d5d33fd714a73c15e7c",
   "name": "iKuuu 每日签到",
   "description": "V1.2 仅保留自动签到（无面板）：Cookie 自动抓取 + 每日定时签到，已移除面板与手动签到脚本。通知里只报服务器原文与剩余流量。",
   "author": "Yjwj205 / 许舟（Surge 移植）",
-  "version": "1.0.0",
+  "version": "1.2",
   "category": "adblock",
-  "updatedAt": "2026-11-15T15:00:58Z"
+  "updatedAt": "2026-11-18T06:01:06Z"
  },
  "ipinfo": {
   "slug": "ipinfo",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "ipinfo.sgmodule",
-  "sha": "b7e2b04304c61bfe4a4e341b56505aea7c9a475c",
+  "sha": "b9f47ed9feec8b87f7a7d70107b5125d213d7890",
   "name": "网络IP信息",
   "description": "V1.2 显示当前网络的 IP 全链路：本机公网 IP、各策略组的真实入口 IP 与节点落地 IP，均含位置和运营商。兜底组常驻，不受参数影响。首行显示 Wi-Fi 名，蜂窝下显示「蜂窝流量」。",
   "author": "许舟",
-  "version": "1.0.0",
+  "version": "1.2",
   "category": "tools",
-  "updatedAt": "2026-11-10T06:51:41Z"
+  "updatedAt": "2026-11-18T06:01:06Z"
  },
  "jichang": {
   "slug": "jichang",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "jichang.sgmodule",
-  "sha": "a1d149b43c3df8418318269b80549ae807cc6f07",
+  "sha": "864f66337a5aec8a28415885b094d2f1ccc660e2",
   "name": "机场流量",
   "description": "V1.1：复制订阅链接进去就可以了。重置日留空则该机场不显示重置信息。",
   "author": "许舟",
-  "version": "1.0.0",
+  "version": "1.1",
   "category": "tools",
-  "updatedAt": "2026-11-10T06:51:32Z"
+  "updatedAt": "2026-11-18T06:01:06Z"
  },
  "qimao": {
   "slug": "qimao",
@@ -15500,13 +15500,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "streaming.sgmodule",
-  "sha": "d84599f18967d97fec3d03594c743364cc6106d0",
+  "sha": "f9dd18bf8bf382361c406c1d523dbdef39198c24",
   "name": "流媒体解锁",
   "description": "V1.3 逐平台实测解锁状态：Netflix、Disney+、YouTube、Prime Video、Spotify、HBO Max、Hulu、Paramount+、Peacock、Viu、Abema、巴哈动画疯、B站港澳台，以及 ChatGPT / Claude / Gemini 三家人工智能服务。每个策略组一块，发真实请求看对方真正看到的地区，不靠 IP 库猜。V1.3 改为图标打头排版，任何机型、任何字号下勾叉列都不会再错位。",
   "author": "许舟",
-  "version": "1.0.0",
+  "version": "1.3",
   "category": "tools",
-  "updatedAt": "2026-11-08T16:06:46Z"
+  "updatedAt": "2026-11-18T06:01:07Z"
  },
  "adblock": {
   "slug": "adblock",
@@ -18282,39 +18282,39 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "ippurity.sgmodule",
-  "sha": "aaf9cb09cca16ceb15d7ea391f26b2150751cd60",
+  "sha": "d30abd959bea9ca8a4c9e7e25f395cd17bdccad2",
   "name": "IP纯净度",
   "description": "V1.1 IPQuery 免 Key 出口风险面板：显示 IP、位置、ASN、风险分与 VPN/代理/Tor/机房标签。点击刷新，自动刷新 30 分钟。未匹配≠安全，风险分不是纯净度百分比。",
   "author": "许舟",
-  "version": "1.0.0",
+  "version": "1.1",
   "category": "adblock",
-  "updatedAt": "2026-11-15T01:32:27Z"
+  "updatedAt": "2026-11-18T06:01:06Z"
  },
  "surge-runtime": {
   "slug": "surge-runtime",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "surge-runtime.sgmodule",
-  "sha": "b4aa497901c518ca6f8fffb62c72c0504f17344b",
+  "sha": "bdf51888e5977d58311e582656017dc818d3db95",
   "name": "Surge 运行监控",
   "description": "V1.2 单张卡片显示 Surge 运行时长、启动时间、配置重载、真实物理内存、采样峰值/最低值和活动连接。自动刷新只监控，20 秒内连续点两次右上角刷新才重启引擎；重启会断开连接并清空缓存和临时规则。需 Surge iOS 6+ 且 http-api-mcp=true。",
   "author": "许舟",
-  "version": "1.0.0",
+  "version": "1.2",
   "category": "adblock",
-  "updatedAt": "2026-11-15T02:13:26Z"
+  "updatedAt": "2026-11-18T06:01:07Z"
  },
  "dual-ip": {
   "slug": "dual-ip",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "dual-ip.sgmodule",
-  "sha": "20527aa1844f5781378886dff26ed73053375293",
+  "sha": "dc104b638dcdd107970386da38546370b2e3893d",
   "name": "双出口 IP 面板",
   "description": "V1.1 详细双出口面板：IP、IPv4/IPv6、国家/省市、运营商/组织、ASN、时区、查询来源、每路耗时与更新时间；点右上角刷新立即查询。",
   "author": "许舟",
-  "version": "1.1.0",
+  "version": "1.1",
   "category": "adblock",
-  "updatedAt": "2026-11-15T10:00:52Z"
+  "updatedAt": "2026-11-18T06:01:05Z"
  },
  "salary-widget": {
   "slug": "salary-widget",
