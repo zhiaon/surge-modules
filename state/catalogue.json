@@ -20876,5 +20876,18 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-18T11:01:01Z"
+ },
+ "ip-quality-fusion3": {
+  "slug": "ip-quality-fusion3",
+  "repo": "xchun5678/surge",
+  "branch": "main",
+  "path": "IP-Quality-Fusion3.sgmodule",
+  "sha": "b24db7e3761cc7b6ca5f167d24f30b90317e59f2",
+  "name": "IP 纯净度检测（融合版）",
+  "description": "mickeu 的 IP 纯净度检测（Scamalytics 真实评分+多源兜底）融合 IPPure 的显示层：IP 打码、图标 shield.lefthalf.filled、IP 行带 IPv4/IPv6 标签。脚本自托管在自己的仓库。",
+  "author": "mickeu（融合版改自其 IP-Quality，显示层借 vfelix7 的 IPPure）",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-18T16:01:04Z"
  }
 }
