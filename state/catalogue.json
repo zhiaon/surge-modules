@@ -20785,5 +20785,44 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-17T15:01:09Z"
+ },
+ "api-balance-overview": {
+  "slug": "api-balance-overview",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "api-balance-overview.sgmodule",
+  "sha": "d07daa45bc165b27f6df7a442eb1a6a63042f98f",
+  "name": "API余额总览",
+  "description": "V1.0：汇总 OpenAI/One API/New API 风格账户余额；支持低余额提醒和缓存展示。",
+  "author": "许舟",
+  "version": "1.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-18T00:00:59Z"
+ },
+ "appstore-price-alert": {
+  "slug": "appstore-price-alert",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "appstore-price-alert.sgmodule",
+  "sha": "64f1b55028a94dd587701b178ce562bdada16254",
+  "name": "App Store降价提醒",
+  "description": "V1.0：监测指定应用在指定地区的 App Store 本体价格；首次静默建立基线，后续降价才通知。",
+  "author": "许舟",
+  "version": "1.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-18T00:00:59Z"
+ },
+ "release-radar": {
+  "slug": "release-radar",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "release-radar.sgmodule",
+  "sha": "a1ba16568b673c7cd34539f7c40b22e2dc624b50",
+  "name": "版本更新雷达",
+  "description": "V1.0：监测 GitHub 仓库 Release 更新；首次静默建立基线，后续新版本通知并在面板显示。",
+  "author": "许舟",
+  "version": "1.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-18T00:00:59Z"
  }
 }
