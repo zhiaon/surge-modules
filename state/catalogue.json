@@ -20863,5 +20863,18 @@
   "version": "1.1",
   "category": "adblock",
   "updatedAt": "2026-11-18T07:01:03Z"
+ },
+ "pdd-clean3": {
+  "slug": "pdd-clean3",
+  "repo": "xchun5678/surge",
+  "branch": "main",
+  "path": "PDD-Clean3.sgmodule",
+  "sha": "5c5e46feef67ae07732f733a0af13d981ae63d15",
+  "name": "拼多多去广告（自制版）",
+  "description": "自制版 v3：修偶发失灵——脚本体积上限提到 1MB（大响应不再被跳过）、API 域名禁 QUIC 强制回落 HTTPS（QUIC 流量脚本处理不到）、开屏拦截兼容裸 IP、标签过滤放宽不再被单个异常项整份绕过。仍只删广告字段、不喂空响应、不拦遥测；装前请停用 v2，勿双开。",
+  "author": "xchun5678",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-18T11:01:01Z"
  }
 }

@@ -1603,5 +1603,6 @@
 "release-radar": "tools",
 "going-out-weather": "tools",
 "rss-reader": "tools",
-"exchange-rates": "tools"
+"exchange-rates": "tools",
+"pdd-clean3": "adblock"
 }
