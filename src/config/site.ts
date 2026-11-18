@@ -42,9 +42,13 @@ export interface SiteConfig {
   };
   footer: {
     tagline: string;
+    /** Affiliation disclaimer. Copyright notices live in the two fields below
+        so the same fact is never stated twice. */
     disclaimer: string;
-    license: string;
-    rights: string;
+    /** Who owns the module content — the upstream authors, not this site. */
+    contentLicense: string;
+    /** Who owns this site's own code, printed with the © year. */
+    copyrightHolder: string;
   };
   seo: {
     titleTemplate: string;
@@ -81,11 +85,13 @@ export const siteConfig: SiteConfig = {
     twitter: '',
   },
   footer: {
-    tagline: '独立维护的 Surge 模块索引。非 Surge 官方产品。',
+    tagline: '独立维护的 Surge 模块索引，非 Surge 官方产品。',
+    // 三段式：关系澄清 → 模块内容归属 → 使用提示。用分号连成两句，
+    // 比原来一句到底的长句好读。
     disclaimer:
-      '本平台与 Surge 官方无隶属关系。所有模块由其作者独立提供与维护，著作权归原作者所有；本站仅做索引与格式规范化，不对模块内容主张权利。使用前请自行确认模块内容与来源。',
-    license: '站内内容版权归原作者所有',
-    rights: '保留所有权利',
+      '本站与 Surge 官方无隶属关系；模块由各作者独立提供与维护，本站仅做索引与格式规范化，不对模块内容主张权利。使用前请自行确认模块内容与来源。',
+    contentLicense: '模块内容版权归原作者所有',
+    copyrightHolder: '许舟',
   },
   seo: {
     titleTemplate: '%s · Surge Modules',

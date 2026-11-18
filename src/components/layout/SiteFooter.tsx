@@ -177,26 +177,27 @@ export function SiteFooter() {
 
         <Divider className="mt-10" />
 
+        {/* Two tiers. The left column carries the legal text (affiliation, then
+            who owns what), the right one is the identity/version stamp. It used
+            to be four copyright lines wrapping around a © + version pair, which
+            read as one blob on a phone. */}
         <div className="mt-6 flex flex-col gap-3 text-[11px] leading-relaxed text-faint sm:flex-row sm:items-start sm:justify-between sm:gap-8">
-          <div className="max-w-xl">
+          <div className="max-w-xl space-y-1.5">
             <p className="text-pretty">{t(siteConfig.footer.disclaimer)}</p>
-            <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span>{t(siteConfig.footer.license)}</span>
-              <span className="text-line-strong" aria-hidden="true">
+            <p className="text-pretty">{t(siteConfig.footer.contentLicense)}</p>
+          </div>
+          <div className="shrink-0 space-y-1 sm:text-right">
+            <p className="tabular-nums">
+              © {year} {t(siteConfig.footer.copyrightHolder)}
+              <span className="mx-2 text-line-strong" aria-hidden="true">
                 ·
               </span>
-              <span>
-                {t('站点代码')} {t(siteConfig.footer.rights)}
-              </span>
+              {t('保留所有权利')}
+            </p>
+            <p className="tabular-nums text-faint/70">
+              {siteConfig.name} v{siteConfig.version}
             </p>
           </div>
-          <p className="shrink-0 tabular-nums sm:text-right">
-            © {year} {siteConfig.name}
-            <span className="mx-2 text-line-strong" aria-hidden="true">
-              ·
-            </span>
-            v{siteConfig.version}
-          </p>
         </div>
       </Container>
     </footer>

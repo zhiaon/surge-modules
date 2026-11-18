@@ -325,12 +325,12 @@ export const EN: Record<string, DictValue> = {
   '未知错误': 'Unknown error',
 
   // ---- footer ----------------------------------------------------------
-  '独立维护的 Surge 模块索引。非 Surge 官方产品。': 'An independently maintained Surge module index. Not an official Surge product.',
-  '本平台与 Surge 官方无隶属关系。所有模块由其作者独立提供与维护，著作权归原作者所有；本站仅做索引与格式规范化，不对模块内容主张权利。使用前请自行确认模块内容与来源。':
-    'This site is not affiliated with Surge. Every module is provided and maintained by its own author, who holds the copyright; this site only indexes and normalises formatting and claims no rights over module contents. Verify what a module does before using it.',
-  '站内内容版权归原作者所有': 'Content copyright belongs to the original authors',
+  '独立维护的 Surge 模块索引，非 Surge 官方产品。': 'An independently maintained Surge module index. Not an official Surge product.',
+  '本站与 Surge 官方无隶属关系；模块由各作者独立提供与维护，本站仅做索引与格式规范化，不对模块内容主张权利。使用前请自行确认模块内容与来源。':
+    'This site is not affiliated with Surge. Modules are provided and maintained by their own authors; we only index them and normalise formatting, and claim no rights over their contents. Check what a module does before you use it.',
+  '模块内容版权归原作者所有': 'Module content © the respective authors',
   '保留所有权利': 'All rights reserved',
-  '站点代码': 'Site code',
+  '许舟': 'Xu Zhou',
   '联系作者': 'Contact',
   '通过Telegram频道私信反馈问题或提出建议': 'Send feedback or suggestions via the Telegram channel',
   '通过 Telegram 频道私信反馈问题或提出建议': 'Send feedback or suggestions via the Telegram channel',
