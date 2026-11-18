@@ -15409,13 +15409,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "dnslite.sgmodule",
-  "sha": "d35c7e359d552e3572eaec046643efabb33c5e45",
+  "sha": "b1a3a78843ecc82b1013db43aacaaf0671b70dfd",
   "name": "DNS Lite",
   "description": "V1.0 国内/国外双 DNS 智能分流 + 广告与追踪域名拦截。国内域名走国内 DNS，其余走国外加密 DNS。",
   "author": "许舟",
   "version": "1.0",
   "category": "rules",
-  "updatedAt": "2026-11-18T06:01:05Z"
+  "updatedAt": "2026-11-18T07:01:02Z"
  },
  "dnsrefresh": {
   "slug": "dnsrefresh",
@@ -15448,39 +15448,39 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "ikuuu.sgmodule",
-  "sha": "3efbf877f78715e62f202d5d33fd714a73c15e7c",
+  "sha": "fc2701b14be95f17f4de6d78660e6440b6e759e0",
   "name": "iKuuu 每日签到",
   "description": "V1.2 仅保留自动签到（无面板）：Cookie 自动抓取 + 每日定时签到，已移除面板与手动签到脚本。通知里只报服务器原文与剩余流量。",
   "author": "Yjwj205 / 许舟（Surge 移植）",
   "version": "1.2",
   "category": "adblock",
-  "updatedAt": "2026-11-18T06:01:06Z"
+  "updatedAt": "2026-11-18T07:01:03Z"
  },
  "ipinfo": {
   "slug": "ipinfo",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "ipinfo.sgmodule",
-  "sha": "b9f47ed9feec8b87f7a7d70107b5125d213d7890",
+  "sha": "58ada98fce5e16d666a2dccb98d27ca02ce8404f",
   "name": "网络IP信息",
   "description": "V1.2 显示当前网络的 IP 全链路：本机公网 IP、各策略组的真实入口 IP 与节点落地 IP，均含位置和运营商。兜底组常驻，不受参数影响。首行显示 Wi-Fi 名，蜂窝下显示「蜂窝流量」。",
   "author": "许舟",
   "version": "1.2",
   "category": "tools",
-  "updatedAt": "2026-11-18T06:01:06Z"
+  "updatedAt": "2026-11-18T07:01:03Z"
  },
  "jichang": {
   "slug": "jichang",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "jichang.sgmodule",
-  "sha": "864f66337a5aec8a28415885b094d2f1ccc660e2",
+  "sha": "cdc1ff24a107eb3ba447dbc4fd69c98acc6cd2f2",
   "name": "机场流量",
   "description": "V1.1：复制订阅链接进去就可以了。重置日留空则该机场不显示重置信息。",
   "author": "许舟",
   "version": "1.1",
   "category": "tools",
-  "updatedAt": "2026-11-18T06:01:06Z"
+  "updatedAt": "2026-11-18T07:01:04Z"
  },
  "qimao": {
   "slug": "qimao",
@@ -15500,13 +15500,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "streaming.sgmodule",
-  "sha": "f9dd18bf8bf382361c406c1d523dbdef39198c24",
+  "sha": "d69669e821322eea7dac4cf06e77a146beb30642",
   "name": "流媒体解锁",
   "description": "V1.3 逐平台实测解锁状态：Netflix、Disney+、YouTube、Prime Video、Spotify、HBO Max、Hulu、Paramount+、Peacock、Viu、Abema、巴哈动画疯、B站港澳台，以及 ChatGPT / Claude / Gemini 三家人工智能服务。每个策略组一块，发真实请求看对方真正看到的地区，不靠 IP 库猜。V1.3 改为图标打头排版，任何机型、任何字号下勾叉列都不会再错位。",
   "author": "许舟",
   "version": "1.3",
   "category": "tools",
-  "updatedAt": "2026-11-18T06:01:07Z"
+  "updatedAt": "2026-11-18T07:01:04Z"
  },
  "adblock": {
   "slug": "adblock",
@@ -18282,13 +18282,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "ippurity.sgmodule",
-  "sha": "d30abd959bea9ca8a4c9e7e25f395cd17bdccad2",
+  "sha": "c0c4bf20e31f51ecefc051758a4026f0bdb6b880",
   "name": "IP纯净度",
   "description": "V1.1 IPQuery 免 Key 出口风险面板：显示 IP、位置、ASN、风险分与 VPN/代理/Tor/机房标签。点击刷新，自动刷新 30 分钟。未匹配≠安全，风险分不是纯净度百分比。",
   "author": "许舟",
   "version": "1.1",
   "category": "adblock",
-  "updatedAt": "2026-11-18T06:01:06Z"
+  "updatedAt": "2026-11-18T07:01:03Z"
  },
  "surge-runtime": {
   "slug": "surge-runtime",
@@ -18308,26 +18308,26 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "dual-ip.sgmodule",
-  "sha": "dc104b638dcdd107970386da38546370b2e3893d",
+  "sha": "ba0a623d6901e59bd93c03086bbf61010c2c1bd9",
   "name": "双出口 IP 面板",
   "description": "V1.1 详细双出口面板：IP、IPv4/IPv6、国家/省市、运营商/组织、ASN、时区、查询来源、每路耗时与更新时间；点右上角刷新立即查询。",
   "author": "许舟",
   "version": "1.1",
   "category": "adblock",
-  "updatedAt": "2026-11-18T06:01:05Z"
+  "updatedAt": "2026-11-18T07:01:02Z"
  },
  "salary-widget": {
   "slug": "salary-widget",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "salary-widget.sgmodule",
-  "sha": "83f0cef22197859224fc21cd8ffc64956f8707e5",
+  "sha": "3620c2585c880ff467d0cead52cd6f54a5c732f0",
   "name": "今日入账",
   "description": "V1.3：采用分组留白排版；详细显示今日收入、预计总额、计薪工时、工作进度、两段用餐休息与下班倒计时，以及本月累计与含本班合计。纯本地计算，每60秒刷新。",
   "author": "许舟",
   "version": "1.3",
   "category": "adblock",
-  "updatedAt": "2026-11-16T04:00:50Z"
+  "updatedAt": "2026-11-18T07:01:04Z"
  },
  "ad": {
   "slug": "ad",
@@ -20791,64 +20791,77 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "api-balance-overview.sgmodule",
-  "sha": "d07daa45bc165b27f6df7a442eb1a6a63042f98f",
+  "sha": "7e2992781027235e12a814a00f3484eb86034c41",
   "name": "API余额总览",
   "description": "V1.0：汇总 OpenAI/One API/New API 风格账户余额；支持低余额提醒和缓存展示。",
   "author": "许舟",
   "version": "1.0",
   "category": "adblock",
-  "updatedAt": "2026-11-18T00:00:59Z"
+  "updatedAt": "2026-11-18T07:01:02Z"
  },
  "appstore-price-alert": {
   "slug": "appstore-price-alert",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "appstore-price-alert.sgmodule",
-  "sha": "64f1b55028a94dd587701b178ce562bdada16254",
+  "sha": "23aee73d31235330342b6a2cac946a2b151347cd",
   "name": "App Store降价提醒",
   "description": "V1.0：监测指定应用在指定地区的 App Store 本体价格；首次静默建立基线，后续降价才通知。",
   "author": "许舟",
   "version": "1.0",
   "category": "adblock",
-  "updatedAt": "2026-11-18T00:00:59Z"
+  "updatedAt": "2026-11-18T07:01:02Z"
  },
  "release-radar": {
   "slug": "release-radar",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "release-radar.sgmodule",
-  "sha": "a1ba16568b673c7cd34539f7c40b22e2dc624b50",
+  "sha": "f64a1ff8346d5cdecb75b3a64ca64577a41343f0",
   "name": "版本更新雷达",
   "description": "V1.0：监测 GitHub 仓库 Release 更新；首次静默建立基线，后续新版本通知并在面板显示。",
   "author": "许舟",
   "version": "1.0",
   "category": "adblock",
-  "updatedAt": "2026-11-18T00:00:59Z"
+  "updatedAt": "2026-11-18T07:01:04Z"
  },
  "going-out-weather": {
   "slug": "going-out-weather",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "going-out-weather.sgmodule",
-  "sha": "d442203e4297e621c5f7a42deb063e67c4f8ec0a",
+  "sha": "5bc070cde1a71faeeb9d7c1e2127c9de357d6a89",
   "name": "出门天气卡",
   "description": "V1.1：详细出门天气卡。显示当前天气与体感、今日高低温、降水概率与雨量、湿度风力、紫外线、空气质量、日出日落、气压能见度阵风、未来 6 小时逐时预报，并给出雨伞/穿衣/运动/体感四项出门指数；每天 07:30 推送天气摘要。",
   "author": "许舟",
   "version": "1.1",
   "category": "adblock",
-  "updatedAt": "2026-11-18T05:01:04Z"
+  "updatedAt": "2026-11-18T07:01:03Z"
  },
  "rss-reader": {
   "slug": "rss-reader",
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "rss-reader.sgmodule",
-  "sha": "b1a118deafe513bf685f69f8642c4d933b5a5055",
+  "sha": "031cbba7a25e03772d5077398ddfef4f762e2225",
   "name": "RSS订阅",
   "description": "V1.0：订阅 RSS / Atom 源，面板列出最新条目；首次只建立基线，之后出现新内容才通知。",
   "author": "许舟",
   "version": "1.0",
   "category": "adblock",
-  "updatedAt": "2026-11-18T05:01:05Z"
+  "updatedAt": "2026-11-18T07:01:04Z"
+ },
+ "exchange-rates": {
+  "slug": "exchange-rates",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "exchange-rates.sgmodule",
+  "sha": "501da62214c129471e7610af106a0faef5244084",
+  "name": "汇率显示面板",
+  "description": "V1.1：直接显示「1 单位外币等于多少基准货币」，如「1 USD（美元） = 6.6798 CNY」；小面值币种自动按 100 或 1000 单位显示，含数据更新时间。",
+  "author": "许舟",
+  "version": "1.1",
+  "category": "adblock",
+  "updatedAt": "2026-11-18T07:01:03Z"
  }
 }
