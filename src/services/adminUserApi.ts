@@ -33,12 +33,12 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
       },
     });
   } catch {
-    throw new AdminUserError(0, 'network_error', '无法连接服务器');
+    throw new AdminUserError(0, 'network_error', i18n.translate('无法连接服务器'));
   }
 
   const type = res.headers.get('content-type') ?? '';
   if (!type.includes('application/json')) {
-    throw new AdminUserError(res.status, 'not_json', '接口未就绪');
+    throw new AdminUserError(res.status, 'not_json', i18n.translate('接口未就绪'));
   }
   const body = (await res.json()) as
     | { ok: true; data: unknown }
@@ -240,3 +240,4 @@ export const adminUserApi = {
     return call(`/invitations/${code}`, { method: 'DELETE' });
   },
 };
+import { i18n } from '@/i18n';

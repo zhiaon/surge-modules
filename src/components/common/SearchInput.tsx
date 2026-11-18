@@ -1,6 +1,7 @@
 import { forwardRef, useRef } from 'react';
 import { Search, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
+import { useI18n } from '@/i18n';
 
 export interface SearchInputProps {
   value: string;
@@ -30,7 +31,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
   {
     value,
     onChange,
-    placeholder = '搜索模块、作者或标签…',
+    placeholder,
     onSubmit,
     onClear,
     className,
@@ -47,6 +48,8 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
   ref,
 ) {
   const innerRef = useRef<HTMLInputElement | null>(null);
+  const { t } = useI18n();
+  const resolvedPlaceholder = placeholder ?? t('搜索模块、作者或标签…');
 
   const clear = () => {
     onChange('');
@@ -90,7 +93,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
         autoCapitalize="off"
         spellCheck={false}
         enterKeyHint="search"
-        placeholder={placeholder}
+        placeholder={resolvedPlaceholder}
         onChange={(e) => onChange(e.target.value)}
         onCompositionStart={onCompositionStart}
         onCompositionEnd={onCompositionEnd}
@@ -114,7 +117,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
         <button
           type="button"
           onClick={clear}
-          aria-label="清空搜索"
+          aria-label={t('清空搜索')}
           className="mr-1.5 inline-flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-xs)] text-faint transition-colors hover:bg-surface hover:text-fg"
         >
           <X className="size-3.5" strokeWidth={2} aria-hidden="true" />

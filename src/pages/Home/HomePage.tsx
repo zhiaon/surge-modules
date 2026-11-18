@@ -10,15 +10,17 @@ import { LibraryPreview, PlatformIntro } from './LibraryPreview';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { StatSheets } from '@/components/home/StatSheets';
 import { closeStatSheet, useStatSheet } from '@/stores/statSheet';
+import { useI18n } from '@/i18n';
 
 /**
  * Home page composition only — every block owns its own data needs and
  * loading state, so a slow section never blocks the hero from painting.
  */
 export function HomePage() {
+  const { t } = useI18n();
   usePageMeta({
-    title: siteConfig.tagline,
-    description: siteConfig.description,
+    title: t(siteConfig.tagline),
+    description: t(siteConfig.description),
     path: '/',
   });
 

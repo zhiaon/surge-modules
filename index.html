@@ -42,6 +42,23 @@
           var meta = document.querySelector('meta[name="theme-color"]');
           if (meta) meta.content = resolved === 'dark' ? '#0B0D12' : '#F6F7FA';
         } catch (e) {}
+
+        // Language before first paint, for the same reason as the theme: <html
+        // lang> selects the CJK font stack and line-breaking rules, and a flip
+        // after paint would reflow the whole page. Must stay in sync with
+        // src/i18n/index.ts (same key, same 'system' default).
+        try {
+          var langMode = localStorage.getItem('surge-modules:lang:v1');
+          var pick = langMode === 'zh' || langMode === 'en' ? langMode : null;
+          if (!pick) {
+            var tags = navigator.languages || [navigator.language || ''];
+            pick = /^zh\b/i.test(tags[0] || '') ? 'zh' : 'en';
+          }
+          document.documentElement.lang = pick === 'zh' ? 'zh-CN' : 'en';
+          document.documentElement.dataset.lang = pick;
+          document.documentElement.dataset.langMode =
+            langMode === 'zh' || langMode === 'en' ? langMode : 'system';
+        } catch (e) {}
       })();
     </script>
     <!-- Cloudflare Web Analytics: privacy-friendly, no cookies, ~1 KB. -->

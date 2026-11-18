@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Home, Compass, Bookmark, History } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { useFavorites } from '@/stores/favorites';
+import { useI18n } from '@/i18n';
 
 const TABS = [
   { to: '/', label: '首页', icon: Home, end: true },
@@ -26,6 +27,7 @@ const TABS = [
  */
 export function MobileTabBar() {
   const favorites = useFavorites();
+  const { t } = useI18n();
   // Keyboard: Safari shrinks the *visual* viewport while leaving the layout
   // viewport alone, so a bar pinned to the layout bottom ends up behind the
   // keyboard. Track the visual viewport and pin the bar to its visible bottom
@@ -79,7 +81,7 @@ export function MobileTabBar() {
 
   return (
     <nav
-      aria-label="底部导航"
+      aria-label={t('底部导航')}
       className={cn(
         'fixed inset-x-2 z-40 md:hidden',
         'rounded-[26px] border border-[var(--line-soft)]',
@@ -129,8 +131,10 @@ export function MobileTabBar() {
                         />
                       )}
                     </span>
-                    <span className="relative z-10">{tab.label}</span>
-                    {showBadge && <span className="sr-only">有 {favorites.length} 个收藏</span>}
+                    <span className="relative z-10">{t(tab.label)}</span>
+                    {showBadge && <span className="sr-only">
+                      {t('有 {n} 个收藏', { n: favorites.length })}
+                    </span>}
                   </>
                 )}
               </NavLink>

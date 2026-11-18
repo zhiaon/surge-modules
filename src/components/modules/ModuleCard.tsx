@@ -12,6 +12,7 @@ import { GithubAvatar } from '@/components/home/StatSheetShared';
 import { installDeepLink } from '@/lib/credential';
 import { toast } from '@/components/feedback/Toast';
 import { openModuleSheet } from '@/stores/moduleSheet';
+import { useI18n } from '@/i18n';
 
 type Variant = 'default' | 'compact' | 'horizontal' | 'featured';
 
@@ -43,6 +44,7 @@ const CARD_BASE =
  * devices get a scale-down press instead, because hover never fires there.
  */
 function ModuleCardImpl({ module, variant = 'default', className, hideTags }: ModuleCardProps) {
+  const { t } = useI18n();
   const featured = variant === 'featured';
   // Only our own upstream gets a donation entry: the QR belongs to the site
   // maintainer, so putting it on someone else's module would misattribute
@@ -66,12 +68,12 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
   const onCopy = async () => {
     const ok = await copyText(installUrl);
     if (!ok) {
-      toast.show('复制失败', '剪贴板不可用，请长按原始链接手动复制');
+      toast.show(t('复制失败'), t('剪贴板不可用，请长按原始链接手动复制'));
       return;
     }
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1800);
-    toast.show('已复制安装链接', undefined, 'success');
+    toast.show(t('已复制安装链接'), undefined, 'success');
   };
 
   if (variant === 'compact') {
@@ -118,7 +120,7 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
           )}
         >
           <Download className="size-3" strokeWidth={2.4} aria-hidden="true" />
-          导入 Surge
+          {t('导入 Surge')}
         </a>
       )}
 
@@ -143,7 +145,7 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
           ) : (
             <Link2 className="size-2.5" strokeWidth={2.2} aria-hidden="true" />
           )}
-          {copied ? '已复制' : '复制链接'}
+          {copied ? t('已复制') : t('复制链接')}
         </button>
 
         <button
@@ -159,7 +161,7 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
           )}
         >
           <FileCode2 className="size-2.5" strokeWidth={2.1} aria-hidden="true" />
-          详情配置
+          {t('详情配置')}
         </button>
       </div>
     </div>
@@ -171,7 +173,7 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="eyebrow">{module.category.name}</span>
+              <span className="eyebrow">{t(module.category.name)}</span>
               <span className="text-faint/50" aria-hidden="true">
                 /
               </span>
@@ -179,15 +181,15 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
               {(module.dupe ?? 0) > 0 && (
                 <span
                   className="inline-flex items-center rounded-full border border-line bg-inset px-1.5 py-0.5 text-[9.5px] text-faint"
-                  title={`另有 ${module.dupe} 个同名模块，可在详情里对比`}
+                  title={t('另有 {n} 个同名模块，可在详情里对比', { n: module.dupe ?? 0 })}
                 >
-                  同名 {(module.dupe ?? 0) + 1}
+                  {t('同名 {n}', { n: (module.dupe ?? 0) + 1 })}
                 </span>
               )}
               {module.health === 'broken' && (
                 <span
                   className="inline-flex items-center gap-1 rounded-full border border-[var(--line-danger-35)] bg-[var(--tint-danger-10)] px-1.5 py-0.5 text-[9.5px] text-danger"
-                  title={`模块引用的脚本已失效：${healthHint(module.healthReason)}`}
+                  title={t('模块引用的脚本已失效：{hint}', { hint: healthHint(module.healthReason) })}
                 >
                   <AlertTriangle className="size-2.5" strokeWidth={2.2} aria-hidden="true" />
                   {healthBadge(module.healthReason)}
@@ -202,7 +204,7 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
         </p>
         <div className="mt-2.5">
           <p className="mb-1.5 text-[11px] text-faint">
-            更新于 {formatDate(module.updatedAt)}
+            {t('更新于 {date}', { date: formatDate(module.updatedAt) })}
           </p>
           {actions()}
         </div>
@@ -228,15 +230,15 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
         <button
           type="button"
           onClick={openDonateSheet}
-          aria-label="捐赠作者"
-          title="捐赠作者"
+          aria-label={t('捐赠作者')}
+          title={t('捐赠作者')}
           className="absolute right-3.5 top-3.5 z-20 inline-flex min-h-0 items-center gap-1 rounded-full border border-line bg-raised/80 px-2 py-[5px] text-[10px] leading-none text-muted shadow-[var(--shadow-card)] transition-colors hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]"
           // The global 44px tap-target rule outranks the utility class; pin the
           // visual box here so the pill stays a small corner badge.
           style={{ minHeight: 22, height: 22 }}
         >
           <span aria-hidden="true">💌</span>
-          捐赠作者
+          {t('捐赠作者')}
         </button>
       )}
 
@@ -267,20 +269,20 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
 
         <div className="min-w-0 flex-1">
           <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 pr-16">
-            <span className="eyebrow">{module.category.name}</span>
+            <span className="eyebrow">{t(module.category.name)}</span>
             <VersionBadge version={module.version} />
             {(module.dupe ?? 0) > 0 && (
               <span
                 className="inline-flex items-center rounded-full border border-line bg-inset px-1.5 py-0.5 text-[9.5px] text-faint"
-                title={`另有 ${module.dupe} 个同名模块，可在详情里对比`}
+                title={t('另有 {n} 个同名模块，可在详情里对比', { n: module.dupe ?? 0 })}
               >
-                同名 {(module.dupe ?? 0) + 1}
+                {t('同名 {n}', { n: (module.dupe ?? 0) + 1 })}
               </span>
             )}
             {module.health === 'broken' && (
               <span
                 className="inline-flex items-center gap-1 rounded-full border border-[var(--line-danger-35)] bg-[var(--tint-danger-10)] px-1.5 py-0.5 text-[9.5px] text-danger"
-                title={`模块引用的脚本已失效：${healthHint(module.healthReason)}`}
+                title={t('模块引用的脚本已失效：{hint}', { hint: healthHint(module.healthReason) })}
               >
                 <AlertTriangle className="size-2.5" strokeWidth={2.2} aria-hidden="true" />
                 {healthBadge(module.healthReason)}
@@ -289,7 +291,7 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
             {featured && (
               <span className="inline-flex items-center gap-1 rounded-[var(--radius-xs)] border border-[var(--line-accent-28)] bg-[var(--tint-accent-12)] px-1.5 py-[3px] text-[10.5px] leading-none text-accent-soft">
                 <Sparkles className="size-2.5" strokeWidth={2} aria-hidden="true" />
-                精选
+                {t('精选')}
               </span>
             )}
           </div>
@@ -337,7 +339,7 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
       <footer className="mt-auto space-y-2.5 border-t border-line pt-3">
         <p className="flex items-center justify-between gap-2 text-[11px] text-faint">
           <time dateTime={toIsoDate(module.updatedAt)} title={formatDate(module.updatedAt)}>
-            更新于 {formatDate(module.updatedAt)}
+            {t('更新于 {date}', { date: formatDate(module.updatedAt) })}
           </time>
           <span className="shrink-0">{formatRelative(module.updatedAt)}</span>
         </p>

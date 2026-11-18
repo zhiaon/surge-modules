@@ -10,6 +10,7 @@ import { moduleService } from '@/services/moduleService';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { formatDate, formatRelative, toIsoDate } from '@/lib/format';
 import { siteConfig } from '@/config/site';
+import { useI18n } from '@/i18n';
 import { ErrorState } from '@/components/feedback/ErrorState';
 import { cn } from '@/lib/cn';
 
@@ -24,9 +25,10 @@ import { cn } from '@/lib/cn';
  * retry button calls the real loader.
  */
 export function UpdatesPage() {
+  const { t } = useI18n();
   usePageMeta({
-    title: '更新日志',
-    description: '平台公告与模块版本更新记录。',
+    title: t('更新日志'),
+    description: t('平台公告与模块版本更新记录。'),
     path: '/updates',
   });
 
@@ -61,12 +63,12 @@ export function UpdatesPage() {
   return (
     <Container size="wide" className="py-8 sm:py-12">
       <header className="max-w-2xl">
-        <span className="eyebrow">更新</span>
+        <span className="eyebrow">{t('更新')}</span>
         <h1 className="mt-2.5 text-balance text-[1.9rem] font-semibold leading-[1.08] tracking-[-0.028em] sm:text-[2.4rem]">
-          更新日志
+          {t('更新日志')}
         </h1>
         <p className="mt-3 text-[14px] leading-relaxed text-muted">
-          平台公告与模块版本记录。当前版本 v{siteConfig.version}。
+          {t('平台公告与模块版本记录。当前版本 v{version}。', { version: siteConfig.version })}
         </p>
       </header>
 
@@ -74,18 +76,18 @@ export function UpdatesPage() {
         <section aria-labelledby="module-versions" className="min-w-0">
           <div className="mb-4 flex items-center justify-between gap-3">
             <h2 id="module-versions" className="text-[13px] font-semibold uppercase tracking-[0.08em] text-faint">
-              模块更新
+              {t('模块更新')}
             </h2>
             {versions.data && (
               <span className="font-mono text-[11px] tabular-nums text-faint">
-                {versions.data.length} 条
+                {t('{n} 条', { n: versions.data.length })}
               </span>
             )}
           </div>
 
           {versions.status === 'error' ? (
             <ErrorState
-              title="更新记录加载失败"
+              title={t('更新记录加载失败')}
               error={versions.error}
               onRetry={versions.reload}
               compact
@@ -108,12 +110,12 @@ export function UpdatesPage() {
             </ul>
           ) : groups.length === 0 ? (
             <EmptyState
-              title="暂无模块更新"
-              description="模块同步并发布新版本后，记录会出现在这里。"
+              title={t('暂无模块更新')}
+              description={t('模块同步并发布新版本后，记录会出现在这里。')}
               action={
                 <Button size="sm" onClick={versions.reload}>
                   <RotateCw className="size-3.5" strokeWidth={2} aria-hidden="true" />
-                  重新加载
+                  {t('重新加载')}
                 </Button>
               }
               compact
@@ -145,12 +147,12 @@ export function UpdatesPage() {
                           </Link>
                           <VersionBadge version={v.version} />
                           <span className="rounded-full border border-line bg-inset px-2 py-0.5 text-[10.5px] text-faint">
-                            {v.module.category.name}
+                            {t(v.module.category.name)}
                           </span>
                           {groups[0]?.items[0]?.id === v.id && (
                             <Badge tone="success">
                               <span className="size-1 rounded-full bg-ok" aria-hidden="true" />
-                              最新
+                              {t('最新')}
                             </Badge>
                           )}
                           <time
@@ -179,12 +181,12 @@ export function UpdatesPage() {
             id="announcements"
             className="mb-4 text-[13px] font-semibold uppercase tracking-[0.08em] text-faint"
           >
-            平台公告
+            {t('平台公告')}
           </h2>
 
           {announcements.status === 'error' ? (
             <ErrorState
-              title="公告加载失败"
+              title={t('公告加载失败')}
               error={announcements.error}
               onRetry={announcements.reload}
               compact
@@ -202,7 +204,7 @@ export function UpdatesPage() {
           ) : !announcements.data || announcements.data.length === 0 ? (
             <div className="rounded-[var(--radius-lg)] border border-dashed border-line px-4 py-8 text-center">
               <Megaphone className="mx-auto size-5 text-faint" strokeWidth={1.6} aria-hidden="true" />
-              <p className="mt-2.5 text-[12.5px] text-faint">暂无公告</p>
+              <p className="mt-2.5 text-[12.5px] text-faint">{t('暂无公告')}</p>
             </div>
           ) : (
             <ul className="space-y-2.5">
@@ -219,7 +221,7 @@ export function UpdatesPage() {
                     {a.pinned && (
                       <Badge tone="accent">
                         <Pin className="size-2.5" aria-hidden="true" />
-                        置顶
+                        {t('置顶')}
                       </Badge>
                     )}
                   </div>

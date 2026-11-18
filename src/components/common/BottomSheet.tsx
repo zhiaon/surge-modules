@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { IconButton } from '../common/IconButton';
 import { cn } from '@/lib/cn';
+import { useI18n } from '@/i18n';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 import { useMotionOff } from '@/hooks/useMotionOff';
@@ -35,6 +36,7 @@ export function BottomSheet({
   className,
   bare = false,
 }: BottomSheetProps) {
+  const { t } = useI18n();
   const reduce = useReducedMotion();
   // A frozen compositor clock (doc hidden) leaves a y:'100%' entrance parked
   // off-screen, so the sheet looks like it never opened. When motion is off we
@@ -109,7 +111,7 @@ export function BottomSheet({
                 </div>
                 <header className="flex items-center justify-between gap-3 px-5 pb-3 pt-1.5">
                   <h2 className="text-[14.5px] font-medium">{title}</h2>
-                  <IconButton label="关闭" onClick={onClose} size="sm" className="-mr-1">
+                  <IconButton label={t('关闭')} onClick={onClose} size="sm" className="-mr-1">
                     <X className="size-4" strokeWidth={1.75} aria-hidden="true" />
                   </IconButton>
                 </header>

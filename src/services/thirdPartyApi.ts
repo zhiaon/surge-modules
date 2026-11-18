@@ -34,12 +34,12 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
       },
     });
   } catch {
-    throw new ThirdPartyError(0, 'network_error', '无法连接服务器');
+    throw new ThirdPartyError(0, 'network_error', i18n.translate('无法连接服务器'));
   }
 
   const type = res.headers.get('content-type') ?? '';
   if (!type.includes('application/json')) {
-    throw new ThirdPartyError(res.status, 'not_json', '接口未就绪');
+    throw new ThirdPartyError(res.status, 'not_json', i18n.translate('接口未就绪'));
   }
 
   const body = (await res.json()) as
@@ -430,3 +430,4 @@ export function webhookUrl(repositoryId: string): string {
       : 'https://son.zhiaon.top';
   return `${origin}/api/v1/webhook/github/${repositoryId}`;
 }
+import { i18n } from '@/i18n';

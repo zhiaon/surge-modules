@@ -6,6 +6,7 @@ import { useEnter } from '@/hooks/useEnter';
 import { cn } from '@/lib/cn';
 import { openStatSheet, type StatSheetKind } from '@/stores/statSheet';
 import type { ModuleStats } from '@/types';
+import { useI18n } from '@/i18n';
 
 export interface HeroProps {
   stats: ModuleStats | undefined;
@@ -25,6 +26,7 @@ export interface HeroProps {
  */
 export function Hero({ stats, topCategory }: HeroProps) {
   const enter = useEnter();
+  const { t } = useI18n();
 
   const cards: Array<{
     label: string;
@@ -34,30 +36,30 @@ export function Hero({ stats, topCategory }: HeroProps) {
     kind: StatSheetKind;
   }> = [
     {
-      label: '模块总数',
+      label: t('模块总数'),
       value: stats ? String(stats.modules) : '—',
-      hint: '已收录并公开',
+      hint: t('已收录并公开'),
       icon: Layers,
       kind: 'modules',
     },
     {
-      label: '分类',
+      label: t('分类'),
       value: stats ? String(stats.categories) : '—',
-      hint: topCategory ? `最多：${topCategory.name}` : '按用途划分',
+      hint: topCategory ? t('最多：{name}', { name: topCategory.name }) : t('按用途划分'),
       icon: Sparkles,
       kind: 'categories',
     },
     {
-      label: '模块来源',
+      label: t('模块来源'),
       value: stats ? String(stats.authors) : '—',
-      hint: '已接入的上游仓库',
+      hint: t('已接入的上游仓库'),
       icon: Users,
       kind: 'sources',
     },
     {
-      label: '最近更新',
+      label: t('最近更新'),
       value: stats?.lastUpdatedAt ? formatDate(stats.lastUpdatedAt) : '—',
-      hint: stats ? `${stats.versions} 个版本记录` : '按发布倒序',
+      hint: stats ? t('{n} 个版本记录', { n: stats.versions }) : t('按发布倒序'),
       icon: Zap,
       kind: 'updates',
     },
@@ -78,7 +80,7 @@ export function Hero({ stats, topCategory }: HeroProps) {
           <div className={cn(enter.cls(0), 'flex items-center gap-2.5')} style={enter.style(0)}>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-raised/70 px-3 py-1.5 text-[11.5px] text-muted">
               <span className="size-1.5 rounded-full bg-ok" aria-hidden="true" />
-              独立 Surge 模块索引
+              {t('独立 Surge 模块索引')}
             </span>
           </div>
 
@@ -89,9 +91,9 @@ export function Hero({ stats, topCategory }: HeroProps) {
             )}
             style={enter.style(0.05)}
           >
-            让 Surge 模块
+            {t('让 Surge 模块')}
             <span className="block bg-[linear-gradient(180deg,var(--color-fg),var(--color-accent-soft))] bg-clip-text text-transparent">
-              发现更简单
+              {t('发现更简单')}
             </span>
           </h1>
 
@@ -102,7 +104,7 @@ export function Hero({ stats, topCategory }: HeroProps) {
             )}
             style={enter.style(0.12)}
           >
-            浏览、搜索与收藏优质 Surge 模块，查看原始配置、复制安装链接，一次找到需要的规则与脚本。
+            {t('浏览、搜索与收藏优质 Surge 模块，查看原始配置、复制安装链接，一次找到需要的规则与脚本。')}
           </p>
 
           <div
@@ -113,11 +115,11 @@ export function Hero({ stats, topCategory }: HeroProps) {
             style={enter.style(0.18)}
           >
             <ButtonLink to="/discover" variant="primary" size="lg" fullWidth className="sm:w-auto">
-              探索模块
+              {t('探索模块')}
               <ArrowRight className="size-4" strokeWidth={1.9} aria-hidden="true" />
             </ButtonLink>
             <ButtonLink to="/discover#categories" variant="secondary" size="lg" fullWidth className="sm:w-auto">
-              浏览分类
+              {t('浏览分类')}
             </ButtonLink>
           </div>
 
@@ -136,7 +138,7 @@ export function Hero({ stats, topCategory }: HeroProps) {
                 key={card.label}
                 type="button"
                 onClick={() => openStatSheet(card.kind)}
-                aria-label={`查看${card.label}`}
+                aria-label={t('查看{label}', { label: card.label })}
                 style={i === cards.length - 1 ? undefined : undefined}
                 className={cn(
                   'group text-left rounded-[var(--radius-lg)] border border-line bg-raised card-spotlight p-4',

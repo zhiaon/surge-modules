@@ -4,9 +4,11 @@ import { Github, Heart } from 'lucide-react';
 import { siteConfig, hasLink } from '@/config/site';
 import { Container } from '@/components/common/Container';
 import { ThemeToggle } from '@/components/common/ThemeToggle';
+import { LanguageToggle } from '@/components/common/LanguageToggle';
 import { cn } from '@/lib/cn';
 import { Logo } from '@/components/navigation/Logo';
 import { openDonateSheet } from '@/stores/donateSheet';
+import { useI18n } from '@/i18n';
 
 /**
  * Top navigation.
@@ -22,6 +24,7 @@ import { openDonateSheet } from '@/stores/donateSheet';
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
+  const { t } = useI18n();
 
 
   useEffect(() => {
@@ -50,7 +53,7 @@ export function SiteHeader() {
             <Link
               to="/"
               className="flex shrink-0 items-center gap-2.5 rounded-[var(--radius-xs)] py-1"
-              aria-label={`${siteConfig.name} 首页`}
+              aria-label={t('{name} 首页', { name: siteConfig.name })}
             >
               <Logo className="size-7" />
               <span className="whitespace-nowrap text-[14.5px] font-semibold tracking-[-0.015em]">
@@ -59,7 +62,7 @@ export function SiteHeader() {
             </Link>
 
             {/* desktop links */}
-            <nav className="ml-2 hidden items-center gap-0.5 md:flex" aria-label="主导航">
+            <nav className="ml-2 hidden items-center gap-0.5 md:flex" aria-label={t('主导航')}>
               {siteConfig.nav.map((item) => {
                 const active = isActive(item.to.split('#')[0]);
                 return (
@@ -73,7 +76,7 @@ export function SiteHeader() {
                       active ? 'text-fg' : 'text-muted hover:bg-raised/60 hover:text-fg',
                     )}
                   >
-                    {item.label}
+                    {t(item.label)}
                     {active && (
                       <span
                         className="absolute inset-x-3 -bottom-px h-[2px] rounded-full bg-accent"
@@ -91,12 +94,13 @@ export function SiteHeader() {
               <button
                 type="button"
                 onClick={openDonateSheet}
-                aria-label="支持作者"
-                title="支持作者"
+                aria-label={t('支持作者')}
+                title={t('支持作者')}
                 className="inline-flex size-10 items-center justify-center rounded-[var(--radius-sm)] text-muted transition-colors hover:bg-raised hover:text-danger"
               >
                 <Heart className="size-[17px]" strokeWidth={1.75} aria-hidden="true" />
               </button>
+              <LanguageToggle />
               <ThemeToggle />
 
               {hasLink(siteConfig.githubUrl) ? (
@@ -104,7 +108,7 @@ export function SiteHeader() {
                   href={siteConfig.githubUrl}
                   target="_blank"
                   rel="noreferrer noopener"
-                  aria-label="GitHub 仓库"
+                  aria-label={t('GitHub 仓库')}
                   className="hidden size-10 items-center justify-center rounded-[var(--radius-sm)] text-muted transition-colors hover:bg-raised hover:text-fg lg:inline-flex"
                 >
                   <Github className="size-[17px]" strokeWidth={1.75} aria-hidden="true" />

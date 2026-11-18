@@ -17,6 +17,7 @@ import { openModuleSheet, closeModuleSheet } from '@/stores/moduleSheet';
 import { closeStatSheet } from '@/stores/statSheet';
 import type { ModuleWithMeta } from '@/types';
 import { cn } from '@/lib/cn';
+import { useI18n } from '@/i18n';
 import { formatRelative } from '@/lib/format';
 
 /**
@@ -33,6 +34,7 @@ export function StatSheets({
   modules: ModuleWithMeta[] | undefined;
   onClose: () => void;
 }) {
+  const { t } = useI18n();
   // Route change must not leave a sheet floating over an unrelated page.
   const key = kind ?? 'none';
   useEffect(() => {
@@ -62,7 +64,7 @@ export function StatSheets({
         <button
           type="button"
           onClick={onClose}
-          aria-label="关闭"
+          aria-label={t('关闭')}
           className="-mr-1 inline-flex size-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-raised hover:text-fg"
         >
           <X className="size-4.5" strokeWidth={1.9} aria-hidden="true" />
@@ -70,7 +72,7 @@ export function StatSheets({
       </div>
 
       <div className="px-5 pb-6">
-        <h2 className="text-[1.1rem] font-semibold tracking-[-0.02em]">{titles[kind]}</h2>
+        <h2 className="text-[1.1rem] font-semibold tracking-[-0.02em]">{t(titles[kind])}</h2>
       </div>
 
       {kind === 'modules' && <ModulesList modules={modules} />}
@@ -84,6 +86,7 @@ export function StatSheets({
 /* ---------------------------------------------------------------- modules */
 
 function ModulesList({ modules }: { modules: ModuleWithMeta[] }) {
+  const { t } = useI18n();
   const [q, setQ] = useState('');
   const [page, setPage] = useState(1);
   const PER = 20;
@@ -112,13 +115,13 @@ function ModulesList({ modules }: { modules: ModuleWithMeta[] }) {
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="搜索模块名称、作者或描述"
+          placeholder={t('搜索模块名称、作者或描述')}
           className="w-full bg-transparent text-[13px] text-fg outline-none placeholder:text-faint"
         />
       </div>
 
       <p className="mb-2 text-[11px] text-faint">
-        共 {filtered.length} 个模块 · 第 {safePage}/{totalPages} 页
+        {t('共 {n} 个模块 · 第 {page}/{pages} 页', { n: filtered.length, page: safePage, pages: totalPages })}
       </p>
 
       <ul className="space-y-1.5">
@@ -138,7 +141,7 @@ function ModulesList({ modules }: { modules: ModuleWithMeta[] }) {
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-[13px] font-medium text-fg">{m.name}</span>
                 <span className="mt-0.5 block truncate text-[11px] text-faint">
-                  {m.category?.name ?? '未分类'} · @{m.author}
+                  {t(m.category?.name ?? '未分类')} · @{m.author}
                 </span>
               </span>
               <span className="shrink-0 font-mono text-[10.5px] text-faint">
@@ -157,7 +160,7 @@ function ModulesList({ modules }: { modules: ModuleWithMeta[] }) {
             disabled={safePage <= 1}
             className="inline-flex h-8 items-center rounded-full border border-line px-3 text-[11.5px] text-muted transition-colors hover:text-fg disabled:opacity-40"
           >
-            上一页
+            {t('上一页')}
           </button>
           <span className="text-[11px] tabular-nums text-faint">
             {safePage} / {totalPages}
@@ -168,7 +171,7 @@ function ModulesList({ modules }: { modules: ModuleWithMeta[] }) {
             disabled={safePage >= totalPages}
             className="inline-flex h-8 items-center rounded-full border border-line px-3 text-[11.5px] text-muted transition-colors hover:text-fg disabled:opacity-40"
           >
-            下一页
+            {t('下一页')}
           </button>
         </div>
       )}
@@ -179,13 +182,14 @@ function ModulesList({ modules }: { modules: ModuleWithMeta[] }) {
 /* ------------------------------------------------------------- categories */
 
 function CategoriesList({ modules }: { modules: ModuleWithMeta[] }) {
+  const { t } = useI18n();
   const [openCatId, setOpenCatId] = useState<string | null>(null);
 
   const grouped = useMemo(() => {
     const map = new Map<string, { name: string; count: number; items: ModuleWithMeta[] }>();
     for (const m of modules) {
       const key = m.category?.id ?? 'none';
-      const name = m.category?.name ?? '未分类';
+      const name = t(m.category?.name ?? '未分类');
       const entry = map.get(key) ?? { name, count: 0, items: [] };
       entry.count += 1;
       entry.items.push(m);
@@ -209,7 +213,7 @@ function CategoriesList({ modules }: { modules: ModuleWithMeta[] }) {
           )}
         >
           <ArrowLeft className="size-3.5" strokeWidth={2} aria-hidden="true" />
-          返回分类
+          {t('返回分类')}
         </button>
         <h3 className="mb-3 text-[14px] font-medium">{openCat.name}</h3>
         <ul className="space-y-1.5">
@@ -236,8 +240,8 @@ function CategoriesList({ modules }: { modules: ModuleWithMeta[] }) {
             >
               <Layers className="size-4 shrink-0 text-accent" strokeWidth={1.8} aria-hidden="true" />
               <span className="min-w-0 flex-1">
-                <span className="block truncate text-[13.5px] font-medium text-fg">{c.name}</span>
-                <span className="mt-0.5 block text-[11px] text-faint">{c.count} 个模块</span>
+                <span className="block truncate text-[13.5px] font-medium text-fg">{t(c.name)}</span>
+                <span className="mt-0.5 block text-[11px] text-faint">{t('共 {n} 个模块', { n: c.count })}</span>
               </span>
             </button>
           </li>
@@ -250,6 +254,7 @@ function CategoriesList({ modules }: { modules: ModuleWithMeta[] }) {
 /* ---------------------------------------------------------------- sources */
 
 function SourcesList({ modules }: { modules: ModuleWithMeta[] }) {
+  const { t } = useI18n();
   const [openRepo, setOpenRepo] = useState<string | null>(null);
   const sources = useMemo(() => groupBySource(modules), [modules]);
 
@@ -267,7 +272,9 @@ function SourcesList({ modules }: { modules: ModuleWithMeta[] }) {
 
   return (
     <div className="px-5 pb-6">
-      <p className="mb-3 text-[11px] text-faint">共 {sources.length} 个已接入的上游仓库</p>
+      <p className="mb-3 text-[11px] text-faint">
+        {t('共 {n} 个已接入的上游仓库', { n: sources.length })}
+      </p>
       <ul className="space-y-2">
         {sources.map((s) => (
           <li key={`${s.owner}/${s.repo}`}>
@@ -306,6 +313,7 @@ function SourceDetail({
   source: { owner: string; repo: string; count: number; modules: ModuleWithMeta[] };
   onBack: () => void;
 }) {
+  const { t } = useI18n();
   const fullName = `${source.owner}/${source.repo}`;
   const repoUrl = `https://github.com/${fullName}`;
   const [q, setQ] = useState('');
@@ -341,7 +349,7 @@ function SourceDetail({
         )}
       >
         <ArrowLeft className="size-3.5" strokeWidth={2} aria-hidden="true" />
-        返回来源
+        {t('返回来源')}
       </button>
 
       {/* repo identity */}
@@ -355,7 +363,7 @@ function SourceDetail({
           href={repoUrl}
           target="_blank"
           rel="noreferrer noopener"
-          aria-label={`在 GitHub 打开 ${fullName}`}
+          aria-label={t('在 GitHub 打开 {name}', { name: fullName })}
           className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-line-strong hover:text-fg"
         >
           <ExternalLink className="size-3.5" strokeWidth={2} aria-hidden="true" />
@@ -366,19 +374,19 @@ function SourceDetail({
       <dl className="mt-4 grid grid-cols-2 gap-2">
         <div className="rounded-[var(--radius-md)] border border-line bg-inset px-2.5 py-2">
           <dt className="flex items-center gap-1 text-[10px] text-faint">
-            <Package className="size-2.5" strokeWidth={2.2} aria-hidden="true" />已收录
+            <Package className="size-2.5" strokeWidth={2.2} aria-hidden="true" />{t('已收录')}
           </dt>
-          <dd className="mt-0.5 text-[12px] tabular-nums text-fg">{source.count} 个</dd>
+          <dd className="mt-0.5 text-[12px] tabular-nums text-fg">{t('{n} 个', { n: source.count })}</dd>
         </div>
         <div className="rounded-[var(--radius-md)] border border-line bg-inset px-2.5 py-2">
           <dt className="flex items-center gap-1 text-[10px] text-faint">
-            <GitBranch className="size-2.5" strokeWidth={2.2} aria-hidden="true" />状态
+            <GitBranch className="size-2.5" strokeWidth={2.2} aria-hidden="true" />{t('状态')}
           </dt>
-          <dd className="mt-0.5 text-[12px] text-ok">已接入</dd>
+          <dd className="mt-0.5 text-[12px] text-ok">{t('已接入')}</dd>
         </div>
         <div className="rounded-[var(--radius-md)] border border-line bg-inset px-2.5 py-2">
           <dt className="flex items-center gap-1 text-[10px] text-faint">
-            <RefreshCw className="size-2.5" strokeWidth={2.2} aria-hidden="true" />最近扫描
+            <RefreshCw className="size-2.5" strokeWidth={2.2} aria-hidden="true" />{t('最近扫描')}
           </dt>
           <dd className="mt-0.5 truncate text-[11px] text-fg">
             {lastScan ? formatRelative(lastScan) : '—'}
@@ -386,7 +394,7 @@ function SourceDetail({
         </div>
         <div className="rounded-[var(--radius-md)] border border-line bg-inset px-2.5 py-2">
           <dt className="flex items-center gap-1 text-[10px] text-faint">
-            <Clock className="size-2.5" strokeWidth={2.2} aria-hidden="true" />接入时间
+            <Clock className="size-2.5" strokeWidth={2.2} aria-hidden="true" />{t('接入时间')}
           </dt>
           <dd className="mt-0.5 truncate text-[11px] text-fg">—</dd>
         </div>
@@ -399,13 +407,13 @@ function SourceDetail({
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="搜索该来源的模块"
+            placeholder={t('搜索该来源的模块')}
             className="w-full bg-transparent text-[12.5px] text-fg outline-none placeholder:text-faint"
           />
         </div>
 
         <p className="mb-2 text-[11px] text-faint">
-          {filtered.length} 个模块 · 第 {safePage}/{totalPages} 页
+          {t('共 {n} 个模块 · 第 {page}/{pages} 页', { n: filtered.length, page: safePage, pages: totalPages })}
         </p>
 
         <ul className="space-y-1.5">
@@ -422,7 +430,7 @@ function SourceDetail({
               disabled={safePage <= 1}
               className="inline-flex h-8 items-center rounded-full border border-line px-3 text-[11.5px] text-muted transition-colors hover:text-fg disabled:opacity-40"
             >
-              上一页
+              {t('上一页')}
             </button>
             <span className="text-[11px] tabular-nums text-faint">
               {safePage} / {totalPages}
@@ -433,7 +441,7 @@ function SourceDetail({
               disabled={safePage >= totalPages}
               className="inline-flex h-8 items-center rounded-full border border-line px-3 text-[11.5px] text-muted transition-colors hover:text-fg disabled:opacity-40"
             >
-              下一页
+              {t('下一页')}
             </button>
           </div>
         )}
@@ -445,6 +453,7 @@ function SourceDetail({
 /* ---------------------------------------------------------------- updates */
 
 function UpdatesList({ modules }: { modules: ModuleWithMeta[] }) {
+  const { t } = useI18n();
   const sorted = useMemo(
     () => [...modules].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)),
     [modules],
@@ -460,7 +469,7 @@ function UpdatesList({ modules }: { modules: ModuleWithMeta[] }) {
   return (
     <div className="px-5 pb-6">
       <p className="mb-3 text-[11px] text-faint">
-        按更新时间倒序 · 共 {sorted.length} 个模块 · 第 {safePage}/{totalPages} 页
+        {t('按更新时间倒序 · 共 {n} 个模块 · 第 {page}/{pages} 页', { n: sorted.length, page: safePage, pages: totalPages })}
       </p>
       <ul className="space-y-1.5">
         {slice.map((m) => (
@@ -476,7 +485,7 @@ function UpdatesList({ modules }: { modules: ModuleWithMeta[] }) {
             disabled={safePage <= 1}
             className="inline-flex h-8 items-center rounded-full border border-line px-3 text-[11.5px] text-muted transition-colors hover:text-fg disabled:opacity-40"
           >
-            上一页
+            {t('上一页')}
           </button>
           <span className="text-[11px] tabular-nums text-faint">
             {safePage} / {totalPages}
@@ -487,7 +496,7 @@ function UpdatesList({ modules }: { modules: ModuleWithMeta[] }) {
             disabled={safePage >= totalPages}
             className="inline-flex h-8 items-center rounded-full border border-line px-3 text-[11.5px] text-muted transition-colors hover:text-fg disabled:opacity-40"
           >
-            下一页
+            {t('下一页')}
           </button>
         </div>
       )}
@@ -498,6 +507,7 @@ function UpdatesList({ modules }: { modules: ModuleWithMeta[] }) {
 /* ------------------------------------------------------------------ shared */
 
 function ModuleRow({ module: m, showDate = false }: { module: ModuleWithMeta; showDate?: boolean }) {
+  const { t } = useI18n();
   return (
     <li>
       <button
@@ -514,7 +524,7 @@ function ModuleRow({ module: m, showDate = false }: { module: ModuleWithMeta; sh
         <span className="min-w-0 flex-1">
           <span className="block truncate text-[13px] font-medium text-fg">{m.name}</span>
           <span className="mt-0.5 block truncate text-[11px] text-faint">
-            {m.category?.name ?? '未分类'} · @{m.author}
+            {t(m.category?.name ?? '未分类')} · @{m.author}
             {showDate && (
               <>
                 {' · '}

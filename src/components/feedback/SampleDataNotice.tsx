@@ -1,11 +1,13 @@
 import { Info } from 'lucide-react';
 import { siteConfig } from '@/config/site';
+import { useI18n } from '@/i18n';
 
 /**
  * Honest banner: the catalogue is fixture data, so say so where the data is
  * shown rather than only in the README.
  */
 export function SampleDataNotice({ compact = false }: { compact?: boolean }) {
+  const { t } = useI18n();
   if (!siteConfig.usesSampleData) return null;
   return (
     <div
@@ -14,11 +16,11 @@ export function SampleDataNotice({ compact = false }: { compact?: boolean }) {
     >
       <Info className="mt-0.5 size-3.5 shrink-0 text-faint" strokeWidth={1.75} aria-hidden="true" />
       <p className="text-[11.5px] leading-relaxed text-faint">
-        <span className="text-muted">示例数据</span>
+        <span className="text-muted">{t('示例数据')}</span>
         {' · '}
         {compact
-          ? '当前内容为界面演示数据。'
-          : '当前展示的模块、作者与版本均为界面演示用的示例数据，未接入真实仓库；原始链接同样不可安装。'}
+          ? t('当前内容为界面演示数据。')
+          : t('当前展示的模块、作者与版本均为界面演示用的示例数据，未接入真实仓库；原始链接同样不可安装。')}
       </p>
     </div>
   );

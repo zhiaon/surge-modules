@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { resolveCategoryIcon } from '@/lib/icons';
 import type { CategoryWithCount } from '@/services/categoryService';
+import { useI18n } from '@/i18n';
 
 export interface CategoryCardProps {
   category: CategoryWithCount;
@@ -12,6 +13,7 @@ export interface CategoryCardProps {
 }
 
 export function CategoryCard({ category, variant = 'tile', className }: CategoryCardProps) {
+  const { t } = useI18n();
   const Icon = resolveCategoryIcon(category.icon);
   const to = `/discover?category=${encodeURIComponent(category.slug)}`;
 
@@ -31,13 +33,13 @@ export function CategoryCard({ category, variant = 'tile', className }: Category
         </span>
         <span>
           <span className="flex items-baseline justify-between gap-2">
-            <span className="text-[13.5px] font-medium text-fg">{category.name}</span>
+            <span className="text-[13.5px] font-medium text-fg">{t(category.name)}</span>
             <span className="font-mono text-[10.5px] tabular-nums text-faint">
               {String(category.moduleCount).padStart(2, '0')}
             </span>
           </span>
           <span className="mt-1.5 line-clamp-2 block text-[11.5px] leading-relaxed text-faint">
-            {category.description}
+            {t(category.description)}
           </span>
         </span>
       </Link>
@@ -64,14 +66,14 @@ export function CategoryCard({ category, variant = 'tile', className }: Category
       </div>
       <div>
         <h3 className="flex items-center gap-1.5 text-[14.5px] font-semibold leading-snug">
-          {category.name}
+          {t(category.name)}
           <ArrowUpRight
             className="size-3 text-faint opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             aria-hidden="true"
           />
         </h3>
         <p className="mt-1.5 line-clamp-2 text-[12.5px] leading-relaxed text-muted">
-          {category.description}
+          {t(category.description)}
         </p>
       </div>
     </Link>

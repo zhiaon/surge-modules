@@ -4,6 +4,7 @@ import { Container } from '@/components/common/Container';
 import { SectionHeading } from '@/components/common/SectionHeading';
 import { CategoryCard } from '@/components/modules/CategoryCard';
 import { ErrorState } from '@/components/feedback/ErrorState';
+import { useI18n } from '@/i18n';
 import type { CategoryWithCount } from '@/services/categoryService';
 
 export interface CategorySectionProps {
@@ -20,16 +21,17 @@ export interface CategorySectionProps {
  * stray carousel.
  */
 export function CategorySection({ categories, loading, error, onRetry }: CategorySectionProps) {
+  const { t } = useI18n();
   return (
     <section id="categories" className="scroll-mt-24 pb-10 pt-12 sm:pb-12 sm:pt-14 lg:pb-16 lg:pt-16">
       <Container size="wide">
         <Reveal>
           <SectionHeading
-            eyebrow="分类"
+            eyebrow={t('分类')}
             index="01"
-            title="按用途浏览"
-            description="从拦截规则到脚本增强，按实际用途归类的模块目录。"
-            action={{ label: '参与筛选', to: '/discover#categories' }}
+            title={t('按用途浏览')}
+            description={t('从拦截规则到脚本增强，按实际用途归类的模块目录。')}
+            action={{ label: t('参与筛选'), to: '/discover#categories' }}
           />
         </Reveal>
       </Container>
@@ -37,7 +39,7 @@ export function CategorySection({ categories, loading, error, onRetry }: Categor
       <div className="mt-7 lg:mt-9">
         {error ? (
           <Container size="wide">
-            <ErrorState title="分类加载失败" error={error} onRetry={onRetry} compact />
+            <ErrorState title={t('分类加载失败')} error={error} onRetry={onRetry} compact />
           </Container>
         ) : loading || !categories ? (
           <Container size="wide">
@@ -82,9 +84,9 @@ export function CategorySection({ categories, loading, error, onRetry }: Categor
 
       <Container size="wide">
         <p className="mt-5 text-[11px] leading-relaxed text-faint lg:mt-6">
-          数据随构建更新。
+          {t('数据随构建更新。')}
           <Link to="/discover" className="tap-target ml-2 text-muted underline-offset-4 hover:underline">
-            查看全部模块
+            {t('查看全部模块')}
           </Link>
         </p>
       </Container>

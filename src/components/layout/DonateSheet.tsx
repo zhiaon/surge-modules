@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Heart } from 'lucide-react';
 import { BottomSheet } from '@/components/common/BottomSheet';
 import { useDonateSheet, closeDonateSheet } from '@/stores/donateSheet';
+import { useI18n } from '@/i18n';
 
 /**
  * WeChat donation QR sheet.
@@ -17,6 +18,7 @@ interface DonationSummary {
 }
 
 export function DonateSheet() {
+  const { t } = useI18n();
   const open = useDonateSheet();
   // Summary only: amounts and head count. Fetched once, and rendered only when
   // there is something to show — a lonely "¥0.00" reads worse than nothing.
@@ -51,7 +53,7 @@ export function DonateSheet() {
         <button
           type="button"
           onClick={closeDonateSheet}
-          aria-label="关闭"
+          aria-label={t('关闭')}
           className="-mr-1 inline-flex size-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-raised hover:text-fg"
         >
           <Heart
@@ -63,15 +65,15 @@ export function DonateSheet() {
       </div>
 
       <div className="px-6 pb-8 pt-1 text-center">
-        <h2 className="text-[1.05rem] font-semibold tracking-[-0.02em]">感谢支持 ❤️</h2>
+        <h2 className="text-[1.05rem] font-semibold tracking-[-0.02em]">{t('感谢支持')} ❤️</h2>
         <p className="mt-1.5 text-[12.5px] leading-relaxed text-muted">
-          模块完全免费，扫码请作者喝杯咖啡
+          {t('模块完全免费，扫码请作者喝杯咖啡')}
         </p>
 
         <div className="mx-auto mt-5 w-full max-w-[280px] rounded-[var(--radius-xl)] border border-line bg-white p-3 shadow-[var(--shadow-card)]">
           <img
             src="/wechat-qr.jpg"
-            alt="微信收款码"
+            alt={t('微信收款码')}
             className="block w-full rounded-[var(--radius-md)]"
             width={480}
             height={480}
@@ -80,13 +82,15 @@ export function DonateSheet() {
 
         <p className="mt-4 flex items-center justify-center gap-1.5 text-[12px] text-faint">
           <Heart className="size-3 text-danger/60" strokeWidth={2} aria-hidden="true" />
-          微信「扫一扫」识别，或长按保存
+          {t('微信「扫一扫」识别，或长按保存')}
         </p>
 
         {summary && (
           <p className="mt-3 text-[11.5px] tabular-nums text-faint">
-            累计 <span className="text-muted">¥{summary.total.toFixed(2)}</span> ·{' '}
-            {summary.count} 位朋友支持
+            {t('累计 ¥{total} · {n} 位朋友支持', {
+              total: summary.total.toFixed(2),
+              n: summary.count,
+            })}
           </p>
         )}
       </div>

@@ -10,11 +10,13 @@ import { favoriteService } from '@/services/favoriteService';
 import { useFavorites } from '@/stores/favorites';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { formatRelative, toIsoDate } from '@/lib/format';
+import { useI18n } from '@/i18n';
 
 export function FavoritesPage() {
+  const { t } = useI18n();
   usePageMeta({
-    title: '我的收藏',
-    description: '保存在本机的 Surge 模块收藏。',
+    title: t('我的收藏'),
+    description: t('保存在本机的 Surge 模块收藏。'),
     path: '/favorites',
   });
 
@@ -28,18 +30,18 @@ export function FavoritesPage() {
   return (
     <Container size="wide" className="py-8 sm:py-12">
       <header className="max-w-2xl">
-        <span className="eyebrow">收藏</span>
+        <span className="eyebrow">{t('收藏')}</span>
         <h1 className="mt-2.5 text-balance text-[1.9rem] font-semibold leading-[1.08] tracking-[-0.028em] sm:text-[2.4rem]">
-          我的收藏
+          {t('我的收藏')}
         </h1>
         <p className="mt-3 text-[14px] leading-relaxed text-muted">
-          收藏保存在这台设备的浏览器中，刷新或重新打开都不会丢失。
+          {t('收藏保存在这台设备的浏览器中，刷新或重新打开都不会丢失。')}
         </p>
       </header>
 
       <div className="mt-7">
         {status === 'error' ? (
-          <ErrorState title="收藏加载失败" error={error} onRetry={reload} />
+          <ErrorState title={t('收藏加载失败')} error={error} onRetry={reload} />
         ) : status === 'loading' && !data ? (
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {Array.from({ length: 4 }).map((_, i) => (
@@ -57,11 +59,11 @@ export function FavoritesPage() {
         ) : !data || data.length === 0 ? (
           <EmptyState
             icon={BookmarkX}
-            title="还没有收藏任何模块"
-            description="在模块卡片或详情页点击收藏，之后可以在这里集中查看。收藏只保存在本机，不会上传。"
+            title={t('还没有收藏任何模块')}
+            description={t('在模块卡片或详情页点击收藏，之后可以在这里集中查看。收藏只保存在本机，不会上传。')}
             action={
               <ButtonLink to="/discover" size="md" variant="primary">
-                去发现模块
+                {t('去发现模块')}
               </ButtonLink>
             }
           />
@@ -69,14 +71,14 @@ export function FavoritesPage() {
           <>
             <p className="mb-4 flex items-baseline gap-2 text-[12px] text-faint">
               <span className="font-mono text-[13px] tabular-nums text-fg">{data.length}</span>
-              个收藏 · 按添加时间倒序
+              {t('{n} 个收藏 · 按添加时间倒序', { n: data.length })}
             </p>
             <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {data.map((entry) => (
                 <li key={entry.module.id} className="flex min-w-0 flex-col gap-1.5">
                   <ModuleCard module={entry.module} />
                   <p className="pl-1 text-[10.5px] text-faint">
-                    收藏于{' '}
+                    {t('收藏于')}{' '}
                     <time dateTime={toIsoDate(entry.addedAt)}>
                       {formatRelative(entry.addedAt)}
                     </time>
@@ -89,7 +91,7 @@ export function FavoritesPage() {
       </div>
 
       <p className="mt-10 border-t border-line pt-5 text-[11px] leading-relaxed text-faint">
-        账号体系与云端同步尚未实现；当前收藏不会跨设备同步，清除站点数据会一并清空。
+        {t('账号体系与云端同步尚未实现；当前收藏不会跨设备同步，清除站点数据会一并清空。')}
       </p>
     </Container>
   );

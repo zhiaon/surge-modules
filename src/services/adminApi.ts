@@ -34,12 +34,12 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
       },
     });
   } catch {
-    throw new AdminApiError(0, 'network_error', '无法连接服务器');
+    throw new AdminApiError(0, 'network_error', i18n.translate('无法连接服务器'));
   }
 
   const type = res.headers.get('content-type') ?? '';
   if (!type.includes('application/json')) {
-    throw new AdminApiError(res.status, 'not_json', '接口未就绪');
+    throw new AdminApiError(res.status, 'not_json', i18n.translate('接口未就绪'));
   }
 
   const body = (await res.json()) as
@@ -462,3 +462,4 @@ export const adminApi = {
     return call(`/alerts/${id}/ack`, { method: 'POST', body: '{}' });
   },
 };
+import { i18n } from '@/i18n';

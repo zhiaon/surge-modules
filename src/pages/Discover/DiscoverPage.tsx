@@ -7,6 +7,7 @@ import { ModuleCard } from '@/components/modules/ModuleCard';
 import { ModuleCardSkeleton } from '@/components/common/Skeleton';
 import { EmptyState } from '@/components/common/EmptyState';
 import { ErrorState } from '@/components/feedback/ErrorState';
+import { useI18n } from '@/i18n';
 import { Button, ButtonLink } from '@/components/common/Button';
 import { CategoryCard } from '@/components/modules/CategoryCard';
 import { useAsync } from '@/hooks/useAsync';
@@ -35,9 +36,10 @@ const SORTS: Array<{ value: ModuleSort; label: string }> = [
  * wide desktop. The grid never stretches a card past a readable measure.
  */
 export function DiscoverPage() {
+  const { t } = useI18n();
   usePageMeta({
-    title: '发现模块',
-    description: '按分类、标签与关键词筛选 Surge 模块。',
+    title: t('发现模块'),
+    description: t('按分类、标签与关键词筛选 Surge 模块。'),
     path: '/discover',
   });
 
@@ -160,12 +162,12 @@ export function DiscoverPage() {
     <>
       <Container size="wide" className="pt-8 sm:pt-12">
         <header className="max-w-2xl">
-          <span className="eyebrow">发现</span>
+          <span className="eyebrow">{t('发现')}</span>
           <h1 className="mt-2.5 text-balance text-[1.9rem] font-semibold leading-[1.08] tracking-[-0.028em] sm:text-[2.4rem]">
-            模块目录
+            {t('模块目录')}
           </h1>
           <p className="mt-3 text-[14px] leading-relaxed text-muted">
-            按分类、标签与关键词筛选。所有条件都会写进地址栏，可直接分享。
+            {t('按分类、标签与关键词筛选。所有条件都会写进地址栏，可直接分享。')}
           </p>
         </header>
 
@@ -174,10 +176,10 @@ export function DiscoverPage() {
           <DebouncedSearchInput
             value={search}
             onChange={commitSearch}
-            placeholder="搜索模块、描述、作者或标签"
+            placeholder={t('搜索模块、描述、作者或标签')}
             size="lg"
             className="flex-1"
-            aria-label="筛选模块"
+            aria-label={t('筛选模块')}
           />
           <div className="flex items-center gap-2">
             <ButtonLink
@@ -186,7 +188,7 @@ export function DiscoverPage() {
               size="md"
               className="shrink-0"
             >
-              合集
+              {t('合集')}
             </ButtonLink>
             <Button
               variant="secondary"
@@ -196,14 +198,14 @@ export function DiscoverPage() {
               aria-controls="filter-panel"
             >
               <SlidersHorizontal className="size-4" strokeWidth={1.85} aria-hidden="true" />
-              筛选
+              {t('筛选')}
               {hasFilters && <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />}
             </Button>
 
             {/* segmented control — one surface, one active pill */}
             <div
               role="group"
-              aria-label="排序方式"
+              aria-label={t('排序方式')}
               className="flex items-center gap-0.5 rounded-[var(--radius-md)] border border-line bg-raised p-0.5"
             >
               {SORTS.map((s) => (
@@ -219,7 +221,7 @@ export function DiscoverPage() {
                       : 'text-faint hover:text-muted',
                   )}
                 >
-                  {s.label}
+                  {t(s.label)}
                 </button>
               ))}
             </div>
@@ -232,11 +234,11 @@ export function DiscoverPage() {
       <Container size="wide" id="filter-panel" className={cn('mt-3', filterSheetOpen ? 'block' : 'hidden')}>
         <div className="rounded-[var(--radius-lg)] border border-line bg-raised p-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-[13.5px] font-semibold">资源筛选</h2>
+            <h2 className="text-[13.5px] font-semibold">{t('资源筛选')}</h2>
             <button
               type="button"
               onClick={() => setFilterSheetOpen(false)}
-              aria-label="收起筛选"
+              aria-label={t('收起筛选')}
               className="inline-flex size-7 items-center justify-center rounded-full text-muted transition-colors hover:bg-inset hover:text-fg"
             >
               <X className="size-4" strokeWidth={2} aria-hidden="true" />
@@ -248,10 +250,10 @@ export function DiscoverPage() {
             <div>
               <p className="mb-2 flex items-center gap-1.5 text-[11.5px] text-faint">
                 <Users className="size-3" strokeWidth={2} aria-hidden="true" />
-                来源（{sources.length}）
+                {t('来源（{n}）', { n: sources.length })}
               </p>
               <div className="flex flex-wrap gap-1">
-                <Chip active={!owner} onClick={() => setParam('owner', null)}>全部</Chip>
+                <Chip active={!owner} onClick={() => setParam('owner', null)}>{t('全部')}</Chip>
                 {sources.map((src) => (
                   <Chip
                     key={src.fullName}
@@ -275,16 +277,16 @@ export function DiscoverPage() {
 
             {/* categories */}
             <div>
-              <p className="mb-2 text-[11.5px] text-faint">分类（{categories.data?.length ?? 0}）</p>
+              <p className="mb-2 text-[11.5px] text-faint">{t('分类（{n}）', { n: categories.data?.length ?? 0 })}</p>
               <div className="flex flex-wrap gap-1">
-                <Chip active={!categorySlug} onClick={() => setParam('category', null)}>全部</Chip>
+                <Chip active={!categorySlug} onClick={() => setParam('category', null)}>{t('全部')}</Chip>
                 {(categories.data ?? []).map((c) => (
                   <Chip
                     key={c.id}
                     active={categorySlug === c.slug}
                     onClick={() => setParam('category', categorySlug === c.slug ? null : c.slug)}
                   >
-                    {c.name}
+                    {t(c.name)}
                     <span className="font-mono text-[9.5px] tabular-nums opacity-60">{c.moduleCount}</span>
                   </Chip>
                 ))}
@@ -293,14 +295,14 @@ export function DiscoverPage() {
 
             {/* features — currently only [Panel]; parsed from the module body */}
             <div>
-              <p className="mb-2 text-[11.5px] text-faint">功能</p>
+              <p className="mb-2 text-[11.5px] text-faint">{t('功能')}</p>
               <div className="flex flex-wrap gap-1">
-                <Chip active={!panelOnly} onClick={() => setParam('panel', null)}>全部</Chip>
+                <Chip active={!panelOnly} onClick={() => setParam('panel', null)}>{t('全部')}</Chip>
                 <Chip
                   active={panelOnly}
                   onClick={() => setParam('panel', panelOnly ? null : '1')}
                 >
-                  含面板
+                  {t('含面板')}
                   <span className="font-mono text-[9.5px] tabular-nums opacity-60">{panelCount}</span>
                 </Chip>
               </div>
@@ -317,7 +319,7 @@ export function DiscoverPage() {
                 }}
                 className="inline-flex items-center gap-1.5 text-[11.5px] text-muted underline-offset-4 hover:text-fg hover:underline"
               >
-                重置筛选
+                {t('重置筛选')}
                 <X className="size-3" strokeWidth={2} aria-hidden="true" />
               </button>
             )}
@@ -329,10 +331,10 @@ export function DiscoverPage() {
         {/* active filter summary */}
         {hasFilters && (
           <div className="mt-4 flex flex-wrap items-center gap-2 rounded-[var(--radius-md)] border border-line bg-raised/60 px-3 py-2.5">
-            <span className="text-[11.5px] text-faint">当前筛选</span>
+            <span className="text-[11.5px] text-faint">{t('当前筛选')}</span>
             {owner && (
               <ActiveChip onRemove={() => setParam('owner', null)}>
-                来源：{owner}
+                {t('来源：{owner}', { owner: owner ?? '' })}
               </ActiveChip>
             )}
             {activeCategory && (
@@ -342,11 +344,11 @@ export function DiscoverPage() {
             )}
             {tag && <ActiveChip onRemove={() => setParam('tag', null)}>#{tag}</ActiveChip>}
             {panelOnly && (
-              <ActiveChip onRemove={() => setParam('panel', null)}>含面板 [Panel]</ActiveChip>
+              <ActiveChip onRemove={() => setParam('panel', null)}>{t('含面板 [Panel]')}</ActiveChip>
             )}
             {sort !== 'recommended' && (
               <ActiveChip onRemove={() => setParam('sort', null)}>
-                排序：{SORTS.find((s) => s.value === sort)?.label ?? sort}
+                {t('排序：{label}', { label: t(SORTS.find((s) => s.value === sort)?.label ?? sort) })}
               </ActiveChip>
             )}
             {search && (
@@ -362,18 +364,18 @@ export function DiscoverPage() {
               }}
               className="ml-auto shrink-0 text-[11.5px] text-muted underline-offset-4 hover:text-fg hover:underline"
             >
-              清除全部
+              {t('清除全部')}
             </button>
           </div>
         )}
 
         <p className="mt-5 text-[11.5px] tabular-nums text-faint" aria-live="polite">
-          {result ? `共 ${result.total} 个模块` : '加载中…'}
+          {result ? t('共 {n} 个模块', { n: result.total }) : t('加载中…')}
         </p>
 
         <div className="mt-3.5">
           {all.status === 'error' ? (
-            <ErrorState title="模块列表加载失败" error={all.error} onRetry={all.reload} />
+            <ErrorState title={t('模块列表加载失败')} error={all.error} onRetry={all.reload} />
           ) : all.status === 'loading' && !result ? (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {Array.from({ length: 8 }).map((_, i) => (
@@ -399,7 +401,7 @@ export function DiscoverPage() {
                       window.scrollTo({ top: 260, behavior: 'smooth' });
                     }}
                     disabled={page <= 1}
-                    aria-label="上一页"
+                    aria-label={t('上一页')}
                     className={cn(
                       'inline-flex size-10 items-center justify-center rounded-full border border-line',
                       'text-muted transition-colors hover:border-line-strong hover:text-fg disabled:opacity-35',
@@ -417,7 +419,7 @@ export function DiscoverPage() {
                       window.scrollTo({ top: 260, behavior: 'smooth' });
                     }}
                     disabled={page >= Math.ceil(result.total / PAGE_SIZE)}
-                    aria-label="下一页"
+                    aria-label={t('下一页')}
                     className={cn(
                       'inline-flex size-10 items-center justify-center rounded-full border border-line',
                       'text-muted transition-colors hover:border-line-strong hover:text-fg disabled:opacity-35',
@@ -431,8 +433,8 @@ export function DiscoverPage() {
           ) : (
             <EmptyState
               icon={SearchX}
-              title="没有符合条件的模块"
-              description="换一个关键词，或清除筛选条件重新浏览。"
+              title={t('没有符合条件的模块')}
+              description={t('换一个关键词，或清除筛选条件重新浏览。')}
               action={
                 <Button
                   size="sm"
@@ -441,7 +443,7 @@ export function DiscoverPage() {
                     setParams(new URLSearchParams(), { replace: true });
                   }}
                 >
-                  清除筛选
+                  {t('清除筛选')}
                 </Button>
               }
             />
@@ -452,8 +454,8 @@ export function DiscoverPage() {
       {/* categories */}
       <section id="categories" className="mt-16 scroll-mt-24 border-t border-line bg-surface/40">
         <Container size="wide" className="py-12 sm:py-14">
-          <h2 className="text-[1.15rem] font-semibold">分类</h2>
-          <p className="mt-1.5 text-[13px] text-muted">选择一个分类快速缩小范围。</p>
+          <h2 className="text-[1.15rem] font-semibold">{t('分类')}</h2>
+          <p className="mt-1.5 text-[13px] text-muted">{t('选择一个分类快速缩小范围。')}</p>
           <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {categories.data?.map((c) => (
               <CategoryCard key={c.id} category={c} />
@@ -461,7 +463,7 @@ export function DiscoverPage() {
           </div>
           <div className="mt-8">
             <ButtonLink to="/" size="sm" variant="ghost">
-              返回首页
+              {t('返回首页')}
             </ButtonLink>
           </div>
         </Container>
@@ -477,13 +479,14 @@ function ActiveChip({
   children: React.ReactNode;
   onRemove: () => void;
 }) {
+  const { t } = useI18n();
   return (
     <span className="inline-flex items-center gap-1 rounded-full border border-[var(--line-accent-28)] bg-[var(--tint-accent-10)] py-1 pl-2.5 pr-1 text-[11.5px] text-accent-soft">
       {children}
       <button
         type="button"
         onClick={onRemove}
-        aria-label="移除这个筛选条件"
+        aria-label={t('移除这个筛选条件')}
         className="inline-flex size-5 items-center justify-center rounded-full transition-colors hover:bg-[var(--tint-accent-16)] hover:text-fg"
       >
         <X className="size-3" strokeWidth={2.2} aria-hidden="true" />

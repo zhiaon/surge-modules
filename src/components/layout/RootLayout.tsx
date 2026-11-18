@@ -8,8 +8,10 @@ import { closeModuleSheet, useModuleSheet } from '@/stores/moduleSheet';
 import { analyticsService } from '@/services/analyticsService';
 import { ScrollToTop } from './ScrollToTop';
 import { DonateSheet } from './DonateSheet';
+import { useI18n } from '@/i18n';
 
 export function RootLayout() {
+  const { t } = useI18n();
   const { pathname } = useLocation();
   const { slug: sheetSlug } = useModuleSheet();
 
@@ -31,7 +33,7 @@ export function RootLayout() {
                    focus:rounded-[var(--radius-sm)] focus:border focus:border-line focus:bg-raised
                    focus:px-4 focus:py-2 focus:text-[13px]"
       >
-        跳到主要内容
+        {t('跳到主要内容')}
       </a>
 
       <SiteHeader />

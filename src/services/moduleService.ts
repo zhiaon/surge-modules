@@ -19,6 +19,7 @@ import type {
 } from '@/types';
 import { api, ApiError, type ModuleListParams } from './apiClient';
 import type { PublicModule, PublicCategory } from '../../packages/shared/src/contract';
+import { i18n } from '@/i18n';
 
 export type DataSource = 'api' | 'unavailable';
 
@@ -37,7 +38,7 @@ export function apiAvailable(): Promise<boolean> {
 
 export class BackendUnavailableError extends Error {
   constructor() {
-    super('后端接口未启动：请用 npm run dev:site，或部署后访问。');
+    super(i18n.translate('后端接口未启动：请用 npm run dev:site，或部署后访问。'));
     this.name = 'BackendUnavailableError';
   }
 }
@@ -63,7 +64,7 @@ function toModuleWithMeta(
       }
     : {
         id: 'uncategorised',
-        name: '未分类',
+        name: i18n.translate('未分类'),
         slug: 'uncategorised',
         description: '',
         sortOrder: 999,
@@ -168,10 +169,10 @@ export const moduleService = {
     await requireApi();
     const detail = await api.getModule(slug);
     if (!detail.rawUrl) {
-      throw new Error('未配置模块反代地址，无法读取原始配置。');
+      throw new Error(i18n.translate('未配置模块反代地址，无法读取原始配置。'));
     }
     const res = await fetch(detail.rawUrl, { credentials: 'omit' });
-    if (!res.ok) throw new Error(`读取原始配置失败（HTTP ${res.status}）`);
+    if (!res.ok) throw new Error(i18n.translate('读取原始配置失败（HTTP {status}）', { status: res.status }));
     const text = await res.text();
     // hard cap in the client too: the proxy already limits, this is a second fence
     return text.slice(0, 512 * 1024);

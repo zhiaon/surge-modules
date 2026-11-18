@@ -8,6 +8,7 @@
  */
 
 import { clearCachedToken, setCachedToken } from '@/lib/credential';
+import { i18n } from '@/i18n';
 
 const BASE = '/api/v1/user';
 
@@ -38,12 +39,12 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
       },
     });
   } catch {
-    throw new UserApiError(0, 'network_error', '网络异常，请检查连接');
+    throw new UserApiError(0, 'network_error', i18n.translate('网络异常，请检查连接'));
   }
 
   const type = res.headers.get('content-type') ?? '';
   if (!type.includes('application/json')) {
-    throw new UserApiError(res.status, 'not_json', '服务暂时不可用');
+    throw new UserApiError(res.status, 'not_json', i18n.translate('服务暂时不可用'));
   }
 
   const body = (await res.json()) as

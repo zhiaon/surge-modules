@@ -3,6 +3,7 @@ import { Check, Monitor, Moon, Sun } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { useTheme } from '@/hooks/useTheme';
 import type { ThemeMode } from '@/types';
+import { useI18n } from '@/i18n';
 
 const OPTIONS: Array<{ value: ThemeMode; label: string; hint: string; icon: typeof Sun }> = [
   { value: 'dark', label: '深色', hint: '始终使用深色', icon: Moon },
@@ -22,6 +23,7 @@ const OPTIONS: Array<{ value: ThemeMode; label: string; hint: string; icon: type
  * flash and no scroll jump.
  */
 export function ThemeToggle({ className }: { className?: string }) {
+  const { t } = useI18n();
   const { mode, resolved, setMode } = useTheme();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -49,7 +51,9 @@ export function ThemeToggle({ className }: { className?: string }) {
 
   const Current = mode === 'system' ? Monitor : resolved === 'dark' ? Moon : Sun;
   const label =
-    mode === 'system' ? `主题：跟随系统（当前${resolved === 'dark' ? '深色' : '浅色'}）` : `主题：${mode === 'dark' ? '深色' : '浅色'}`;
+    mode === 'system'
+      ? t('主题：跟随系统（当前{dark}）', { dark: resolved === 'dark' ? t('深色') : t('浅色') })
+      : t('主题：{mode}', { mode: mode === 'dark' ? t('深色') : t('浅色') });
 
   return (
     <div ref={rootRef} className={cn('relative', className)}>
@@ -77,7 +81,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         <div
           id={listId}
           role="listbox"
-          aria-label="选择外观"
+          aria-label={t('选择外观')}
           className={cn(
             'absolute right-0 top-[calc(100%+0.5rem)] z-[70] w-52 overflow-hidden',
             'rounded-[var(--radius-lg)] border border-line bg-float p-1.5',
@@ -86,7 +90,7 @@ export function ThemeToggle({ className }: { className?: string }) {
           style={{ animation: 'enter-up 140ms var(--ease-out-soft) both' }}
         >
           <p className="px-2.5 pb-1.5 pt-1 text-[10.5px] uppercase tracking-[0.12em] text-faint">
-            外观
+            {t('外观')}
           </p>
           {OPTIONS.map((opt) => {
             const Icon = opt.icon;
@@ -109,9 +113,9 @@ export function ThemeToggle({ className }: { className?: string }) {
               >
                 <Icon className="size-4 shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[12.5px] leading-tight">{opt.label}</span>
+                  <span className="block text-[12.5px] leading-tight">{t(opt.label)}</span>
                   <span className="mt-0.5 block text-[10.5px] leading-tight text-faint">
-                    {opt.hint}
+                    {t(opt.hint)}
                   </span>
                 </span>
                 {active && (

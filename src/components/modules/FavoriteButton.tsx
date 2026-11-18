@@ -3,6 +3,7 @@ import { useIsFavorite, favoritesStore } from '@/stores/favorites';
 import { analyticsService } from '@/services/analyticsService';
 import { toast } from '@/components/feedback/Toast';
 import { cn } from '@/lib/cn';
+import { useI18n } from '@/i18n';
 
 export interface FavoriteButtonProps {
   moduleId: string;
@@ -28,6 +29,7 @@ export function FavoriteButton({
   className,
 }: FavoriteButtonProps) {
   const active = useIsFavorite(moduleId);
+  const { t } = useI18n();
 
   const onClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -35,7 +37,7 @@ export function FavoriteButton({
     const next = favoritesStore.toggle(moduleId);
     analyticsService.trackFavorite(moduleId, next);
     toast.show(
-      next ? '已加入收藏' : '已取消收藏',
+      next ? t('已加入收藏') : t('已取消收藏'),
       next ? moduleName : undefined,
       next ? 'success' : 'default',
     );
@@ -64,7 +66,7 @@ export function FavoriteButton({
         ) : (
           <Bookmark className="size-4" strokeWidth={1.75} aria-hidden="true" />
         )}
-        {active ? '已收藏' : '收藏'}
+        {active ? t('已收藏') : t('收藏')}
       </button>
     );
   }
@@ -74,8 +76,8 @@ export function FavoriteButton({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      aria-label={active ? `取消收藏 ${moduleName}` : `收藏 ${moduleName}`}
-      title={active ? '取消收藏' : '收藏'}
+      aria-label={active ? t('取消收藏 {name}', { name: moduleName }) : t('收藏 {name}', { name: moduleName })}
+      title={active ? t('取消收藏') : t('收藏')}
       className={cn(
         'inline-flex shrink-0 items-center justify-center rounded-[var(--radius-md)]',
         'border border-transparent text-faint transition-colors duration-200',

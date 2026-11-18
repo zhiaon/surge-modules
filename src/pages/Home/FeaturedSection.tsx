@@ -7,6 +7,7 @@ import { EmptyState } from '@/components/common/EmptyState';
 import { ButtonLink } from '@/components/common/Button';
 import { ErrorState } from '@/components/feedback/ErrorState';
 import type { ModuleWithMeta } from '@/types';
+import { useI18n } from '@/i18n';
 
 export interface FeaturedSectionProps {
   modules: ModuleWithMeta[] | undefined;
@@ -25,24 +26,25 @@ export interface FeaturedSectionProps {
  */
 export function FeaturedSection({ modules, loading, error, onRetry }: FeaturedSectionProps) {
   const count = modules?.length ?? 0;
+  const { t } = useI18n();
 
   return (
     <section className="border-y border-line bg-surface/40 py-12 sm:py-14 lg:py-16">
       <Container size="wide">
         <Reveal>
           <SectionHeading
-            eyebrow="精选"
+            eyebrow={t('精选')}
             index="02"
-            title="本期推荐"
-            description="由维护者手动标记的模块，按最近更新时间排序。"
-            action={{ label: '全部模块', to: '/discover' }}
+            title={t('本期推荐')}
+            description={t('由维护者手动标记的模块，按最近更新时间排序。')}
+            action={{ label: t('全部模块'), to: '/discover' }}
           />
         </Reveal>
 
         <div className="mt-7 lg:mt-9">
           {error ? (
             <ErrorState
-              title="精选模块加载失败"
+              title={t('精选模块加载失败')}
               error={error}
               onRetry={onRetry}
               compact
@@ -55,11 +57,11 @@ export function FeaturedSection({ modules, loading, error, onRetry }: FeaturedSe
             </div>
           ) : count === 0 ? (
             <EmptyState
-              title="暂无精选模块"
-              description="精选由维护者标记，标记后会自动出现在这里。"
+              title={t('暂无精选模块')}
+              description={t('精选由维护者标记，标记后会自动出现在这里。')}
               action={
                 <ButtonLink to="/discover" size="sm">
-                  浏览全部模块
+                  {t('浏览全部模块')}
                 </ButtonLink>
               }
             />

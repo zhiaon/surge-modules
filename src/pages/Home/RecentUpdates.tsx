@@ -8,6 +8,7 @@ import { VersionBadge } from '@/components/common/Badge';
 import { formatDate, formatRelative, toIsoDate } from '@/lib/format';
 import { ErrorState } from '@/components/feedback/ErrorState';
 import type { ModuleWithMeta } from '@/types';
+import { useI18n } from '@/i18n';
 
 export interface RecentUpdatesProps {
   modules: ModuleWithMeta[] | undefined;
@@ -21,22 +22,23 @@ export interface RecentUpdatesProps {
  * date. Reads like a changelog page, which is what it is.
  */
 export function RecentUpdates({ modules, loading, error, onRetry }: RecentUpdatesProps) {
+  const { t } = useI18n();
   return (
     <section className="py-12 sm:py-14 lg:py-16">
       <Container size="wide">
         <Reveal>
           <SectionHeading
-            eyebrow="更新"
+            eyebrow={t('更新')}
             index="03"
-            title="最近更新"
-            description="按发布倒序排列的模块版本记录。"
-            action={{ label: '查看全部更新', to: '/updates' }}
+            title={t('最近更新')}
+            description={t('按发布倒序排列的模块版本记录。')}
+            action={{ label: t('查看全部更新'), to: '/updates' }}
           />
         </Reveal>
 
         <div className="mt-7 lg:mt-9">
           {error ? (
-            <ErrorState title="更新记录加载失败" error={error} onRetry={onRetry} compact />
+            <ErrorState title={t('更新记录加载失败')} error={error} onRetry={onRetry} compact />
           ) : loading || !modules ? (
             <div className="divide-y divide-line">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -45,7 +47,7 @@ export function RecentUpdates({ modules, loading, error, onRetry }: RecentUpdate
             </div>
           ) : modules.length === 0 ? (
             <p className="rounded-[var(--radius-md)] border border-dashed border-line px-5 py-10 text-center text-[12.5px] text-faint">
-              暂无版本记录。模块导入并同步后，更新会按时间倒序出现在这里。
+              {t('暂无版本记录。模块导入并同步后，更新会按时间倒序出现在这里。')}
             </p>
           ) : (
             <ul className="divide-y divide-line border-y border-line">

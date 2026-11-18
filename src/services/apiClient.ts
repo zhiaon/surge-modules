@@ -22,6 +22,7 @@ import type {
   PublicModuleDetail,
   PublicSettings,
 } from '../../packages/shared/src/contract';
+import { i18n } from '@/i18n';
 
 const DATA = '/data';
 
@@ -42,14 +43,14 @@ async function loadJson<T>(path: string): Promise<T> {
   try {
     response = await fetch(`${DATA}${path}`, { headers: { accept: 'application/json' } });
   } catch {
-    throw new ApiError(0, 'network_error', '无法连接服务器');
+    throw new ApiError(0, 'network_error', i18n.translate(i18n.translate('无法连接服务器')));
   }
   if (!response.ok) {
-    throw new ApiError(response.status, 'not_found', '数据文件缺失');
+    throw new ApiError(response.status, 'not_found', i18n.translate(i18n.translate('数据文件缺失')));
   }
   const contentType = response.headers.get('content-type') ?? '';
   if (!contentType.includes('application/json')) {
-    throw new ApiError(response.status, 'not_json', '数据文件格式异常');
+    throw new ApiError(response.status, 'not_json', i18n.translate(i18n.translate('数据文件格式异常')));
   }
   return (await response.json()) as T;
 }

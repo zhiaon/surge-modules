@@ -9,6 +9,7 @@ import { ButtonLink } from '@/components/common/Button';
 import { EmptyState } from '@/components/common/EmptyState';
 import { ErrorState } from '@/components/feedback/ErrorState';
 import type { ModuleWithMeta } from '@/types';
+import { useI18n } from '@/i18n';
 
 export interface LibraryPreviewProps {
   modules: ModuleWithMeta[] | undefined;
@@ -23,30 +24,31 @@ export interface LibraryPreviewProps {
  * modules, with the honest total and a plain "browse everything" exit.
  */
 export function LibraryPreview({ modules, total, loading, error, onRetry }: LibraryPreviewProps) {
+  const { t } = useI18n();
   return (
     <section className="border-t border-line py-12 sm:py-14 lg:py-16">
       <Container size="wide">
         <Reveal>
           <SectionHeading
-            eyebrow="模块库"
+            eyebrow={t('模块库')}
             index="04"
-            title="全部模块"
+            title={t('全部模块')}
             description={
               total === undefined
-                ? '按更新时间倒序展示最新收录的模块。'
+                ? t('按更新时间倒序展示最新收录的模块。')
                 : total === 0
-                  ? '模块库尚未导入内容。'
+                  ? t('模块库尚未导入内容。')
                   : total === 1
-                    ? '当前索引 1 个演示模块，用于验证列表结构。'
-                    : `当前索引 ${total} 个已发布模块，按更新时间倒序展示。`
+                    ? t('当前索引 1 个演示模块，用于验证列表结构。')
+                    : t('当前索引 {n} 个已发布模块，按更新时间倒序展示。', { n: total })
             }
-            action={{ label: '探索全部模块', to: '/discover' }}
+            action={{ label: t('探索全部模块'), to: '/discover' }}
           />
         </Reveal>
 
         <div className="mt-7 lg:mt-9">
           {error ? (
-            <ErrorState title="模块库加载失败" error={error} onRetry={onRetry} compact />
+            <ErrorState title={t('模块库加载失败')} error={error} onRetry={onRetry} compact />
           ) : loading || !modules ? (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {Array.from({ length: 3 }).map((_, i) => (
@@ -55,9 +57,9 @@ export function LibraryPreview({ modules, total, loading, error, onRetry }: Libr
             </div>
           ) : modules.length === 0 ? (
             <EmptyState
-              title="模块库为空"
-              description="导入模块后，最新收录的内容会出现在这里。"
-              action={<ButtonLink to="/about" size="sm">了解导入计划</ButtonLink>}
+              title={t('模块库为空')}
+              description={t('导入模块后，最新收录的内容会出现在这里。')}
+              action={<ButtonLink to="/about" size="sm">{t('了解导入计划')}</ButtonLink>}
             />
           ) : (
             <div className="grid items-start gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -72,10 +74,10 @@ export function LibraryPreview({ modules, total, loading, error, onRetry }: Libr
 
         <div className="mt-8 flex flex-col items-start gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[11.5px] leading-relaxed text-faint">
-            展示的是索引内的全部内容，不含安装量或热度排序 —— 这些统计尚未接入。
+            {t('展示的是索引内的全部内容，不含安装量或热度排序 —— 这些统计尚未接入。')}
           </p>
           <ButtonLink to="/discover" variant="secondary" size="sm" className="shrink-0">
-            进入发现页
+            {t('进入发现页')}
             <ArrowRight className="size-3.5" strokeWidth={1.75} aria-hidden="true" />
           </ButtonLink>
         </div>
@@ -86,11 +88,12 @@ export function LibraryPreview({ modules, total, loading, error, onRetry }: Libr
 
 /** Compact "platform intro" block used between library and footer. */
 export function PlatformIntro() {
+  const { t } = useI18n();
   const points = [
-    { title: '独立索引', body: '由维护者整理的 Surge 模块目录，与 Surge 官方无隶属关系。' },
-    { title: '原始配置', body: '在详情页直接查看模块的 .sgmodule 原文，复制原始链接。' },
-    { title: '版本记录', body: '记录每个模块的版本号、发布时间与更新说明。' },
-    { title: '本地收藏', body: '收藏保存在本机浏览器，无需账号，清除站点数据会一并清空。' },
+    { title: t('独立索引'), body: t('由维护者整理的 Surge 模块目录，与 Surge 官方无隶属关系。') },
+    { title: t('原始配置'), body: t('在详情页直接查看模块的 .sgmodule 原文，复制原始链接。') },
+    { title: t('版本记录'), body: t('记录每个模块的版本号、发布时间与更新说明。') },
+    { title: t('本地收藏'), body: t('收藏保存在本机浏览器，无需账号，清除站点数据会一并清空。') },
   ];
 
   return (
@@ -100,21 +103,21 @@ export function PlatformIntro() {
           <Reveal>
             <div className="lg:sticky lg:top-24">
               <div className="mb-2.5 flex items-center gap-2">
-                <span className="eyebrow">关于平台</span>
+                <span className="eyebrow">{t('关于平台')}</span>
                 <span className="font-mono text-[10.5px] tabular-nums text-faint/70">05</span>
               </div>
               <h2 className="text-balance text-[1.5rem] font-semibold leading-[1.14] tracking-[-0.02em] sm:text-[1.9rem]">
-                一个专注的模块索引。
+                {t('一个专注的模块索引。')}
               </h2>
               <p className="mt-3 text-pretty text-[13.5px] leading-relaxed text-muted">
-                不做社区，不做商店。只负责把模块整理清楚，让你更快找到需要的那一个。
+                {t('不做社区，不做商店。只负责把模块整理清楚，让你更快找到需要的那一个。')}
               </p>
               <Link
                 to="/about"
                 className="tap-target group mt-5 inline-flex items-center gap-1.5 text-[12.5px] text-muted transition-colors hover:text-fg"
               >
                 <span className="border-b border-transparent pb-0.5 group-hover:border-line-strong">
-                  了解平台范围
+                  {t('了解平台范围')}
                 </span>
                 <ArrowUpRight className="size-3.5" aria-hidden="true" />
               </Link>

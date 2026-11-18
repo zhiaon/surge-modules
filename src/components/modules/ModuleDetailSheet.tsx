@@ -25,6 +25,7 @@ import { rankGroup, type CompareTech } from '@/lib/sameName';
 import { analyticsService } from '@/services/analyticsService';
 import { copyText, formatDate, formatRelative, toIsoDate } from '@/lib/format';
 import { resolveCategoryIcon } from '@/lib/icons';
+import { useI18n } from '@/i18n';
 
 /**
  * Module detail as a sheet.
@@ -39,6 +40,7 @@ import { resolveCategoryIcon } from '@/lib/icons';
  * shares still land there; only in-app card taps use this sheet.
  */
 export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: () => void }) {
+  const { t } = useI18n();
   const { data: module, status, error, reload } = useAsync(
     () => moduleService.getModuleBySlug(slug),
     [slug],
@@ -60,6 +62,8 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
           rewrites: number;
           scripts: Array<{ name: string; url: string }>;
           crons: string[];
+          /** how many [Panel] sections the file declares (enrich.py) */
+          panels?: number;
         } | null;
         sameAs?: string[];
         history?: Array<{ at: string; type: 'added' | 'content' | 'removed' }>;
@@ -145,7 +149,7 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
     if (!ok) return;
     setCopied('config');
     window.setTimeout(() => setCopied(null), 1800);
-    toast.show('已复制配置', '这是模块的完整 .sgmodule 文本', 'success');
+    toast.show(t('已复制配置'), t('这是模块的完整 .sgmodule 文本'), 'success');
   };
 
   const Icon = module ? resolveCategoryIcon(module.category.icon) : null;
@@ -165,7 +169,7 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
         <button
           type="button"
           onClick={onClose}
-          aria-label="关闭"
+          aria-label={t('关闭')}
           className="-mr-1 inline-flex size-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-raised hover:text-fg"
         >
           <X className="size-4.5" strokeWidth={1.9} aria-hidden="true" />
@@ -183,10 +187,10 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
           </div>
         ) : status === 'error' ? (
           <div className="p-5">
-            <ErrorState title="模块详情加载失败" error={error} onRetry={reload} />
+            <ErrorState title={t('模块详情加载失败')} error={error} onRetry={reload} />
           </div>
         ) : !module || !Icon ? (
-          <div className="p-8 text-center text-[13px] text-faint">找不到这个模块</div>
+          <div className="p-8 text-center text-[13px] text-faint">{t('找不到这个模块')}</div>
         ) : (
           <>
             {/* ---- header ---- */}
@@ -207,7 +211,7 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                     {module.isFeatured && (
                       <Badge tone="accent">
                         <Sparkles className="size-2.5" strokeWidth={2.2} aria-hidden="true" />
-                        精选
+                        {t('精选')}
                       </Badge>
                     )}
 
@@ -225,16 +229,16 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                 <div className="min-w-0 rounded-[var(--radius-md)] border border-line bg-inset px-2.5 py-2">
                   <dt className="flex items-center gap-1 text-[10px] text-faint">
                     <Tag className="size-2.5 shrink-0" strokeWidth={2.2} aria-hidden="true" />
-                    类别
+                    {t('类别')}
                   </dt>
                   <dd className="mt-0.5 truncate text-[11.5px] text-fg">
-                    {module.category.name}
+                    {t(module.category.name)}
                   </dd>
                 </div>
                 <div className="min-w-0 rounded-[var(--radius-md)] border border-line bg-inset px-2.5 py-2">
                   <dt className="flex items-center gap-1 text-[10px] text-faint">
                     <FileCode2 className="size-2.5 shrink-0" strokeWidth={2.2} aria-hidden="true" />
-                    版本
+                    {t('版本')}
                   </dt>
                   <dd className="mt-0.5 truncate font-mono text-[11.5px] tabular-nums text-fg">
                     v{module.version}
@@ -243,7 +247,7 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                 <div className="min-w-0 rounded-[var(--radius-md)] border border-line bg-inset px-2.5 py-2">
                   <dt className="flex items-center gap-1 text-[10px] text-faint">
                     <Calendar className="size-2.5 shrink-0" strokeWidth={2.2} aria-hidden="true" />
-                    更新
+                    {t('更新')}
                   </dt>
                   <dd
                     className="mt-0.5 truncate text-[11.5px] tabular-nums text-fg"
@@ -284,23 +288,23 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
               {detail?.tech && (
                 <details className="group mt-3.5 rounded-[var(--radius-md)] border border-line bg-inset/60">
                   <summary className="flex cursor-pointer list-none items-center justify-between px-3 py-2.5 text-[11.5px] text-muted">
-                    <span>技术清单</span>
+                    <span>{t('技术清单')}</span>
                     <span className="text-[10.5px] text-faint">
-                      {detail.tech.rules ? `${detail.tech.rules} 条规则 · ` : ''}
-                      {detail.tech.mitm.length} 域名 · {detail.tech.rewrites} 条重写 ·{' '}
-                      {detail.tech.scripts.length} 个脚本
+                      {detail.tech.rules ? `${t('{n} 条规则', { n: detail.tech.rules })} · ` : ''}
+                      {t('{n} 域名', { n: detail.tech.mitm.length })} · {t('{n} 条重写', { n: detail.tech.rewrites })} ·{' '}
+                      {t('{n} 个脚本', { n: detail.tech.scripts.length })}
                     </span>
                   </summary>
                   <div className="space-y-2.5 border-t border-line px-3 py-2.5 text-[11px] leading-relaxed text-faint">
                     {(detail.tech.panels ?? 0) > 0 && (
                       <p>
-                        <span className="text-muted">面板：</span>
-                        {detail.tech.panels} 个 [Panel] 卡片
+                        <span className="text-muted">{t('面板：')}</span>
+                        {t('{n} 个 [Panel] 卡片', { n: detail.tech.panels ?? 0 })}
                       </p>
                     )}
                     {detail.tech.crons.length > 0 && (
                       <p>
-                        <span className="text-muted">定时：</span>
+                        <span className="text-muted">{t('定时：')}</span>
                         {detail.tech.crons.join(' / ')}
                       </p>
                     )}
@@ -308,12 +312,12 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                       <p className="break-all">
                         <span className="text-muted">MITM：</span>
                         {detail.tech.mitm.slice(0, 12).join(', ')}
-                        {detail.tech.mitm.length > 12 && ` …等 ${detail.tech.mitm.length} 个`}
+                        {detail.tech.mitm.length > 12 && t('…等 {n} 个', { n: detail.tech.mitm.length })}
                       </p>
                     )}
                     {detail.tech.scripts.length > 0 && (
                       <ul className="space-y-1">
-                        <li className="text-muted">脚本：</li>
+                        <li className="text-muted">{t('脚本：')}</li>
                         {detail.tech.scripts.map((sc) => (
                           <li key={sc.url} className="break-all">
                             <a
@@ -330,7 +334,7 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                     )}
                     {detail.tech.crons.length === 0 &&
                       detail.tech.mitm.length === 0 &&
-                      detail.tech.scripts.length === 0 && <p>无脚本、无 MITM、无定时任务。</p>}
+                      detail.tech.scripts.length === 0 && <p>{t('无脚本、无 MITM、无定时任务。')}</p>}
                   </div>
                 </details>
               )}
@@ -340,18 +344,18 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                 <div className="mt-3.5 rounded-[var(--radius-md)] border border-line bg-inset/60 p-3">
                   <p className="mb-2 flex items-center gap-1.5 text-[11.5px] text-muted">
                     <Layers3 className="size-3" strokeWidth={2} aria-hidden="true" />
-                    同名模块 {comparison.length} 个，选哪个？
+                    {t('同名模块 {n} 个，选哪个？', { n: comparison.length })}
                   </p>
                   <div className="-mx-1 overflow-x-auto">
                     <table className="w-full min-w-[420px] border-collapse text-[11px]">
                       <thead>
                         <tr className="text-faint">
-                          <th className="p-1 text-left font-normal">来源</th>
-                          <th className="p-1 text-right font-normal">规则</th>
-                          <th className="p-1 text-right font-normal">重写</th>
-                          <th className="p-1 text-right font-normal">域名</th>
-                          <th className="p-1 text-right font-normal">脚本</th>
-                          <th className="p-1 text-right font-normal">状态</th>
+                          <th className="p-1 text-left font-normal">{t('来源')}</th>
+                          <th className="p-1 text-right font-normal">{t('规则')}</th>
+                          <th className="p-1 text-right font-normal">{t('重写')}</th>
+                          <th className="p-1 text-right font-normal">{t('域名')}</th>
+                          <th className="p-1 text-right font-normal">{t('脚本')}</th>
+                          <th className="p-1 text-right font-normal">{t('状态')}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -366,7 +370,7 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                             <td className="max-w-[132px] truncate p-1 text-muted">
                               {row.recommended && (
                                 <span className="mr-1 rounded bg-[var(--tint-accent-16)] px-1 py-0.5 text-[9px] text-accent-soft">
-                                  推荐
+                                  {t('推荐')}
                                 </span>
                               )}
                               {row.module.repositoryUrl?.replace('https://github.com/', '') ??
@@ -386,9 +390,9 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                             </td>
                             <td className="p-1 text-right">
                               {row.module.health === 'broken' ? (
-                                <span className="text-danger">失效</span>
+                                <span className="text-danger">{t('失效')}</span>
                               ) : row.module.health === 'ok' ? (
-                                <span className="text-ok">正常</span>
+                                <span className="text-ok">{t('正常')}</span>
                               ) : (
                                 <span className="text-faint">—</span>
                               )}
@@ -399,7 +403,7 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                     </table>
                   </div>
                   <p className="mt-2 text-[10.5px] leading-relaxed text-faint">
-                    按「脚本是否可用 → 拦截面大小 → 更新时间」排序，推荐项可直接安装。
+                    {t('按「脚本是否可用 → 拦截面大小 → 更新时间」排序，推荐项可直接安装。')}
                   </p>
                 </div>
               )}
@@ -411,24 +415,24 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                 onClick={async () => {
                   const url = `${location.origin}/p/${module.slug}`;
                   const ok = await copyText(url);
-                  toast.show(ok ? '分享链接已复制' : '复制失败', ok ? '对方会看到模块预览卡片' : undefined, ok ? 'success' : 'default');
+                  toast.show(ok ? t('分享链接已复制') : t('复制失败'), ok ? t('对方会看到模块预览卡片') : undefined, ok ? 'success' : 'default');
                 }}
                 className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-line bg-inset px-3 py-1.5 text-[11.5px] text-muted transition-colors hover:border-line-strong hover:text-fg"
               >
                 <Share2 className="size-3" strokeWidth={2} aria-hidden="true" />
-                分享链接
+                {t('分享链接')}
               </button>
 
               {/* Change events recorded by the sync job. */}
               {detail?.history && detail.history.length > 0 && (
                 <div className="mt-3.5">
-                  <p className="mb-1.5 text-[11px] text-faint">变更记录</p>
+                  <p className="mb-1.5 text-[11px] text-faint">{t('变更记录')}</p>
                   <ul className="space-y-1">
                     {detail.history.slice(0, 4).map((h, i) => (
                       <li key={`${h.at}-${i}`} className="flex items-center gap-2 text-[11px] text-faint">
                         <span className="tabular-nums">{formatDate(h.at)}</span>
                         <span className="text-muted">
-                          {h.type === 'added' ? '收录' : h.type === 'removed' ? '下架' : '内容变更'}
+                          {h.type === 'added' ? t('收录') : h.type === 'removed' ? t('下架') : t('内容变更')}
                         </span>
                       </li>
                     ))}
@@ -446,10 +450,10 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                 className="flex w-full items-center gap-2 text-left"
               >
                 <FileCode2 className="size-4 shrink-0 text-faint" strokeWidth={1.9} aria-hidden="true" />
-                <span className="text-[12.5px] font-medium">原始配置</span>
+                <span className="text-[12.5px] font-medium">{t('原始配置')}</span>
                 <span className="font-mono text-[10px] text-faint">.sgmodule</span>
                 <span className="ml-auto text-[11px] text-faint">
-                  {showConfig ? '收起' : '展开'}
+                  {showConfig ? t('收起') : t('展开')}
                 </span>
               </button>
 
@@ -457,7 +461,7 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                 <div className="mt-2.5">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-[10.5px] text-faint">
-                      {rawConfig ? `${rawConfig.split('\n').length} 行` : configStatus === 'loading' ? '加载中…' : '—'}
+                      {rawConfig ? t('{n} 行', { n: rawConfig.split('\n').length }) : configStatus === 'loading' ? t('加载中…') : '—'}
                     </span>
                     <button
                       type="button"
@@ -476,11 +480,11 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
                       ) : (
                         <Copy className="size-3" strokeWidth={1.9} aria-hidden="true" />
                       )}
-                      {copied === 'config' ? '已复制' : '复制配置'}
+                      {copied === 'config' ? t('已复制') : t('复制配置')}
                     </button>
                   </div>
                   <pre className="max-h-72 overflow-auto rounded-[var(--radius-md)] border border-line bg-[var(--color-inset)] p-3 font-mono text-[10.5px] leading-[1.65] text-muted">
-                    {rawConfig || (configStatus === 'loading' ? '加载中…' : '暂无内容')}
+                    {rawConfig || (configStatus === 'loading' ? t('加载中…') : t('暂无内容'))}
                   </pre>
                 </div>
               )}
@@ -488,12 +492,12 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
               {/* version history, last three */}
               {versions && versions.length > 0 && (
                 <div className="mt-4 border-t border-line pt-3.5">
-                  <p className="mb-2 text-[11px] text-faint">版本记录（{versions.length}）</p>
+                  <p className="mb-2 text-[11px] text-faint">{t('版本记录（{n}）', { n: versions.length })}</p>
                   <ol className="space-y-1.5">
                     {versions.slice(0, 3).map((v, i) => (
                       <li key={v.version} className="flex items-baseline gap-2 text-[11px]">
                         <span className="font-mono tabular-nums text-fg">v{v.version}</span>
-                        {i === 0 && <span className="text-[9.5px] text-ok">当前</span>}
+                        {i === 0 && <span className="text-[9.5px] text-ok">{t('当前')}</span>}
                         <time
                           dateTime={toIsoDate(v.releasedAt)}
                           className="ml-auto shrink-0 font-mono tabular-nums text-faint"
@@ -510,14 +514,15 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
               )}
 
               <p className="mt-4 text-[10.5px] leading-relaxed text-faint">
-                安装链接需要 Surge 已安装并登录；未登录时链接不含访问凭证。
-                模块最后更新 {formatRelative(module.updatedAt)}。
+                {t('安装链接需要 Surge 已安装并登录；未登录时链接不含访问凭证。')}
+                {t('模块最后更新 {when}。', { when: formatRelative(module.updatedAt) })}
               </p>
 
               {/* Attribution: the module is the author's work, not ours. */}
               <p className="mt-2 border-t border-line pt-2.5 text-[10.5px] leading-relaxed text-faint">
-                模块著作权归原作者 {module.author || '所有作者'} 所有，本站仅做索引与格式规范化，
-                不对模块内容主张任何权利。如有异议可联系下架。
+                {t('模块著作权归原作者 {author} 所有，本站仅做索引与格式规范化，不对模块内容主张任何权利。如有异议可联系下架。', {
+                  author: module.author || t('所有作者'),
+                })}
               </p>
             </div>
           </>

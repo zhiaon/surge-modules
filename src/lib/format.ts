@@ -1,4 +1,5 @@
 /** Date + text helpers. Every page formats through these — never inline. */
+import { i18n } from '@/i18n';
 
 const DATE_FMT = new Intl.DateTimeFormat('zh-CN', {
   year: 'numeric',
@@ -7,6 +8,8 @@ const DATE_FMT = new Intl.DateTimeFormat('zh-CN', {
 });
 
 const MONTH_FMT = new Intl.DateTimeFormat('zh-CN', { month: 'short', day: 'numeric' });
+
+const MONTH_FMT_EN = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
 
 /** 2026.11.02 — editorial, unambiguous, sorts alphabetically too. */
 export function formatDate(input: string | Date | null | undefined): string {
@@ -18,11 +21,12 @@ export function formatDate(input: string | Date | null | undefined): string {
   return `${get('year')}.${get('month')}.${get('day')}`;
 }
 
-/** 11月2日 — compact, used inside dense lists. */
+/** 11月2日 / "Nov 2" — compact, used inside dense lists. */
 export function formatMonthDay(input: string | Date | null | undefined): string {
   if (!input) return '—';
   const d = toDate(input);
   if (!d) return '—';
+  if (i18n.current() === 'en') return MONTH_FMT_EN.format(d);
   return MONTH_FMT.format(d).replace(/\//g, '月').replace(/$/, '日');
 }
 
@@ -35,18 +39,21 @@ const RELATIVE_UNITS: Array<[Intl.RelativeTimeFormatUnit, number]> = [
 ];
 
 const RTF = new Intl.RelativeTimeFormat('zh-CN', { numeric: 'auto' });
+const RTF_EN = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 
-/** “3 天前” / “刚刚”. Falls back to a date beyond a year. */
+/** “3 天前” / “3 days ago”; “刚刚” / “just now”. Falls back to a date beyond a year. */
 export function formatRelative(input: string | Date | null | undefined, now = Date.now()): string {
   if (!input) return '—';
   const d = toDate(input);
   if (!d) return '—';
+  const en = i18n.current() === 'en';
   const diff = (d.getTime() - now) / 1000;
   const abs = Math.abs(diff);
-  if (abs < 90) return '刚刚';
+  if (abs < 90) return en ? 'just now' : '刚刚';
+  const fmt = en ? RTF_EN : RTF;
   for (const [unit, secs] of RELATIVE_UNITS) {
     if (abs >= secs) {
-      return RTF.format(Math.round(diff / secs), unit);
+      return fmt.format(Math.round(diff / secs), unit);
     }
   }
   return formatDate(d);

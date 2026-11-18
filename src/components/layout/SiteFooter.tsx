@@ -7,6 +7,7 @@ import { Logo } from '@/components/navigation/Logo';
 import { Divider } from '@/components/common/Divider';
 import { api } from '@/services/apiClient';
 import { openDonateSheet } from '@/stores/donateSheet';
+import { useI18n } from '@/i18n';
 
 /**
  * Footer.
@@ -22,6 +23,7 @@ import { openDonateSheet } from '@/stores/donateSheet';
  */
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const { t } = useI18n();
   const links = siteConfig.nav.filter((n) => !n.to.includes('#'));
 
   const [telegram, setTelegram] = useState(siteConfig.contact.telegram);
@@ -52,20 +54,22 @@ export function SiteFooter() {
       <Container size="wide" className="py-12 sm:py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] lg:gap-14">
           <div className="max-w-sm">
-            <Link to="/" className="inline-flex items-center gap-2.5" aria-label={`${siteConfig.name} 首页`}>
+            <Link to="/" className="inline-flex items-center gap-2.5" aria-label={t('{name} 首页', { name: siteConfig.name })}>
               <Logo className="size-6" />
               <span className="text-[14px] font-medium">{siteConfig.name}</span>
             </Link>
             <p className="mt-3.5 text-pretty text-[12.5px] leading-relaxed text-muted">
-              {siteConfig.description}
+              {t(siteConfig.description)}
             </p>
             <p className="mt-3 text-[11.5px] leading-relaxed text-faint/80">
-              {siteConfig.footer.tagline}
+              {t(siteConfig.footer.tagline)}
             </p>
           </div>
 
-          <nav aria-label="页脚导航">
-            <h2 className="mb-3.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-faint">导航</h2>
+          <nav aria-label={t('页脚导航')}>
+            <h2 className="mb-3.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-faint">
+              {t('导航')}
+            </h2>
             <ul className="space-y-2.5">
               {links.map((item) => (
                 <li key={item.to}>
@@ -73,7 +77,7 @@ export function SiteFooter() {
                     to={item.to}
                     className="tap-target text-[13px] text-muted transition-colors hover:text-fg"
                   >
-                    {item.label}
+                    {t(item.label)}
                   </Link>
                 </li>
               ))}
@@ -85,7 +89,7 @@ export function SiteFooter() {
               never a click target that goes nowhere. */}
           <div>
             <h2 className="mb-3.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-faint">
-              联系作者
+              {t('联系作者')}
             </h2>
             {telegramLink ? (
               <a
@@ -106,9 +110,9 @@ export function SiteFooter() {
                   <Send className="size-4" strokeWidth={1.8} />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[13px] font-medium text-fg">联系作者</span>
+                  <span className="block text-[13px] font-medium text-fg">{t('联系作者')}</span>
                   <span className="mt-0.5 block text-[11.5px] leading-relaxed text-faint">
-                    通过 Telegram 频道私信反馈问题或提出建议
+                    {t('通过 Telegram 频道私信反馈问题或提出建议')}
                   </span>
                 </span>
                 <Send
@@ -127,9 +131,9 @@ export function SiteFooter() {
                   <Send className="size-4" strokeWidth={1.8} />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[13px] font-medium text-muted">联系作者</span>
+                  <span className="block text-[13px] font-medium text-muted">{t('联系作者')}</span>
                   <span className="mt-0.5 block text-[11.5px] leading-relaxed text-faint">
-                    通过 Telegram 频道私信反馈问题或提出建议
+                    {t('通过 Telegram 频道私信反馈问题或提出建议')}
                   </span>
                 </span>
               </div>
@@ -139,7 +143,7 @@ export function SiteFooter() {
           {/* 支持作者 — opens the WeChat QR sheet; same card style as 联系作者 */}
           <div>
             <h2 className="mb-3.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-faint">
-              支持作者
+              {t('支持作者')}
             </h2>
             <button
               type="button"
@@ -158,9 +162,9 @@ export function SiteFooter() {
                 <Heart className="size-4" strokeWidth={1.8} />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[13px] font-medium text-fg">支持作者</span>
+                <span className="block text-[13px] font-medium text-fg">{t('支持作者')}</span>
                 <span className="mt-0.5 block text-[11.5px] leading-relaxed text-faint">
-                  请作者喝杯咖啡，微信扫码捐赠
+                  {t('请作者喝杯咖啡，微信扫码捐赠')}
                 </span>
               </span>
               <Heart
@@ -175,13 +179,15 @@ export function SiteFooter() {
 
         <div className="mt-6 flex flex-col gap-3 text-[11px] leading-relaxed text-faint sm:flex-row sm:items-start sm:justify-between sm:gap-8">
           <div className="max-w-xl">
-            <p className="text-pretty">{siteConfig.footer.disclaimer}</p>
+            <p className="text-pretty">{t(siteConfig.footer.disclaimer)}</p>
             <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span>{siteConfig.footer.license}</span>
+              <span>{t(siteConfig.footer.license)}</span>
               <span className="text-line-strong" aria-hidden="true">
                 ·
               </span>
-              <span>站点代码 {siteConfig.footer.rights}</span>
+              <span>
+                {t('站点代码')} {t(siteConfig.footer.rights)}
+              </span>
             </p>
           </div>
           <p className="shrink-0 tabular-nums sm:text-right">

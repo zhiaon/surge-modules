@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { IconButton } from '../common/IconButton';
 import { cn } from '@/lib/cn';
+import { useI18n } from '@/i18n';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 
@@ -37,6 +38,7 @@ export function Modal({
   className,
   align = 'center',
 }: ModalProps) {
+  const { t } = useI18n();
   const reduce = useReducedMotion();
   const titleId = useId();
   const descId = useId();
@@ -109,7 +111,7 @@ export function Modal({
                     </p>
                   )}
                 </div>
-                <IconButton label="关闭" onClick={onClose} size="sm" className="-mr-1 -mt-0.5">
+                <IconButton label={t('关闭')} onClick={onClose} size="sm" className="-mr-1 -mt-0.5">
                   <X className="size-4" strokeWidth={1.75} aria-hidden="true" />
                 </IconButton>
               </header>
