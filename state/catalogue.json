@@ -18048,13 +18048,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "hongguo.sgmodule",
-  "sha": "70f92eb671f68105a3285e939f85a999f1e0a8ec",
+  "sha": "f28f291d428ca25ae1f75632596592601ff75f35",
   "name": "红果短剧去广告",
-  "description": "V1.1 移除 p*-webcast-sign.douyinpic.com 拦截，避免误伤抖音评论头像；纯域名层去广告：穿山甲/Pangle 广告 SDK 全族、红果广告视频子域 v*-reading-ad、广告素材签名（-ad-sign / mgsd-sign / luckycat）、广告位调度 TNC、小游戏与电商推广位、埋点上报、直播带货卡片信令。正片 CDN 与图床全部前置放行，不需要 MITM 与证书。",
+  "description": "V1.2 新增红果专属广告域（hongguoapp / hongguosdk / hongguo.ad）、穿山甲 SDK 直连域（pangolin-sdk-toutiao、ad.pangolin.cn）、联盟 SDK 关键字 ad-union-sdk、字节兜底 be-pack 与 tnc.snssdk；刻意不写 zijieapi 整域拦截，避免连带 api5-normal 业务接口。纯域名层去广告，不需要 MITM 与证书。",
   "author": "许舟",
-  "version": "1.0.0",
+  "version": "1.2",
   "category": "adblock",
-  "updatedAt": "2026-11-15T06:00:53Z"
+  "updatedAt": "2026-11-18T05:01:04Z"
  },
  "haijiao": {
   "slug": "haijiao",
@@ -20824,5 +20824,31 @@
   "version": "1.0",
   "category": "adblock",
   "updatedAt": "2026-11-18T00:00:59Z"
+ },
+ "going-out-weather": {
+  "slug": "going-out-weather",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "going-out-weather.sgmodule",
+  "sha": "d442203e4297e621c5f7a42deb063e67c4f8ec0a",
+  "name": "出门天气卡",
+  "description": "V1.1：详细出门天气卡。显示当前天气与体感、今日高低温、降水概率与雨量、湿度风力、紫外线、空气质量、日出日落、气压能见度阵风、未来 6 小时逐时预报，并给出雨伞/穿衣/运动/体感四项出门指数；每天 07:30 推送天气摘要。",
+  "author": "许舟",
+  "version": "1.1",
+  "category": "adblock",
+  "updatedAt": "2026-11-18T05:01:04Z"
+ },
+ "rss-reader": {
+  "slug": "rss-reader",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "rss-reader.sgmodule",
+  "sha": "b1a118deafe513bf685f69f8642c4d933b5a5055",
+  "name": "RSS订阅",
+  "description": "V1.0：订阅 RSS / Atom 源，面板列出最新条目；首次只建立基线，之后出现新内容才通知。",
+  "author": "许舟",
+  "version": "1.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-18T05:01:05Z"
  }
 }
