@@ -226,7 +226,27 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
         />
       )}
 
-      <header className="flex items-start gap-3">
+      {/* Same corner and reserved space in both languages. Keeping the header
+          below the badge avoids guessing how wide a translated label is. */}
+      {isOwn && (
+        <button
+          type="button"
+          onClick={openDonateSheet}
+          aria-label={t('捐赠作者')}
+          title={t('捐赠作者')}
+          className={cn(
+            'absolute right-3.5 top-3.5 z-20 inline-flex min-h-0 items-center gap-1 whitespace-nowrap rounded-full border border-line px-1.5 py-0.5',
+            'text-[9.5px] leading-none text-muted transition-colors',
+            'hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]',
+          )}
+          style={{ minHeight: 20, height: 20 }}
+        >
+          <span aria-hidden="true">💌</span>
+          {t('捐赠作者')}
+        </button>
+      )}
+
+      <header className={cn('flex items-start gap-3', isOwn && 'pt-4')}>
         {/* Author avatar as the card's lead image; the category icon rides on
             it as a small badge so users still see what the module does. Falls
             back to the icon-only tile when there is no GitHub owner. */}
@@ -277,28 +297,6 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
                 <Sparkles className="size-2.5" strokeWidth={2} aria-hidden="true" />
                 {t('精选')}
               </span>
-            )}
-            {/* Donation entry for our own modules. It used to be an absolutely
-                positioned corner badge, which collided with the version chip
-                once the label was translated ("Support the author" is twice as
-                wide as 「捐赠作者」). Inline in the wrapping metadata row it can
-                never overlap anything. */}
-            {isOwn && (
-              <button
-                type="button"
-                onClick={openDonateSheet}
-                aria-label={t('捐赠作者')}
-                title={t('捐赠作者')}
-                className={cn(
-                  'inline-flex min-h-0 items-center gap-1 rounded-full border border-line px-1.5 py-0.5',
-                  'text-[9.5px] leading-none text-muted transition-colors',
-                  'hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]',
-                )}
-                style={{ minHeight: 20, height: 20 }}
-              >
-                <span aria-hidden="true">💌</span>
-                {t('捐赠作者')}
-              </button>
             )}
           </div>
           <h3
