@@ -181,7 +181,7 @@ export function DiscoverPage() {
             className="flex-1"
             aria-label={t('筛选模块')}
           />
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <ButtonLink
               to="/collection"
               variant="secondary"
@@ -196,17 +196,26 @@ export function DiscoverPage() {
               onClick={() => setFilterSheetOpen((v) => !v)}
               aria-expanded={filterSheetOpen}
               aria-controls="filter-panel"
+              className="shrink-0"
             >
               <SlidersHorizontal className="size-4" strokeWidth={1.85} aria-hidden="true" />
               {t('筛选')}
               {hasFilters && <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />}
             </Button>
 
-            {/* segmented control — one surface, one active pill */}
+            {/* segmented control — one surface, one active pill.
+                The three labels grow a lot in English ("Latest updates" is 14
+                characters where 「最近更新」 is 4), so the group takes the rest of
+                the row and scrolls rather than wrapping each button onto two
+                lines inside a 390px viewport. */}
             <div
               role="group"
               aria-label={t('排序方式')}
-              className="flex items-center gap-0.5 rounded-[var(--radius-md)] border border-line bg-raised p-0.5"
+              className={cn(
+                'flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto',
+                'rounded-[var(--radius-md)] border border-line bg-raised p-0.5',
+                '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+              )}
             >
               {SORTS.map((s) => (
                 <button
@@ -215,7 +224,8 @@ export function DiscoverPage() {
                   onClick={() => setParam('sort', s.value === 'recommended' ? null : s.value)}
                   aria-pressed={sort === s.value}
                   className={cn(
-                    'rounded-[var(--radius-xs)] px-2.5 py-2 text-[12px] transition-colors duration-200',
+                    'shrink-0 whitespace-nowrap rounded-[var(--radius-xs)] px-2.5 py-2 text-[12px]',
+                    'transition-colors duration-200',
                     sort === s.value
                       ? 'bg-raised-hover text-fg shadow-[var(--shadow-card)]'
                       : 'text-faint hover:text-muted',

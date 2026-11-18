@@ -226,22 +226,6 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
         />
       )}
 
-      {isOwn && (
-        <button
-          type="button"
-          onClick={openDonateSheet}
-          aria-label={t('捐赠作者')}
-          title={t('捐赠作者')}
-          className="absolute right-3.5 top-3.5 z-20 inline-flex min-h-0 items-center gap-1 rounded-full border border-line bg-raised/80 px-2 py-[5px] text-[10px] leading-none text-muted shadow-[var(--shadow-card)] transition-colors hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]"
-          // The global 44px tap-target rule outranks the utility class; pin the
-          // visual box here so the pill stays a small corner badge.
-          style={{ minHeight: 22, height: 22 }}
-        >
-          <span aria-hidden="true">💌</span>
-          {t('捐赠作者')}
-        </button>
-      )}
-
       <header className="flex items-start gap-3">
         {/* Author avatar as the card's lead image; the category icon rides on
             it as a small badge so users still see what the module does. Falls
@@ -268,7 +252,7 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
         </span>
 
         <div className="min-w-0 flex-1">
-          <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 pr-16">
+          <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
             <span className="eyebrow">{t(module.category.name)}</span>
             <VersionBadge version={module.version} />
             {(module.dupe ?? 0) > 0 && (
@@ -293,6 +277,28 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
                 <Sparkles className="size-2.5" strokeWidth={2} aria-hidden="true" />
                 {t('精选')}
               </span>
+            )}
+            {/* Donation entry for our own modules. It used to be an absolutely
+                positioned corner badge, which collided with the version chip
+                once the label was translated ("Support the author" is twice as
+                wide as 「捐赠作者」). Inline in the wrapping metadata row it can
+                never overlap anything. */}
+            {isOwn && (
+              <button
+                type="button"
+                onClick={openDonateSheet}
+                aria-label={t('捐赠作者')}
+                title={t('捐赠作者')}
+                className={cn(
+                  'inline-flex min-h-0 items-center gap-1 rounded-full border border-line px-1.5 py-0.5',
+                  'text-[9.5px] leading-none text-muted transition-colors',
+                  'hover:border-[var(--line-danger-35)] hover:text-danger active:scale-[0.97]',
+                )}
+                style={{ minHeight: 20, height: 20 }}
+              >
+                <span aria-hidden="true">💌</span>
+                {t('捐赠作者')}
+              </button>
             )}
           </div>
           <h3
