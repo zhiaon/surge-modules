@@ -20889,5 +20889,18 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-18T16:01:04Z"
+ },
+ "episode-watch": {
+  "slug": "episode-watch",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "episode-watch.sgmodule",
+  "sha": "d3c91d21cf48a0e46cc24a59247114e0c2224d14",
+  "name": "追更提醒",
+  "description": "V1.4：360影视、优酷、腾讯视频搜索中文剧；Bangumi与TVmaze补充。仅匹配精确正片更新标记，首次静默、跨源去重通知。",
+  "author": "许舟",
+  "version": "1.4",
+  "category": "adblock",
+  "updatedAt": "2026-11-19T03:01:04Z"
  }
 }
