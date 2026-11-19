@@ -74,8 +74,16 @@ export function LanguageToggle({ className }: { className?: string }) {
           open && 'border-line bg-raised text-fg',
         )}
       >
+        {/* Matched to the theme icon next to it by ink, not by font size: the
+            moon's painted shape measures 13.49px tall inside its 18px box, so
+            each marker is sized to hit that height (measured with canvas
+            metrics — cap height runs ≈0.70em for "A", CJK fills more of the em
+            box, and two letters need less to stay inside the 40px control). */}
         <span
-          className="text-[12px] font-semibold leading-none tracking-[-0.02em]"
+          className={cn(
+            'font-semibold leading-none tracking-[-0.02em]',
+            short === '中' ? 'text-[15px]' : short.length > 1 ? 'text-[14px]' : 'text-[19px]',
+          )}
           aria-hidden="true"
         >
           {short}

@@ -328,10 +328,6 @@ export const EN: Record<string, DictValue> = {
     'This site is not affiliated with Surge. Modules are provided and maintained by their own authors; we only index them and normalise formatting, and claim no rights over their contents. Check what a module does before you use it.',
   '模块内容版权归原作者所有': 'Module content © the respective authors',
   '保留所有权利': 'All rights reserved',
-  '许舟': 'Xu Zhou',
-  '联系作者': 'Contact',
-  '通过Telegram频道私信反馈问题或提出建议': 'Send feedback or suggestions via the Telegram channel',
-  '通过 Telegram 频道私信反馈问题或提出建议': 'Send feedback or suggestions via the Telegram channel',
   '示例数据': 'Sample data',
   '当前内容为界面演示数据。': 'This content is demo data for the interface.',
   '当前展示的模块、作者与版本均为界面演示用的示例数据，未接入真实仓库；原始链接同样不可安装。':

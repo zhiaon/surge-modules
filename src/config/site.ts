@@ -35,11 +35,6 @@ export interface SiteConfig {
   /** empty until the repository is actually public */
   githubUrl: string;
   issuesUrl: string;
-  contact: {
-    email: string;
-    telegram: string;
-    twitter: string;
-  };
   footer: {
     tagline: string;
     /** Affiliation disclaimer. Copyright notices live in the two fields below
@@ -47,8 +42,6 @@ export interface SiteConfig {
     disclaimer: string;
     /** Who owns the module content — the upstream authors, not this site. */
     contentLicense: string;
-    /** Who owns this site's own code, printed with the © year. */
-    copyrightHolder: string;
   };
   seo: {
     titleTemplate: string;
@@ -77,13 +70,6 @@ export const siteConfig: SiteConfig = {
   // 未配置：仓库尚未公开，留空而不是编造地址
   githubUrl: '',
   issuesUrl: '',
-  contact: {
-    email: '',
-    // Fallback for the footer「联系作者」card when /data/settings.json is not
-    // available — the entry must never degrade into dead text.
-    telegram: 'https://t.me/Xzhou_Xz',
-    twitter: '',
-  },
   footer: {
     tagline: '独立维护的 Surge 模块索引，非 Surge 官方产品。',
     // 三段式：关系澄清 → 模块内容归属 → 使用提示。用分号连成两句，
@@ -91,7 +77,6 @@ export const siteConfig: SiteConfig = {
     disclaimer:
       '本站与 Surge 官方无隶属关系；模块由各作者独立提供与维护，本站仅做索引与格式规范化，不对模块内容主张权利。使用前请自行确认模块内容与来源。',
     contentLicense: '模块内容版权归原作者所有',
-    copyrightHolder: '许舟',
   },
   seo: {
     titleTemplate: '%s · Surge Modules',
