@@ -15448,13 +15448,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "ikuuu.sgmodule",
-  "sha": "fc2701b14be95f17f4de6d78660e6440b6e759e0",
+  "sha": "560981a9748520b415bde3adc628596dc86e65e5",
   "name": "iKuuu 每日签到",
-  "description": "V1.2 仅保留自动签到（无面板）：Cookie 自动抓取 + 每日定时签到，已移除面板与手动签到脚本。通知里只报服务器原文与剩余流量。",
+  "description": "V1.3 每日签到 + 每10分钟本地补签检查；失效等待重新登录，成功后当天不重复提交。",
   "author": "Yjwj205 / 许舟（Surge 移植）",
-  "version": "1.2",
+  "version": "1.3",
   "category": "adblock",
-  "updatedAt": "2026-11-18T07:01:03Z"
+  "updatedAt": "2026-11-19T04:01:07Z"
  },
  "ipinfo": {
   "slug": "ipinfo",
