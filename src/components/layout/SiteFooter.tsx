@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { Container } from '@/components/common/Container';
 import { Logo } from '@/components/navigation/Logo';
 import { Divider } from '@/components/common/Divider';
 import { api } from '@/services/apiClient';
-import { openDonateSheet } from '@/stores/donateSheet';
 import { useI18n } from '@/i18n';
 
 /**
@@ -52,7 +51,7 @@ export function SiteFooter() {
   return (
     <footer className="mt-10 border-t border-line bg-surface/30 pb-[calc(var(--tabbar-h)+28px+env(safe-area-inset-bottom))] md:mt-20 md:pb-0">
       <Container size="wide" className="py-12 sm:py-14">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] lg:gap-14">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr] lg:gap-14">
           <div className="max-w-sm">
             <Link to="/" className="inline-flex items-center gap-2.5" aria-label={t('{name} 首页', { name: siteConfig.name })}>
               <Logo className="size-6" />
@@ -140,39 +139,7 @@ export function SiteFooter() {
             )}
           </div>
 
-          {/* 支持作者 — opens the WeChat QR sheet; same card style as 联系作者 */}
-          <div>
-            <h2 className="mb-3.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-faint">
-              {t('支持作者')}
-            </h2>
-            <button
-              type="button"
-              onClick={openDonateSheet}
-              className="group -mx-2 flex w-[calc(100%+1rem)] items-center gap-3 rounded-[var(--radius-lg)] border border-line
-                         bg-raised px-3.5 py-3 text-left card-spotlight transition-[transform,border-color,background-color]
-                         duration-200 hover:border-line-strong hover:bg-raised-hover
-                         active:scale-[0.985] sm:-mx-3 sm:w-[calc(100%+1.5rem)]"
-            >
-              <span
-                className="flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-sm)]
-                           border border-line bg-inset text-muted transition-colors
-                           group-hover:border-[var(--line-danger-35)] group-hover:text-danger"
-                aria-hidden="true"
-              >
-                <Heart className="size-4" strokeWidth={1.8} />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block text-[13px] font-medium text-fg">{t('支持作者')}</span>
-                <span className="mt-0.5 block text-[11.5px] leading-relaxed text-faint">
-                  {t('请作者喝杯咖啡，微信扫码捐赠')}
-                </span>
-              </span>
-              <Heart
-                className="size-3.5 shrink-0 text-faint transition-colors group-hover:text-danger"
-                aria-hidden="true"
-              />
-            </button>
-          </div>
+          {/* 赞助入口已按站主要求移除，页脚只保留导航与联系两列 */}
         </div>
 
         <Divider className="mt-10" />

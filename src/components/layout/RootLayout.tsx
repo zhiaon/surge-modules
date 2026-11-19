@@ -7,7 +7,6 @@ import { ModuleDetailSheet } from '@/components/modules/ModuleDetailSheet';
 import { closeModuleSheet, useModuleSheet } from '@/stores/moduleSheet';
 import { analyticsService } from '@/services/analyticsService';
 import { ScrollToTop } from './ScrollToTop';
-import { DonateSheet } from './DonateSheet';
 import { useI18n } from '@/i18n';
 
 export function RootLayout() {
@@ -50,7 +49,6 @@ export function RootLayout() {
       {/* Detail sheet: opened by card taps and legacy /modules/:slug links. */}
       {sheetSlug && <ModuleDetailSheet slug={sheetSlug} onClose={closeModuleSheet} />}
 
-      <DonateSheet />
       <ScrollToTop />
     </div>
   );

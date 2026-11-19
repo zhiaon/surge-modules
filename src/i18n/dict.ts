@@ -157,8 +157,6 @@ export const EN: Record<string, DictValue> = {
   '同名 {n}': 'Same name {n}',
   '模块引用的脚本已失效：{hint}': 'The scripts this module points at are gone: {hint}',
   '更新于 {date}': 'Updated {date}',
-  '捐赠作者': 'Support the author',
-  '支持作者': 'Support the author',
 
   // ---- module detail sheet --------------------------------------------
   '模块详情加载失败': 'Could not load module details',
@@ -334,14 +332,6 @@ export const EN: Record<string, DictValue> = {
   '联系作者': 'Contact',
   '通过Telegram频道私信反馈问题或提出建议': 'Send feedback or suggestions via the Telegram channel',
   '通过 Telegram 频道私信反馈问题或提出建议': 'Send feedback or suggestions via the Telegram channel',
-  '请作者喝杯咖啡，微信扫码捐赠': 'Buy the author a coffee — scan with WeChat to donate',
-  '感谢支持': 'Thank you',
-  '模块完全免费': 'The modules are completely free',
-  '模块完全免费，扫码请作者喝杯咖啡': 'Modules are free — scan to buy the author a coffee',
-  '微信收款码': 'WeChat payment QR code',
-  '微信「扫一扫」识别，或长按保存': 'Scan with WeChat, or long-press to save',
-  '累计 ¥{total} · {n} 位朋友支持': 'Total ¥{total} · {n} supporters',
-  '{n} 位朋友支持': { one: '{n} supporter', many: '{n} supporters' },
   '示例数据': 'Sample data',
   '当前内容为界面演示数据。': 'This content is demo data for the interface.',
   '当前展示的模块、作者与版本均为界面演示用的示例数据，未接入真实仓库；原始链接同样不可安装。':

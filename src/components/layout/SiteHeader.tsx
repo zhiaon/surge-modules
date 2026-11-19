@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Github, Heart } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { siteConfig, hasLink } from '@/config/site';
 import { Container } from '@/components/common/Container';
 import { ThemeToggle } from '@/components/common/ThemeToggle';
 import { LanguageToggle } from '@/components/common/LanguageToggle';
 import { cn } from '@/lib/cn';
 import { Logo } from '@/components/navigation/Logo';
-import { openDonateSheet } from '@/stores/donateSheet';
 import { useI18n } from '@/i18n';
 
 /**
@@ -90,17 +89,6 @@ export function SiteHeader() {
             </nav>
 
             <div className="ml-auto flex items-center gap-1">
-              {/* Donation entry kept in the header so it is visible without
-                  scrolling — the footer card alone was easy to miss. */}
-              <button
-                type="button"
-                onClick={openDonateSheet}
-                aria-label={t('支持作者')}
-                title={t('支持作者')}
-                className="inline-flex size-10 items-center justify-center rounded-[var(--radius-sm)] text-muted transition-colors hover:bg-raised hover:text-danger"
-              >
-                <Heart className="size-[17px]" strokeWidth={1.75} aria-hidden="true" />
-              </button>
               <LanguageToggle />
               <ThemeToggle />
 
