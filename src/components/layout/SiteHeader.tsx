@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Github, Heart } from 'lucide-react';
 import { siteConfig, hasLink } from '@/config/site';
 import { Container } from '@/components/common/Container';
@@ -23,7 +23,7 @@ import { useI18n } from '@/i18n';
  */
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const { t } = useI18n();
 
 
@@ -34,8 +34,9 @@ export function SiteHeader() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const isActive = (to: string) =>
-    to === '/' ? pathname === '/' : pathname === to || pathname.startsWith(`${to}/`);
+  // Anchor destinations (e.g. Categories) share a pathname with Discover.
+  const activeTo = siteConfig.nav.find((item) => item.to === pathname + hash)?.to
+    ?? siteConfig.nav.find((item) => item.to === pathname || (item.to !== '/' && pathname.startsWith(`${item.to}/`)))?.to;
 
   return (
     <>
@@ -64,12 +65,12 @@ export function SiteHeader() {
             {/* desktop links */}
             <nav className="ml-2 hidden items-center gap-0.5 md:flex" aria-label={t('主导航')}>
               {siteConfig.nav.map((item) => {
-                const active = isActive(item.to.split('#')[0]);
+                const active = item.to === activeTo;
                 return (
-                  <NavLink
+                  <Link
                     key={item.to}
                     to={item.to}
-                    end={item.to === '/'}
+                    aria-current={active ? (item.to.includes('#') ? 'location' : 'page') : undefined}
                     className={cn(
                       'relative inline-flex h-9 items-center whitespace-nowrap rounded-[var(--radius-sm)] px-3',
                       'text-[13px] transition-colors duration-200',
@@ -83,7 +84,7 @@ export function SiteHeader() {
                         aria-hidden="true"
                       />
                     )}
-                  </NavLink>
+                  </Link>
                 );
               })}
             </nav>

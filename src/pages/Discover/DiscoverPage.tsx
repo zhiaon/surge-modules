@@ -172,16 +172,16 @@ export function DiscoverPage() {
         </header>
 
         {/* search + sort */}
-        <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:items-center">
+        <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:items-center lg:grid lg:grid-cols-[minmax(0,1fr)_max-content] lg:gap-4 xl:gap-6">
           <DebouncedSearchInput
             value={search}
             onChange={commitSearch}
             placeholder={t('搜索模块、描述、作者或标签')}
             size="lg"
-            className="flex-1"
+            className="flex-1 lg:min-w-0"
             aria-label={t('筛选模块')}
           />
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 lg:flex-nowrap lg:gap-3">
             <ButtonLink
               to="/collection"
               variant="secondary"
@@ -203,16 +203,14 @@ export function DiscoverPage() {
               {hasFilters && <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />}
             </Button>
 
-            {/* segmented control — one surface, one active pill.
-                The three labels grow a lot in English ("Latest updates" is 14
-                characters where 「最近更新」 is 4), so the group takes the rest of
-                the row and scrolls rather than wrapping each button onto two
-                lines inside a 390px viewport. */}
+            {/* One shared sort control: narrow screens keep horizontal scrolling;
+                desktop reserves its content width so translated labels stay
+                visible without squeezing the search field or wrapping pills. */}
             <div
               role="group"
               aria-label={t('排序方式')}
               className={cn(
-                'flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto',
+                'flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto lg:flex-none lg:overflow-visible',
                 'rounded-[var(--radius-md)] border border-line bg-raised p-0.5',
                 '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
               )}
@@ -224,7 +222,7 @@ export function DiscoverPage() {
                   onClick={() => setParam('sort', s.value === 'recommended' ? null : s.value)}
                   aria-pressed={sort === s.value}
                   className={cn(
-                    'shrink-0 whitespace-nowrap rounded-[var(--radius-xs)] px-2.5 py-2 text-[12px]',
+                    'shrink-0 whitespace-nowrap rounded-[var(--radius-xs)] px-2.5 py-2 text-[12px] lg:px-3 lg:text-[13px]',
                     'transition-colors duration-200',
                     sort === s.value
                       ? 'bg-raised-hover text-fg shadow-[var(--shadow-card)]'
@@ -242,7 +240,7 @@ export function DiscoverPage() {
       {/* Egern-style inline filter panel: expands under the search row.
           Sources as avatar chips, categories as text chips, both wrap. */}
       <Container size="wide" id="filter-panel" className={cn('mt-3', filterSheetOpen ? 'block' : 'hidden')}>
-        <div className="rounded-[var(--radius-lg)] border border-line bg-raised p-3">
+        <div className="rounded-[var(--radius-lg)] border border-line bg-raised p-3 lg:p-5">
           <div className="flex items-center justify-between">
             <h2 className="text-[13.5px] font-semibold">{t('资源筛选')}</h2>
             <button
@@ -255,7 +253,7 @@ export function DiscoverPage() {
             </button>
           </div>
 
-          <div className="mt-2.5 space-y-3">
+          <div className="mt-2.5 space-y-3 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)_max-content] lg:items-start lg:gap-x-6 lg:gap-y-4 lg:space-y-0 xl:gap-x-8">
             {/* sources */}
             <div>
               <p className="mb-2 flex items-center gap-1.5 text-[11.5px] text-faint">
@@ -327,7 +325,7 @@ export function DiscoverPage() {
                   setParam('tag', null);
                   setParam('panel', null);
                 }}
-                className="inline-flex items-center gap-1.5 text-[11.5px] text-muted underline-offset-4 hover:text-fg hover:underline"
+                className="inline-flex items-center gap-1.5 text-[11.5px] text-muted underline-offset-4 hover:text-fg hover:underline lg:col-span-full lg:justify-self-start"
               >
                 {t('重置筛选')}
                 <X className="size-3" strokeWidth={2} aria-hidden="true" />
@@ -387,14 +385,14 @@ export function DiscoverPage() {
           {all.status === 'error' ? (
             <ErrorState title={t('模块列表加载失败')} error={all.error} onRetry={all.reload} />
           ) : all.status === 'loading' && !result ? (
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 xl:gap-5">
               {Array.from({ length: 8 }).map((_, i) => (
                 <ModuleCardSkeleton key={i} />
               ))}
             </div>
           ) : result && result.items.length > 0 ? (
             <>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 xl:gap-5">
                 {result.items
                   .slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
                   .map((m) => (
@@ -523,7 +521,7 @@ function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        'inline-flex h-6 min-h-0 min-w-0 shrink-0 items-center whitespace-nowrap rounded-md border px-2 text-[10px]',
+        'inline-flex h-6 min-h-0 min-w-0 shrink-0 items-center whitespace-nowrap rounded-md border px-2 text-[10px] lg:h-7 lg:px-2.5 lg:text-[11.5px]',
         'transition-colors duration-200',
         active
           ? 'border-[var(--line-accent-45)] bg-[var(--tint-accent-12)] text-accent-soft'
