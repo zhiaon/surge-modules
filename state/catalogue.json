@@ -15435,13 +15435,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "fanqie.sgmodule",
-  "sha": "ea9a385478331580676eb15e66e3ea2751d219e6",
+  "sha": "678f85192893fd588b187c8ebdb17482934dc077",
   "name": "番茄小说去广告",
-  "description": "V1.25：移除 p3/p11-webcast-sign.douyinpic.com 拦截，避免误伤抖音评论头像；V1.24 基础：新增 lf-fe*.fqnovelstatic.com 拦截 —— 实测「番茄送你惊喜电商券」运营弹窗弹出瞬间拉 1.1 MB 活动页前端包；V1.23 基础：摘除失效的 [Script] 段（番茄证书固定，fanqie_clean.js 永远跑不起来，纯占位误导）；V1.22 基础：撤回 pddpic 拦截（会误伤拼多多App图片），活动卡改靠接口断供，仅做 SNI/域名层拦截",
+  "description": "V1.26：移除 ecomuser、商品图 item/aio 及 ecombdapi/ecombdstatic 的共享电商拦截，兼容抖音商城；保留明确广告素材与 SDK 拦截。V1.25：移除 p3/p11-webcast-sign.douyinpic.com 拦截，避免误伤抖音评论头像；V1.24 基础：新增 lf-fe*.fqnovelstatic.com 拦截 —— 实测「番茄送你惊喜电商券」运营弹窗弹出瞬间拉 1.1 MB 活动页前端包；V1.23 基础：摘除失效的 [Script] 段（番茄证书固定，fanqie_clean.js 永远跑不起来，纯占位误导）；V1.22 基础：撤回 pddpic 拦截（会误伤拼多多App图片），活动卡改靠接口断供，仅做 SNI/域名层拦截",
   "author": "许舟",
-  "version": "1.25",
+  "version": "1.26",
   "category": "adblock",
-  "updatedAt": "2026-11-18T06:01:05Z"
+  "updatedAt": "2026-11-21T04:41:57Z"
  },
  "ikuuu": {
   "slug": "ikuuu",
@@ -18048,13 +18048,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "hongguo.sgmodule",
-  "sha": "f28f291d428ca25ae1f75632596592601ff75f35",
+  "sha": "0cde0f388b85941127257da20505e4133d72cd1d",
   "name": "红果短剧去广告",
-  "description": "V1.2 新增红果专属广告域（hongguoapp / hongguosdk / hongguo.ad）、穿山甲 SDK 直连域（pangolin-sdk-toutiao、ad.pangolin.cn）、联盟 SDK 关键字 ad-union-sdk、字节兜底 be-pack 与 tnc.snssdk；刻意不写 zijieapi 整域拦截，避免连带 api5-normal 业务接口。纯域名层去广告，不需要 MITM 与证书。",
+  "description": "V1.3：移除第⑧段6条共享电商拦截，避免误伤抖音商城；保留红果专属、广告 SDK 与素材拦截。V1.2 新增红果专属广告域（hongguoapp / hongguosdk / hongguo.ad）、穿山甲 SDK 直连域（pangolin-sdk-toutiao、ad.pangolin.cn）、联盟 SDK 关键字 ad-union-sdk、字节兜底 be-pack 与 tnc.snssdk；刻意不写 zijieapi 整域拦截，避免连带 api5-normal 业务接口。纯域名层去广告，不需要 MITM 与证书。",
   "author": "许舟",
-  "version": "1.2",
+  "version": "1.3",
   "category": "adblock",
-  "updatedAt": "2026-11-18T05:01:04Z"
+  "updatedAt": "2026-11-21T04:41:57Z"
  },
  "haijiao": {
   "slug": "haijiao",
