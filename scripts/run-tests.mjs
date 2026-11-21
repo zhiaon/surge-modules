@@ -50,6 +50,14 @@ for (const suite of suites) {
   }
 }
 
+try {
+  execFileSync('python3', ['-m', 'unittest', 'discover', '-s', 'tests/python', '-v'], {
+    stdio: 'inherit', cwd: root,
+  });
+} catch {
+  failed += 1;
+}
+
 if (failed > 0) {
   console.error(`\n${failed} suite(s) failed`);
   process.exit(1);

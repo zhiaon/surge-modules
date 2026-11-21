@@ -114,9 +114,10 @@ def gh(url, accept='application/vnd.github+json', retries=3):
     raise RuntimeError(f'giving up on {url}')
 
 
-def tree_of(owner, repo, branch):
-    """All .sgmodule blobs in a repo: [{path, sha}]."""
-    data = gh(f'https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=1')
+def tree_snapshot(owner, repo, branch):
+    """Keep completeness and tree identity alongside the module blobs."""
+    ref = urllib.parse.quote(branch, safe='')
+    data = gh(f'https://api.github.com/repos/{owner}/{repo}/git/trees/{ref}?recursive=1')
     out = []
     for node in data.get('tree', []):
         p = node.get('path', '')
@@ -125,7 +126,48 @@ def tree_of(owner, repo, branch):
         if SKIP_PATTERNS.search(p):
             continue
         out.append({'path': p, 'sha': node.get('sha', '')})
-    return out
+    return {'files': out, 'sha': data.get('sha'), 'truncated': data.get('truncated')}
+
+
+def tree_of(owner, repo, branch):
+    """List-only interface retained for rebuild_catalogue.py."""
+    return tree_snapshot(owner, repo, branch)['files']
+
+
+def plan_removals(owner, repo, branch, existing, snapshot):
+    """Fail closed; a large loss needs every original URL 404 and a stable tree.
+
+    Re-read the branch AFTER the probes, so a moving/renamed branch or an
+    incomplete response cannot turn one suspicious answer into mass removal.
+    Call before imports so a failed confirmation leaves this repo untouched.
+    """
+    tree = snapshot['files']
+    if existing and not tree:
+        return [], '上游返回空文件列表，跳过下架'
+    if snapshot.get('truncated') is not False:
+        return [], '上游文件树不完整或缺少完整性标记，跳过同步和下架'
+    seen_paths = {node['path'] for node in tree}
+    vanished = [path for path in existing if path not in seen_paths]
+    if len(vanished) <= max(20, len(existing) * 0.4):
+        return vanished, None
+
+    prefix = f'{len(vanished)}/{len(existing)} 个文件消失，二次确认失败：'
+    if not snapshot.get('sha'):
+        return [], prefix + '缺少文件树标识，跳过下架'
+    for path in vanished:
+        if not missing_public_module(owner, repo, branch, path):
+            return [], prefix + f'{path} 未确认404（仍可达或请求异常），跳过下架'
+    try:
+        check = tree_snapshot(owner, repo, branch)
+    except Exception:
+        return [], prefix + '文件树复查请求失败，跳过下架'
+    if check.get('truncated') is not False or not check['files']:
+        return [], prefix + '复查文件树为空或不完整，跳过下架'
+    signature = lambda nodes: sorted((n['path'], n['sha']) for n in nodes)
+    if (check.get('sha') != snapshot['sha']
+            or signature(check['files']) != signature(tree)):
+        return [], prefix + '复查文件树发生变化，跳过下架'
+    return vanished, None
 
 
 def raw_file(owner, repo, branch, path):
@@ -264,7 +306,8 @@ def main():
         owner, repo = repo_meta['owner'], repo_meta['repo']
         branch = repo_meta['branch']
         try:
-            tree = tree_of(owner, repo, branch)
+            snapshot = tree_snapshot(owner, repo, branch)
+            tree = snapshot['files']
         except Exception as e:
             # A failed tree may mean a missing branch or a temporary API error.
             # Only a separate repository 404 AND each original module's public
@@ -290,11 +333,18 @@ def main():
                 report['errors'].append(f'{key}: {str(e)[:80]}')
             continue
         existing = by_repo.get(key, {})
-        seen_paths = set()
+        vanished, block_reason = plan_removals(owner, repo, branch, existing, snapshot)
+        if block_reason:
+            report['errors'].append(f'{key}: {block_reason}')
+            continue
+        if len(vanished) > max(20, len(existing) * 0.4):
+            report.setdefault('confirmed_removals', []).append({
+                'repo': key, 'count': len(vanished), 'tree_sha': snapshot['sha'],
+                'evidence': 'all-module-404-and-stable-complete-tree'})
+            print(f'  ✓ {key}: {len(vanished)} 个原文件全部404，完整文件树复查一致，允许下架', flush=True)
 
         for node in tree:
             path, sha = node['path'], node['sha']
-            seen_paths.add(path)
             prev = existing.get(path)
             if prev and prev[1] == sha:
                 continue  # unchanged
@@ -369,20 +419,7 @@ def main():
                 with open(os.path.join(RAW_DIR, f'{slug}.sgmodule'), 'wb') as f:
                     f.write(raw)
 
-        # files gone from upstream → drop them
-        # Safety valve: a repo that suddenly reports no files is far more likely
-        # to be an upstream hiccup (renamed default branch, partial API answer)
-        # than a real mass deletion. Never wipe a whole repo's modules on a
-        # single suspicious response.
-        vanished = [p for p in existing if p not in seen_paths]
-        if existing and not tree:
-            report['errors'].append(f'{key}: 上游返回空文件列表，跳过下架')
-            continue
-        if existing and len(vanished) > max(20, len(existing) * 0.4):
-            report['errors'].append(
-                f'{key}: {len(vanished)}/{len(existing)} 个文件消失，疑似上游异常，跳过下架')
-            continue
-
+        # The removal plan was confirmed before this repo's imports.
         for path in vanished:
             slug, _sha = existing[path]
             report['removed'].append({
@@ -393,7 +430,7 @@ def main():
             # Upstream deleted it, so we stop serving it too — no orphan files
             # in the repo and no half-working links on the site.
             fp = os.path.join(RAW_DIR, f'{slug}.sgmodule')
-            if os.path.exists(fp):
+            if not args.dry_run and os.path.exists(fp):
                 os.remove(fp)
 
 
