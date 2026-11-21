@@ -46,14 +46,26 @@ RELEASES = os.path.join(STATE, 'releases.json')
 # name pattern (catches the same content arriving from a new repo).
 def load_denylist():
     if not os.path.exists(DENYLIST):
-        return set(), None
+        return set(), None, set()
     d = json.load(open(DENYLIST))
     pats = d.get('name_patterns') or []
     rx = re.compile('|'.join(re.escape(x) for x in pats), re.I) if pats else None
-    return set(d.get('keys') or []), rx
+    repos = {x.lower() for x in (d.get('repos') or [])}
+    return set(d.get('keys') or []), rx, repos
 
 
-DENY_KEYS, DENY_RX = load_denylist()
+DENY_KEYS, DENY_RX, DENY_REPOS = load_denylist()
+
+
+def denied_record(rec):
+    """True when a catalogue record must not be served any more.
+
+    A repo in `repos` is blocked wholesale: every file it ships, including
+    renames that would otherwise arrive as a new slug, is refused.
+    """
+    if f"{rec['repo']}@{rec['branch']}:{rec['path']}" in DENY_KEYS:
+        return True
+    return rec['repo'].lower() in DENY_REPOS
 
 
 def denied(key, author, name, is_new=False):
@@ -274,13 +286,12 @@ def main():
     # Denylisted modules that slipped in before the rule existed are dropped
     # here, so the next build never ships them and they cannot come back.
     denied_drops = []
-    for slug in [k for k, v in catalogue.items()
-                 if f"{v['repo']}@{v['branch']}:{v['path']}" in DENY_KEYS]:
+    for slug in [k for k, v in catalogue.items() if denied_record(v)]:
         rec = catalogue.pop(slug)
         denied_drops.append({'slug': slug, 'name': rec.get('name', slug),
                              'reason': 'denylisted', 'repo': rec.get('repo')})
         raw_p = os.path.join(RAW_DIR, f'{slug}.sgmodule')
-        if os.path.exists(raw_p):
+        if not args.dry_run and os.path.exists(raw_p):
             os.remove(raw_p)
     # catalogue: slug -> module record (with repo/path/sha)
     # sources:   "owner/repo@branch" -> {branch, owner, repo}
@@ -305,6 +316,8 @@ def main():
     for key, repo_meta in sorted(sources.items()):
         owner, repo = repo_meta['owner'], repo_meta['repo']
         branch = repo_meta['branch']
+        if f'{owner}/{repo}'.lower() in DENY_REPOS:
+            continue  # blocked source: never scanned, never re-imported
         try:
             snapshot = tree_snapshot(owner, repo, branch)
             tree = snapshot['files']

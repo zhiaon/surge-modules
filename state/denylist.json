@@ -1,13 +1,16 @@
 {
-  "comment": "只按仓库路径精确拦截（新增的灰产/上游测试残留）。名字正则已弃用，因为会误删已有模块。",
-  "name_patterns": [],
-  "keys": [
-    "androidcn/userscripts@main:hlbdy.sgmodule",
-    "app2smile/rules@master:module/bilibili-test.sgmodule",
-    "app2smile/rules@master:module/mitm.sgmodule",
-    "app2smile/rules@master:module/tieba-test.sgmodule",
-    "zhiaon/Modules@main:surge-memory.sgmodule",
-    "zhiaon/Modules@main:surge-uptime.sgmodule",
-    "zhiaon/Modules@main:workbuddy.sgmodule"
-  ]
+ "comment": "只按仓库路径精确拦截（新增的灰产/上游测试残留）。名字正则已弃用，因为会误删已有模块。 repos = 整仓拒绝，永不再导入。",
+ "name_patterns": [],
+ "keys": [
+  "androidcn/userscripts@main:hlbdy.sgmodule",
+  "app2smile/rules@master:module/bilibili-test.sgmodule",
+  "app2smile/rules@master:module/mitm.sgmodule",
+  "app2smile/rules@master:module/tieba-test.sgmodule",
+  "zhiaon/Modules@main:surge-memory.sgmodule",
+  "zhiaon/Modules@main:surge-uptime.sgmodule",
+  "zhiaon/Modules@main:workbuddy.sgmodule"
+ ],
+ "repos": [
+  "xchun5678/surge"
+ ]
 }
