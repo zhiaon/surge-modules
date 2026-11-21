@@ -5373,13 +5373,13 @@
   "repo": "fmz200/wool_scripts",
   "branch": "main",
   "path": "Surge/module/split/partB/BaiduTieba.sgmodule",
-  "sha": "3afecd2bd77ffdfa62284b6a51d66ca4b651d0a9",
+  "sha": "c483369e9fa6ef50bf86f90a0e8054f7c7bec1f7",
   "name": "百度贴吧",
   "description": "某些APP要清除缓存或者重新安装拦截广告才会生效！",
   "author": "奶思",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T01:15:35Z"
+  "updatedAt": "2026-11-21T08:00:52Z"
  },
  "baidutranslation": {
   "slug": "baidutranslation",
@@ -13797,13 +13797,13 @@
   "repo": "fmz200/wool_scripts",
   "branch": "main",
   "path": "Surge/module/split/partZ/Zhihu.sgmodule",
-  "sha": "6d9d905dfdbe2aa01719c70c005e6929691864b5",
+  "sha": "b3b66deb8aad2269d17585c79ac40dd942cc8854",
   "name": "知乎",
   "description": "某些APP要清除缓存或者重新安装拦截广告才会生效！",
   "author": "奶思",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-10T10:44:42Z"
+  "updatedAt": "2026-11-21T08:00:53Z"
  },
  "zhongbangbank": {
   "slug": "zhongbangbank",
@@ -20915,5 +20915,31 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-21T07:00:56Z"
+ },
+ "chinamobile-panel3": {
+  "slug": "chinamobile-panel3",
+  "repo": "xchun5678/surge",
+  "branch": "main",
+  "path": "ChinaMobile-Panel3.sgmodule",
+  "sha": "27c5c0b460156a7cb1ca7c8ea4116b454c001ad9",
+  "name": "中国移动（Surge 面板版）",
+  "description": "话费 / 流量 / 语音余量面板 + 登录捕获 + 会话保活。先在「中国移动」App 用短信验证码登录一次自动捕获参数，之后面板自动查询：剩余话费、通用/其他流量、剩余语音，附今日已用、日均可用、用完预测与近 7 天用量条。基于 Aswoth/Hark 的 Egern 版（china-mobile-hark-merged-glass）适配：数据层（自研 MD5/AES 加解密、签名、autoLogin 续期、用量洞察）逻辑原样搬运，渲染换成 Surge 文字面板。脚本自托管在自己的仓库。",
+  "author": "xchun5678（Surge 适配） / 原作 Hark、zhaohantao1360-hash（Egern 版）",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-21T08:00:58Z"
+ },
+ "chinaunicom-panel9": {
+  "slug": "chinaunicom-panel9",
+  "repo": "xchun5678/surge",
+  "branch": "main",
+  "path": "ChinaUnicom-Panel9.sgmodule",
+  "sha": "00e9f4735310a1a6aa0bd7ddbf38be3520ecc857",
+  "name": "中国联通（Surge 面板版）",
+  "description": "话费 / 流量 / 语音余量面板 + 登录捕获 + 会话保活（v8：架构按中国移动版重排）。打开中国联通 App 余量页，或微信「中国联通」小程序的余量查询页查询一次即可自动捕获；App 响应与查询响应里的 Set-Cookie 会滚动合并保鲜，会话越用越久；保活每 20 分钟自动查询，连续鉴权失败会提醒打开 App 恢复登录。基于 iBL3ND 的 Egern 版（moyuzaime/egern ChinaUnicom）适配，数据层与 v7 一致、已有数据无缝接续。脚本自托管在自己的仓库。v9：日均可用单独一行。",
+  "author": "xchun5678（Surge 适配） / 原作 iBL3ND",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-21T08:00:58Z"
  }
 }
