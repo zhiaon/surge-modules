@@ -20941,5 +20941,18 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-21T08:00:58Z"
+ },
+ "hongguo-clean": {
+  "slug": "hongguo-clean",
+  "repo": "xchun5678/surge",
+  "branch": "main",
+  "path": "Hongguo-Clean.sgmodule",
+  "sha": "b38bdb1febab51de2ace7015272b9737ad7b9cf2",
+  "name": "红果短剧去广告（自制版）",
+  "description": "自制版：基于许舟（zhiaon）原版 V1.3 自托管锁定，内容与原版一致，不随上游自动更新。原版 V1.3 已移除第⑧段 6 条共享电商拦截，ecombdimg 等与抖音商城共用域不再拦截。原版说明：V1.3：移除第⑧段6条共享电商拦截，避免误伤抖音商城；保留红果专属、广告 SDK 与素材拦截。V1.2 新增红果专属广告域（hongguoapp / hongguosdk / hongguo.ad）、穿山甲 SDK 直连域（pangolin-sdk-toutiao、ad.pangolin.cn）、联盟 SDK 关键字 ad-union-sdk、字节兜底 be-pack 与 tnc.snssdk；刻意不写 zijieapi 整域拦截，避免连带 api5-normal 业务接口。纯域名层去广告，不需要 MITM 与证书。",
+  "author": "许舟",
+  "version": "1.3",
+  "category": "adblock",
+  "updatedAt": "2026-11-21T10:00:53Z"
  }
 }
