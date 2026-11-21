@@ -20902,5 +20902,18 @@
   "version": "1.4",
   "category": "adblock",
   "updatedAt": "2026-11-19T03:01:04Z"
+ },
+ "chinamobile-panel2": {
+  "slug": "chinamobile-panel2",
+  "repo": "xchun5678/surge",
+  "branch": "main",
+  "path": "ChinaMobile-Panel2.sgmodule",
+  "sha": "9c2002d9aa993f25af04a9d9e9ed6ff545d8534d",
+  "name": "中国移动（Surge 面板版）",
+  "description": "话费 / 流量 / 语音余量面板 + 登录捕获 + 会话保活。先在「中国移动」App 用短信验证码登录一次自动捕获参数，之后面板自动查询：剩余话费、通用/其他流量、剩余语音，附今日已用、日均可用、用完预测与近 7 天用量条。基于 Aswoth/Hark 的 Egern 版（china-mobile-hark-merged-glass）适配：数据层（自研 MD5/AES 加解密、签名、autoLogin 续期、用量洞察）逻辑原样搬运，渲染换成 Surge 文字面板。脚本自托管在自己的仓库。",
+  "author": "xchun5678（Surge 适配） / 原作 Hark、zhaohantao1360-hash（Egern 版）",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-21T07:00:56Z"
  }
 }
