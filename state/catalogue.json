@@ -18966,110 +18966,6 @@
   "category": "adblock",
   "updatedAt": "2026-11-17T12:22:46Z"
  },
- "cn-cal-surge2": {
-  "slug": "cn-cal-surge2",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "CN_Cal_Surge2.sgmodule",
-  "sha": "bf2e9c033a9f9e26f588e42757770cb029150ac6",
-  "name": "双周日历",
-  "description": "两周日期带农历、节日与节气（v2 全角对齐版）。移植自 IBL3ND 的 Egern 小组件 CN_Cal，农历/节气/节日计算逻辑原样保留、纯本地计算不联网；日期改用全角数字排版，与农历、星期逐列对齐，今天在农历行以「今天」标出，三字以上节日全名列在下方注脚行。",
-  "author": "xchun5678",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T12:22:53Z"
- },
- "cellulardirect": {
-  "slug": "cellulardirect",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "CellularDirect.sgmodule",
-  "sha": "f9488ee45d25bcfd51ee26c682464db19ea7e6ae",
-  "name": "蜂窝下全局直连",
-  "description": "蜂窝网络下所有流量直接直连（仅蜂窝网络生效，Wi-Fi 不受影响）",
-  "author": "xchun5678",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T12:22:53Z"
- },
- "goofishads": {
-  "slug": "goofishads",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "GoofishAds.sgmodule",
-  "sha": "8c9599f11ecc00cff72de2a39a4d0be8386b9988",
-  "name": "小黄鱼净化（Goofish 去广告）",
-  "description": "墨鱼版闲鱼净化：去开屏广告/悬浮球/信息流广告等（由 QX 版转换）",
-  "author": "xchun5678",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T12:22:53Z"
- },
- "taobao-clean": {
-  "slug": "taobao-clean",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "Taobao-Clean.sgmodule",
-  "sha": "62fabcbf2650520369e6f60ec325cd1aa45cb097",
-  "name": "淘宝去广告（自制版）",
-  "description": "自制版 v1：只对专用广告/开屏接口回空 {}，不使用 kelee 的远程脚本，不 REJECT 任何淘宝域名（adashx 被拦是 2026-11-13 淘宝卡顿的教训）。装前请先停用/删除 QingRex 的「淘宝去广告」，勿双开。",
-  "author": "xchun5678",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T12:22:55Z"
- },
- "holiday-cal21": {
-  "slug": "holiday-cal21",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "holiday-cal21.sgmodule",
-  "sha": "c58ee0e424025b25f7b64401ae233cd58bbe5887",
-  "name": "节假日日历",
-  "description": "双周日历 + 中国法定节假日：农历、节气、传统节日之外，放假日标「放假」（节日当天显示节日名）、调休日标「上班」，假期段起止与调休日列在面板下方。节假日数据为国务院公布的 2026–2027 年安排，内置在脚本里、纯本地不联网；2028 年安排公布后喊我更新数据即可。",
-  "author": "xchun5678",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T12:22:57Z"
- },
- "jichang-noreset": {
-  "slug": "jichang-noreset",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "jichang-noreset.sgmodule",
-  "sha": "7228460a5dad678fc2eb958738f8a742cd5a9ae6",
-  "name": "机场流量（不重置版）",
-  "description": "V1.0 改版：重置日可填 0 表示该机场不重置（面板显示「不重置」）；其余与原版相同。需与 airport-panel-noreset.js 配套使用。",
-  "author": "许舟",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T12:22:58Z"
- },
- "split-exit2": {
-  "slug": "split-exit2",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "split-exit2.sgmodule",
-  "sha": "80b519480bed9e0351eededb57a200fb6fe83153",
-  "name": "分流出口检测",
-  "description": "自制分流出口面板：上半部是分站出口（ChatGPT、Claude、Binance、Spotify、Cloudflare 按现行分流规则实际走的出口 IP 与归属地），下半部是分组出口（把查询钉到各策略组看当前真实出口，含 DIRECT 本机真实出口）。数据来源为 Cloudflare Trace 与 ipwho.is，与 ipfinal 无关（它家 API 拦脚本客户端）。脚本自托管在自己的仓库。",
-  "author": "xchun5678",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T12:22:59Z"
- },
- "streaming-own4": {
-  "slug": "streaming-own4",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "streaming-own4.sgmodule",
-  "sha": "ed7cac78a00e103568730a6c18ccd3fa5a1c53e2",
-  "name": "流媒体解锁（自制版）",
-  "description": "自制流媒体解锁面板：YouTube、Netflix、Disney+、Prime Video、HBO Max、Spotify、ChatGPT、Claude、Gemini、Grok 共 10 项并行实测，5 秒左右出结果；显示真实出口地区，图标打头对齐排版。脚本自托管在自己的仓库。",
-  "author": "xchun5678",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T12:23:00Z"
- },
  "95598": {
   "slug": "95598",
   "repo": "mickeu/surge",
@@ -20253,19 +20149,6 @@
   "category": "adblock",
   "updatedAt": "2026-11-17T12:36:25Z"
  },
- "rednote-allinone": {
-  "slug": "rednote-allinone",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "RedNote-AllInOne.sgmodule",
-  "sha": "1836983009f2c3bd0ce9a2a5f8dd557d65af0eed",
-  "name": "小红书/RedNote 去水印去广告（合并版）",
-  "description": "合并版：原版（QingRex 水印配置拦截 + RedPaper 脚本）与评论实况补丁（rednote-comment-fix.js：评论列表登记 _16 原流、下载时换掉 _7 水印流）合为一个模块。适配海外版 RedNote(rnote.com)。",
-  "author": "xchun5678",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T15:01:09Z"
- },
  "api-balance-overview": {
   "slug": "api-balance-overview",
   "repo": "zhiaon/Modules",
@@ -20344,32 +20227,6 @@
   "category": "adblock",
   "updatedAt": "2026-11-18T07:01:03Z"
  },
- "pdd-clean3": {
-  "slug": "pdd-clean3",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "PDD-Clean3.sgmodule",
-  "sha": "5c5e46feef67ae07732f733a0af13d981ae63d15",
-  "name": "拼多多去广告（自制版）",
-  "description": "自制版 v3：修偶发失灵——脚本体积上限提到 1MB（大响应不再被跳过）、API 域名禁 QUIC 强制回落 HTTPS（QUIC 流量脚本处理不到）、开屏拦截兼容裸 IP、标签过滤放宽不再被单个异常项整份绕过。仍只删广告字段、不喂空响应、不拦遥测；装前请停用 v2，勿双开。",
-  "author": "xchun5678",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-18T11:01:01Z"
- },
- "ip-quality-fusion3": {
-  "slug": "ip-quality-fusion3",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "IP-Quality-Fusion3.sgmodule",
-  "sha": "b24db7e3761cc7b6ca5f167d24f30b90317e59f2",
-  "name": "IP 纯净度检测（融合版）",
-  "description": "mickeu 的 IP 纯净度检测（Scamalytics 真实评分+多源兜底）融合 IPPure 的显示层：IP 打码、图标 shield.lefthalf.filled、IP 行带 IPv4/IPv6 标签。脚本自托管在自己的仓库。",
-  "author": "mickeu（融合版改自其 IP-Quality，显示层借 vfelix7 的 IPPure）",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-18T16:01:04Z"
- },
  "episode-watch": {
   "slug": "episode-watch",
   "repo": "zhiaon/Modules",
@@ -20382,44 +20239,5 @@
   "version": "1.4",
   "category": "adblock",
   "updatedAt": "2026-11-19T03:01:04Z"
- },
- "chinamobile-panel3": {
-  "slug": "chinamobile-panel3",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "ChinaMobile-Panel3.sgmodule",
-  "sha": "27c5c0b460156a7cb1ca7c8ea4116b454c001ad9",
-  "name": "中国移动（Surge 面板版）",
-  "description": "话费 / 流量 / 语音余量面板 + 登录捕获 + 会话保活。先在「中国移动」App 用短信验证码登录一次自动捕获参数，之后面板自动查询：剩余话费、通用/其他流量、剩余语音，附今日已用、日均可用、用完预测与近 7 天用量条。基于 Aswoth/Hark 的 Egern 版（china-mobile-hark-merged-glass）适配：数据层（自研 MD5/AES 加解密、签名、autoLogin 续期、用量洞察）逻辑原样搬运，渲染换成 Surge 文字面板。脚本自托管在自己的仓库。",
-  "author": "xchun5678（Surge 适配） / 原作 Hark、zhaohantao1360-hash（Egern 版）",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-21T08:00:58Z"
- },
- "chinaunicom-panel9": {
-  "slug": "chinaunicom-panel9",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "ChinaUnicom-Panel9.sgmodule",
-  "sha": "00e9f4735310a1a6aa0bd7ddbf38be3520ecc857",
-  "name": "中国联通（Surge 面板版）",
-  "description": "话费 / 流量 / 语音余量面板 + 登录捕获 + 会话保活（v8：架构按中国移动版重排）。打开中国联通 App 余量页，或微信「中国联通」小程序的余量查询页查询一次即可自动捕获；App 响应与查询响应里的 Set-Cookie 会滚动合并保鲜，会话越用越久；保活每 20 分钟自动查询，连续鉴权失败会提醒打开 App 恢复登录。基于 iBL3ND 的 Egern 版（moyuzaime/egern ChinaUnicom）适配，数据层与 v7 一致、已有数据无缝接续。脚本自托管在自己的仓库。v9：日均可用单独一行。",
-  "author": "xchun5678（Surge 适配） / 原作 iBL3ND",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-21T08:00:58Z"
- },
- "hongguo-clean": {
-  "slug": "hongguo-clean",
-  "repo": "xchun5678/surge",
-  "branch": "main",
-  "path": "Hongguo-Clean.sgmodule",
-  "sha": "b38bdb1febab51de2ace7015272b9737ad7b9cf2",
-  "name": "红果短剧去广告（自制版）",
-  "description": "自制版：基于许舟（zhiaon）原版 V1.3 自托管锁定，内容与原版一致，不随上游自动更新。原版 V1.3 已移除第⑧段 6 条共享电商拦截，ecombdimg 等与抖音商城共用域不再拦截。原版说明：V1.3：移除第⑧段6条共享电商拦截，避免误伤抖音商城；保留红果专属、广告 SDK 与素材拦截。V1.2 新增红果专属广告域（hongguoapp / hongguosdk / hongguo.ad）、穿山甲 SDK 直连域（pangolin-sdk-toutiao、ad.pangolin.cn）、联盟 SDK 关键字 ad-union-sdk、字节兜底 be-pack 与 tnc.snssdk；刻意不写 zijieapi 整域拦截，避免连带 api5-normal 业务接口。纯域名层去广告，不需要 MITM 与证书。",
-  "author": "许舟",
-  "version": "1.3",
-  "category": "adblock",
-  "updatedAt": "2026-11-21T10:00:53Z"
  }
 }
