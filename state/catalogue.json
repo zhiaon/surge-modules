@@ -20239,5 +20239,18 @@
   "version": "1.4",
   "category": "adblock",
   "updatedAt": "2026-11-19T03:01:04Z"
+ },
+ "cf-ip-optimizer": {
+  "slug": "cf-ip-optimizer",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "cf-ip-optimizer.sgmodule",
+  "sha": "bf4efecf8a81247661c246b758fe6bb4b8a6a03f",
+  "name": "CF IP 优选工具",
+  "description": "v3.7.2 · Cloudflare 官方 IP 段 · DIRECT 直连与 PROXY 代理双模式测速（代理模式按线路统计，目标地址不可核验）。扫描期间仅 speed.cloudflare.com 走固定地址并直连，结束恢复。",
+  "author": "zhiaon",
+  "version": "3.7.2",
+  "category": "adblock",
+  "updatedAt": "2026-11-23T12:11:13Z"
  }
 }
