@@ -19023,13 +19023,13 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "LocalDeviceLoopback.sgmodule",
-  "sha": "b4f49830608dddd14421deedd723c9f2f7534019",
+  "sha": "c44c6058fc63f95f70d4b14177f0adc38a77c81c",
   "name": "Local Device Loopback",
   "description": "Reflect 10.7.0.1 back to this device for on-device developer tools. Surge 5.102.0+ [IP Rewrite] 官方示例：让 Surge 充当 LocalDevVPN。支持 coredevice-toolkit (cdtk) 免电脑 CoreDevice RSD 极客工具链",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:04Z"
+  "updatedAt": "2026-11-24T21:00:56Z"
  },
  "memorytraffic": {
   "slug": "memorytraffic",
@@ -19218,26 +19218,26 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "打断请求.sgmodule",
-  "sha": "221e3606b27e3e7696f81a40d0af26a566b76c08",
+  "sha": "8400911b271ca9a5cdb73ef1b37dc0c0fb1e51a4",
   "name": "打断请求",
   "description": "支持定时/WiFi 断开时执行.点击面板按钮或请求 kill-active-requests.com 手动打断请求. 请求支持通过 URL 参数传入正则匹配参数 REQ_RULE",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:08Z"
+  "updatedAt": "2026-11-24T21:00:57Z"
  },
  "module-18": {
   "slug": "module-18",
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "机场流量信息面板.sgmodule",
-  "sha": "dbd175866df81657a7017127788c576522fe03f1",
+  "sha": "3bf122ce3316c710a795345bedbc12357a2827a2",
   "name": "机场流量信息面板",
   "description": "直接填写订阅链接，编辑页保留 10 组参数，面板仅显示已填写的订阅",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:08Z"
+  "updatedAt": "2026-11-24T21:00:57Z"
  },
  "module-19": {
   "slug": "module-19",
