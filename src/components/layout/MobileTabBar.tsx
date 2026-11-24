@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Home, Compass, Bookmark, History } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/cn';
 import { useFavorites } from '@/stores/favorites';
 import { useI18n } from '@/i18n';
@@ -16,8 +15,9 @@ const TABS = [
 /**
  * iPhone-first bottom navigation.
  *
- * Floating pill: insets 8px from the screen edges, rounds to 26px, sits on a
- * blurred translucent surface.
+ * Floating navigation surface: insets 8px from the screen edges, rounds to 26px,
+ * sits on a blurred translucent surface. The active item uses a short underline
+ * that expands in place, matching the restrained mobile navigation pattern.
  *
  * iOS keyboard handling: when the software keyboard opens, Safari shrinks the
  * *visual* viewport but leaves the *layout* viewport untouched — a fixed
@@ -29,7 +29,6 @@ const TABS = [
 export function MobileTabBar() {
   const favorites = useFavorites();
   const { t } = useI18n();
-  const reduceMotion = useReducedMotion();
   // Keyboard: Safari shrinks the *visual* viewport while leaving the layout
   // viewport alone, so a bar pinned to the layout bottom ends up behind the
   // keyboard. Track the visual viewport and pin the bar to its visible bottom
@@ -104,7 +103,6 @@ export function MobileTabBar() {
               <NavLink
                 to={tab.to}
                 end={tab.end}
-                state={{ fromBottomTab: true }}
                 data-own-tap-feedback
                 className={({ isActive }) =>
                   cn(
@@ -116,25 +114,7 @@ export function MobileTabBar() {
               >
                 {({ isActive }) => (
                   <>
-                    {isActive && (
-                      <motion.span
-                        layoutId="mobile-tab-active-pill"
-                        initial={false}
-                        transition={
-                          reduceMotion
-                            ? { duration: 0 }
-                            : { type: 'spring', stiffness: 520, damping: 42, mass: 0.72 }
-                        }
-                        className="pointer-events-none absolute inset-x-2.5 top-1.5 h-[calc(var(--tabbar-h)-0.75rem)] rounded-[18px] bg-[var(--tint-accent-12)]"
-                        aria-hidden="true"
-                      />
-                    )}
-                    <span
-                      className={cn(
-                        'relative z-10 transition-transform duration-200 ease-out',
-                        isActive ? 'scale-[1.06]' : 'scale-100',
-                      )}
-                    >
+                    <span className="relative z-10">
                       <Icon
                         className="size-[20px]"
                         strokeWidth={isActive ? 1.9 : 1.6}
@@ -147,6 +127,14 @@ export function MobileTabBar() {
                         />
                       )}
                     </span>
+                    <span
+                      className={cn(
+                        'absolute bottom-[5px] left-1/2 h-[3px] -translate-x-1/2 rounded-full',
+                        'bg-accent transition-[width,opacity] duration-100 ease-out',
+                        isActive ? 'w-10 opacity-100' : 'w-6 opacity-0',
+                      )}
+                      aria-hidden="true"
+                    />
                     <span className="relative z-10">{t(tab.label)}</span>
                     {showBadge && <span className="sr-only">
                       {t('有 {n} 个收藏', { n: favorites.length })}

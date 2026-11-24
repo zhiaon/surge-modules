@@ -11,7 +11,7 @@ import { useI18n } from '@/i18n';
 
 export function RootLayout() {
   const { t } = useI18n();
-  const { pathname, state } = useLocation();
+  const { pathname } = useLocation();
   const { slug: sheetSlug } = useModuleSheet();
 
   // A route change (back button, direct link, search result) must not leave the
@@ -38,9 +38,7 @@ export function RootLayout() {
       <SiteHeader />
 
       <main id="main" className="flex-1">
-        <div key={pathname} className={state?.fromBottomTab ? 'tab-page-entry' : undefined}>
-          <Outlet />
-        </div>
+        <Outlet />
       </main>
 
       <SiteFooter />
