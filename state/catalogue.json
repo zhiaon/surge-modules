@@ -19036,13 +19036,13 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "MemoryTraffic.sgmodule",
-  "sha": "9b78f356a53350507054ee95467cc3e96a06727b",
+  "sha": "708de2e37b510a7f2b657dba4f887d947ef286de",
   "name": "内存和流量实时监控",
   "description": "本机流量 + Tailscale 入站设备累计流量监控面板。多台设备按设备名独立统计（dev1~dev5），API 地址/密码可配置",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:05Z"
+  "updatedAt": "2026-11-24T22:01:08Z"
  },
  "miniwatts-realbattery": {
   "slug": "miniwatts-realbattery",
@@ -19218,13 +19218,13 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "打断请求.sgmodule",
-  "sha": "8400911b271ca9a5cdb73ef1b37dc0c0fb1e51a4",
+  "sha": "f69bcd333fc0dc570b0e840d08e1a2e282fae780",
   "name": "打断请求",
   "description": "支持定时/WiFi 断开时执行.点击面板按钮或请求 kill-active-requests.com 手动打断请求. 请求支持通过 URL 参数传入正则匹配参数 REQ_RULE",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-24T21:00:57Z"
+  "updatedAt": "2026-11-24T22:01:09Z"
  },
  "module-18": {
   "slug": "module-18",
