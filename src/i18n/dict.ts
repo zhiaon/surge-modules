@@ -27,6 +27,8 @@ export const EN: Record<string, DictValue> = {
   '主导航': 'Main navigation',
   '底部导航': 'Bottom navigation',
   '页脚导航': 'Footer navigation',
+  '回到顶部': 'Back to top',
+  '跳到底部': 'Jump to bottom',
   '导航': 'Navigation',
   '{name} 首页': '{name} home',
   'GitHub 仓库': 'GitHub repository',

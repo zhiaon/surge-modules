@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useKeyboardOpen } from '@/hooks/useKeyboardOpen';
 import { NavLink } from 'react-router-dom';
 import { Home, Compass, Bookmark, History } from 'lucide-react';
 import { cn } from '@/lib/cn';
@@ -33,7 +34,7 @@ export function MobileTabBar() {
   // viewport alone, so a bar pinned to the layout bottom ends up behind the
   // keyboard. Track the visual viewport and pin the bar to its visible bottom
   // edge instead — Egern behaves the same way (its bar never hides).
-  const [keyboardOpen, setKeyboardOpen] = useState(false);
+  const keyboardOpen = useKeyboardOpen();
   const [bottom, setBottom] = useState('calc(4px + env(safe-area-inset-bottom))');
 
   useEffect(() => {
@@ -47,6 +48,13 @@ export function MobileTabBar() {
     // lift clears it without leaving a visible gap under the bar.
     const chromeLift = isIos && !standalone ? 12 : 0;
     setBottom(`calc(4px + env(safe-area-inset-bottom) + ${chromeLift}px)`);
+    // Anything that has to clear the bar (the scroll buttons) needs the bar's
+    // own bottom offset, which depends on the iOS chrome lift above — so it is
+    // published as a variable instead of being duplicated as a magic number.
+    document.documentElement.style.setProperty(
+      '--tabbar-bottom',
+      `calc(4px + env(safe-area-inset-bottom) + ${chromeLift}px)`,
+    );
     // Keep the page's bottom padding in sync so the last card never hides
     // behind the pill (46px = Safari address pill, 8px = the bar's own gap).
     document.documentElement.style.setProperty(
@@ -59,26 +67,7 @@ export function MobileTabBar() {
   // viewport stays put. Repositioning the bar against that offset put it in the
   // middle of the screen, so instead the bar fades out while typing — the
   // keyboard owns the bottom edge, and the bar returns the moment it closes.
-  useEffect(() => {
-    const vv = window.visualViewport;
-    if (!vv) return undefined;
-
-    const update = () => {
-      const covered = Math.max(
-        0,
-        document.documentElement.clientHeight - (vv.height + vv.offsetTop),
-      );
-      setKeyboardOpen(covered > 120);
-    };
-
-    update();
-    vv.addEventListener('resize', update);
-    vv.addEventListener('scroll', update);
-    return () => {
-      vv.removeEventListener('resize', update);
-      vv.removeEventListener('scroll', update);
-    };
-  }, []);
+  // The scroll buttons read the same signal (see ScrollJumps).
 
   return (
     <nav

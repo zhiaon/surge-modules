@@ -66,6 +66,10 @@
   /* total bottom space the floating tab bar needs (updated at runtime for
    * iOS Safari, whose address pill is not part of env(safe-area-inset-bottom)) */
   --content-bottom: calc(var(--tabbar-h) + 56px);
+  /* Where the scroll buttons sit: just above the floating tab bar on phones.
+   * `--tabbar-bottom` is published by the bar itself (it knows the iOS chrome
+   * lift); the fallback keeps the buttons sane before that effect runs. */
+  --jump-bottom: calc(var(--tabbar-bottom, calc(4px + env(safe-area-inset-bottom))) + var(--tabbar-h) + 12px);
 
   /* semantic tints -------------------------------------------------------
      Each is declared twice: a flat rgba() first (Safari <16.2, Chrome <111),
@@ -186,6 +190,14 @@ html[data-theme='light'] {
        and the scroll restoration after navigation. Scoped to same-page anchors. */
     scroll-behavior: auto;
     scroll-padding-top: 5.5rem;
+  }
+
+  /* No floating bar on desktop, so the scroll buttons only need a gutter inset.
+     Declared here rather than in @theme — @theme takes no nested at-rules. */
+  @media (min-width: 48rem) {
+    html {
+      --jump-bottom: 24px;
+    }
   }
 
   html,

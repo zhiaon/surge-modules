@@ -27,6 +27,7 @@ const suites = [
   { name: 'batching', entry: 'tests/batching.test.ts' },
   { name: 'phase7', entry: 'tests/phase7.test.ts' },
   { name: 'list-snapshot', entry: 'tests/list-snapshot.test.ts' },
+  { name: 'scroll-jumps', entry: 'tests/scroll-jumps.test.ts' },
 ];
 
 let failed = 0;
