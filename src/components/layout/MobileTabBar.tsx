@@ -48,13 +48,6 @@ export function MobileTabBar() {
     // lift clears it without leaving a visible gap under the bar.
     const chromeLift = isIos && !standalone ? 12 : 0;
     setBottom(`calc(4px + env(safe-area-inset-bottom) + ${chromeLift}px)`);
-    // Anything that has to clear the bar (the scroll buttons) needs the bar's
-    // own bottom offset, which depends on the iOS chrome lift above — so it is
-    // published as a variable instead of being duplicated as a magic number.
-    document.documentElement.style.setProperty(
-      '--tabbar-bottom',
-      `calc(4px + env(safe-area-inset-bottom) + ${chromeLift}px)`,
-    );
     // Keep the page's bottom padding in sync so the last card never hides
     // behind the pill (46px = Safari address pill, 8px = the bar's own gap).
     document.documentElement.style.setProperty(

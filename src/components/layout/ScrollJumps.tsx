@@ -7,14 +7,11 @@ import { useKeyboardOpen } from '@/hooks/useKeyboardOpen';
 /**
  * Jump-to-top / jump-to-bottom controls.
  *
- * Pinned to the bottom-right corner above the mobile tab bar. Two reasons it
- * measures the page instead of hard-coding an offset:
- *
- *  - the mobile bar's height already lives in `--content-bottom` (which the tab
- *    bar updates at runtime for iOS Safari's floating address pill), so the
- *    buttons sit above whatever the bar actually occupies;
- *  - on desktop there is no bar at all, so the same expression collapses to a
- *    plain gutter inset.
+ * Pinned to the right edge, vertically centred — the one strip of a phone
+ * screen that is never covered by the header, the tab bar or the footer, and
+ * that stays in the same place while the page scrolls. Because the position is
+ * a percentage of the viewport, it needs no knowledge of the bar's height or
+ * of iOS Safari's address pill.
  *
  * Both buttons are hidden until there is something to scroll: a page that fits
  * the viewport shows nothing. The top button also disappears at the very top
@@ -98,27 +95,34 @@ export function ScrollJumps() {
   const visible = (state.canUp || state.canDown) && !keyboardOpen;
 
   return (
+    // Two elements on purpose: the outer one owns the fixed, vertically
+    // centred position (a percentage that must never animate), the inner one
+    // owns the show/hide fade and its small lift. Collapsing them into one
+    // would make `translate-y-2` fight `-translate-y-1/2` and the group would
+    // jump by half its height every time it appeared.
     <div
       aria-hidden={!visible}
-      className={cn(
-        'fixed right-3 z-40 flex flex-col gap-2 md:right-6',
-        'transition-[opacity,transform] duration-200 ease-out',
-        visible ? 'opacity-100' : 'pointer-events-none translate-y-2 opacity-0',
-      )}
-      style={{ bottom: 'var(--jump-bottom)' }}
+      className="pointer-events-none fixed right-3 top-1/2 z-40 -translate-y-1/2 md:right-6"
     >
-      <JumpButton
-        label={t('回到顶部')}
-        icon={<ArrowUpToLine className="size-[18px]" strokeWidth={1.8} aria-hidden="true" />}
-        shown={state.canUp && !keyboardOpen}
-        onClick={() => scrollToEdge('top')}
-      />
-      <JumpButton
-        label={t('跳到底部')}
-        icon={<ArrowDownToLine className="size-[18px]" strokeWidth={1.8} aria-hidden="true" />}
-        shown={state.canDown && !keyboardOpen}
-        onClick={() => scrollToEdge('bottom')}
-      />
+      <div
+        className={cn(
+          'flex flex-col gap-2 transition-[opacity,transform] duration-200 ease-out',
+          visible ? 'pointer-events-auto translate-y-0 opacity-100' : 'translate-y-2 opacity-0',
+        )}
+      >
+        <JumpButton
+          label={t('回到顶部')}
+          icon={<ArrowUpToLine className="size-[18px]" strokeWidth={1.8} aria-hidden="true" />}
+          shown={state.canUp && !keyboardOpen}
+          onClick={() => scrollToEdge('top')}
+        />
+        <JumpButton
+          label={t('跳到底部')}
+          icon={<ArrowDownToLine className="size-[18px]" strokeWidth={1.8} aria-hidden="true" />}
+          shown={state.canDown && !keyboardOpen}
+          onClick={() => scrollToEdge('bottom')}
+        />
+      </div>
     </div>
   );
 }
