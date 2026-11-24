@@ -264,7 +264,7 @@ export function installClickEffects(): () => void {
     if (!(target instanceof Element)) return;
 
     const el = target.closest(INTERACTIVE_SELECTOR);
-    if (!(el instanceof HTMLElement)) return;
+    if (!(el instanceof HTMLElement) || el.hasAttribute('data-own-tap-feedback')) return;
     if (el.hasAttribute('disabled') || el.getAttribute('aria-disabled') === 'true') return;
     if (busy.has(el)) return;
 

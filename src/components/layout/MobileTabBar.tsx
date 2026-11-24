@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Home, Compass, Bookmark, History } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/cn';
 import { useFavorites } from '@/stores/favorites';
 import { useI18n } from '@/i18n';
@@ -28,6 +29,7 @@ const TABS = [
 export function MobileTabBar() {
   const favorites = useFavorites();
   const { t } = useI18n();
+  const reduceMotion = useReducedMotion();
   // Keyboard: Safari shrinks the *visual* viewport while leaving the layout
   // viewport alone, so a bar pinned to the layout bottom ends up behind the
   // keyboard. Track the visual viewport and pin the bar to its visible bottom
@@ -102,6 +104,8 @@ export function MobileTabBar() {
               <NavLink
                 to={tab.to}
                 end={tab.end}
+                state={{ fromBottomTab: true }}
+                data-own-tap-feedback
                 className={({ isActive }) =>
                   cn(
                     'relative flex h-[var(--tabbar-h)] flex-col items-center justify-center gap-1',
@@ -113,12 +117,24 @@ export function MobileTabBar() {
                 {({ isActive }) => (
                   <>
                     {isActive && (
-                      <span
-                        className="absolute inset-x-2.5 top-1.5 h-[calc(var(--tabbar-h)-0.75rem)] rounded-[18px] bg-[var(--tint-accent-12)]"
+                      <motion.span
+                        layoutId="mobile-tab-active-pill"
+                        initial={false}
+                        transition={
+                          reduceMotion
+                            ? { duration: 0 }
+                            : { type: 'spring', stiffness: 520, damping: 42, mass: 0.72 }
+                        }
+                        className="pointer-events-none absolute inset-x-2.5 top-1.5 h-[calc(var(--tabbar-h)-0.75rem)] rounded-[18px] bg-[var(--tint-accent-12)]"
                         aria-hidden="true"
                       />
                     )}
-                    <span className="relative z-10">
+                    <span
+                      className={cn(
+                        'relative z-10 transition-transform duration-200 ease-out',
+                        isActive ? 'scale-[1.06]' : 'scale-100',
+                      )}
+                    >
                       <Icon
                         className="size-[20px]"
                         strokeWidth={isActive ? 1.9 : 1.6}

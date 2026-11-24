@@ -459,6 +459,23 @@ html[data-theme='light'] {
   }
 }
 
+/* Tab destinations appear immediately. Never wait for the old page to leave,
+   and don't replay the home's longer stagger on top of the tab transition. */
+@media (max-width: 47.999rem) {
+  .tab-page-entry :is(.enter, .enter-hold) {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .tab-page-entry { animation: tab-page-in 160ms ease-out; }
+  }
+}
+@keyframes tab-page-in {
+  from { opacity: .88; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+
 @keyframes enter-up {
   from {
     opacity: 0;
