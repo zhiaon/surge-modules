@@ -7,11 +7,11 @@ import { useKeyboardOpen } from '@/hooks/useKeyboardOpen';
 /**
  * Jump-to-top / jump-to-bottom controls.
  *
- * Pinned to the right edge, vertically centred — the one strip of a phone
- * screen that is never covered by the header, the tab bar or the footer, and
- * that stays in the same place while the page scrolls. Because the position is
- * a percentage of the viewport, it needs no knowledge of the bar's height or
- * of iOS Safari's address pill.
+ * Pinned to the right edge, a quarter of the viewport above the bottom — the
+ * one strip of a phone screen that is never covered by the header or the footer
+ * and that stays put while the page scrolls. Being a percentage of the
+ * viewport, it needs no knowledge of the tab bar's height or of iOS Safari's
+ * address pill, and it keeps clear of the bar on short screens too.
  *
  * Both buttons are hidden until there is something to scroll: a page that fits
  * the viewport shows nothing. The top button also disappears at the very top
@@ -95,14 +95,16 @@ export function ScrollJumps() {
   const visible = (state.canUp || state.canDown) && !keyboardOpen;
 
   return (
-    // Two elements on purpose: the outer one owns the fixed, vertically
-    // centred position (a percentage that must never animate), the inner one
-    // owns the show/hide fade and its small lift. Collapsing them into one
-    // would make `translate-y-2` fight `-translate-y-1/2` and the group would
-    // jump by half its height every time it appeared.
+    // Two elements on purpose: the outer one owns the fixed position (a
+    // percentage that must never animate), the inner one owns the show/hide
+    // fade and its small lift, so the group cannot jump when it appears.
+    //
+    // One quarter of the viewport up from the bottom edge — under the middle
+    // of the screen (the owner asked for it below centre) but still well clear
+    // of the floating tab bar on any phone height.
     <div
       aria-hidden={!visible}
-      className="pointer-events-none fixed right-3 top-1/2 z-40 -translate-y-1/2 md:right-6"
+      className="pointer-events-none fixed right-3 bottom-1/4 z-40 md:right-6"
     >
       <div
         className={cn(
