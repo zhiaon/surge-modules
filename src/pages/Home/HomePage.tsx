@@ -2,6 +2,7 @@ import { siteConfig } from '@/config/site';
 import { useAsync } from '@/hooks/useAsync';
 import { categoryService } from '@/services/categoryService';
 import { moduleService } from '@/services/moduleService';
+import { snapshots } from '@/lib/publicSnapshots';
 import { Hero } from './Hero';
 import { CategorySection } from './CategorySection';
 import { FeaturedSection } from './FeaturedSection';
@@ -15,6 +16,10 @@ import { useI18n } from '@/i18n';
 /**
  * Home page composition only — every block owns its own data needs and
  * loading state, so a slow section never blocks the hero from painting.
+ *
+ * Every read is bound to a public snapshot: coming back from the bottom tab bar
+ * paints the real cards on the first frame instead of a grid of skeletons, and
+ * the fetch that still runs behind it refreshes them.
  */
 export function HomePage() {
   const { t } = useI18n();
@@ -24,13 +29,30 @@ export function HomePage() {
     path: '/',
   });
 
-  const stats = useAsync(() => moduleService.getModuleStats(), []);
-  const featured = useAsync(() => moduleService.getFeaturedModules(6), []);
-  const recent = useAsync(() => moduleService.getRecentlyUpdated(5), []);
-  const categories = useAsync(() => categoryService.getCategories(), []);
+  const stats = useAsync(() => moduleService.getModuleStats(), [], snapshots.stats());
+  const featured = useAsync(
+    () => moduleService.getFeaturedModules(6),
+    [],
+    snapshots.featured(6),
+  );
+  const recent = useAsync(
+    () => moduleService.getRecentlyUpdated(5),
+    [],
+    snapshots.recent(5),
+  );
+  const categories = useAsync(
+    () => categoryService.getCategories(),
+    [],
+    snapshots.categories(),
+  );
   // Full catalogue: stat sheets search/page locally, LibraryPreview takes
-  // the first 6 — one fetch serves everything on the page.
-  const library = useAsync(() => moduleService.getModules({ perPage: 9999 }), []);
+  // the first 6 — one fetch serves everything on the page, and the same
+  // snapshot is shared with Discover and Collection.
+  const library = useAsync(
+    () => moduleService.getModules({ perPage: 9999 }),
+    [],
+    snapshots.catalogue(),
+  );
 
   const topCategory = categories.data
     ? [...categories.data].sort((a, b) => b.moduleCount - a.moduleCount)[0]

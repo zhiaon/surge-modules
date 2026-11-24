@@ -14,6 +14,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { moduleService } from '@/services/moduleService';
 import { categoryService } from '@/services/categoryService';
 import { moduleQuery } from '@/services/moduleQuery';
+import { snapshots } from '@/lib/publicSnapshots';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { cn } from '@/lib/cn';
 import type { ModuleSort } from '@/types';
@@ -81,8 +82,19 @@ export function DiscoverPage() {
     setSearch(q);
   }, [q]);
 
-  const all = useAsync(() => moduleService.getModules({ perPage: 9999 }), []);
-  const categories = useAsync(() => categoryService.getCategories(), []);
+  // The full catalogue is shared with the home page: whichever page fetched it
+  // last, coming back here paints the cards immediately (no skeleton) while the
+  // request below refreshes the same snapshot in the background.
+  const all = useAsync(
+    () => moduleService.getModules({ perPage: 9999 }),
+    [],
+    snapshots.catalogue(),
+  );
+  const categories = useAsync(
+    () => categoryService.getCategories(),
+    [],
+    snapshots.categories(),
+  );
 
   const commitSearch = (value: string) => {
     setSearch(value);
@@ -395,8 +407,8 @@ export function DiscoverPage() {
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 xl:gap-5">
                 {result.items
                   .slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
-                  .map((m) => (
-                    <ModuleCard key={m.id} module={m} />
+                  .map((m, i) => (
+                    <ModuleCard key={m.id} module={m} priority={i < 3} />
                   ))}
               </div>
 

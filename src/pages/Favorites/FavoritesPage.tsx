@@ -8,6 +8,7 @@ import { Skeleton } from '@/components/common/Skeleton';
 import { useAsync } from '@/hooks/useAsync';
 import { favoriteService } from '@/services/favoriteService';
 import { useFavorites } from '@/stores/favorites';
+import { favoriteSignature, snapshots } from '@/lib/publicSnapshots';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { formatRelative, toIsoDate } from '@/lib/format';
 import { useI18n } from '@/i18n';
@@ -22,9 +23,15 @@ export function FavoritesPage() {
 
   // subscribe so removing a favorite on this page updates immediately
   const records = useFavorites();
+  // Snapshot key = the exact favorite records (id + addedAt, in order). Adding,
+  // removing or re-adding any module changes the key, so a list built from an
+  // older set is never reused; when the set is identical the revisit paints the
+  // saved list on the first frame and refreshes it in the background.
+  const signature = favoriteSignature(records);
   const { data, status, error, reload } = useAsync(
     () => favoriteService.getFavorites(),
-    [records.length],
+    [signature],
+    snapshots.favorites(signature),
   );
 
   return (
@@ -74,9 +81,9 @@ export function FavoritesPage() {
               {t('{n} 个收藏 · 按添加时间倒序', { n: data.length })}
             </p>
             <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {data.map((entry) => (
+              {data.map((entry, i) => (
                 <li key={entry.module.id} className="flex min-w-0 flex-col gap-1.5">
-                  <ModuleCard module={entry.module} />
+                  <ModuleCard module={entry.module} priority={i < 3} />
                   <p className="pl-1 text-[10.5px] text-faint">
                     {t('收藏于')}{' '}
                     <time dateTime={toIsoDate(entry.addedAt)}>

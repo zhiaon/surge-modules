@@ -80,7 +80,11 @@ export function FeaturedSection({ modules, loading, error, onRetry }: FeaturedSe
                   count >= 3 ? (i === 0 ? 'sm:col-span-2 lg:col-span-6' : 'lg:col-span-3') : '';
                 return (
                   <Reveal key={m.id} delay={Math.min(i, 5) * 0.04} className={span}>
-                    <ModuleCard module={m} variant={i === 0 && count >= 2 ? 'featured' : 'default'} />
+                    <ModuleCard
+                      module={m}
+                      priority={i < 3}
+                      variant={i === 0 && count >= 2 ? 'featured' : 'default'}
+                    />
                   </Reveal>
                 );
               })}

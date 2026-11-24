@@ -26,6 +26,7 @@ const suites = [
   { name: 'webhook', entry: 'tests/webhook.test.ts' },
   { name: 'batching', entry: 'tests/batching.test.ts' },
   { name: 'phase7', entry: 'tests/phase7.test.ts' },
+  { name: 'list-snapshot', entry: 'tests/list-snapshot.test.ts' },
 ];
 
 let failed = 0;

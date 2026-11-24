@@ -4,6 +4,7 @@ import { ArrowLeft, Check, Copy, Download, Link2, Plus, Search, Trash2, X } from
 import { Container } from '@/components/common/Container';
 import { useAsync } from '@/hooks/useAsync';
 import { moduleService } from '@/services/moduleService';
+import { snapshots } from '@/lib/publicSnapshots';
 import { mergeModules, type MergeSource } from '@/lib/mergeModules';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { useI18n } from '@/i18n';
@@ -28,7 +29,13 @@ export function CollectionPage() {
   });
 
   const navigate = useNavigate();
-  const catalogue = useAsync(() => moduleService.getModules({ perPage: 9999 }), []);
+  // Same catalogue snapshot as Home and Discover: arriving here from either
+  // page paints the picker list immediately and refreshes it behind the scenes.
+  const catalogue = useAsync(
+    () => moduleService.getModules({ perPage: 9999 }),
+    [],
+    snapshots.catalogue(),
+  );
   const [selected, setSelected] = useState<string[]>(() => readHash());
   const [q, setQ] = useState('');
   const [busy, setBusy] = useState(false);

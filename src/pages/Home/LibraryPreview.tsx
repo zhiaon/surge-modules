@@ -65,7 +65,7 @@ export function LibraryPreview({ modules, total, loading, error, onRetry }: Libr
             <div className="grid items-start gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {modules.map((m, i) => (
                 <Reveal key={m.id} delay={Math.min(i, 5) * 0.04}>
-                  <ModuleCard module={m} hideTags={false} />
+                  <ModuleCard module={m} priority={i < 3} hideTags={false} />
                 </Reveal>
               ))}
             </div>

@@ -21,6 +21,7 @@ export interface ModuleCardProps {
   className?: string;
   /** in dense grid lists we skip the description */
   hideTags?: boolean;
+  priority?: boolean;
 }
 
 const CARD_BASE =
@@ -42,7 +43,7 @@ const CARD_BASE =
  * Hover: -2px lift + border warm + shadow, desktop only (see .card-hover). Touch
  * devices get a scale-down press instead, because hover never fires there.
  */
-function ModuleCardImpl({ module, variant = 'default', className, hideTags }: ModuleCardProps) {
+function ModuleCardImpl({ module, variant = 'default', className, hideTags, priority }: ModuleCardProps) {
   const { t } = useI18n();
   const featured = variant === 'featured';
 
@@ -229,6 +230,7 @@ function ModuleCardImpl({ module, variant = 'default', className, hideTags }: Mo
           {repoOwner ? (
             <GithubAvatar
               owner={repoOwner}
+              priority={priority}
               size={36}
               className="transition-transform duration-300 group-hover:scale-[1.04]"
             />
@@ -339,5 +341,5 @@ export const ModuleCard = memo(ModuleCardImpl, (a, b) =>
   a.module.version === b.module.version &&
   a.variant === b.variant &&
   a.className === b.className &&
-  a.hideTags === b.hideTags,
+  a.hideTags === b.hideTags && a.priority === b.priority,
 );

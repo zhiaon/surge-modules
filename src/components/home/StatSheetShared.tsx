@@ -1,5 +1,12 @@
 import { useState } from 'react';
 import type { ModuleWithMeta } from '@/types';
+const shownAvatars = new Set<string>();
+function rememberAvatar(src: string) {
+  shownAvatars.delete(src);
+  shownAvatars.add(src);
+  if (shownAvatars.size > 128) shownAvatars.delete(shownAvatars.values().next().value!);
+}
+
 /**
  * GitHub avatar with a graceful fallback to the identicon-style default when
  * the avatar URL fails. Cached by the browser; nothing is re-fetched per open.
@@ -7,10 +14,12 @@ import type { ModuleWithMeta } from '@/types';
 export function GithubAvatar({
   owner,
   size = 36,
+  priority = false,
   className,
 }: {
   owner: string;
   size?: number;
+  priority?: boolean;
   className?: string;
 }) {
   const [failed, setFailed] = useState(false);
@@ -38,7 +47,8 @@ export function GithubAvatar({
     <img
       src={src}
       alt=""
-      loading="lazy"
+      loading={priority || shownAvatars.has(src) ? 'eager' : 'lazy'}
+      onLoad={() => rememberAvatar(src)}
       onError={() => setFailed(true)}
       className={cn('shrink-0 rounded-full border border-line bg-inset object-cover', className)}
       style={{ width: size, height: size }}
