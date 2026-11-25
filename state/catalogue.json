@@ -19070,19 +19070,6 @@
   "category": "adblock",
   "updatedAt": "2026-11-17T12:36:05Z"
  },
- "raccoonopenai-multi": {
-  "slug": "raccoonopenai-multi",
-  "repo": "mickeu/surge",
-  "branch": "main",
-  "path": "RaccoonOpenAI-Multi.sgmodule",
-  "sha": "6e25e5ab5de0ca5682e1e6fd62daf59b456a4ab8",
-  "name": "Xiaoxiong OpenAI 反代（多账号轮询）",
-  "description": "把商汤 Xiaoxiong（小浣熊）包装成 OpenAI 兼容 API，支持多账号轮询负载均衡：accounts 填多个「手机号:密码」用竖线分隔，每账号独立 token 缓存与自动续期；附每日批量签到（串行防风控）+ 面板手动签到。账号数不限。",
-  "author": "mickeu",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:06Z"
- },
  "auto-reconnect": {
   "slug": "auto-reconnect",
   "repo": "mickeu/surge",
@@ -19127,13 +19114,13 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "SurgeMonitor.sgmodule",
-  "sha": "5480d00fe6381f8ce59d9f2ed72e5dcbde661262",
+  "sha": "66c8c2b865f265d60eabca01b77c4d5ab53006e7",
   "name": "内存",
   "description": "Surge 运行内存、运行时间、流量、请求/DNS/直连-代理详情监控面板",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:07Z"
+  "updatedAt": "2026-11-25T17:01:19Z"
  },
  "tg": {
   "slug": "tg",
@@ -19153,26 +19140,26 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "TieBa.sgmodule",
-  "sha": "426006aba8cf50bcce8919ef8fd6fc11fa50ed91",
+  "sha": "187177b86727b5dcdbbcf64dd336e1f3a1905f01",
   "name": "百度贴吧签到整合版",
   "description": "🔄 整合百度贴吧抓Cookie + 自动签到 + 面板手动签到，一个模块搞定",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:07Z"
+  "updatedAt": "2026-11-25T17:01:19Z"
  },
  "unicom-panel": {
   "slug": "unicom-panel",
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "Unicom_Panel.sgmodule",
-  "sha": "945bc9f0a99e4bfa409fb5d61abd2603d922655e",
+  "sha": "63a6b209b347da1043fc3a9d417560b870d1feb3",
   "name": "中国联通面板",
   "description": "话费/语音/通用流量信息面板（含自动抓取 Cookie）。参数页可开关「抓取Cookie」与「显示已用通用流量」。",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:07Z"
+  "updatedAt": "2026-11-25T17:01:19Z"
  },
  "youtube-enhance-2": {
   "slug": "youtube-enhance-2",
@@ -19187,31 +19174,18 @@
   "category": "adblock",
   "updatedAt": "2026-11-17T12:36:07Z"
  },
- "lzlukvca": {
-  "slug": "lzlukvca",
-  "repo": "mickeu/surge",
-  "branch": "main",
-  "path": "lzlukvca.sgmodule",
-  "sha": "4531523c59b2c5dc4625ccf0e7f2d79e5b812c2d",
-  "name": "黄豆短剧 lzlukvca 金币+会员剧集解锁",
-  "description": "解锁 lzlukvca.cc 金币/会员剧集",
-  "author": "mickeu",
-  "version": "1.0.0",
-  "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:08Z"
- },
  "module-16": {
   "slug": "module-16",
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "实时油价.sgmodule",
-  "sha": "39baeb687664b240db551753a42a0a1515293f50",
+  "sha": "db7e9fd94d959fdf37c58ec2d68c7b5921b41556",
   "name": "实时油价",
   "description": "⛽ 查询全国主要城市实时油价（中文城市名，如：北京、深圳、长沙）",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:08Z"
+  "updatedAt": "2026-11-25T17:01:20Z"
  },
  "module-17": {
   "slug": "module-17",
@@ -19257,26 +19231,26 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "节假日信息.sgmodule",
-  "sha": "1f3d2d1bf2fb10e86d52007a440b2ad348ad38c7",
+  "sha": "8c88138b3bb08cf8356642fa198b4753600506f8",
   "name": "节假日信息",
   "description": "显示节假日的信息",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:09Z"
+  "updatedAt": "2026-11-25T17:01:20Z"
  },
  "module-21": {
   "slug": "module-21",
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "蛋蛋不语.sgmodule",
-  "sha": "073ba82ff7db98656d096ce2de61210aeaee7b7a",
+  "sha": "4af8555a1146fe97b4626e280eb1af718374bf70",
   "name": "蛋蛋不语VIP解锁",
   "description": "蛋蛋不语 - 解锁会员，复刻自 curtinp118/Scripthub（防上游删库）",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:09Z"
+  "updatedAt": "2026-11-25T17:01:21Z"
  },
  "module-22": {
   "slug": "module-22",
@@ -20265,5 +20239,18 @@
   "version": "1.2.1",
   "category": "adblock",
   "updatedAt": "2026-11-25T04:47:20Z"
+ },
+ "module-29": {
+  "slug": "module-29",
+  "repo": "mickeu/surge",
+  "branch": "main",
+  "path": "京东比价.sgmodule",
+  "sha": "70debaa45ffcd1f928477bd256206a3e07750023",
+  "name": "京东比价",
+  "description": "首次使用需安装慢慢买应用，之后点击进入[我的]页面以捕获Cookie，捕获成功后方可在商品详情页面查看比价内容。",
+  "author": "wf021325, githubdulong, mw418（原作者）；mickeu（脚本自托管）",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-25T17:01:20Z"
  }
 }
