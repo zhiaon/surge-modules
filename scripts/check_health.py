@@ -22,6 +22,7 @@ import json
 import os
 import re
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
@@ -50,28 +51,49 @@ def encode_url(url):
     return urllib.parse.quote(url, safe="/:?&=#%+,;@!$'()*[]~")
 
 
-def probe(url, timeout=12):
-    """True when the URL resolves and answers with something usable."""
-    url = encode_url(url)
+def _attempt(url, timeout):
+    """One HEAD-then-GET pass: 'ok' | 'gone' | 'unknown'.
+
+    Only a definite 404/410 counts as gone. A 5xx, a timeout, a reset or a DNS
+    hiccup is 'unknown' — the difference matters because `broken` hides the
+    module from the site, and a bad minute on GitHub's CDN must never delete a
+    working module from the catalogue.
+    """
     for method in ('HEAD', 'GET'):
         req = urllib.request.Request(url, method=method, headers={'User-Agent': UA})
         if method == 'GET':
             req.add_header('Range', 'bytes=0-0')
         try:
             with urllib.request.urlopen(req, timeout=timeout) as r:
-                return 200 <= r.status < 400
+                return 'ok' if 200 <= r.status < 400 else 'unknown'
         except urllib.error.HTTPError as e:
-            # 403/405 = alive but refuses the probe method; treat as ok.
+            # Alive but refusing this probe method / rate limiting us.
             if e.code in (401, 403, 405, 429):
-                return True
+                return 'ok'
             if e.code in (404, 410):
-                return False
-            if method == 'GET':
-                return False
+                return 'gone'
+            # 5xx and the rest: inconclusive, try the other method.
+            continue
         except Exception:
-            if method == 'GET':
-                return False
-    return False
+            continue
+    return 'unknown'
+
+
+def probe(url, timeout=12, attempts=2):
+    """'ok' | 'gone' | 'unknown', retrying anything inconclusive.
+
+    Two passes with a short backoff: one dropped connection used to be enough
+    to hide a module, which is how ten GitHub-release scripts all flipped to
+    broken in the same run.
+    """
+    url = encode_url(url)
+    verdict = 'unknown'
+    for i in range(attempts):
+        verdict = _attempt(url, timeout)
+        if verdict != 'unknown':
+            return verdict
+        time.sleep(0.6 + i * 0.9)
+    return verdict
 
 
 def classify(url, repo_cache):
@@ -151,9 +173,11 @@ def main():
 
     # 2) probe each unique URL once
     verdict = {}
-    with ThreadPoolExecutor(max_workers=16) as pool:
-        for i, (url, ok) in enumerate(zip(all_urls, pool.map(probe, all_urls)), 1):
-            verdict[url] = ok
+    # 8 workers instead of 16: the previous fan-out hit GitHub's release CDN
+    # hard enough that a whole batch came back refused and was called broken.
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        for i, (url, res) in enumerate(zip(all_urls, pool.map(probe, all_urls)), 1):
+            verdict[url] = res
             if i % 200 == 0:
                 print(f'  {i}/{len(all_urls)}', flush=True)
 
@@ -163,15 +187,29 @@ def main():
     broken_count = 0
     repo_cache = {}
     for slug, urls in jobs:
-        bad = [u for u in urls if u.startswith('(relative)') or not verdict.get(u, True)]
-        status = 'broken' if bad else 'ok'
-        reason = None
-        if bad:
+        relatives = [u for u in urls if u.startswith('(relative)')]
+        gone = [u for u in urls if not u.startswith('(relative)')
+                and verdict.get(u) == 'gone']
+        inconclusive = [u for u in urls if not u.startswith('(relative)')
+                        and verdict.get(u) == 'unknown']
+
+        if relatives or gone:
+            # Definite: a relative path can never resolve on our host, and a
+            # 404/410 means upstream really removed the file.
+            bad = relatives + gone
             broken_count += 1
             reasons = {classify(u, repo_cache) for u in bad}
             reason = reasons.pop() if len(reasons) == 1 else 'mixed'
-        out[slug] = {'status': status, 'broken': bad[:5], 'checked': now,
-                     'reason': reason}
+            out[slug] = {'status': 'broken', 'broken': bad[:5], 'checked': now,
+                         'reason': reason}
+        elif inconclusive:
+            # We could not reach every script (timeout, 5xx, rate limit). Keep
+            # the previous verdict rather than hiding a module over a blip.
+            prev = previous.get(slug)
+            out[slug] = prev if prev else {
+                'status': 'unknown', 'broken': [], 'checked': now, 'reason': None}
+        else:
+            out[slug] = {'status': 'ok', 'broken': [], 'checked': now, 'reason': None}
 
     # keep previous verdicts for modules we did not scan this round — but only
     # for modules that still exist: a pruned slug must not linger forever.
