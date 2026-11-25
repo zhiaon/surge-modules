@@ -131,8 +131,9 @@ export const EN: Record<string, DictValue> = {
   '关于平台': 'About',
   '独立索引': 'Independent index',
   '由维护者整理的 Surge 模块目录，与 Surge 官方无隶属关系。': 'A Surge module catalogue maintained independently, not affiliated with Surge.',
-  '在详情页直接查看模块的 .sgmodule 原文，复制原始链接。': 'Read a module’s .sgmodule source in its detail sheet and copy the raw link.',
   '版本记录': 'Version history',
+  '安装链接': 'Install link',
+  '一键复制安装链接，或直接唤起 Surge 添加模块。': 'Copy the install link, or hand the module straight to Surge.',
   '记录每个模块的版本号、发布时间与更新说明。': 'Every module’s version number, release date and changelog.',
   '本地收藏': 'Local favorites',
   '收藏保存在本机浏览器，无需账号，清除站点数据会一并清空。':

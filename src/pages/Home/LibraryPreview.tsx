@@ -91,7 +91,7 @@ export function PlatformIntro() {
   const { t } = useI18n();
   const points = [
     { title: t('独立索引'), body: t('由维护者整理的 Surge 模块目录，与 Surge 官方无隶属关系。') },
-    { title: t('原始配置'), body: t('在详情页直接查看模块的 .sgmodule 原文，复制原始链接。') },
+    { title: t('安装链接'), body: t('一键复制安装链接，或直接唤起 Surge 添加模块。') },
     { title: t('版本记录'), body: t('记录每个模块的版本号、发布时间与更新说明。') },
     { title: t('本地收藏'), body: t('收藏保存在本机浏览器，无需账号，清除站点数据会一并清空。') },
   ];

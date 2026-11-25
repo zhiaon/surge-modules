@@ -112,7 +112,7 @@ export function Hero({ stats, topCategory }: HeroProps) {
               )}
               style={enter.style(0.12)}
             >
-              {t('浏览、搜索与收藏优质 Surge 模块，查看原始配置、复制安装链接，一次找到需要的规则与脚本。')}
+              {t('浏览、搜索与收藏优质 Surge 模块，查看版本记录、复制安装链接，一次找到需要的规则与脚本。')}
             </p>
 
             <div
