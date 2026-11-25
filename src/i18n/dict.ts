@@ -370,8 +370,6 @@ export const EN: Record<string, DictValue> = {
   '数据文件格式异常': 'Malformed data file',
   '后端接口未启动：请用 npm run dev:site，或部署后访问。':
     'The backend is not running: use npm run dev:site, or visit the deployed site.',
-  '未配置模块反代地址，无法读取原始配置。': 'No module proxy URL is configured, so the raw config cannot be read.',
-  '读取原始配置失败（HTTP {status}）': 'Could not read the raw config (HTTP {status})',
   '这是多余的': 'redundant',
 
   // ---- leftovers ------------------------------------------------------

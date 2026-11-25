@@ -161,23 +161,6 @@ export const moduleService = {
     }
   },
 
-  /**
-   * The raw .sgmodule text. Fetched from the proxy URL, which is the only public
-   * address for module content — the upstream repository stays backend-only.
-   */
-  async getRawConfig(slug: string): Promise<string> {
-    await requireApi();
-    const detail = await api.getModule(slug);
-    if (!detail.rawUrl) {
-      throw new Error(i18n.translate('未配置模块反代地址，无法读取原始配置。'));
-    }
-    const res = await fetch(detail.rawUrl, { credentials: 'omit' });
-    if (!res.ok) throw new Error(i18n.translate('读取原始配置失败（HTTP {status}）', { status: res.status }));
-    const text = await res.text();
-    // hard cap in the client too: the proxy already limits, this is a second fence
-    return text.slice(0, 512 * 1024);
-  },
-
   /** @param slug public module slug (not the internal id) */
   async getVersions(slug: string): Promise<ModuleVersion[]> {
     await requireApi();
