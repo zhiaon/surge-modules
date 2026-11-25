@@ -7,9 +7,8 @@ import {
   FileCode2,
   Sparkles,
   Tag,
-  X,
 } from 'lucide-react';
-import { BottomSheet } from '@/components/common/BottomSheet';
+import { ModuleDetailDialog } from '@/components/modules/ModuleDetailDialog';
 import { Badge, VersionBadge } from '@/components/common/Badge';
 import { Skeleton } from '@/components/common/Skeleton';
 import { ErrorState } from '@/components/feedback/ErrorState';
@@ -26,13 +25,12 @@ import { resolveCategoryIcon } from '@/lib/icons';
 import { useI18n } from '@/i18n';
 
 /**
- * Module detail as a sheet.
+ * Module detail in a safe, centered dialog with one internal vertical scroller.
  *
- * Opens over the list instead of navigating away, so browsing ten modules no
- * longer costs ten page loads and ten scroll restorations. Structure follows
- * the familiar hub layout: icon + name, category / update date / version as a
- * metadata strip, description, tags, the install + copy pair, then the raw
- * config folded away behind a disclosure.
+ * Opens over the list instead of navigating away. The dedicated dialog keeps
+ * its close header outside the content scroller, including loading/error states.
+ * Existing metadata, descriptions, technical comparisons and history stay here;
+ * the raw module config remains deliberately hidden.
  *
  * The full page at /modules/:slug stays — direct links, search engines and
  * shares still land there; only in-app card taps use this sheet.
@@ -130,28 +128,11 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
   const Icon = module ? resolveCategoryIcon(module.category.icon) : null;
 
   return (
-    <BottomSheet
-      open
+    <ModuleDetailDialog
+      title={t('详情配置')}
+      closeLabel={t('关闭')}
       onClose={onClose}
-      height="tall"
-      bare
-      className="sm:max-w-xl"
     >
-      {/* bare sheet: draw the grabber and a real close button ourselves */}
-      <div className="flex shrink-0 items-center justify-between px-3 pb-1 pt-2.5">
-        <span className="w-9" aria-hidden="true" />
-        <span className="h-1 w-9 rounded-full bg-line-strong sm:hidden" aria-hidden="true" />
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label={t('关闭')}
-          className="-mr-1 inline-flex size-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-raised hover:text-fg"
-        >
-          <X className="size-4.5" strokeWidth={1.9} aria-hidden="true" />
-        </button>
-      </div>
-
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
         {status === 'loading' && !module ? (
           <div className="space-y-3 p-5">
             <Skeleton className="h-6 w-2/3" />
@@ -457,7 +438,6 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
             </div>
           </>
         )}
-      </div>
-    </BottomSheet>
+    </ModuleDetailDialog>
   );
 }

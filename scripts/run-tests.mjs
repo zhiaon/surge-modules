@@ -28,6 +28,7 @@ const suites = [
   { name: 'phase7', entry: 'tests/phase7.test.ts' },
   { name: 'list-snapshot', entry: 'tests/list-snapshot.test.ts' },
   { name: 'scroll-jumps', entry: 'tests/scroll-jumps.test.ts' },
+  { name: 'detail-dialog', entry: 'tests/detail-dialog.test.ts' },
 ];
 
 let failed = 0;
@@ -41,7 +42,7 @@ for (const suite of suites) {
     platform: 'node',
     target: 'node20',
     format: 'esm',
-    external: ['node:*'],
+    external: ['node:*', 'happy-dom'],
     logLevel: 'error',
   });
 
