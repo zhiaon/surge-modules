@@ -13160,13 +13160,13 @@
   "repo": "fmz200/wool_scripts",
   "branch": "main",
   "path": "Surge/module/split/partY/YouTube.sgmodule",
-  "sha": "f229b6274f85fddc808fef7399978884f3610781",
-  "name": "YouTube",
-  "description": "某些APP要清除缓存或者重新安装拦截广告才会生效！",
+  "sha": "9a8da955de98481ed80d400e46282cb49749475d",
+  "name": "Youtube (Music) Enhance",
+  "description": "适用于 Youtube & Youtube Music",
   "author": "奶思",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-11T00:36:26Z"
+  "updatedAt": "2026-11-25T14:01:31Z"
  },
  "youxiapp": {
   "slug": "youxiapp",
