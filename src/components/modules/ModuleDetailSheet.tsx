@@ -71,11 +71,6 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
     }
   }, [slug]);
 
-  const { data: rawConfig, status: configStatus } = useAsync(
-    () => (module ? moduleService.getRawConfig(module.slug) : Promise.resolve('')),
-    [module?.slug],
-  );
-
   // Same-title modules from other repos: the catalogue carries up to four
   // 「京东去广告」 and by default the user cannot tell them apart.
   const { data: allModules } = useAsync(() => moduleService.getModules({ perPage: 9999 }), []);
@@ -125,15 +120,6 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
     if (!module || !siblings.length) return [];
     return rankGroup([module, ...siblings], siblingTech);
   }, [module, siblings, siblingTech]);
-
-  // The raw config is why most people open this sheet — start expanded so it
-  // is one less tap. Collapsed again only if the user chooses to (the effect
-  // below re-expands when a different module is opened).
-  const [showConfig, setShowConfig] = useState(true);
-
-  useEffect(() => {
-    setShowConfig(true);
-  }, [module?.slug]);
 
   useEffect(() => {
     if (module) analyticsService.trackModuleView(module.slug);
@@ -430,37 +416,9 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
               )}
             </div>
 
-            {/* ---- raw config ---- */}
+            {/* The raw .sgmodule text is deliberately not shown: the owner does
+                not want the module body displayed. Version history below stays. */}
             <div className="px-5 py-4">
-              <button
-                type="button"
-                onClick={() => setShowConfig((v) => !v)}
-                aria-expanded={showConfig}
-                className="flex w-full items-center gap-2 text-left"
-              >
-                <FileCode2 className="size-4 shrink-0 text-faint" strokeWidth={1.9} aria-hidden="true" />
-                <span className="text-[12.5px] font-medium">{t('原始配置')}</span>
-                <span className="font-mono text-[10px] text-faint">.sgmodule</span>
-                <span className="ml-auto text-[11px] text-faint">
-                  {showConfig ? t('收起') : t('展开')}
-                </span>
-              </button>
-
-              {showConfig && (
-                <div className="mt-2.5">
-                  {/* No copy button: the owner does not want the raw text of a
-                      module handed out in one tap. The config is still shown. */}
-                  <div className="mb-2">
-                    <span className="text-[10.5px] text-faint">
-                      {rawConfig ? t('{n} 行', { n: rawConfig.split('\n').length }) : configStatus === 'loading' ? t('加载中…') : '—'}
-                    </span>
-                  </div>
-                  <pre className="max-h-72 overflow-auto rounded-[var(--radius-md)] border border-line bg-[var(--color-inset)] p-3 font-mono text-[10.5px] leading-[1.65] text-muted">
-                    {rawConfig || (configStatus === 'loading' ? t('加载中…') : t('暂无内容'))}
-                  </pre>
-                </div>
-              )}
-
               {/* version history, last three */}
               {versions && versions.length > 0 && (
                 <div className="mt-4 border-t border-line pt-3.5">

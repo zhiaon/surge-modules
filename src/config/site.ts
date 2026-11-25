@@ -60,7 +60,7 @@ export const siteConfig: SiteConfig = {
   shortName: 'Modules',
   tagline: '让 Surge 模块发现更简单。',
   description:
-    '一个独立的 Surge 模块索引平台：浏览、搜索、收藏与分发模块，查看原始配置与版本记录。',
+    '一个独立的 Surge 模块索引平台：浏览、搜索、收藏与分发模块，查看版本记录与更新说明。',
   keywords: ['Surge', 'Surge 模块', 'sgmodule', '模块索引', '网络工具', '代理规则'],
   locale: 'zh-CN',
   logo: {

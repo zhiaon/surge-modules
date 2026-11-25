@@ -69,7 +69,6 @@ export const EN: Record<string, DictValue> = {
   '返回分类': 'Back to categories',
   '返回来源': 'Back to sources',
   '返回模块目录': 'Back to the catalogue',
-  '暂无内容': 'Nothing here yet',
   '已复制': 'Copied',
   '复制失败': 'Copy failed',
   '剪贴板不可用，请长按原始链接手动复制': 'Clipboard unavailable — long-press the raw link to copy it manually',
@@ -88,7 +87,7 @@ export const EN: Record<string, DictValue> = {
   '独立 Surge 模块索引': 'An independent Surge module index',
   '让 Surge 模块': 'Finding Surge',
   '发现更简单': 'modules, made simple',
-  '浏览、搜索与收藏优质 Surge 模块，查看原始配置、复制安装链接，一次找到需要的规则与脚本。':
+  '浏览、搜索与收藏优质 Surge 模块，查看版本记录、复制安装链接，一次找到需要的规则与脚本。':
     'Browse, search and save good Surge modules — read the raw config, copy an install link, and get the rules and scripts you need in one pass.',
   '探索模块': 'Explore modules',
   '浏览分类': 'Browse categories',
@@ -132,7 +131,6 @@ export const EN: Record<string, DictValue> = {
   '关于平台': 'About',
   '独立索引': 'Independent index',
   '由维护者整理的 Surge 模块目录，与 Surge 官方无隶属关系。': 'A Surge module catalogue maintained independently, not affiliated with Surge.',
-  '原始配置': 'Raw config',
   '在详情页直接查看模块的 .sgmodule 原文，复制原始链接。': 'Read a module’s .sgmodule source in its detail sheet and copy the raw link.',
   '版本记录': 'Version history',
   '记录每个模块的版本号、发布时间与更新说明。': 'Every module’s version number, release date and changelog.',
@@ -201,7 +199,6 @@ export const EN: Record<string, DictValue> = {
   '下架': 'Removed',
   '内容变更': 'Content changed',
   '收起': 'Collapse',
-  '展开': 'Expand',
   '{n} 行': { one: '{n} line', many: '{n} lines' },
   '版本记录（{n}）': 'Version history ({n})',
   '当前': 'Current',
@@ -381,7 +378,7 @@ export const EN: Record<string, DictValue> = {
   '脚本：': 'Scripts:',
   '定时：': 'Schedule:',
   '面板：': 'Panels:',
-  '一个独立的 Surge 模块索引平台：浏览、搜索、收藏与分发模块，查看原始配置与版本记录。':
+  '一个独立的 Surge 模块索引平台：浏览、搜索、收藏与分发模块，查看版本记录与更新说明。':
     'An independent Surge module index: browse, search, save and distribute modules, and read the raw config and version history.',
   '让 Surge 模块发现更简单。': 'Finding Surge modules, made simple.',
   '模块索引': 'Module index',
