@@ -20245,13 +20245,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "cf-ip-optimizer.sgmodule",
-  "sha": "bf4efecf8a81247661c246b758fe6bb4b8a6a03f",
+  "sha": "9b98f1502805f31d96cb008c957d37fb8c3a2c83",
   "name": "CF IP 优选工具",
-  "description": "v3.7.2 · Cloudflare 官方 IP 段 · DIRECT 直连与 PROXY 代理双模式测速（代理模式按线路统计，目标地址不可核验）。扫描期间仅 speed.cloudflare.com 走固定地址并直连，结束恢复。",
+  "description": "v3.7.2 · Cloudflare 官方 IP 段 · DIRECT 直连测速。扫描期间仅 speed.cloudflare.com 走固定地址并直连，结束恢复。",
   "author": "zhiaon",
   "version": "3.7.2",
   "category": "adblock",
-  "updatedAt": "2026-11-23T12:11:13Z"
+  "updatedAt": "2026-11-25T04:58:33Z"
  },
  "earthquake-alert": {
   "slug": "earthquake-alert",
