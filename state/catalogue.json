@@ -20252,5 +20252,18 @@
   "version": "3.7.2",
   "category": "adblock",
   "updatedAt": "2026-11-23T12:11:13Z"
+ },
+ "earthquake-alert": {
+  "slug": "earthquake-alert",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "earthquake-alert.sgmodule",
+  "sha": "ee2a1eaa73c6cffec92b567eba45d52f6521bb9e",
+  "name": "地震速报（中国地震台网）",
+  "description": "中国地震台网公开目录速报，支持按手动位置和半径筛选，并为新事件发送带系统声音的通知。注意：这是震后速报，不是震前预警；Surge 脚本不能读取 iPhone GPS 或直接朗读文字。",
+  "author": "Minis",
+  "version": "1.2.1",
+  "category": "adblock",
+  "updatedAt": "2026-11-25T04:47:20Z"
  }
 }
