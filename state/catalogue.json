@@ -19010,13 +19010,13 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "IP-Quality.sgmodule",
-  "sha": "c8ac2d61f358cba6ea9dcc95f335fa4229842af8",
+  "sha": "202ad272e5cf7131832db01b60aa92978b2989e4",
   "name": "IP 纯净度检测",
   "description": "多源并发检测指定策略组节点的出口 IP 纯净度（规则法，RULE-SET 控制检测域名走指定策略组）。Scamalytics 真实评分+黑名单/代理检测，参数填 key 启用，无 key 降级 ip-api 估算。",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:04Z"
+  "updatedAt": "2026-11-25T20:01:12Z"
  },
  "localdeviceloopback": {
   "slug": "localdeviceloopback",
@@ -19062,13 +19062,13 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "PingMe整合.sgmodule",
-  "sha": "9af6624885035b8f8d875a30c8ac86bf0c8df3b8",
+  "sha": "ce3ebfdfbd0b5d7d49227725f42a85ddcaf2b335",
   "name": "PingMe 签到整合版",
   "description": "🔄 整合 PingMe 抓Cookie + 签到 + 视频奖励，支持策略组参数，一个模块搞定\\n更新时间：2026.11.03 15:46｜面板不显示失败文本",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:36:05Z"
+  "updatedAt": "2026-11-25T20:01:13Z"
  },
  "auto-reconnect": {
   "slug": "auto-reconnect",
