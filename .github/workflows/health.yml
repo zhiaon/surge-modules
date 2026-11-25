@@ -23,6 +23,11 @@ jobs:
       - name: Repoint moved script URLs
         run: python3 scripts/apply_url_rewrites.py
 
+      # The hide rules are what decide whether a module leaves the site, so
+      # they are checked before anything is probed.
+      - name: Check the hide rules
+        run: python3 scripts/check_health.py --self-test
+
       - name: Probe module scripts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

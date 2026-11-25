@@ -164,7 +164,13 @@ def main():
     # them) but are not published: a module that installs and silently does
     # nothing is worse than one that is simply absent. When upstream fixes the
     # script, the next health run flips it back to ok and it reappears.
-    hidden = {slug for slug, rec in health.items() if rec.get('status') == 'broken'}
+    # `streak` is how many consecutive nightly runs found the script gone. It is
+    # a second fence on top of check_health.py: an old health.json, a hand edit
+    # or a single bad probe must never hide a module on its own.
+    HIDE_AFTER_RUNS = 2
+    hidden = {slug for slug, rec in health.items()
+              if rec.get('status') == 'broken'
+              and (rec.get('streak') if rec.get('streak') is not None else HIDE_AFTER_RUNS) >= HIDE_AFTER_RUNS}
     for rec in catalogue.values():
         if rec['slug'] in set(missing_raw) or rec['slug'] in hidden:
             continue
