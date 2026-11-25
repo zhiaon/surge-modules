@@ -4,8 +4,6 @@ import {
   Layers3,
   Share2,
   Calendar,
-  Check,
-  Copy,
   FileCode2,
   Sparkles,
   Tag,
@@ -128,7 +126,6 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
     return rankGroup([module, ...siblings], siblingTech);
   }, [module, siblings, siblingTech]);
 
-  const [copied, setCopied] = useState<'config' | null>(null);
   // The raw config is why most people open this sheet — start expanded so it
   // is one less tap. Collapsed again only if the user chooses to (the effect
   // below re-expands when a different module is opened).
@@ -143,14 +140,6 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
   }, [module]);
 
   const latest = versions?.[0];
-
-  const doCopyConfig = async () => {
-    const ok = await copyText(rawConfig ?? '');
-    if (!ok) return;
-    setCopied('config');
-    window.setTimeout(() => setCopied(null), 1800);
-    toast.show(t('已复制配置'), t('这是模块的完整 .sgmodule 文本'), 'success');
-  };
 
   const Icon = module ? resolveCategoryIcon(module.category.icon) : null;
 
@@ -459,29 +448,12 @@ export function ModuleDetailSheet({ slug, onClose }: { slug: string; onClose: ()
 
               {showConfig && (
                 <div className="mt-2.5">
-                  <div className="mb-2 flex items-center justify-between">
+                  {/* No copy button: the owner does not want the raw text of a
+                      module handed out in one tap. The config is still shown. */}
+                  <div className="mb-2">
                     <span className="text-[10.5px] text-faint">
                       {rawConfig ? t('{n} 行', { n: rawConfig.split('\n').length }) : configStatus === 'loading' ? t('加载中…') : '—'}
                     </span>
-                    <button
-                      type="button"
-                      onClick={() => void doCopyConfig()}
-                      disabled={!rawConfig}
-                      className={cn(
-                        'inline-flex h-7 items-center gap-1.5 rounded-[var(--radius-xs)] border px-2 text-[10.5px]',
-                        'transition-colors disabled:opacity-40',
-                        copied === 'config'
-                          ? 'border-[var(--line-ok-26)] bg-[var(--tint-ok-14)] text-ok'
-                          : 'border-line bg-raised text-muted hover:border-line-strong hover:text-fg',
-                      )}
-                    >
-                      {copied === 'config' ? (
-                        <Check className="size-3" strokeWidth={2.4} aria-hidden="true" />
-                      ) : (
-                        <Copy className="size-3" strokeWidth={1.9} aria-hidden="true" />
-                      )}
-                      {copied === 'config' ? t('已复制') : t('复制配置')}
-                    </button>
                   </div>
                   <pre className="max-h-72 overflow-auto rounded-[var(--radius-md)] border border-line bg-[var(--color-inset)] p-3 font-mono text-[10.5px] leading-[1.65] text-muted">
                     {rawConfig || (configStatus === 'loading' ? t('加载中…') : t('暂无内容'))}

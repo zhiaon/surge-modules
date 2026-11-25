@@ -72,8 +72,6 @@ export const EN: Record<string, DictValue> = {
   '暂无内容': 'Nothing here yet',
   '已复制': 'Copied',
   '复制失败': 'Copy failed',
-  '已复制配置': 'Config copied',
-  '这是模块的完整 .sgmodule 文本': 'This is the module’s full .sgmodule text',
   '剪贴板不可用，请长按原始链接手动复制': 'Clipboard unavailable — long-press the raw link to copy it manually',
 
   // ---- home: hero ------------------------------------------------------
@@ -205,7 +203,6 @@ export const EN: Record<string, DictValue> = {
   '收起': 'Collapse',
   '展开': 'Expand',
   '{n} 行': { one: '{n} line', many: '{n} lines' },
-  '复制配置': 'Copy config',
   '版本记录（{n}）': 'Version history ({n})',
   '当前': 'Current',
   '安装链接需要 Surge 已安装并登录；未登录时链接不含访问凭证。':
