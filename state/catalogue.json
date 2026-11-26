@@ -20304,5 +20304,18 @@
   "version": "1.0.1",
   "category": "adblock",
   "updatedAt": "2026-11-26T09:01:11Z"
+ },
+ "module-30": {
+  "slug": "module-30",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "多平台签到.sgmodule",
+  "sha": "5b6c6fde34b8d4e1d9ccb3b53f6398547a55e8db",
+  "name": "多平台签到",
+  "description": "Surge 多平台签到中心｜账号数据仅本地｜真实状态，不伪造签到结果",
+  "author": "zhiaon",
+  "version": "1.0.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-26T14:01:06Z"
  }
 }
