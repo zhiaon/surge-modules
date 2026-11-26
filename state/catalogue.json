@@ -20265,5 +20265,18 @@
   "version": "1.0",
   "category": "adblock",
   "updatedAt": "2026-11-26T03:01:10Z"
+ },
+ "coolapk-3": {
+  "slug": "coolapk-3",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "coolapk.sgmodule",
+  "sha": "5e39eb2c67066580a5d4d4bfbddf63a5a13aa11a",
+  "name": "酷安去广告",
+  "description": "V1.0 保守清理 api.coolapk.com 三个列表接口中明确标记 sponsorCard 的卡片；保留普通推荐/热帖/通用模板。全广告页和未知结构透传；仅合成回归，未验证当前 App、开屏或全部广告。",
+  "author": "zhiaon",
+  "version": "1.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-26T04:01:00Z"
  }
 }
