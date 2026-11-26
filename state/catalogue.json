@@ -20278,5 +20278,31 @@
   "version": "1.0",
   "category": "adblock",
   "updatedAt": "2026-11-26T04:01:00Z"
+ },
+ "domaincollector": {
+  "slug": "domaincollector",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "DomainCollector.sgmodule",
+  "sha": "5bae1337f3005bf1073d4a2b350f77240ccf1c61",
+  "name": "Surge域名规则采集器",
+  "description": "V0.1 本地 Rule Script 域名采集；管理入口 http://domain-collector.invalid/。无需 MITM。次数按60秒合并；无法覆盖IP直连、预匹配或更早终结的规则。请保持采集规则在普通规则最前；不会自动写入生成的分流规则。",
+  "author": "zhiaon",
+  "version": "0.1.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-26T09:01:11Z"
+ },
+ "tf-monitor": {
+  "slug": "tf-monitor",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "tf-monitor.sgmodule",
+  "sha": "24bacaff6f5e73fcdcc72f292a51a85f53adfeaa",
+  "name": "TestFlight 多链接名额监控",
+  "description": "原生按分钟步进触发，不再每分钟空跑。默认10分钟，每小时6次；多链接独立去重，不强制唤醒、不自动报名。",
+  "author": "zhiaon",
+  "version": "1.0.1",
+  "category": "adblock",
+  "updatedAt": "2026-11-26T09:01:11Z"
  }
 }
