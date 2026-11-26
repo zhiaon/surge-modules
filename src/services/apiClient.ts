@@ -147,6 +147,11 @@ function filterAndPage(items: PublicModule[], params: ModuleListParams): ModuleL
 }
 
 export const api = {
+  /** Full cached catalogue for ID lookups; browsing pagination must not hide favorites. */
+  getAllModules(): Promise<PublicModule[]> {
+    return allModules();
+  },
+
   async listModules(params: ModuleListParams = {}): Promise<ModuleListPage> {
     return filterAndPage(await allModules(), params);
   },

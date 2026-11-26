@@ -19,8 +19,8 @@ export const favoriteService = {
   /** MOCK (local) */
   async getFavorites(): Promise<FavoriteEntry[]> {
     const records = favoritesStore.getSnapshot();
-    const all = await moduleService.getModules();
-    const byId = new Map(all.items.map((m) => [m.id, m]));
+    const all = await moduleService.getAllModules();
+    const byId = new Map(all.map((m) => [m.id, m]));
     return records.flatMap((rec) => {
       const module = byId.get(rec.moduleId);
       return module ? [{ module, addedAt: rec.addedAt }] : [];

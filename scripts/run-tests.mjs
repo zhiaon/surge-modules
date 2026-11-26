@@ -29,6 +29,7 @@ const suites = [
   { name: 'list-snapshot', entry: 'tests/list-snapshot.test.ts' },
   { name: 'scroll-jumps', entry: 'tests/scroll-jumps.test.ts' },
   { name: 'detail-dialog', entry: 'tests/detail-dialog.test.ts' },
+  { name: 'favorites', entry: 'tests/favorites.test.ts' },
 ];
 
 let failed = 0;

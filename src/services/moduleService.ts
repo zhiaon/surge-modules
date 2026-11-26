@@ -101,6 +101,13 @@ function toModuleWithMeta(
 }
 
 export const moduleService = {
+  /** Complete catalogue for ID lookups, independent of list page size or sorting. */
+  async getAllModules(): Promise<ModuleWithMeta[]> {
+    await requireApi();
+    const [modules, categories] = await Promise.all([api.getAllModules(), api.listCategories()]);
+    return modules.map((m) => toModuleWithMeta(m, categories));
+  },
+
   async getModules(params: ModuleListParams = {}): Promise<ListResult<ModuleWithMeta>> {
     await requireApi();
     const [page, categories] = await Promise.all([api.listModules(params), api.listCategories()]);
