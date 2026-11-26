@@ -20252,5 +20252,18 @@
   "version": "1.0.0",
   "category": "adblock",
   "updatedAt": "2026-11-25T17:01:20Z"
+ },
+ "taobao": {
+  "slug": "taobao",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "taobao.sgmodule",
+  "sha": "66b5187463ff70144d7071b602f6c8422d041f4f",
+  "name": "淘宝去广告",
+  "description": "V1.0：保守净化开屏接口中的明确广告容器；关闭已有开屏控制字段并清空广告素材地址。保留商品、搜索、购物车、订单和支付数据；未知结构透传。需开启脚本与 MITM 并信任 Surge CA；尚未经当前淘宝 App 实流量验证。",
+  "author": "Minis",
+  "version": "1.0",
+  "category": "adblock",
+  "updatedAt": "2026-11-26T03:01:10Z"
  }
 }
