@@ -20330,18 +20330,5 @@
   "version": "v1.0.1",
   "category": "adblock",
   "updatedAt": "2026-11-27T05:49:09Z"
- },
- "pingme-checkin": {
-  "slug": "pingme-checkin",
-  "repo": "zhiaon/Modules",
-  "branch": "main",
-  "path": "pingme-checkin.sgmodule",
-  "sha": "06e0077e94f82e5f5a8b83344815cb465d96e084",
-  "name": "PingMe多账号签到",
-  "description": "按设定定时批量签到并领取视频奖励，抓取账号后多账号自动执行；每天 23:00 汇总各账号当日已确认金币。",
-  "author": "zhiaon",
-  "version": "v1.2.1",
-  "category": "adblock",
-  "updatedAt": "2026-11-27T06:52:19Z"
  }
 }
