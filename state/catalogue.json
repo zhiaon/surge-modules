@@ -20336,12 +20336,12 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "pingme-checkin.sgmodule",
-  "sha": "83bc394b9bcbc13de1e19fb122942d96752588f1",
+  "sha": "ddb68d3f5606972533f5731cb376d9f3d73454bd",
   "name": "多账号金币签到",
   "description": "按设定定时批量签到并领取视频奖励，抓取账号后多账号自动执行；每天 23:00 汇总各账号当日已确认金币。",
   "author": "zhiaon",
-  "version": "v1.0.7",
+  "version": "v1.0.8",
   "category": "adblock",
-  "updatedAt": "2026-11-27T06:00:59Z"
+  "updatedAt": "2026-11-27T06:03:14Z"
  }
 }
