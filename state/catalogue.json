@@ -20330,5 +20330,18 @@
   "version": "v1.0.2",
   "category": "adblock",
   "updatedAt": "2026-11-27T11:24:01Z"
+ },
+ "caiyun-weather": {
+  "slug": "caiyun-weather",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "caiyun-weather.sgmodule",
+  "sha": "4d058a99b041b3adbf7cded652a9e282fd3e0092",
+  "name": "彩云天气VIP解锁",
+  "description": "彩云天气净化与会员解锁：拦截广告请求，清空首页活动与推荐位，改写会员接口返回长期 SVIP，为卫星云图与 48 小时预报请求补充鉴权头。",
+  "author": "Minis (移植自 6otho/Loon_tool + chxm1023/Rewrite)",
+  "version": "v1.0.1",
+  "category": "adblock",
+  "updatedAt": "2026-11-27T23:43:32Z"
  }
 }

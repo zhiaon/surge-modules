@@ -1562,5 +1562,6 @@
 "tf-monitor": "apple",
 "baidu-tieba-checkin": "scripts",
 "multi-platform-checkin": "tools",
-"pingme-auto": "scripts"
+"pingme-auto": "scripts",
+"caiyun-weather": "tools"
 }
