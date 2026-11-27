@@ -20330,5 +20330,18 @@
   "version": "v1.0.1",
   "category": "adblock",
   "updatedAt": "2026-11-27T05:49:09Z"
+ },
+ "pingme-auto": {
+  "slug": "pingme-auto",
+  "repo": "zhiaon/Modules",
+  "branch": "main",
+  "path": "pingme-auto.sgmodule",
+  "sha": "7b347ee5a71707adb4601388f1d6653fba38b84c",
+  "name": "PingMe 自动助手",
+  "description": "自动抓取多个账号凭据并按定时执行签到与视频奖励；运行后输出每个账号的余额、签到与视频结果，到结算时间推送当日汇总。",
+  "author": "6otho",
+  "version": "v1.0.2",
+  "category": "adblock",
+  "updatedAt": "2026-11-27T11:24:01Z"
  }
 }

@@ -1562,5 +1562,6 @@
 "domaincollector": "tools",
 "tf-monitor": "apple",
 "baidu-tieba-checkin": "scripts",
-"multi-platform-checkin": "tools"
+"multi-platform-checkin": "tools",
+"pingme-auto": "scripts"
 }
