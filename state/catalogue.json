@@ -15404,19 +15404,6 @@
   "category": "adblock",
   "updatedAt": "2026-11-10T10:46:49Z"
  },
- "dnslite": {
-  "slug": "dnslite",
-  "repo": "zhiaon/Modules",
-  "branch": "main",
-  "path": "dnslite.sgmodule",
-  "sha": "664983fc4432ab117105bf5c8336f2f9ebbf3dab",
-  "name": "DNS Lite",
-  "description": "国内与国外双 DNS 智能分流：国内域名走国内 DNS，其余走国外加密 DNS，并可拦截广告与追踪域名。",
-  "author": "许舟",
-  "version": "v1.0.1",
-  "category": "rules",
-  "updatedAt": "2026-11-27T05:49:07Z"
- },
  "dnsrefresh": {
   "slug": "dnsrefresh",
   "repo": "zhiaon/Modules",
