@@ -15435,13 +15435,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "fanqie.sgmodule",
-  "sha": "0c6bee63be442d44c6895dbf87afd3b90e7818a7",
+  "sha": "cda55fc6ef3da50d10ba4f9adff19bdbc01f3c3c",
   "name": "番茄小说去广告",
   "description": "番茄小说去广告：拦截广告素材、广告 SDK 与统计回传域名，保留正文、书架与抖音商城等共享电商链路。番茄存在证书固定，模块以域名与规则集为主，不依赖脚本改写接口。",
   "author": "许舟",
   "version": "v1.26.1",
   "category": "adblock",
-  "updatedAt": "2026-11-27T05:49:08Z"
+  "updatedAt": "2026-11-27T06:20:27Z"
  },
  "ikuuu": {
   "slug": "ikuuu",
@@ -20310,13 +20310,13 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "baidu-tieba-checkin.sgmodule",
-  "sha": "cb76d77e965944bc387dc720b2707061c8dbccab",
+  "sha": "da85fd6633bfa46eb9d2dff7e9e1598705fd38f9",
   "name": "百度贴吧签到",
   "description": "百度贴吧每日签到：自动捕获登录 Cookie，按设定时间调度签到，账号信息仅保存在本机。",
   "author": "Minis",
   "version": "v1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-27T05:49:06Z"
+  "updatedAt": "2026-11-27T06:20:27Z"
  },
  "multi-platform-checkin": {
   "slug": "multi-platform-checkin",
