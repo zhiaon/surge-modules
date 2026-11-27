@@ -19023,13 +19023,13 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "MemoryTraffic.sgmodule",
-  "sha": "884ba896e736fed0195012fd75dd3992f8f2f846",
+  "sha": "7ddfc1704fa9b1a8ea3c801342e6b9a789642297",
   "name": "内存和流量实时监控",
-  "description": "本机流量 + Tailscale 入站设备累计流量监控面板。多台设备按设备名独立统计（dev1~dev5），API 地址/密码可配置",
+  "description": "内存 + 流量 + Tailscale 状态卡：会话状态、本机、DERP、出口、流量（TCP/UDP 连接数）、设备在线数与直连中继分布、设备列表。入站设备自动识别，参数页无需填写任何设备",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-26T06:01:01Z"
+  "updatedAt": "2026-11-27T15:01:00Z"
  },
  "miniwatts-realbattery": {
   "slug": "miniwatts-realbattery",
