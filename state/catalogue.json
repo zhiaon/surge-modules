@@ -14733,13 +14733,13 @@
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/basic-adblock.sgmodule",
-  "sha": "e855502a39912802a123b87d8eea27f52186070c",
+  "sha": "1d707835d87ff515b4d9b5c9db9ac86542cfc4ad",
   "name": "基础去广告模块",
   "description": "基础域名级去广告：常见网页广告、移动广告联盟、弹窗跳转网络与真机日志确认的精确应用规则。无脚本、无 MITM、无响应改写。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-13T11:50:20Z"
+  "updatedAt": "2026-11-27T07:00:47Z"
  },
  "camscanner-self": {
   "slug": "camscanner-self",
@@ -14759,13 +14759,13 @@
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/instagram-self.sgmodule",
-  "sha": "f5a77ba8137a9949539cf5a5f398b59c65a22f55",
+  "sha": "e57b3b8cd56cc38d12b6abfc35cae4a931df4f9c",
   "name": "Instagram",
   "description": "固定云端订阅，自有可审计 Instagram 增强版：清理 Web Feed、探索页和 Reels 中的明确广告对象，并拦截真机验证的 netseer 网络关联辅助探测。原生 iOS App 主链路因证书钉扎无法解密，不强行 MITM。不含第三方脚本。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-25T10:01:04Z"
+  "updatedAt": "2026-11-27T07:00:47Z"
  },
  "jd-self": {
   "slug": "jd-self",
@@ -16163,13 +16163,13 @@
   "repo": "mulanshan/surge",
   "branch": "main",
   "path": "rewrite/Surge/bilibili-self.sgmodule",
-  "sha": "05f8236ef6f9ec299a4037e78df3f1e2fa091ac7",
+  "sha": "cd57af3d0c7bd01525667daacd088ff15927ec96",
   "name": "哔哩哔哩",
   "description": "固定云端订阅，自有可审计哔哩哔哩去广告模块：覆盖开屏、首页与竖屏推荐流、视频详情与相关推荐(gRPC)、评论区商业推广、动态流广告与搜索推广，并提供可选底栏精简与 PCDN 策略开关。不含第三方脚本，不修改登录、大会员或支付状态。",
   "author": "mulanshan",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-25T10:01:03Z"
+  "updatedAt": "2026-11-27T07:00:47Z"
  },
  "bilibili-adblock-workers": {
   "slug": "bilibili-adblock-workers",
