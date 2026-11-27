@@ -20336,12 +20336,12 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "pingme-checkin.sgmodule",
-  "sha": "cd40a4b424ff99cd746f29dfee86b5bea7d06339",
+  "sha": "cc8dd6f6f0169e946ed9ba90d7312e614d227874",
   "name": "PingMe多账号签到",
   "description": "按设定定时批量签到并领取视频奖励，抓取账号后多账号自动执行；每天 23:00 汇总各账号当日已确认金币。",
   "author": "zhiaon",
-  "version": "v1.1.0",
+  "version": "v1.1.2",
   "category": "adblock",
-  "updatedAt": "2026-11-27T06:29:34Z"
+  "updatedAt": "2026-11-27T06:45:49Z"
  }
 }
