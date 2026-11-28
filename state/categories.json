@@ -1577,5 +1577,7 @@
 "wetalk-auto": "scripts",
 "xiaoheihe-checkin": "scripts",
 "xiaohongshu-adblock": "adblock",
-"youtube-adblock": "adblock"
+"youtube-adblock": "adblock",
+"memorytraffic-nx": "tools",
+"memory-traffic": "tools"
 }
