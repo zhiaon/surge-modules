@@ -1563,5 +1563,19 @@
 "baidu-tieba-checkin": "scripts",
 "multi-platform-checkin": "tools",
 "pingme-auto": "scripts",
-"caiyun-weather": "tools"
+"caiyun-weather": "tools",
+"adguard-safari-unlock": "adblock",
+"apple-push-proxy": "rules",
+"github-429-zh-hant": "adblock",
+"heiliao-adblock": "clean",
+"network-info-2": "tools",
+"pako-adblock": "adblock",
+"spotify-enhance": "media",
+"telegram-jump": "adblock",
+"telegram-nagram-redirect": "adblock",
+"trakt-zh-redirect": "adblock",
+"wetalk-auto": "scripts",
+"xiaoheihe-checkin": "scripts",
+"xiaohongshu-adblock": "adblock",
+"youtube-adblock": "adblock"
 }
