@@ -20544,12 +20544,12 @@
   "repo": "zhiaon/Modules",
   "branch": "main",
   "path": "memory-traffic.sgmodule",
-  "sha": "712965f9127a9b29b8a6f9994bbafb06865d8e8d",
+  "sha": "e31baafb7f7b3714f8d5b571077c8c45de00cf22",
   "name": "内存流量Tailscale实时监控",
-  "description": "显示 Surge 内存、运行时长、接口累计上传与下载，并自动识别 Tailscale 策略，展示出口、DERP、TCP/UDP 连接及在线设备。数据由 Surge 内置 MCP 只读取得，无需填写端口或密钥。",
+  "description": "显示 Surge 内存、运行时长、接口实时上下行速率和累计流量，自动识别 Tailscale 策略并展示出口、DERP、TCP/UDP 连接及在线设备。通过内置 MCP 只读获取数据，无需填写端口或密钥。",
   "author": "许舟",
-  "version": "v2.0.0",
+  "version": "v2.1.0",
   "category": "adblock",
-  "updatedAt": "2026-11-28T01:55:34Z"
+  "updatedAt": "2026-11-28T02:56:32Z"
  }
 }
