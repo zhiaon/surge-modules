@@ -6,7 +6,7 @@ import { Container } from '@/components/common/Container';
 import { ThemeToggle } from '@/components/common/ThemeToggle';
 import { LanguageToggle } from '@/components/common/LanguageToggle';
 import { cn } from '@/lib/cn';
-import { Logo } from '@/components/navigation/Logo';
+import { SurgeGlassLogo } from '@/components/layout/SurgeGlassLogo';
 import { useI18n } from '@/i18n';
 
 /**
@@ -55,7 +55,7 @@ export function SiteHeader() {
               className="flex shrink-0 items-center gap-2.5 rounded-[var(--radius-xs)] py-1"
               aria-label={t('{name} 首页', { name: siteConfig.name })}
             >
-              <Logo className="size-7" />
+              <SurgeGlassLogo className="size-7" />
               <span className="whitespace-nowrap text-[14.5px] font-semibold tracking-[-0.015em]">
                 {siteConfig.name}
               </span>
