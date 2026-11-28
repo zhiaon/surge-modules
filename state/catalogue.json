@@ -19231,13 +19231,13 @@
   "repo": "mickeu/surge",
   "branch": "main",
   "path": "蛋蛋不语.sgmodule",
-  "sha": "4af8555a1146fe97b4626e280eb1af718374bf70",
+  "sha": "5c425ad3557836468682ab33559a17e858bb7dd0",
   "name": "蛋蛋不语VIP解锁",
-  "description": "蛋蛋不语 - 解锁会员，复刻自 curtinp118/Scripthub（防上游删库）",
+  "description": "蛋蛋不语 - 解锁会员（1.0.2 起主后端改用 https://supabase.opengl.top/，备用 sb.danboxingqiu.cn，故同时覆盖 IP 与两个域名）",
   "author": "mickeu",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-25T17:01:21Z"
+  "updatedAt": "2026-11-28T14:00:53Z"
  },
  "module-22": {
   "slug": "module-22",
