@@ -18906,13 +18906,13 @@
   "repo": "Siriusrry/Surge",
   "branch": "master",
   "path": "Module/Routing-Rules/Routing-Rules.sgmodule",
-  "sha": "78df158e4c8dc7acef27d4ce4e86ce230ac065c1",
+  "sha": "2a8eb1968f841bb011520d5c429b8a31ec6a4388",
   "name": "Traffic Routing Rules",
   "description": "Personal routing rules",
   "author": "Siriusrry",
   "version": "1.0.0",
   "category": "adblock",
-  "updatedAt": "2026-11-17T12:22:45Z"
+  "updatedAt": "2026-11-28T09:57:11Z"
  },
  "tiktok-us": {
   "slug": "tiktok-us",
